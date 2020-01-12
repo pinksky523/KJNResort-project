@@ -17,4 +17,5 @@ public interface MemberService {
 	
 	public MemberVO get(String id);
 	
+	public boolean remove(String id);
 }

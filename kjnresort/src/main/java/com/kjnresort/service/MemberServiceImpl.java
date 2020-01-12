@@ -36,7 +36,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public boolean modify(MemberVO member) {
 
-		return mapper.update(id) == 1;
+		return mapper.update(member) == 1;
 	}
 
 	@Override

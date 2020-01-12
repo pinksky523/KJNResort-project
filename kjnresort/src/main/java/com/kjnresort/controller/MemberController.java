@@ -22,8 +22,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.EventAttachVO;
 import com.kjnresort.domain.EventVO;
+import com.kjnresort.domain.MemberVO;
 import com.kjnresort.domain.PageDTO;
 import com.kjnresort.service.EventService;
+import com.kjnresort.service.MemberService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
