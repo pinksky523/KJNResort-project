@@ -50,7 +50,7 @@ public class TicketController {
 		log.info("TicketController register()");
 		return "redirect:/ticket/list";
 	}
-	
+	//테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트
 	//이용권 구매 취소 이건 업데이트로 바꿔야함
 	@PreAuthorize("principal.username == #writer")						// 작성자 확인
 	@PostMapping("remove")
