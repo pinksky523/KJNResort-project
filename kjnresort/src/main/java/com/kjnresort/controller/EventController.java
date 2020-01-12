@@ -1,5 +1,30 @@
 package com.kjnresort.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.kjnresort.domain.Criteria;
+import com.kjnresort.domain.EventAttachVO;
+import com.kjnresort.domain.EventVO;
+import com.kjnresort.domain.PageDTO;
+import com.kjnresort.service.EventService;
+
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -13,7 +38,8 @@ public class EventController {
 	@GetMapping("getAttachList")
 	@ResponseBody
 	public ResponseEntity<List<EventAttachVO>> getAttachList(Long event_no) {
-
+		
+		return new ResponseEntity<>(service.getAttachList(event_no), HttpStatus.OK);
 	}
 	
 	@GetMapping("list")
@@ -33,7 +59,7 @@ public class EventController {
 	//@RequestParam은 안써도 됨
 	//@ModelAttribute를 안쓰면 화면 전환될 때 에러 발생
 	@GetMapping({"get", "modify"})
-	public void get(Long eventNo, Model model, @ModelAttribute("cri") Criteria cri) {
+	public void get(Long event_no, Model model, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("event", service.get(event_no));
 	}
 	
@@ -74,7 +100,7 @@ public class EventController {
 //		
 //		return "redirect:/event/list";
 		
-		return "redirect:/event/list" + cri.getListLink();
+		return "redirect:/event/list" + cri.getListlink();
 	}
 	
 	//첨부파일 삭제
@@ -125,7 +151,7 @@ public class EventController {
 //				
 //		return "redirect:/board/list";
 		
-		return "redirect:/event/list" + cri.getListLink();
+		return "redirect:/event/list" + cri.getListlink();
 	}
 	
 //	@GetMapping("get")
@@ -149,7 +175,7 @@ public class EventController {
 		}
 		
 		service.register(event);
-		rttr.addFlashAttribute("result", event.getEventNo());
+		rttr.addFlashAttribute("result", event.getEvent_no());
 		return "redirect:/event/list";
 	}
 	
