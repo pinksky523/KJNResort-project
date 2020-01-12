@@ -8,5 +8,5 @@ public class EventAttachVO {
 	private String uploadPath;
 	private String fileName;	
 	private boolean boardType;		//후기게시판인지 이벤트게시판인지
-	private Long event_no;
+	private Long eventNo;
 }

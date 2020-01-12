@@ -14,12 +14,12 @@ public interface EventService {
 	
 	public boolean modify(EventVO event);
 	
-	public boolean remove(Long event_no);
+	public boolean remove(Long eventNo);
 	
-	public EventVO get(Long event_no);
+	public EventVO get(Long eventNo);
 	
 	public void register(EventVO event);
 	
-	public List<EventAttachVO> getAttachList(Long event_no);
+	public List<EventAttachVO> getAttachList(Long eventNo);
 
 }

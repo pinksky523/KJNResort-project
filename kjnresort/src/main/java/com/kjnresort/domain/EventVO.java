@@ -7,12 +7,12 @@ import lombok.Data;
 
 @Data
 public class EventVO {
-	private Long event_no;
+	private Long eventNo;
 	private String id;
-	private String event_title;
-	private Date event_start;
-	private Date event_end;
-	private Long view_cnt;
+	private String eventTitle;
+	private Date eventStart;
+	private Date eventEnd;
+	private Long viewCnt;
 	private List<EventAttachVO> attachList;
 	
 }

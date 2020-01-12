@@ -37,9 +37,9 @@ public class EventController {
 	
 	@GetMapping("getAttachList")
 	@ResponseBody
-	public ResponseEntity<List<EventAttachVO>> getAttachList(Long event_no) {
+	public ResponseEntity<List<EventAttachVO>> getAttachList(Long eventNo) {
 		
-		return new ResponseEntity<>(service.getAttachList(event_no), HttpStatus.OK);
+		return new ResponseEntity<>(service.getAttachList(eventNo), HttpStatus.OK);
 	}
 	
 	@GetMapping("list")
@@ -59,8 +59,8 @@ public class EventController {
 	//@RequestParam은 안써도 됨
 	//@ModelAttribute를 안쓰면 화면 전환될 때 에러 발생
 	@GetMapping({"get", "modify"})
-	public void get(Long event_no, Model model, @ModelAttribute("cri") Criteria cri) {
-		model.addAttribute("event", service.get(event_no));
+	public void get(Long eventNo, Model model, @ModelAttribute("cri") Criteria cri) {
+		model.addAttribute("event", service.get(eventNo));
 	}
 	
 	
@@ -74,13 +74,13 @@ public class EventController {
 	//검색 후에도 마찬가지로 되게 하기
 	@PreAuthorize("principal.username == #writer")
 	@PostMapping("remove")
-	public String remove(@RequestParam("event_no") Long event_no, RedirectAttributes rttr, 
+	public String remove(@RequestParam("eventNo") Long eventNo, RedirectAttributes rttr, 
 						@ModelAttribute("cri") Criteria cri, String writer) {
 		
-		List<EventAttachVO> attachList = service.getAttachList(event_no);
+		List<EventAttachVO> attachList = service.getAttachList(eventNo);
 		
 		
-		if(service.remove(event_no)) {
+		if(service.remove(eventNo)) {
 			//첨부파일이 있는 경우 파일 삭제 메서드 호출
 			if(attachList != null || attachList.size() > 0) {
 				deleteFiles(attachList);
@@ -175,7 +175,7 @@ public class EventController {
 		}
 		
 		service.register(event);
-		rttr.addFlashAttribute("result", event.getEvent_no());
+		rttr.addFlashAttribute("result", event.getEventNo());
 		return "redirect:/event/list";
 	}
 	

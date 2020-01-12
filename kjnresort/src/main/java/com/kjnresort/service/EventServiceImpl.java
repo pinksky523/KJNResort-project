@@ -31,9 +31,9 @@ public class EventServiceImpl implements EventService {
 	}
 	
 	@Override
-	public EventVO get(Long event_no) {
+	public EventVO get(Long eventNo) {
 
-		return mapper.read(event_no);
+		return mapper.read(eventNo);
 	}
 
 	
@@ -44,9 +44,9 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
-	public boolean remove(Long event_no) {
+	public boolean remove(Long eventNo) {
 
-		return mapper.delete(event_no) == 1;
+		return mapper.delete(eventNo) == 1;
 	}
 
 	@Override
@@ -62,9 +62,9 @@ public class EventServiceImpl implements EventService {
 	
 	
 	@Override
-	public List<EventAttachVO> getAttachList(Long event_no) {
+	public List<EventAttachVO> getAttachList(Long eventNo) {
 		
-		return attachMapper.findByEventNo(event_no);
+		return attachMapper.findByEventNo(eventNo);
 	}
 	
 	
