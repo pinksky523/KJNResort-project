@@ -54,7 +54,7 @@ public class MemberController {
 	//pageNum, amount 추가	
 	//@RequestParam은 안써도 됨
 	//@ModelAttribute를 안쓰면 화면 전환될 때 에러 발생
-	@GetMapping({"get", "modify"})
+	@GetMapping({"get"})
 	public void get(String id, Model model, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("member", service.get(id));
 	}
