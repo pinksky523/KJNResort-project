@@ -22,15 +22,17 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.EventAttachVO;
 import com.kjnresort.domain.EventVO;
+import com.kjnresort.domain.MemberVO;
 import com.kjnresort.domain.PageDTO;
 import com.kjnresort.service.EventService;
+import com.kjnresort.service.MemberService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/event/*")
+@RequestMapping("/member/*")
 @AllArgsConstructor
 public class MemberController {
 	private MemberService service;
@@ -53,32 +55,21 @@ public class MemberController {
 	//@RequestParam은 안써도 됨
 	//@ModelAttribute를 안쓰면 화면 전환될 때 에러 발생
 	@GetMapping({"get", "modify"})
-	public void get(Long eventNo, Model model, @ModelAttribute("cri") Criteria cri) {
-		model.addAttribute("event", service.get(eventNo));
+	public void get(String id, Model model, @ModelAttribute("cri") Criteria cri) {
+		model.addAttribute("member", service.get(id));
 	}
-	
-	
-	@GetMapping("register")
-	@PreAuthorize("isAuthenticated()")
-	public void register() {
 
-	}
 	
 	//2페이지의 게시글을 조회하고 수정 화면에서 remove 누르면 삭제 후 다시 2페이지로 가게 하기
 	//검색 후에도 마찬가지로 되게 하기
-	@PreAuthorize("principal.username == #writer")
 	@PostMapping("remove")
-	public String remove(@RequestParam("eventNo") Long eventNo, RedirectAttributes rttr, 
-						@ModelAttribute("cri") Criteria cri, String writer) {
+	public String remove(@RequestParam("id") String id, RedirectAttributes rttr, 
+						@ModelAttribute("cri") Criteria cri) {
+	
 		
-		List<EventAttachVO> attachList = service.getAttachList(eventNo);
 		
-		
-		if(service.remove(eventNo)) {
-			//첨부파일이 있는 경우 파일 삭제 메서드 호출
-			if(attachList != null || attachList.size() > 0) {
-				deleteFiles(attachList);
-			}
+		if(service.remove(id)) {
+			
 			
 			rttr.addFlashAttribute("result", "삭제");
 		}
@@ -94,43 +85,18 @@ public class MemberController {
 //		
 //		return "redirect:/event/list";
 		
-		return "redirect:/event/list" + cri.getListlink();
+		return "redirect:/member/list" + cri.getListlink();
 	}
 	
-	//첨부파일 삭제
-	private void deleteFiles(List<EventAttachVO> attachList) {
-		attachList.forEach(avo -> {
-			
-			try {
-				Path file = Paths.get("c:\\upload\\" +
-									avo.getUploadPath() + "\\" +
-									avo.getUuid() + "_" +
-									avo.getFileName());	//원본파일 삭제 	//uri를 받으면 Path 객체를 넘긴다
-				Files.deleteIfExists(file);
-				
-				//이미지의 경우
-				if(Files.probeContentType(file).startsWith("image")) {
-					Path thumbnail = Paths.get("c:\\upload\\" +
-							avo.getUploadPath() + "\\s_" +
-							avo.getUuid() + "_" +
-							avo.getFileName());	
-					Files.delete(thumbnail);	//섬네일 삭제
-				}
-						
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		});
-	}
 	
 
 	//2페이지의 게시글을 조회하고 수정 화면에서 list 누르면 수정 후 다시 2페이지로 가게 하기
 	//검색 후에도 마찬가지로 되게 하기
-	@PreAuthorize("principal.username == #event.writer")
+	
 	@PostMapping("modify")
-	public String modify(EventVO event, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
+	public String modify(MemberVO member, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
 
-		if(service.modify(event)) {
+		if(service.modify(member)) {
 			rttr.addFlashAttribute("result", "수정");
 		}
 		
@@ -145,7 +111,7 @@ public class MemberController {
 //				
 //		return "redirect:/board/list";
 		
-		return "redirect:/event/list" + cri.getListlink();
+		return "redirect:/member/list" + cri.getListlink();
 	}
 	
 //	@GetMapping("get")
@@ -154,24 +120,7 @@ public class MemberController {
 //		model.addAttribute("board", service.get(bno));
 //	}
 	
-	// /board/register POST 요청을 처리하는 register() 작성
-	// 파라미터는 등록된 게시물의 정보를 갖는 BoardVO 객체와
-	// /board/list로 리다이렉트하기 위한 RedirectAttributes 객체를 받음
-	// 기능 : 파라미터로 받은 BoardVO 객체를 tbl_board 테이블에 저장하고
-	//		등록된 게시물의 번호를 result 속성에 담아
-	//		/board/list로 리다이렉트
-	@PostMapping("register")
-	@PreAuthorize("isAuthenticated()")
-	public String register(EventVO event, RedirectAttributes rttr) {
-
-		if(event.getAttachList() != null) {
-			event.getAttachList().forEach(attach -> log.info(attach));
-		}
-		
-		service.register(event);
-		rttr.addFlashAttribute("result", event.getEventNo());
-		return "redirect:/event/list";
-	}
+	
 	
 	// /board/list GET 요청을 처리하는 list() 작성
 	// 결과 뷰로 tbl_board 테이블의 전체 목록을 담아 가도록 처리
