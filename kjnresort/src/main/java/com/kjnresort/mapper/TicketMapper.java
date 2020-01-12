@@ -1,5 +1,5 @@
 package com.kjnresort.mapper;
 
-public class TicketMapper {
+public interface TicketMapper {
 
 }
