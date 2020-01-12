@@ -9,35 +9,35 @@ import com.kjnresort.domain.Criteria;
 
 
 @RequestMapping("/condoReserve")
-public class CondoReserve {
+public class CondoReserveController {
  
-	//ÄÜµµ¿¹¾à¸ñ·Ï
+	//ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@GetMapping("/list")
 	public void reserveList(Model model,Criteria cri) {
 		
 	}
 	
-	//ÄÜµµ¿¹¾à»ó¼¼Á¶È¸
+	//ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¸
 	@GetMapping("/get")
 	public void reserveGet(long rno,Model model,Criteria cri) {
 		
 	}
 	
-	//ÄÜµµ¿¹¾àÀÌ¿ëÈ®ÀÎ
+	//ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¿ï¿½È®ï¿½ï¿½
 	@PostMapping("/confirm")
 	public void reserveConfirm(long rno,Model model,Criteria cri) {
 		
 	}
 	
-	//ÄÜµµ¿¹¾àÃë¼Ò
+	//ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@PostMapping("/cancel")
 	public void reserveCancel(long rno,Model model,Criteria cri) {
 		
 	}
 	
-	//ÄÜµµ¿¹¾àÇÏ±â
+	//ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 	@PostMapping("/add")
-	public void addReserve() { //¸Å°³º¯¼ö¿¡ ¿¹¾à vo,daoµµ Ãß°¡ÇØÁÖ±â
+	public void addReserve() { //ï¿½Å°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ vo,daoï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½Ö±ï¿½
 		
 	}
 	

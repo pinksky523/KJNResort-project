@@ -14,8 +14,8 @@ public interface EventMapper {
 	//Memo list with page
 	public List<EventVO> getListWithPaging(Criteria cri);		
 	public int update(EventVO event);	
-	public int delete(Long event_no);	
-	public EventVO read(Long event_no);	
+	public int delete(Long eventNo);	
+	public EventVO read(Long eventNo);	
 	public void insertSelectKey(EventVO event);	
 	public void insert(EventVO event);
 	public List<EventVO> getList();
