@@ -38,7 +38,7 @@ public class BoardController {
 	
 	private BoardService service;
 
-	@PreAuthorize("principal.username == #writer")						// ���깆�� ����
+	@PreAuthorize("principal.username == #writer")						// 코딩테스트 ㅎㅎㅎ
 	@PostMapping("remove")
 	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr, 
 			 @ModelAttribute("cri") Criteria cri, String writer) {
