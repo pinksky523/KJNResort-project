@@ -4,3 +4,4 @@ public class CondoManageVO {
 	public String roomType;
 	public int price;
 }
+

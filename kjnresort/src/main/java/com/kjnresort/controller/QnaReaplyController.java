@@ -9,10 +9,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kjnresort.domain.QnaReplyVO;
+import com.kjnresort.service.QnaReplyService;
 
-@RequestMapping("/qnareplies/")
-public class QnaReaplyController {
-
+@RequestMapping("/qnareply/")
+public class QnaReplyController {
+    QnaReplyService service;
 	@GetMapping("/get")
 	public ResponseEntity<QnaReplyVO> get(Long qno){
 		return null;
