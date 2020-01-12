@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class EventVO {
 	private Long eventNo;
-	private String id;
+	private String writer;
 	private String eventTitle;
 	private Date eventStart;
 	private Date eventEnd;
