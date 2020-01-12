@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kjnresort.domain.BoardAttachVO;
+import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.domain.TicketVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.PageDTO;

@@ -3,7 +3,7 @@ package com.kjnresort.domain;
 import lombok.Data;
 
 @Data
-public class BoardAttachVO {
+public class ReviewAttachVO {
 	private String uuid;
 	private String uploadPath;
 	private String fileName;

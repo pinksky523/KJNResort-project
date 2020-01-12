@@ -17,5 +17,5 @@ public class ReviewVO {
 	private String  category;
 	private String  id;
 	private Long    grade;
-	private List<BoardAttachVO> attachList;
+	private List<ReviewAttachVO> attachList;
 }

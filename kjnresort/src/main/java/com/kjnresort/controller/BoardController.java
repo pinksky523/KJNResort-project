@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kjnresort.domain.BoardAttachVO;
+import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.domain.BoardVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.PageDTO;
@@ -42,7 +42,7 @@ public class BoardController {
 			 @ModelAttribute("cri") Criteria cri, String writer) {
 		log.info("BoardController remove() " + bno);
 		
-		List<BoardAttachVO> attachList = service.getAttachList(bno);
+		List<ReviewAttachVO> attachList = service.getAttachList(bno);
 		if(service.remove(bno)) {
 			// 泥⑤����쇱�� ���� 寃쎌�� ���� ���� 硫����� �몄�
 			if(attachList != null || attachList.size() > 0) {
@@ -54,7 +54,7 @@ public class BoardController {
 	}
 	
 	//	泥⑤����� ����
-	private void deleteFiles(List<BoardAttachVO> attachList) {
+	private void deleteFiles(List<ReviewAttachVO> attachList) {
 		log.info("delete files!");
 		attachList.forEach(avo -> {
 			try {
@@ -125,7 +125,7 @@ public class BoardController {
 	
 	@GetMapping(value = "getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<BoardAttachVO>> getAttachList(Long bno){
+	public ResponseEntity<List<ReviewAttachVO>> getAttachList(Long bno){
 		log.info("getAttachList:" + bno);
 		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK);
 		

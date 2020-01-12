@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.kjnresort.domain.BoardAttachVO;
+import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.ReviewVO;
 import com.kjnresort.mapper.BoardAttachMapper;
@@ -17,7 +17,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 public class ReviewServiceImpl implements ReviewService{@Override
-	public List<BoardAttachVO> getAttachList(Long reviewNo) {
+	public List<ReviewAttachVO> getAttachList(Long reviewNo) {
 		// TODO Auto-generated method stub
 		return null;
 	}

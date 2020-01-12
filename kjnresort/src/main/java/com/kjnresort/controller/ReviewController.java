@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kjnresort.domain.BoardAttachVO;
+import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.domain.ReviewVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.PageDTO;
@@ -44,7 +44,7 @@ public class ReviewController {
 			 @ModelAttribute("cri") Criteria cri, String writer) {
 		log.info("reviewController remove() " + reviewNo);
 		
-		List<BoardAttachVO> attachList = service.getAttachList(reviewNo);
+		List<ReviewAttachVO> attachList = service.getAttachList(reviewNo);
 		if(service.remove(reviewNo)) {
 			// 첨부파일이 있는 경우 파일 삭제 메서드 호출
 			if(attachList != null || attachList.size() > 0) {
@@ -56,7 +56,7 @@ public class ReviewController {
 	}
 	
 	//	첨부파일 삭제
-	private void deleteFiles(List<BoardAttachVO> attachList) {
+	private void deleteFiles(List<ReviewAttachVO> attachList) {
 		log.info("delete files!");
 		attachList.forEach(avo -> {
 			try {
@@ -132,7 +132,7 @@ public class ReviewController {
 	//첨부파일 리스트 
 	@GetMapping(value = "getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<BoardAttachVO>> getAttachList(Long reviewNo){
+	public ResponseEntity<List<ReviewAttachVO>> getAttachList(Long reviewNo){
 		log.info("getAttachList:" + reviewNo);
 		return new ResponseEntity<>(service.getAttachList(reviewNo), HttpStatus.OK);
 		
