@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kjnresort.domain.BoardVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.EventAttachVO;
 import com.kjnresort.domain.EventVO;
@@ -58,17 +59,13 @@ public class EventController {
 	//pageNum, amount 추가	
 	//@RequestParam은 안써도 됨
 	//@ModelAttribute를 안쓰면 화면 전환될 때 에러 발생
-	@GetMapping({"get", "modify"})
+	@GetMapping({"get"})
 	public void get(Long eventNo, Model model, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("event", service.get(eventNo));
 	}
 	
 	
-	@GetMapping("register")
-	@PreAuthorize("isAuthenticated()")
-	public void register() {
 
-	}
 	
 	//2페이지의 게시글을 조회하고 수정 화면에서 remove 누르면 삭제 후 다시 2페이지로 가게 하기
 	//검색 후에도 마찬가지로 되게 하기
