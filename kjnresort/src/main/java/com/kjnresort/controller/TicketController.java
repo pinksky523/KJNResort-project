@@ -1,14 +1,5 @@
 package com.kjnresort.controller;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,14 +8,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.domain.TicketVO;
 import com.kjnresort.domain.Criteria;
-import com.kjnresort.domain.PageDTO;
-import com.kjnresort.service.TicketService;
+//import com.kjnresort.service.TicketService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -34,7 +23,7 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/ticket/*")
 @AllArgsConstructor
 public class TicketController {
-	private TicketService service;
+	//private TicketService service;
 	
 	//이용권 구매 폼으로 가는 버튼 클릭
 	@GetMapping("register")
@@ -66,8 +55,8 @@ public class TicketController {
 	@PostMapping("modify")
 	public String modify(TicketVO ticket, RedirectAttributes rttr, 
 		    			 @ModelAttribute("cri") Criteria cri) {
-		log.info("BoardController modify()" + ticket);
-		return "redirect:/board/list" + cri.getListlink();
+		log.info("TicketController modify()" + ticket);
+		return "redirect:/ticket/list" + cri.getListlink();
 	}
 	
 	//이용권 가격 수정 폼으로
@@ -82,7 +71,7 @@ public class TicketController {
 	//이용권 구매 내역 리스트
 	@GetMapping("list")
 	public void list(Criteria cri, Model model) {
-		log.info("BoardController list() with cri : " + cri);
+		log.info("TicketController list() with cri : " + cri);
 	}
 
 }
