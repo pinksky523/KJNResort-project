@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.ReplyPageDTO;
-import com.kjnresort.domain.ReplyVO;
+import com.kjnresort.domain.ReviewReplyVO;
 import com.kjnresort.mapper.BoardMapper;
 import com.kjnresort.mapper.ReplyMapper;
 
@@ -24,7 +24,7 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Transactional
 	@Override
-	public int register(ReplyVO rvo) {
+	public int register(ReviewReplyVO rvo) {
 		log.info("ReplyServiceImpl register() rvo : " + rvo);
 		boardMapper.updateReplyCnt(rvo.getBno(), 1);
 		return mapper.insert(rvo);
@@ -34,7 +34,7 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public int remove(Long rno) {
 		log.info("ReplyServiceImpl remove() rno : " + rno);
-		ReplyVO rvo = mapper.read(rno);
+		ReviewReplyVO rvo = mapper.read(rno);
 		boardMapper.updateReplyCnt(rvo.getBno(), -1);
 		return mapper.delete(rno);
 	}
@@ -46,19 +46,19 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 	
 	@Override
-	public List<ReplyVO> getList(Criteria cri, Long bno) {
+	public List<ReviewReplyVO> getList(Criteria cri, Long bno) {
 		log.info("ReplyServiceImpl getList() bno : " + bno);
 		return mapper.getListWithPaging(cri, bno);
 	}
 
 	@Override
-	public int modify(ReplyVO rvo) {
+	public int modify(ReviewReplyVO rvo) {
 		log.info("ReplyServiceImpl modify() rvo : " + rvo);
 		return mapper.update(rvo);
 	}
 
 	@Override
-	public ReplyVO get(Long rno) {
+	public ReviewReplyVO get(Long rno) {
 		log.info("ReplyServiceImpl get() rno : " + rno);
 		return mapper.read(rno);
 	}

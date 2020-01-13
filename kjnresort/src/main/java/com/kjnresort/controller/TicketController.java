@@ -1,4 +1,4 @@
-package com.kjnresort.controller;
+ package com.kjnresort.controller;
 
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
