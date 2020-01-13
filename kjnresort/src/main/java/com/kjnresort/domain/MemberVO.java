@@ -16,5 +16,6 @@ public class MemberVO {
 	private String address;
 	private boolean state;	//정지회원인지 일반회원인지
 	private Date regDate;
+	private Date updateDate;
 	private List<AuthVO> authList;	
 }
