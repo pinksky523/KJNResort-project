@@ -3,11 +3,14 @@ package com.kjnresort.service;	//이 패키지를 스프링이 자동스캔하�
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.kjnresort.domain.BoardVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.EventAttachVO;
 import com.kjnresort.domain.EventVO;
 import com.kjnresort.domain.MemberVO;
+import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.mapper.EventAttachMapper;
 import com.kjnresort.mapper.EventMapper;
 import com.kjnresort.mapper.MemberMapper;
@@ -56,6 +59,13 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.getListWithPaging(cri);
 	}	
 	
+	@Transactional
+	@Override
+	public void register(MemberVO member) {
+		log.info("register....... : " + member);
+		mapper.insert(member);
+		
+	}
 	
 	
 }

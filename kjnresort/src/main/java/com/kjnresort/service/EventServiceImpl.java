@@ -27,7 +27,7 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public void register(EventVO event) {
 
-		mapper.insertSelectKey(event);
+		mapper.insert(event);
 	}
 	
 	@Override
