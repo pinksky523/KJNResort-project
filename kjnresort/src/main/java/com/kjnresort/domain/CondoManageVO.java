@@ -1,6 +1,6 @@
 package com.kjnresort.domain;
 
-public class CondoManageVO { //ÄÜµµ¸Å´ÏÁöºêÀÌ¿À
+public class CondoManageVO { //ì½˜ë„ë§¤ë‹ˆì§€ë¸Œì´ì˜¤
 	public String roomType;
 	public int price;
 }

@@ -1,5 +1,7 @@
 package com.kjnresort.controller;
 
+import java.security.Principal;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,37 +13,40 @@ import com.kjnresort.domain.Criteria;
 import com.kjnresort.service.CondoReserveService;
 
 
-@RequestMapping("/condoReserve")
+@RequestMapping("/condoreserve")
 public class CondoReserveController { //헐 이제 될거같아
 	CondoReserveService service;
 	
 	@GetMapping("/list")
-	public void reserveList(Model model,Criteria cri) {
+	public void list(Model model,Criteria cri,Principal principal) {
 		
 	}
 	
 	
 	@GetMapping("/get")
-	public CondoReserveVO reserveGet(long rno,Model model,Criteria cri) {
-		
+	public CondoReserveVO get(Long rno,Model model,Criteria cri) {
+		return null;
 	}
 	
 	
 	@PostMapping("/confirm")
-	public void reserveConfirm(long rno,Model model,Criteria cri) {
+	public void reserveConfirm(CondoReserveVO crvo,Model model,RedirectAttributes rttr,Criteria cri) {
 		
 	}
 	
 	
 	@PostMapping("/cancel")
-	public void reserveCancel(long rno,Model model,Criteria cri) {
+	public void reserveCancel(CondoReserveVO crvo,Model model,RedirectAttributes rttr,Criteria cri) {
 		
 	}
 	
-	
-	@PostMapping("/reserve")
-	public String registerReserve(CondoReserveVO crVO,RedirectAttributes rttr) {
+	@GetMapping("/register")
+	public void register() {
 		
+	}
+	@PostMapping("/register")
+	public String register(CondoReserveVO crVO,RedirectAttributes rttr) {
+		return null;
 	}
 	
 }

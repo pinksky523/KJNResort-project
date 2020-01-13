@@ -6,7 +6,8 @@ public class QnaVO { //큐엔에이 브이오
    public String writer;
    public String contents;
    public String regDate;
-  
+   public String answer;
+   public String answerRegDate;
    
 public long getQnaNo() {
 	return qnaNo;
@@ -37,6 +38,18 @@ public String getRegDate() {
 }
 public void setRegDate(String regDate) {
 	this.regDate = regDate;
+}
+public String getAnswer() {
+	return answer;
+}
+public void setAnswer(String answer) {
+	this.answer = answer;
+}
+public String getAnswerRegDate() {
+	return answerRegDate;
+}
+public void setAnswerRegDate(String answerRegDate) {
+	this.answerRegDate = answerRegDate;
 }
 
 

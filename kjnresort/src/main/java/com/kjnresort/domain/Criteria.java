@@ -14,7 +14,7 @@ public class Criteria {
 	private int amount;
 	private String type;
 	private String keyword;
-
+    
 	public Criteria( ) {
 		this(1, 10);	//기본 페이지 번호는 1번, 갯수는 10개로 설정
 	}
