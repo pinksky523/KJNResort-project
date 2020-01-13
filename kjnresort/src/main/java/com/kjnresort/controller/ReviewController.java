@@ -36,7 +36,6 @@ import lombok.extern.log4j.Log4j;
 public class ReviewController {
 	private ReviewService service;
 	
-	//푸쉬 테스트 푸쉬 테스트 푸쉬 테스트 푸쉬 테스트 푸쉬 테스트 푸쉬 테스트 푸쉬 테스트 푸쉬 테스트 푸쉬 테스트 푸쉬 테스트 푸쉬 테스트
  	//후기 삭제
 	@PreAuthorize("principal.username == #writer")						// 작성자 확인
 	@PostMapping("remove")

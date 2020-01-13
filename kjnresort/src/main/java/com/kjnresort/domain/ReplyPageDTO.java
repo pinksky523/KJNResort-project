@@ -9,5 +9,5 @@ import lombok.Data;
 @AllArgsConstructor
 public class ReplyPageDTO {
 	private int replyCnt;
-	private List<ReplyVO> list;
+	private List<ReviewReplyVO> list;
 }

@@ -60,41 +60,41 @@ public class UploadController {
 			
 		}
 	
-	// 첨부파일의 다운로드 처리
-		@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
-		@ResponseBody
-		public ResponseEntity<Resource> downloadFile(String fileName, @RequestHeader("User-Agent") String userAgent) {
-		log.info("download file: " + fileName);
-		Resource resource = new FileSystemResource("c:\\upload\\" + fileName);
-		log.info("resource : " + resource);
+//	// 첨부파일의 다운로드 처리
+//		@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+//		@ResponseBody
+//		public ResponseEntity<Resource> downloadFile(String fileName, @RequestHeader("User-Agent") String userAgent) {
+//		log.info("download file: " + fileName);
+//		Resource resource = new FileSystemResource("c:\\upload\\" + fileName);
+//		log.info("resource : " + resource);
 		
-	//	resource가 없으면 상태 코드 404 반환
-		if(resource.exists() == false) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-	//	UUID 제거하고 저장
-		String resourceName = resource.getFilename().substring(resource.getFilename().indexOf("_") + 1);
-		
-		HttpHeaders headers = new HttpHeaders();
-		String downloadName = "";
-		try {
-			if(userAgent.contains("Trident")) {						//	IE의 경우
-				log.info("IE browser");
-				downloadName = URLEncoder.encode(resourceName, "UTF-8").replaceAll("\\+", " ");
-			} else if(userAgent.contains("Edge")){					//	Edge의 경우
-				log.info("Edge brower");
-				downloadName = URLEncoder.encode(resourceName, "UTF-8");
-				log.info("Edge name:" + downloadName);
-			} else {												//	Chrome의 경우
-				log.info("Chrome browser");
-				downloadName = new String(resourceName.getBytes(),"ISO-8859-1");
-			}
-			headers.add("Content-Disposition", "attachment; fileName=" + downloadName);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		return new ResponseEntity<>(resource, headers, HttpStatus.OK);
-	}
+//	//	resource가 없으면 상태 코드 404 반환
+//		if(resource.exists() == false) {
+//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//		}
+//	//	UUID 제거하고 저장
+//		String resourceName = resource.getFilename().substring(resource.getFilename().indexOf("_") + 1);
+//		
+//		HttpHeaders headers = new HttpHeaders();
+//		String downloadName = "";
+//		try {
+//			if(userAgent.contains("Trident")) {						//	IE의 경우
+//				log.info("IE browser");
+//				downloadName = URLEncoder.encode(resourceName, "UTF-8").replaceAll("\\+", " ");
+//			} else if(userAgent.contains("Edge")){					//	Edge의 경우
+//				log.info("Edge brower");
+//				downloadName = URLEncoder.encode(resourceName, "UTF-8");
+//				log.info("Edge name:" + downloadName);
+//			} else {												//	Chrome의 경우
+//				log.info("Chrome browser");
+//				downloadName = new String(resourceName.getBytes(),"ISO-8859-1");
+//			}
+//			headers.add("Content-Disposition", "attachment; fileName=" + downloadName);
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		}
+//		return new ResponseEntity<>(resource, headers, HttpStatus.OK);
+//	}
 	
 	
 	//	섬네일 이미지 전송
@@ -121,16 +121,6 @@ public class UploadController {
 		Date date = new Date();
 		String str = sdf.format(date);
 		return str.replace("-", File.separator);
-	}
-	
-	private boolean checkImageType(File file) {		// 이미지 파일 여부 확인
-		try {
-			String contentType = Files.probeContentType(file.toPath());
-			return contentType.startsWith("image");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return false;
 	}
 	
 	@PreAuthorize("isAuthenticated()")
@@ -170,14 +160,6 @@ public class UploadController {
 			try {
 				File saveFile = new File(uploadPath, uploadFileName);
 				multipartfile.transferTo(saveFile);
-				// check image type file
-				if(checkImageType(saveFile)) {
-					att.setImage(true);
-					
-					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "s_" + uploadFileName));
-					Thumbnailator.createThumbnail(multipartfile.getInputStream(), thumbnail, 100, 100);
-					thumbnail.close();
-				}
 				//list에 AttachFileDTO 추가
 				list.add(att);
 				
@@ -196,30 +178,30 @@ public class UploadController {
 		
 	}	//End GetMapping
 	
-	@PostMapping("/uploadFormAction")
-	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
-		
-		String uploadFolder = "C:\\upload";
-		
-		for(MultipartFile multipartfile : uploadFile) {
-			log.info("------------------------------");
-			log.info("Upload File Name : " + multipartfile.getOriginalFilename());
-			log.info("Upload File Size : " + multipartfile.getSize());
-			
-			File saveFile = new File(uploadFolder, multipartfile.getOriginalFilename());
-			
-			try {
-				multipartfile.transferTo(saveFile);
-			} catch (Exception e) {
-				log.error(e.getMessage());
-			}
-		}
-	}	//End PostMapping
-	
-	@GetMapping("/uploadForm")
-	public void uploadForm() {
-		
-		log.info("upload form()");
-	}	//End GetMapping
+//	@PostMapping("/uploadFormAction")
+//	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
+//		
+//		String uploadFolder = "C:\\upload";
+//		
+//		for(MultipartFile multipartfile : uploadFile) {
+//			log.info("------------------------------");
+//			log.info("Upload File Name : " + multipartfile.getOriginalFilename());
+//			log.info("Upload File Size : " + multipartfile.getSize());
+//			
+//			File saveFile = new File(uploadFolder, multipartfile.getOriginalFilename());
+//			
+//			try {
+//				multipartfile.transferTo(saveFile);
+//			} catch (Exception e) {
+//				log.error(e.getMessage());
+//			}
+//		}
+//	}	//End PostMapping
+//	
+//	@GetMapping("/uploadForm")
+//	public void uploadForm() {
+//		
+//		log.info("upload form()");
+//	}	//End GetMapping
 
 }
