@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="com.kjnresort.domain.AttachFileDTO" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/domain/AttachFileDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1692" y="48"/>    
+    <position height="-1" width="-1" x="1360" y="527"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="com.kjnresort.domain.Criteria" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/domain/Criteria.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1679" y="433"/>    
+    <position height="-1" width="-1" x="937" y="489"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <class id="5" language="java" name="com.kjnresort.domain.PageDTO" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/domain/PageDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1514" y="525"/>    
+    <position height="-1" width="-1" x="775" y="568"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <class id="6" language="java" name="com.kjnresort.domain.ReviewAttachVO" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/domain/ReviewAttachVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1518" y="100"/>    
+    <position height="-1" width="-1" x="1360" y="82"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </class>  
   <interface id="7" language="java" name="com.kjnresort.mapper.ReplyMapper" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/mapper/ReplyMapper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="890" y="212"/>    
+    <position height="-1" width="-1" x="866" y="159"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </interface>  
   <interface id="8" language="java" name="com.kjnresort.mapper.ReviewMapper" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/mapper/ReviewMapper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="897" y="-19"/>    
+    <position height="-1" width="-1" x="844" y="-34"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -75,7 +75,7 @@
   </interface>  
   <interface id="9" language="java" name="com.kjnresort.service.ReviewService" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/service/ReviewService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="592" y="-31"/>    
+    <position height="-1" width="-1" x="537" y="-32"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -84,7 +84,7 @@
   </interface>  
   <class id="10" language="java" name="com.kjnresort.service.ReviewServiceImpl" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/service/ReviewServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="558" y="230"/>    
+    <position height="-1" width="-1" x="560" y="219"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -93,7 +93,7 @@
   </class>  
   <interface id="11" language="java" name="com.kjnresort.service.ReplyService" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/service/ReplyService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="590" y="513"/>    
+    <position height="-1" width="-1" x="541" y="451"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -102,8 +102,8 @@
   </interface>  
   <class id="12" language="java" name="com.kjnresort.service.ReplyServiceImpl" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/service/ReplyServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="894" y="502"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    <position height="228" width="246" x="421" y="545"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
@@ -111,7 +111,7 @@
   </class>  
   <class id="13" language="java" name="com.kjnresort.domain.ReviewVO" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/domain/ReviewVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1270" y="254"/>    
+    <position height="-1" width="-1" x="1139" y="203"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -131,10 +131,10 @@
   <association id="15">    
     <end type="SOURCE" refId="1" navigable="false">      
       <attribute id="16" name="service">        
-        <position height="0" width="0" x="-704" y="13"/>      
+        <position height="0" width="0" x="-759" y="12"/>      
       </attribute>      
       <multiplicity id="17" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-704" y="13"/>      
+        <position height="0" width="0" x="-759" y="12"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
@@ -143,10 +143,10 @@
   <association id="18">    
     <end type="SOURCE" refId="5" navigable="false">      
       <attribute id="19" name="cri">        
-        <position height="0" width="0" x="1156" y="-17"/>      
+        <position height="0" width="0" x="414" y="39"/>      
       </attribute>      
       <multiplicity id="20" minimum="0" maximum="1">        
-        <position height="0" width="0" x="1156" y="-17"/>      
+        <position height="0" width="0" x="414" y="39"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
@@ -155,10 +155,10 @@
   <association id="21">    
     <end type="SOURCE" refId="14" navigable="false">      
       <attribute id="22" name="service">        
-        <position height="0" width="0" x="-30" y="37"/>      
+        <position height="0" width="0" x="-79" y="-25"/>      
       </attribute>      
       <multiplicity id="23" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-30" y="37"/>      
+        <position height="0" width="0" x="-79" y="-25"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="11" navigable="true"/>    
@@ -167,10 +167,10 @@
   <association id="24">    
     <end type="SOURCE" refId="12" navigable="false">      
       <attribute id="25" name="mapper">        
-        <position height="0" width="0" x="-112" y="251"/>      
+        <position height="0" width="0" x="-136" y="198"/>      
       </attribute>      
       <multiplicity id="26" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-112" y="251"/>      
+        <position height="0" width="0" x="-136" y="198"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
@@ -187,10 +187,10 @@
   <association id="29">    
     <end type="SOURCE" refId="13" navigable="false">      
       <attribute id="30" name="attachList">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="-158" y="-18"/>      
       </attribute>      
       <multiplicity id="31" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
+        <position height="0" width="0" x="-158" y="-18"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
