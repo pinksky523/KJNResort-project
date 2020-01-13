@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.kjnresort.service.CondoUtilSerivce;
 
 @RequestMapping("/condoutil")
-public class CondoUtilController {
+public class CondoUtilController {//콘도 유틸 컨트롤러
 	CondoUtilSerivce service;
 
 	@PostMapping("/getavailableroomtype")

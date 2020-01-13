@@ -2,7 +2,7 @@ package com.kjnresort.domain;
 
 import java.sql.Date;
 
-public class CondoReserveVO {
+public class CondoReserveVO { //콘도리절브브이오
 	public long reservoNo;
 	public Date reserveDate;
 	public int status;
@@ -10,10 +10,11 @@ public class CondoReserveVO {
 	public Date checkIn;
 	public Date checkOut;
 	public int nights;
+	public int price;
 	public String id;
 	public String name;
 	public String phoneNumber;
-	public int review;
+	
 	
 	public long getReservoNo() {
 		return reservoNo;
@@ -57,6 +58,13 @@ public class CondoReserveVO {
 	public void setNights(int nights) {
 		this.nights = nights;
 	}
+	
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
 	public String getId() {
 		return id;
 	}
@@ -75,11 +83,6 @@ public class CondoReserveVO {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public int getReview() {
-		return review;
-	}
-	public void setReview(int review) {
-		this.review = review;
-	}
+
 	
 }

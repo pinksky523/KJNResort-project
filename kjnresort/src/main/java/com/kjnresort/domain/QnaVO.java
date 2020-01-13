@@ -1,6 +1,6 @@
 package com.kjnresort.domain;
 
-public class QnaVO {
+public class QnaVO { //큐엔에이 브이오
    public long qnaNo;
    public String title;
    public String writer;
@@ -38,9 +38,7 @@ public String getRegDate() {
 public void setRegDate(String regDate) {
 	this.regDate = regDate;
 }
-public int getAnswer() {
-	return answer;
-}
+
 
    
    

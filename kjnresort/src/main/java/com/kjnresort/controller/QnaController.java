@@ -20,7 +20,7 @@ import com.kjnresort.domain.QnaVO;
 import com.kjnresort.service.QnaService;
 
 @RequestMapping("/qna")
-public class QnaController {
+public class QnaController {//큐엔에이컨트롤러
 	QnaService service;
 	
 	@GetMapping("/list")
