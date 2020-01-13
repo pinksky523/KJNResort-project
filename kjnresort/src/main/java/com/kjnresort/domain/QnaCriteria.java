@@ -9,29 +9,30 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class Criteria {
+public class QnaCriteria {
 	private int pageNum;
 	private int amount;
 	private String type;
-	private String keyword;
-    
-	public Criteria( ) {
-		this(1, 10);	//ê¸°ë³¸ í˜ì´ì§€ ë²ˆí˜¸ëŠ” 1ë²ˆ, ê°¯ìˆ˜ëŠ” 10ê°œë¡œ ì„¤ì •
+	private String answerType;
+	
+
+	public QnaCriteria( ) {
+		this(1, 10);	//±âº» ÆäÀÌÁö ¹øÈ£´Â 1¹ø, °¹¼ö´Â 10°³·Î ¼³Á¤
 	}
 	
-	public Criteria(int pageNum, int amount) {
+	public QnaCriteria(int pageNum, int amount) {
 		this.pageNum = pageNum;
 		this.amount = amount;
 	}
 	
-	//ë§í¬ ìƒì„± ì²˜ë¦¬
+	//¸µÅ© »ı¼º Ã³¸®
 	public String getListlink() {
 		UriComponentsBuilder builder
 		= UriComponentsBuilder.fromPath("")
 							  .queryParam("pageNum", pageNum)
 							  .queryParam("amount", amount)
-							  .queryParam("type", type)
-							  .queryParam("keyword", keyword);
+							  .queryParam("answerType",answerType)
+							  .queryParam("type", type);
 		return builder.toUriString();
 	}
 	

@@ -11,17 +11,17 @@ import com.kjnresort.domain.CondoManageVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.service.CondoManageService;
 
-@RequestMapping("/condomanage")
+@RequestMapping("/condomanage/*")
 public class CondoManageController {//콘도 매니지컨트롤러
 	CondoManageService serivce;
 	
-	@GetMapping("/list")
-	public void condoList(Criteria cri,Model model) {
+	@GetMapping("list")
+	public void list(Model model) {
 		
 	}
 	
-	@PostMapping("/modify")
-	public String condoModify(CondoManageVO cvo,RedirectAttributes rttr,Criteria cri) {
-		return null;
+	@PostMapping("modify")
+	public void modify(CondoManageVO cmvo, RedirectAttributes rttr) {
+		
 	}
 }
