@@ -38,9 +38,7 @@ public String getRegDate() {
 public void setRegDate(String regDate) {
 	this.regDate = regDate;
 }
-public int getAnswer() {
-	return answer;
-}
+
 
    
    
