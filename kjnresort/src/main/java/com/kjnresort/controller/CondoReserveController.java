@@ -12,7 +12,7 @@ import com.kjnresort.service.CondoReserveService;
 
 
 @RequestMapping("/condoReserve")
-public class CondoReserveController { //한글 인코딩테스트
+public class CondoReserveController { //한글테스트 오전 9시47분
 	CondoReserveService service;
 	
 	@GetMapping("/list")
