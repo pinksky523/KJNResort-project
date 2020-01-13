@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package com.kjnresort.controller;
 
 import java.util.Date;
@@ -21,3 +22,28 @@ public class CondoUtilController {
 		
 	}
 }
+=======
+package com.kjnresort.controller;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.kjnresort.service.CondoUtilSerivce;
+
+@RequestMapping("/condoutil")
+public class CondoUtilController {//콘도 유틸 컨트롤러
+	CondoUtilSerivce service;
+
+	@PostMapping("/getavailableroomtype")
+	public List<String> getAvailableRoomType(Date checkIn,Date checkOut ){
+		return null;
+	}
+	
+	@PostMapping("/utilroom")
+	public void utilRoom(String roomType,Date checkIn,Date checkOut) {
+		
+	}
+}
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git

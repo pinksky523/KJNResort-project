@@ -53,7 +53,7 @@ public class RecruitController {
 					Model model, 
 					@ModelAttribute("cri") Criteria cri) {
 		log.info("RecruitController get()");
-		model.addAttribute("board", service.get(recruitNo));
+		model.addAttribute("recruit", service.get(recruitNo));
 	}
 	
 	// /board/register POST 요청을 처리하는 register() 작성

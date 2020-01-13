@@ -12,7 +12,11 @@ import com.kjnresort.domain.QnaReplyVO;
 import com.kjnresort.service.QnaReplyService;
 
 @RequestMapping("/qnareply/")
+<<<<<<< HEAD
 public class QnaReplyController {
+=======
+public class QnaReplyController {//큐엔에이 리플라이 컨트롤러
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
     QnaReplyService service;
 	@GetMapping("/get")
 	public ResponseEntity<QnaReplyVO> get(Long qno){

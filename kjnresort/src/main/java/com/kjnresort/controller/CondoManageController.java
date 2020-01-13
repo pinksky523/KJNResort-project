@@ -12,7 +12,7 @@ import com.kjnresort.domain.Criteria;
 import com.kjnresort.service.CondoManageService;
 
 @RequestMapping("/condomanage")
-public class CondoManageController {//ÇÑ±ÛÀÎÄÚµùÅ×½ºÆ®
+public class CondoManageController {//ì½˜ë„ ë§¤ë‹ˆì§€ì»¨íŠ¸ë¡¤ëŸ¬
 	CondoManageService serivce;
 	
 	@GetMapping("/list")

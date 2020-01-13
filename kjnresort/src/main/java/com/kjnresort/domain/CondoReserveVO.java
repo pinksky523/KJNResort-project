@@ -2,7 +2,7 @@ package com.kjnresort.domain;
 
 import java.sql.Date;
 
-public class CondoReserveVO {
+public class CondoReserveVO { //콘도리절브브이오
 	public long reservoNo;
 	public Date reserveDate;
 	public int status;
