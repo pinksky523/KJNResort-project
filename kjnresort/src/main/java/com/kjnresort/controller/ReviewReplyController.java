@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.ReplyPageDTO;
-import com.kjnresort.domain.ReplyVO;
+import com.kjnresort.domain.ReviewReplyVO;
 import com.kjnresort.service.ReplyService;
 
 import lombok.AllArgsConstructor;
@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @RequestMapping("/replies/")
 @AllArgsConstructor
-public class ReplyController {
+public class ReviewReplyController {
 	private ReplyService service;
 	
 	@GetMapping(value = "pages/{bno}/{page}")
@@ -42,7 +42,7 @@ public class ReplyController {
 	@PostMapping(value = "new",
 				 consumes = "application/json",
 				 produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> register(@RequestBody ReplyVO rvo) {
+	public ResponseEntity<String> register(@RequestBody ReviewReplyVO rvo) {
 		log.info("ReplyVO : " + rvo);
 		return service.register(rvo) == 1 
 				? new ResponseEntity<>("success", HttpStatus.OK)
@@ -50,7 +50,7 @@ public class ReplyController {
 	}	
 	
 	@GetMapping(value = "{rno}")
-	public ResponseEntity<ReplyVO> get(@PathVariable("rno") Long rno) {
+	public ResponseEntity<ReviewReplyVO> get(@PathVariable("rno") Long rno) {
 		log.info("ReplyController get() rno : " + rno);
 		return new ResponseEntity<>(service.get(rno), HttpStatus.OK);
 	}	
@@ -60,7 +60,7 @@ public class ReplyController {
 				   	value = "{rno}",
 				   	produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> modify(@PathVariable("rno") Long rno,
-										 @RequestBody ReplyVO rvo) {
+										 @RequestBody ReviewReplyVO rvo) {
 		log.info("ReplyController modify() rno : " + rno);
 		log.info("ReplyController modify() rvo : " + rvo);
 //		rvo.setRno(rno);
@@ -71,7 +71,7 @@ public class ReplyController {
 	
 	@PreAuthorize("principal.username == #rvo.replyer")
 	@DeleteMapping(value = "{rno}", produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> remove(@RequestBody ReplyVO rvo, @PathVariable("rno") Long rno) {
+	public ResponseEntity<String> remove(@RequestBody ReviewReplyVO rvo, @PathVariable("rno") Long rno) {
 		log.info("ReplyController remove() rno : " + rno);
 		return service.remove(rno) == 1 
 				? new ResponseEntity<>("success", HttpStatus.OK)

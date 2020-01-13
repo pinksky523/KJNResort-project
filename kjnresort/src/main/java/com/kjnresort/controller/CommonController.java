@@ -11,15 +11,13 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 public class CommonController {
-	//한글인코딩테스트
 	
-	
-	@PostMapping("/customLogout")
+	@PostMapping("/logout")
 	public void logoutPOST() {
 		log.info("custom logout post");
 	}
 	
-	@GetMapping("/customLogout")
+	@GetMapping("/logout")
 	public void logoutGET() {
 		log.info("custom logout get");
 	}
@@ -30,7 +28,7 @@ public class CommonController {
 		model.addAttribute("msg", "접근 권한 없음");
 	}
 	
-	@GetMapping("/customLogin")
+	@GetMapping("/login")
 	public void loginInput(String error, String logout, Model model) {
 		log.info("error : " + error);
 		log.info("logout : " + logout);

@@ -31,11 +31,11 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
+
 @RequestMapping("/event/*")
 @AllArgsConstructor
 public class EventController {
 	private EventService service;
-	
 	@GetMapping("getAttachList")
 	@ResponseBody
 	public ResponseEntity<List<EventAttachVO>> getAttachList(Long eventNo) {
@@ -59,7 +59,7 @@ public class EventController {
 	//pageNum, amount 추가	
 	//@RequestParam은 안써도 됨
 	//@ModelAttribute를 안쓰면 화면 전환될 때 에러 발생
-	@GetMapping({"get"})
+	@GetMapping({"get", "modify"})
 	public void get(Long eventNo, Model model, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("event", service.get(eventNo));
 	}
@@ -156,6 +156,15 @@ public class EventController {
 //		log.info("BoardController get()");
 //		model.addAttribute("board", service.get(bno));
 //	}
+	
+	
+	@GetMapping("register")
+	@PreAuthorize("isAuthenticated()")
+	public void register() {
+		log.info("EventController register() - get");
+	}
+	
+	
 	
 	// /board/register POST 요청을 처리하는 register() 작성
 	// 파라미터는 등록된 게시물의 정보를 갖는 BoardVO 객체와

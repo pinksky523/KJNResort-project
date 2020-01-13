@@ -29,12 +29,6 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public List<NoticeVO> getList() {
-		log.info("getList.......");
-		return mapper.getList();
-	}
-
-	@Override
 	public NoticeVO get(Long noticeNo) {
 		log.info("get.......");
 		return mapper.read(noticeNo);
@@ -52,11 +46,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return mapper.delete(noticeNo) == 1;
 	}
 
-
 	@Override
 	public void register(NoticeVO notice) {
 		log.info("register........ : " + notice);
-		mapper.insertSelectKey(notice);
+		mapper.insert(notice);
 	}
 
 }

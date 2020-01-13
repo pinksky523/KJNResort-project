@@ -10,14 +10,11 @@ import com.kjnresort.domain.Criteria;
 public interface RecruitMapper {	
 	public int getTotalCount(Criteria cri);
 	public List<RecruitVO> getListWithPaging(Criteria cri);
-	public List<RecruitVO> getList();
-	
-	public void insertSelectKey(RecruitVO recruit);							
+			
 	public void insert(RecruitVO recruit);
 	public int update(RecruitVO recruit);
 	public int delete(Long recruitNo);
 	public RecruitVO read(Long recruitNo);
-
 }
 
 

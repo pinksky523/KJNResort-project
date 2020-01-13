@@ -29,12 +29,6 @@ public class RecruitServiceImpl implements RecruitService {
 	}
 
 	@Override
-	public List<RecruitVO> getList() {
-		log.info("getList.......");
-		return mapper.getList();
-	}
-
-	@Override
 	public RecruitVO get(Long recruitNo) {
 		log.info("get.......");
 		return mapper.read(recruitNo);
@@ -55,7 +49,7 @@ public class RecruitServiceImpl implements RecruitService {
 	@Override
 	public void register(RecruitVO recruit) {
 		log.info("register........ : " + recruit);
-		mapper.insertSelectKey(recruit);
+		mapper.insert(recruit);
 	}
 
 }

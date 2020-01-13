@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kjnresort.domain.BoardVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.EventAttachVO;
 import com.kjnresort.domain.EventVO;
@@ -38,8 +39,27 @@ public class MemberController {
 	private MemberService service;
 	
 	
+	@GetMapping("register")
+	@PreAuthorize("isAuthenticated()")
+	public void register() {
+		log.info("MemberController register() - get");
+	}
+	
+	@PostMapping("register")
+	@PreAuthorize("isAuthenticated()")
+	public String register(MemberVO member, RedirectAttributes rttr) {
+		log.info("BMemberController register()");
+		log.info("register:" + member);
+	
+		log.info("===============================");
+		service.register(member);
+		rttr.addFlashAttribute("result", member.getId());
+		return "redirect:/member/login";
+	}
+	
+	
 	@GetMapping("list")
-	public void list(Criteria cri, Model model) {
+	public void memberList(Criteria cri, Model model) {
 
 		model.addAttribute("list", service.getList(cri));
 		
@@ -57,6 +77,24 @@ public class MemberController {
 	@GetMapping({"get"})
 	public void get(String id, Model model, @ModelAttribute("cri") Criteria cri) {
 		model.addAttribute("member", service.get(id));
+	}
+	
+	@GetMapping({"findId"})
+	public void get(String id, String phoneNumber, Model model) {
+		model.addAttribute("findId", service.get(id));
+	}
+	
+	@GetMapping({"findPw"})
+	public String get(String id, String name, String phoneNumber, Model model) {
+		model.addAttribute("findPw", service.get(id));
+		
+		return "redirect:/member/pwModify";
+	}
+	
+	
+	@PostMapping({"mypage"})
+	public void get(String id, Model model) {
+		model.addAttribute("mypage", service.get(id));
 	}
 
 	
