@@ -50,9 +50,9 @@
 	<task:annotation-driven/>
 	
 	<!-- myBatis mapper  -->
- 	<mybatis-spring:scan base-package="org.zerock.mapper"/>	
-	<context:component-scan base-package="org.zerock.service" /> 
-	<context:component-scan base-package="org.zerock.aop" /> 
-	<context:component-scan base-package="org.zerock.task" /> 		
+ 	<mybatis-spring:scan base-package="com.kjnresort.mapper"/>	
+	<context:component-scan base-package="com.kjnresort.service" /> 
+	<context:component-scan base-package="com.kjnresort.aop" /> 
+	<context:component-scan base-package="com.kjnresort.task" /> 		
 	
 </beans>

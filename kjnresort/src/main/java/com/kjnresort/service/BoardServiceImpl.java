@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.kjnresort.domain.BoardAttachVO;
+import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.domain.BoardVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.mapper.BoardAttachMapper;
@@ -44,7 +44,7 @@ public class BoardServiceImpl implements BoardService {
 	public void register(BoardVO board) {
 		log.info("register....... : " + board);
 		mapper.insertSelectKey(board);
-		List<BoardAttachVO> attachList = board.getAttachList();
+		List<ReviewAttachVO> attachList = board.getAttachList();
 
 		// 첨부파일이 없으면 중단
 		if(attachList == null || attachList.size() <= 0) {
@@ -88,7 +88,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardAttachVO> getAttachList(Long bno) {
+	public List<ReviewAttachVO> getAttachList(Long bno) {
 		log.info("get Attach list by bno : " + bno);
 		return attachMapper.findByBno(bno);
 	}

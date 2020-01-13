@@ -29,7 +29,7 @@
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	</beans:bean> 
 	
-	<context:component-scan base-package="org.zerock.controller" />
+	<context:component-scan base-package="com.kjnresort.controller" />
 	
 	<security:global-method-security
 				pre-post-annotations="enabled" secured-annotations="enabled"/>

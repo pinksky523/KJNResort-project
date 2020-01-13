@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kjnresort.domain.BoardAttachVO;
+import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.domain.BoardVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.PageDTO;
@@ -34,17 +34,19 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/board/*")
 @AllArgsConstructor
 public class BoardController {
+	//한글인코딩테스트
+	
 	private BoardService service;
 
-	@PreAuthorize("principal.username == #writer")						// 작성자 확인
+	@PreAuthorize("principal.username == #writer")						// 코딩테스트 ㅎㅎㅎ
 	@PostMapping("remove")
 	public String remove(@RequestParam("bno") Long bno, RedirectAttributes rttr, 
 			 @ModelAttribute("cri") Criteria cri, String writer) {
 		log.info("BoardController remove() " + bno);
 		
-		List<BoardAttachVO> attachList = service.getAttachList(bno);
+		List<ReviewAttachVO> attachList = service.getAttachList(bno);
 		if(service.remove(bno)) {
-			// 첨부파일이 있는 경우 파일 삭제 메서드 호출
+			// 泥⑤����쇱�� ���� 寃쎌�� ���� ���� 硫����� �몄�
 			if(attachList != null || attachList.size() > 0) {
 				deleteFiles(attachList);
 			}
@@ -53,8 +55,8 @@ public class BoardController {
 		return "redirect:/board/list" + cri.getListlink();
 	}
 	
-	//	첨부파일 삭제
-	private void deleteFiles(List<BoardAttachVO> attachList) {
+	//	泥⑤����� ����
+	private void deleteFiles(List<ReviewAttachVO> attachList) {
 		log.info("delete files!");
 		attachList.forEach(avo -> {
 			try {
@@ -62,13 +64,13 @@ public class BoardController {
 								avo.getUploadPath() +"\\" +
 								avo.getUuid() + "_" +
 								avo.getFileName());
-				Files.deleteIfExists(file);								// 원본 파일 삭제
-				if(Files.probeContentType(file).startsWith("image")) {	// 이미지의 경우
+				Files.deleteIfExists(file);								// ��蹂� ���� ����
+				if(Files.probeContentType(file).startsWith("image")) {	// �대�몄��� 寃쎌��
 					Path thumbnail = Paths.get("C:\\upload\\"+ 
 									avo.getUploadPath() +"\\s_" +
 									avo.getUuid() + "_" +
 									avo.getFileName());
-					Files.deleteIfExists(thumbnail);					// 썸네일 삭제
+					Files.deleteIfExists(thumbnail);					// �몃�ㅼ�� ����
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -76,7 +78,7 @@ public class BoardController {
 		});
 	}
 	
-	@PreAuthorize("principal.username == #board.writer")				// 작성자 확인
+	@PreAuthorize("principal.username == #board.writer")				// ���깆�� ����
 	@PostMapping("modify")
 	public String modify(BoardVO board, RedirectAttributes rttr, 
 		    			 @ModelAttribute("cri") Criteria cri) {
@@ -125,7 +127,7 @@ public class BoardController {
 	
 	@GetMapping(value = "getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
-	public ResponseEntity<List<BoardAttachVO>> getAttachList(Long bno){
+	public ResponseEntity<List<ReviewAttachVO>> getAttachList(Long bno){
 		log.info("getAttachList:" + bno);
 		return new ResponseEntity<>(service.getAttachList(bno), HttpStatus.OK);
 		

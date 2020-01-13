@@ -2,12 +2,12 @@ package com.kjnresort.service;
 
 import java.util.List;
 
-import com.kjnresort.domain.BoardAttachVO;
+import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.domain.BoardVO;
 import com.kjnresort.domain.Criteria;
 
 public interface BoardService {
-	public List<BoardAttachVO> getAttachList(Long bno);
+	public List<ReviewAttachVO> getAttachList(Long bno);
 	public int getTotalCount(Criteria cri);
 	public List<BoardVO> getList(Criteria cri);
 	public List<BoardVO> getList();

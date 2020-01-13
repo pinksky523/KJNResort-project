@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.kjnresort.domain.BoardAttachVO;
+import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.mapper.BoardAttachMapper;
 
 import lombok.AllArgsConstructor;
@@ -46,7 +46,7 @@ public class FileCheckTask {
 		log.warn(new Date());
 		
 		// 1) 데이터베이스에서 어제 사용된 파일 목록 받아오기
-		List<BoardAttachVO> fileList = attachMapper.getOldFiles();
+		List<ReviewAttachVO> fileList = attachMapper.getOldFiles();
 		
 		// 2) 해당 폴더의 파일 목록에서 데이터베이스에 없는 파일 찾아내기
 		// tbl_attach 테이블의 데이터를 목록으로 반환
