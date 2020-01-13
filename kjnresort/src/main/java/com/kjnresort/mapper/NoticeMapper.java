@@ -10,9 +10,7 @@ import com.kjnresort.domain.Criteria;
 public interface NoticeMapper {	
 	public int getTotalCount(Criteria cri);
 	public List<NoticeVO> getListWithPaging(Criteria cri);
-	public List<NoticeVO> getList();
-	
-	public void insertSelectKey(NoticeVO notice);							
+							
 	public void insert(NoticeVO notice);
 	public int update(NoticeVO notice);
 	public int delete(Long noticeNo);

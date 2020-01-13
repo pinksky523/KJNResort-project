@@ -29,6 +29,11 @@ public class RecruitController {
 		
 	}
 	
+	@GetMapping("/modify")
+	public void modify() {
+		
+	}
+	
 	@PostMapping("/remove")
 	public String remove(@RequestParam("recruitNo") Long recruitNo,  @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("RecruitController remove()... " + recruitNo);
