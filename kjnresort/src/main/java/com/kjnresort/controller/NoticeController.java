@@ -29,11 +29,6 @@ public class NoticeController {
 		
 	}
 	
-	@GetMapping("/modify")
-	public void modify() {
-		
-	}
-	
 	@PostMapping("/remove")
 	public String remove(@RequestParam("noticeNo") Long noticeNo,  @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
 		log.info("NoticeController remove()... " + noticeNo);

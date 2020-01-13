@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="com.kjnresort.controller.RecruitController" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/controller/RecruitController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="222" y="206"/>    
+    <position height="-1" width="-1" x="229" y="223"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="com.kjnresort.domain.Criteria" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/domain/Criteria.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="997" y="282"/>    
+    <position height="-1" width="-1" x="996" y="290"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="com.kjnresort.domain.RecruitVO" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/domain/RecruitVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="807" y="304"/>    
+    <position height="-1" width="-1" x="807" y="344"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <interface id="4" language="java" name="com.kjnresort.mapper.RecruitMapper" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/mapper/RecruitMapper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="553" y="494"/>    
+    <position height="-1" width="-1" x="556" y="503"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </interface>  
   <class id="5" language="java" name="com.kjnresort.domain.PageDTO" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/domain/PageDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1194" y="247"/>    
+    <position height="-1" width="-1" x="1178" y="256"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </class>  
   <interface id="6" language="java" name="com.kjnresort.service.RecruitService" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/service/RecruitService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="211" y="485"/>    
+    <position height="-1" width="-1" x="214" y="500"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -64,32 +64,44 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="8">    
-    <end type="SOURCE" refId="7" navigable="false">      
-      <attribute id="9" name="mapper"/>      
-      <multiplicity id="10" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="11">    
+  <realization id="8">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="6"/>  
   </realization>  
+  <association id="9">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="10" name="cri">        
+        <position height="0" width="0" x="-1" y="8"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-1" y="8"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="12">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="13" name="service"/>      
-      <multiplicity id="14" minimum="0" maximum="1"/>    
+      <attribute id="13" name="service">        
+        <position height="0" width="0" x="3" y="15"/>      
+      </attribute>      
+      <multiplicity id="14" minimum="0" maximum="1">        
+        <position height="0" width="0" x="3" y="15"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="6" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="15">    
-    <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="16" name="cri"/>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="16" name="mapper">        
+        <position height="0" width="0" x="3" y="9"/>      
+      </attribute>      
+      <multiplicity id="17" minimum="0" maximum="1">        
+        <position height="0" width="0" x="3" y="9"/>      
+      </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
