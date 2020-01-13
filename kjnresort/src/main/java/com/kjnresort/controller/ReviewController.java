@@ -45,13 +45,13 @@ public class ReviewController {
 		log.info("reviewController remove() " + reviewNo);
 		
 		List<ReviewAttachVO> attachList = service.getAttachList(reviewNo);
-		if(service.remove(reviewNo)) {
-			// 첨부파일이 있는 경우 파일 삭제 메서드 호출
-			if(attachList != null || attachList.size() > 0) {
-				deleteFiles(attachList);
-			}
-			rttr.addFlashAttribute("result", "success");
-		}
+//		if(service.remove(reviewNo)) {
+//			// 첨부파일이 있는 경우 파일 삭제 메서드 호출
+//			if(attachList != null || attachList.size() > 0) {
+//				deleteFiles(attachList);
+//			}
+//			rttr.addFlashAttribute("result", "success");
+//		}
 		return "redirect:/review/list" + cri.getListlink();
 	}
 	

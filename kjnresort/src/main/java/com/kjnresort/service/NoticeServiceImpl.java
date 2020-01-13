@@ -60,18 +60,3 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
