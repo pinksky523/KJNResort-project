@@ -16,8 +16,6 @@ public interface EventMapper {
 	public int update(EventVO event);	
 	public int delete(Long eventNo);	
 	public EventVO read(Long eventNo);	
-	public void insertSelectKey(EventVO event);	
 	public void insert(EventVO event);
-	public List<EventVO> getList();
 
 }
