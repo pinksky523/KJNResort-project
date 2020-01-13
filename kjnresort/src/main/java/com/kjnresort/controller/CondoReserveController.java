@@ -12,7 +12,7 @@ import com.kjnresort.service.CondoReserveService;
 
 
 @RequestMapping("/condoReserve")
-public class CondoReserveController { //ÇÑ±ÛÅ×½ºÆ® ¿ÀÀü 9½Ã47ºĞ
+public class CondoReserveController { //í— ì´ì œ ë ê±°ê°™ì•„
 	CondoReserveService service;
 	
 	@GetMapping("/list")
