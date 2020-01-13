@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="com.kjnresort.aop.LogAdvice" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/aop/LogAdvice.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="429" y="401"/>    
+    <position height="-1" width="-1" x="697" y="405"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -13,56 +13,16 @@
   <class id="2" language="java" name="com.kjnresort.exception.CommonExceptionAdvice" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/exception/CommonExceptionAdvice.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="412" y="197"/>    
+    <position height="-1" width="-1" x="366" y="399"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="com.kjnresort.security.CustomAccessDeniedHandler" project="kjnresort" 
-    file="/kjnresort/src/main/java/com/kjnresort/security/CustomAccessDeniedHandler.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="944" y="157"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="4" language="java" name="com.kjnresort.security.CustomLoginSuccessHandler" project="kjnresort" 
-    file="/kjnresort/src/main/java/com/kjnresort/security/CustomLoginSuccessHandler.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="918" y="299"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="5" language="java" name="com.kjnresort.security.CustomNoOpPasswordEncoder" project="kjnresort" 
-    file="/kjnresort/src/main/java/com/kjnresort/security/CustomNoOpPasswordEncoder.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1057" y="447"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="6" language="java" name="com.kjnresort.security.CustomUserDetailsService" project="kjnresort" 
-    file="/kjnresort/src/main/java/com/kjnresort/security/CustomUserDetailsService.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1056" y="622"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="7" language="java" name="com.kjnresort.task.FileCheckTask" project="kjnresort" 
+  <class id="3" language="java" name="com.kjnresort.task.FileCheckTask" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/task/FileCheckTask.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="417" y="607"/>    
+    <position height="-1" width="-1" x="1005" y="405"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
