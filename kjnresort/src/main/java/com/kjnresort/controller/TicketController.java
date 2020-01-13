@@ -25,6 +25,32 @@ import lombok.extern.log4j.Log4j;
 public class TicketController {
 	//private TicketService service;
 	
+	@GetMapping("buyTicket")
+	@PreAuthorize("isAuthenticated()")
+	public void buyTicket() {
+		log.info("TicketController register() - get");
+	}
+	
+	@PostMapping("buyTicket")
+	@PreAuthorize("isAuthenticated()")
+	public String buyTicket(TicketVO ticket, RedirectAttributes rttr, 
+			 @ModelAttribute("cri") Criteria cri) {
+		log.info("TicketController modify()" + ticket);
+		return "redirect:/ticket/list" + cri.getListlink();
+	}
+	
+	@GetMapping("buyTicketInfo")
+	@PreAuthorize("isAuthenticated()")
+	public void buyTicketInfo() {
+		log.info("TicketController register() - get");
+	}
+	
+	@GetMapping("buyTicketResult")
+	@PreAuthorize("isAuthenticated()")
+	public void buyTicketResult() {
+		log.info("TicketController register() - get");
+	}
+	
 	//이용권 구매 폼으로 가는 버튼 클릭
 	@GetMapping("register")
 	@PreAuthorize("isAuthenticated()")
