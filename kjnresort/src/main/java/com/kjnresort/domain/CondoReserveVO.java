@@ -7,6 +7,7 @@ public class CondoReserveVO { //콘도리절브브이오
 	public Date reserveDate;
 	public int status;
 	public String roomType;
+	public int roomNo;
 	public Date checkIn;
 	public Date checkOut;
 	public int nights;
@@ -39,6 +40,12 @@ public class CondoReserveVO { //콘도리절브브이오
 	}
 	public void setRoomType(String roomType) {
 		this.roomType = roomType;
+	}
+	public int getRoomNo() {
+		return roomNo;
+	}
+	public void setRoomNo(int roomNo) {
+		this.roomNo = roomNo;
 	}
 	public Date getCheckIn() {
 		return checkIn;

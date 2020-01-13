@@ -31,11 +31,11 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
+
 @RequestMapping("/event/*")
 @AllArgsConstructor
 public class EventController {
 	private EventService service;
-	
 	@GetMapping("getAttachList")
 	@ResponseBody
 	public ResponseEntity<List<EventAttachVO>> getAttachList(Long eventNo) {
