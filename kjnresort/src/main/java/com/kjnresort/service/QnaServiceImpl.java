@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.QnaVO;
+import com.kjnresort.mapper.QnaMapper;
 
 public class QnaServiceImpl implements QnaService {
+	QnaMapper mapper;
 	public List<QnaVO> getList(Criteria cri){
 		return null;
 	}

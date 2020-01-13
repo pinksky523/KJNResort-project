@@ -9,9 +9,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kjnresort.domain.CondoManageVO;
 
 import com.kjnresort.domain.Criteria;
+import com.kjnresort.service.CondoManageService;
 
-@RequestMapping("/condo")
-public class CondoManageController {
+@RequestMapping("/condomanage")
+public class CondoManageController {//한글인코딩테스트
+	CondoManageService serivce;
 	
 	@GetMapping("/list")
 	public void condoList(Criteria cri,Model model) {
