@@ -6,7 +6,7 @@ public class QnaVO {
    public String writer;
    public String contents;
    public String regDate;
-   public int answer;
+  
    
 public long getQnaNo() {
 	return qnaNo;
@@ -41,10 +41,7 @@ public void setRegDate(String regDate) {
 public int getAnswer() {
 	return answer;
 }
-public void setAnswer(int answer) {
-	this.answer = answer;
-}
-   
+
    
    
 }

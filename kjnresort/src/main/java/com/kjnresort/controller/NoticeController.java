@@ -53,7 +53,7 @@ public class NoticeController {
 					Model model, 
 					@ModelAttribute("cri") Criteria cri) {
 		log.info("NoticeController get()");
-		model.addAttribute("board", service.get(noticeNo));
+		model.addAttribute("notice", service.get(noticeNo));
 	}
 	
 	// /board/register POST 요청을 처리하는 register() 작성
