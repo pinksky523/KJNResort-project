@@ -11,6 +11,8 @@ import lombok.extern.log4j.Log4j;
 @Controller
 @Log4j
 public class CommonController {
+	//한글인코딩테스트
+	
 	
 	@PostMapping("/customLogout")
 	public void logoutPOST() {

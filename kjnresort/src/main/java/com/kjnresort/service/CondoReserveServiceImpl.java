@@ -4,8 +4,12 @@ import java.util.List;
 
 import com.kjnresort.domain.CondoReserveVO;
 import com.kjnresort.domain.Criteria;
+import com.kjnresort.mapper.CondoReserveMapper;
+import com.kjnresort.mapper.CondoUtilMapper;
 
 public class CondoReserveServiceImpl implements CondoReserveService {
+	CondoReserveMapper condoReservemapper;
+	CondoUtilMapper condoUtilMapper;
 	public List<CondoReserveVO> getListWithPaging(Criteria cri){
 		return null;
 	}

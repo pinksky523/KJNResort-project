@@ -3,7 +3,7 @@
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
   <class id="1" language="java" name="com.kjnresort.controller.TicketController" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/controller/TicketController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="155" y="120"/>    
+    <position height="-1" width="-1" x="157" y="-180"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="com.kjnresort.domain.Criteria" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/domain/Criteria.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="369" width="145" x="583" y="-186"/>    
+    <position height="-1" width="-1" x="614" y="-185"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -30,7 +30,7 @@
   </class>  
   <class id="4" language="java" name="com.kjnresort.domain.PageDTO" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/domain/PageDTO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="632" y="369"/>    
+    <position height="-1" width="-1" x="606" y="166"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <interface id="5" language="java" name="com.kjnresort.mapper.TicketMapper" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/mapper/TicketMapper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="63" width="103" x="843" y="-219"/>    
+    <position height="-1" width="-1" x="807" y="-229"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </interface>  
   <interface id="6" language="java" name="com.kjnresort.service.TicketService" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/service/TicketService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="63" width="103" x="1030" y="-206"/>    
+    <position height="-1" width="-1" x="1016" y="-222"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,7 +57,7 @@
   </interface>  
   <class id="7" language="java" name="com.kjnresort.service.TicketServiceImpl" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/service/TicketServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="99" width="126" x="1020" y="-43"/>    
+    <position height="-1" width="-1" x="1013" y="4"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
