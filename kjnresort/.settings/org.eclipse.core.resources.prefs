@@ -1,6 +1,14 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/kjnresort/controller/BoardController.java=UTF-8
 encoding//src/main/java/com/kjnresort/controller/CommonController.java=UTF-8
+encoding//src/main/java/com/kjnresort/controller/CondoManageController.java=UTF-8
 encoding//src/main/java/com/kjnresort/controller/CondoReserveController.java=UTF-8
+encoding//src/main/java/com/kjnresort/controller/CondoUtilController.java=UTF-8
 encoding//src/main/java/com/kjnresort/controller/EventController.java=UTF-8
+encoding//src/main/java/com/kjnresort/controller/QnaController.java=UTF-8
+encoding//src/main/java/com/kjnresort/controller/QnaReplyController.java=UTF-8
+encoding//src/main/java/com/kjnresort/domain/CondoManageVO.java=UTF-8
+encoding//src/main/java/com/kjnresort/domain/CondoReserveVO.java=UTF-8
+encoding//src/main/java/com/kjnresort/domain/QnaReplyVO.java=UTF-8
+encoding//src/main/java/com/kjnresort/domain/QnaVO.java=UTF-8
 encoding/<project>=UTF-8
