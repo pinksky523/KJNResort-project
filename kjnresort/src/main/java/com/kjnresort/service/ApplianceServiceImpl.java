@@ -29,12 +29,6 @@ public class ApplianceServiceImpl implements ApplianceService {
 	}
 
 	@Override
-	public List<ApplianceVO> getList() {
-		log.info("getList.......");
-		return mapper.getList();
-	}
-
-	@Override
 	public ApplianceVO get(String phoneNumber) {
 		log.info("get.......");
 		return mapper.read(phoneNumber);
@@ -43,7 +37,7 @@ public class ApplianceServiceImpl implements ApplianceService {
 	@Override
 	public void register(ApplianceVO appliance) {
 		log.info("register........ : " + appliance);
-		mapper.insertSelectKey(appliance);
+		mapper.insert(appliance);
 	}
 
 }
