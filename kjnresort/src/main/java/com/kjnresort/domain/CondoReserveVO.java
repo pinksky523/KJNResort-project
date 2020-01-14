@@ -3,7 +3,7 @@ package com.kjnresort.domain;
 import java.sql.Date;
 
 public class CondoReserveVO { //콘도리절브브이오
-	public long reservoNo;
+	public long rno;
 	public Date reserveDate;
 	public int status;
 	public String roomType;
@@ -17,11 +17,12 @@ public class CondoReserveVO { //콘도리절브브이오
 	public String phoneNumber;
 	
 	
-	public long getReservoNo() {
-		return reservoNo;
+	
+	public long getRno() {
+		return rno;
 	}
-	public void setReservoNo(long reservoNo) {
-		this.reservoNo = reservoNo;
+	public void setRno(long rno) {
+		this.rno = rno;
 	}
 	public Date getReserveDate() {
 		return reserveDate;

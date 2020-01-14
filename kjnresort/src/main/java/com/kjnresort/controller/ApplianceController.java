@@ -39,7 +39,7 @@ public class ApplianceController {
 	public String register(ApplianceVO appliance, RedirectAttributes rttr) {
 		log.info("ApplianceController register()");
 		service.register(appliance);
-		rttr.addFlashAttribute("result", appliance.getPhoneNumber());		// 등록된 게시글의 bno를 result값에 담아서 redirect로 넘겨준다.
+		rttr.addFlashAttribute("result", appliance.getRecruitNo());		// 등록된 게시글의 bno를 result값에 담아서 redirect로 넘겨준다.
 		return "redirect:/appliance/list";
 	}
 	

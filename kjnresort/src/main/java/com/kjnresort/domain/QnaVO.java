@@ -1,18 +1,22 @@
 package com.kjnresort.domain;
 
+import java.util.Date;
+
 public class QnaVO { //큐엔에이 브이오
-   public long qnaNo;
+   public long qno;
    public String title;
-   public String writer;
+   public String id;
    public String contents;
    public String regDate;
-  
+   public String answer;
+   public Date answerRegDate;
    
-public long getQnaNo() {
-	return qnaNo;
+
+public long getQno() {
+	return qno;
 }
-public void setQnaNo(long qnaNo) {
-	this.qnaNo = qnaNo;
+public void setQno(long qno) {
+	this.qno = qno;
 }
 public String getTitle() {
 	return title;
@@ -20,11 +24,15 @@ public String getTitle() {
 public void setTitle(String title) {
 	this.title = title;
 }
-public String getWriter() {
-	return writer;
+
+public String getId() {
+	return id;
 }
-public void setWriter(String writer) {
-	this.writer = writer;
+public void setId(String id) {
+	this.id = id;
+}
+public void setAnswerRegDate(Date answerRegDate) {
+	this.answerRegDate = answerRegDate;
 }
 public String getContents() {
 	return contents;
@@ -38,6 +46,13 @@ public String getRegDate() {
 public void setRegDate(String regDate) {
 	this.regDate = regDate;
 }
+public String getAnswer() {
+	return answer;
+}
+public void setAnswer(String answer) {
+	this.answer = answer;
+}
+
 
 
    

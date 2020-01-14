@@ -7,7 +7,10 @@ import com.kjnresort.domain.Criteria;
 
 public interface CondoReserveService {
 	 public List<CondoReserveVO> getListWithPaging(Criteria cri);
+	 public List<CondoReserveVO> getListWithId(Criteria cri,String id);
 	 public void register(CondoReserveVO reserve);
 	 public int modify(CondoReserveVO reserve);
 	 public CondoReserveVO get(Long rno);
+	 public int getTotalCount(Criteria cri);
+	 public int getTotalCountWithId(Criteria cri,String id);
 }

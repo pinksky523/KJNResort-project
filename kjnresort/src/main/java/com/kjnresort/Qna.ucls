@@ -1,150 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.2.4" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
-  <class id="1" language="java" name="com.kjnresort.controller.QnaController" project="mypart" 
-    file="/mypart/src/main/java/com/kjnresort/controller/QnaController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="457" y="141"/>    
+  <class id="1" language="java" name="com.kjnresort.controller.QnaController" project="kjnresort" 
+    file="/kjnresort/src/main/java/com/kjnresort/controller/QnaController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="250" y="161"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="com.kjnresort.domain.QnaReplyVO" project="mypart" 
-    file="/mypart/src/main/java/com/kjnresort/domain/QnaReplyVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1165" y="123"/>    
+  <class id="2" language="java" name="com.kjnresort.domain.QnaVO" project="kjnresort" 
+    file="/kjnresort/src/main/java/com/kjnresort/domain/QnaVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="603" y="305"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="3" language="java" name="com.kjnresort.mapper.QnaMapper" project="mypart" 
-    file="/mypart/src/main/java/com/kjnresort/mapper/QnaMapper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="471" y="743"/>    
+  <interface id="3" language="java" name="com.kjnresort.mapper.QnaMapper" project="kjnresort" 
+    file="/kjnresort/src/main/java/com/kjnresort/mapper/QnaMapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="233" y="731"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="4" language="java" name="com.kjnresort.mapper.QnaReplyMapper" project="mypart" 
-    file="/mypart/src/main/java/com/kjnresort/mapper/QnaReplyMapper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="747" y="719"/>    
+  <class id="4" language="java" name="com.kjnresort.service.QnaServiceImpl" project="kjnresort" 
+    file="/kjnresort/src/main/java/com/kjnresort/service/QnaServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="748" y="718"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="5" language="java" name="com.kjnresort.service.QnaService" project="kjnresort" 
+    file="/kjnresort/src/main/java/com/kjnresort/service/QnaService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="236" y="416"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <interface id="5" language="java" name="com.kjnresort.service.QnaService" project="mypart" 
-    file="/mypart/src/main/java/com/kjnresort/service/QnaService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="461" y="356"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="6" language="java" name="com.kjnresort.service.QnaServiceImpl" project="mypart" 
-    file="/mypart/src/main/java/com/kjnresort/service/QnaServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="464" y="549"/>    
+  <class id="6" language="java" name="com.kjnresort.domain.QnaPageDTO" project="kjnresort" 
+    file="/kjnresort/src/main/java/com/kjnresort/domain/QnaPageDTO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1141" y="268"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="7" language="java" name="com.kjnresort.service.QnaReplyService" project="mypart" 
-    file="/mypart/src/main/java/com/kjnresort/service/QnaReplyService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="769" y="328"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </interface>  
-  <class id="8" language="java" name="com.kjnresort.controller.QnaReplyController" project="mypart" 
-    file="/mypart/src/main/java/com/kjnresort/controller/QnaReplyController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="769" y="126"/>    
+  <class id="7" language="java" name="com.kjnresort.domain.QnaCriteria" project="kjnresort" 
+    file="/kjnresort/src/main/java/com/kjnresort/domain/QnaCriteria.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="913" y="288"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="com.kjnresort.service.QnaReplyServiceImpl" project="mypart" 
-    file="/mypart/src/main/java/com/kjnresort/service/QnaReplyServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="741" y="531"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <class id="10" language="java" name="com.kjnresort.domain.QnaVO" project="mypart" 
-    file="/mypart/src/main/java/com/kjnresort/domain/QnaVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1011" y="238"/>    
-    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
-      sort-features="false" accessors="true" visibility="true">      
-      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
-      <operations public="true" package="true" protected="true" private="true" static="true"/>    
-    </display>  
-  </class>  
-  <realization id="11">    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <association id="12">    
+  <association id="8">    
     <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="13" name="service">        
-        <position height="0" width="0" x="311" y="12"/>      
-      </attribute>      
-      <multiplicity id="14" minimum="0" maximum="1">        
-        <position height="0" width="0" x="311" y="12"/>      
-      </multiplicity>    
+      <attribute id="9" name="service"/>      
+      <multiplicity id="10" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="5" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="15">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="16" name="service">        
-        <position height="0" width="0" x="311" y="12"/>      
-      </attribute>      
-      <multiplicity id="17" minimum="0" maximum="1">        
-        <position height="0" width="0" x="311" y="12"/>      
-      </multiplicity>    
+  <association id="11">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="12" name="qnaCri"/>      
+      <multiplicity id="13" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="18">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="19" name="mapper">        
-        <position height="0" width="0" x="308" y="-29"/>      
-      </attribute>      
-      <multiplicity id="20" minimum="0" maximum="1">        
-        <position height="0" width="0" x="308" y="-29"/>      
-      </multiplicity>    
+  <association id="14">    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="15" name="mapper"/>      
+      <multiplicity id="16" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="21">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="22" name="mapper">        
-        <position height="0" width="0" x="289" y="47"/>      
-      </attribute>      
-      <multiplicity id="23" minimum="0" maximum="1">        
-        <position height="0" width="0" x="289" y="47"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="24">    
-    <end type="SOURCE" refId="6"/>    
+  <realization id="17">    
+    <end type="SOURCE" refId="4"/>    
     <end type="TARGET" refId="5"/>  
   </realization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 

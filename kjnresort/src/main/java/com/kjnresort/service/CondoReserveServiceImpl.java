@@ -22,4 +22,20 @@ public class CondoReserveServiceImpl implements CondoReserveService {
 	 public CondoReserveVO get(Long rno) {
 		 return null;
 	 }
+	
+	public List<CondoReserveVO> getListWithId(Criteria cri, String id) {
+		
+		return null;
+	}
+	
+	public int getTotalCount(Criteria cri) {
+		
+		return 0;
+	}
+
+	public int getTotalCountWithId(Criteria cri, String id) {
+	
+		return 0;
+	}
+	
 }
