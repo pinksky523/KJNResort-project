@@ -91,7 +91,7 @@ CREATE TABLE t_member
 	birth date NOT NULL,
 	gender char(1) DEFAULT 'M' NOT NULL,
 	address varchar2(200) NOT NULL,
-	status number(1) DEFAULT O NOT NULL,
+	status number(1) DEFAULT 0 NOT NULL,
 	PRIMARY KEY (id)
 );
 
@@ -111,14 +111,14 @@ CREATE TABLE t_notice
 
 CREATE TABLE t_qna
 (
-	qna_no number NOT NULL,
+	qnano number NOT NULL,
 	id varchar2(15) NOT NULL,
 	title varchar2(100) NOT NULL,
 	content varchar2(4000) NOT NULL,
 	regdate date DEFAULT sysdate,
 	answer varchar2(4000),
 	answerregdate date DEFAULT sysdate,
-	PRIMARY KEY (qna_no)
+	PRIMARY KEY (qnano)
 );
 
 
