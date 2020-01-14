@@ -40,12 +40,6 @@ public class ReviewServiceImpl implements ReviewService{
 	}
 
 	@Override
-	public List<ReviewVO> getList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean modify(ReviewVO review) {
 		// TODO Auto-generated method stub
 		return false;
