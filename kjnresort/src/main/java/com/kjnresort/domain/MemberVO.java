@@ -14,7 +14,7 @@ public class MemberVO {
 	private Date birth;
 	private char gender;
 	private String address;
-	private boolean state;	//정지상태인지 일반상태인지
+	private boolean status;	//정지상태인지 일반상태인지
 	private Date regDate;
 	private Date updateDate;
 	private List<AuthVO> authList;	
