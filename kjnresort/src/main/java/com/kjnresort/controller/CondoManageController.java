@@ -6,14 +6,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kjnresort.domain.CondoManageVO;
+import com.kjnresort.domain.CondoVO;
 
 import com.kjnresort.domain.Criteria;
-import com.kjnresort.service.CondoManageService;
+import com.kjnresort.service.CondoService;
 
 @RequestMapping("/condomanage/*")
 public class CondoManageController {//콘도 매니지컨트롤러
-	CondoManageService serivce;
+	CondoService serivce;
 	
 	@GetMapping("list")
 	public void list(Model model) {
@@ -21,7 +21,7 @@ public class CondoManageController {//콘도 매니지컨트롤러
 	}
 	
 	@PostMapping("modify")
-	public void modify(CondoManageVO cmvo, RedirectAttributes rttr) {
+	public void modify(CondoVO cmvo, RedirectAttributes rttr) {
 		
 	}
 }
