@@ -3,10 +3,10 @@ package com.kjnresort.service;
 import java.util.List;
 
 import com.kjnresort.domain.CondoVO;
-import com.kjnresort.mapper.CondoManageMapper;
+import com.kjnresort.mapper.CondoMapper;
 
 public class CondoSerivceImpl implements CondoService {
-		CondoManageMapper mapper;
+		CondoMapper mapper;
 		public int modify(CondoVO cmvo) {
 			return 0;
 		}
