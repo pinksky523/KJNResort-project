@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import com.kjnresort.domain.EventAttachVO;
 import com.kjnresort.domain.ReviewAttachVO;
-import com.kjnresort.mapper.BoardAttachMapper;
+import com.kjnresort.mapper.EventAttachMapper;
+import com.kjnresort.mapper.ReviewAttachMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.Setter;
@@ -26,7 +28,10 @@ import lombok.extern.log4j.Log4j;
 public class FileCheckTask {
 
 	@Setter(onMethod_ = @Autowired)
-	private BoardAttachMapper attachMapper;
+	private ReviewAttachMapper attachMapperR;
+	
+	@Setter(onMethod_ = @Autowired)
+	private EventAttachMapper attachMapperE;
 	
 	private String getFolderYesterDay() {		// 어제 날짜 폴더의 문자열 반환
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -46,32 +51,37 @@ public class FileCheckTask {
 		log.warn(new Date());
 		
 		// 1) 데이터베이스에서 어제 사용된 파일 목록 받아오기
-		List<ReviewAttachVO> fileList = attachMapper.getOldFiles();
+		List<ReviewAttachVO> fileListR = attachMapperR.getOldFiles();
+		List<EventAttachVO> fileListE = attachMapperE.getOldFiles();
 		
 		// 2) 해당 폴더의 파일 목록에서 데이터베이스에 없는 파일 찾아내기
 		// tbl_attach 테이블의 데이터를 목록으로 반환
-		List<Path> fileListPaths = fileList.stream()
+		List<Path> fileListPathsR = fileListR.stream()
 							      .map(vo -> Paths.get("C:\\upload", vo.getUploadPath(), vo.getUuid() + "_" + vo.getFileName()))
 								  .collect(Collectors.toList());
+		List<Path> fileListPathsE = fileListE.stream()
+			      .map(vo -> Paths.get("C:\\upload", vo.getUploadPath(), vo.getUuid() + "_" + vo.getFileName()))
+				  .collect(Collectors.toList());
 		
-		// 썸네일 이미지가 있는 겨우 목록에 추가
-		fileList.stream().filter(vo-> vo.isFileType() == true)
-						 .map(vo -> Paths.get("C:\\upload", vo.getUploadPath(), "s_" + vo.getUuid() + "_" + vo.getFileName()))
-						 .forEach(p -> fileListPaths.add(p));
-
 		log.warn("==============================");
 		
-		fileListPaths.forEach(p -> log.warn(p));
+		fileListPathsR.forEach(p -> log.warn(p));
+		fileListPathsE.forEach(p -> log.warn(p));
 		
 		// 어제 날짜 폴더 가져오기
 		File targetDir = Paths.get("C:\\upload", getFolderYesterDay()).toFile();
 		
 		// 3) 데이터베이스에 없는 파일들 삭제하기
 		// 목록에 없는 삭제 대상 파일들을 배열에 저장
-		File[] removeFiles = targetDir.listFiles(file -> fileListPaths.contains(file.toPath()) == false);
+		File[] removeFilesR = targetDir.listFiles(file -> fileListPathsR.contains(file.toPath()) == false);
+		File[] removeFilesE = targetDir.listFiles(file -> fileListPathsE.contains(file.toPath()) == false);
 		
 		log.warn("------------------------------");
-		for (File file : removeFiles) {
+		for (File file : removeFilesR) {
+			log.warn(file.getAbsolutePath());
+			file.delete();
+		}
+		for (File file : removeFilesE) {
 			log.warn(file.getAbsolutePath());
 			file.delete();
 		}

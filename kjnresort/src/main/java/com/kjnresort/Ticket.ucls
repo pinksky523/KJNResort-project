@@ -10,9 +10,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="com.kjnresort.domain.TicketVO" project="kjnresort" 
-    file="/kjnresort/src/main/java/com/kjnresort/domain/TicketVO.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="855" width="167" x="358" y="-370"/>    
+  <class id="2" language="java" name="com.kjnresort.domain.TicketBuyVO" project="kjnresort" 
+    file="/kjnresort/src/main/java/com/kjnresort/domain/TicketBuyVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="433" y="-80"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <interface id="5" language="java" name="com.kjnresort.mapper.TicketMapper" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/mapper/TicketMapper.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="807" y="-229"/>    
+    <position height="-1" width="-1" x="821" y="-229"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -48,7 +48,7 @@
   </interface>  
   <interface id="6" language="java" name="com.kjnresort.service.TicketService" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/service/TicketService.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1016" y="-222"/>    
+    <position height="-1" width="-1" x="1047" y="-223"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -57,22 +57,35 @@
   </interface>  
   <class id="7" language="java" name="com.kjnresort.service.TicketServiceImpl" project="kjnresort" 
     file="/kjnresort/src/main/java/com/kjnresort/service/TicketServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1013" y="4"/>    
+    <position height="-1" width="-1" x="1045" y="3"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="8">    
+  <class id="8" language="java" name="com.kjnresort.domain.TicketVO" project="kjnresort" 
+    file="/kjnresort/src/main/java/com/kjnresort/domain/TicketVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="261" y="169"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="9">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="9" name="cri"/>      
-      <multiplicity id="10" minimum="0" maximum="1"/>    
+      <attribute id="10" name="cri">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="11" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="11">    
+  <realization id="12">    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="6"/>  
   </realization>  

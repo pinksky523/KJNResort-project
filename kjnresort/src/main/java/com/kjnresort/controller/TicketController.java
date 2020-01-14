@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kjnresort.domain.TicketVO;
+import com.kjnresort.domain.TicketBuyVO;
 import com.kjnresort.domain.Criteria;
 //import com.kjnresort.service.TicketService;
 
@@ -33,16 +33,10 @@ public class TicketController {
 	
 	@PostMapping("buyTicket")
 	@PreAuthorize("isAuthenticated()")
-	public String buyTicket(TicketVO ticket, RedirectAttributes rttr, 
+	public String buyTicket(TicketBuyVO ticket, RedirectAttributes rttr, 
 			 @ModelAttribute("cri") Criteria cri) {
 		log.info("TicketController modify()" + ticket);
 		return "redirect:/ticket/list" + cri.getListlink();
-	}
-	
-	@GetMapping("buyTicketInfo")
-	@PreAuthorize("isAuthenticated()")
-	public void buyTicketInfo() {
-		log.info("TicketController register() - get");
 	}
 	
 	@GetMapping("buyTicketResult")
@@ -51,35 +45,35 @@ public class TicketController {
 		log.info("TicketController register() - get");
 	}
 	
-	//이용권 구매 폼으로 가는 버튼 클릭
-	@GetMapping("register")
-	@PreAuthorize("isAuthenticated()")
-	public void register() {
-		log.info("TicketController register() - get");
-	}
-	
-	//이용권 결제 버튼 클릭
-	@PostMapping("register")
-	@PreAuthorize("isAuthenticated()")
-	public String register(TicketVO ticket, RedirectAttributes rttr) {
-		log.info("TicketController register()");
-		return "redirect:/ticket/list";
-	}
+//	//이용권 구매 폼으로 가는 버튼 클릭
+//	@GetMapping("register")
+//	@PreAuthorize("isAuthenticated()")
+//	public void register() {
+//		log.info("TicketController register() - get");
+//	}
+//	
+//	//이용권 결제 버튼 클릭
+//	@PostMapping("register")
+//	@PreAuthorize("isAuthenticated()")
+//	public String register(TicketVO ticket, RedirectAttributes rttr) {
+//		log.info("TicketController register()");
+//		return "redirect:/ticket/list";
+//	}
 	
 	//이용권 구매 취소 이건 업데이트로 바꿔야함
 	@PreAuthorize("principal.username == #writer")						// 작성자 확인
-	@PostMapping("remove")
-	public String remove(@RequestParam("ticketNo") Long ticketNo, RedirectAttributes rttr, 
+	@PostMapping("cancel")
+	public String cancel(@RequestParam("ticketNo") Long ticketNo, RedirectAttributes rttr, 
 			 @ModelAttribute("cri") Criteria cri, String writer) {
 		log.info("BoardController remove() " + ticketNo);
 		
-		return "redirect:/board/list" + cri.getListlink();
+		return "redirect:/ticket/list" + cri.getListlink();
 	}
 	
 	//이용권 가격 수정
 	@PreAuthorize("principal.username == #board.writer")				// 작성자 확인
 	@PostMapping("modify")
-	public String modify(TicketVO ticket, RedirectAttributes rttr, 
+	public String modify(TicketBuyVO ticket, RedirectAttributes rttr, 
 		    			 @ModelAttribute("cri") Criteria cri) {
 		log.info("TicketController modify()" + ticket);
 		return "redirect:/ticket/list" + cri.getListlink();

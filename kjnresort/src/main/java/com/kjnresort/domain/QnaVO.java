@@ -7,7 +7,7 @@ public class QnaVO { //큐엔에이 브이오
    public String title;
    public String id;
    public String contents;
-   public String regDate;
+   public Date regDate;
    public String answer;
    public Date answerRegDate;
    
@@ -40,11 +40,15 @@ public String getContents() {
 public void setContents(String contents) {
 	this.contents = contents;
 }
-public String getRegDate() {
+
+public Date getRegDate() {
 	return regDate;
 }
-public void setRegDate(String regDate) {
+public void setRegDate(Date regDate) {
 	this.regDate = regDate;
+}
+public Date getAnswerRegDate() {
+	return answerRegDate;
 }
 public String getAnswer() {
 	return answer;

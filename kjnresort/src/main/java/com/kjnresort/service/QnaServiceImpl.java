@@ -3,17 +3,16 @@ package com.kjnresort.service;
 import java.util.List;
 
 import com.kjnresort.domain.Criteria;
-import com.kjnresort.domain.QnaCriteria;
 import com.kjnresort.domain.QnaVO;
 import com.kjnresort.mapper.QnaMapper;
 
 public class QnaServiceImpl implements QnaService {
 	QnaMapper mapper;
-	public List<QnaVO> getListWithPaging(QnaCriteria qnaCri){
+	public List<QnaVO> getListWithPaging(Criteria cri){
 		return null;
 	}
 	
-	public List<QnaVO> getListWithId(QnaCriteria qnaCri,String id){
+	public List<QnaVO> getListWithId(Criteria cri,String id){
 		return null;
 	}
 	
@@ -35,11 +34,11 @@ public class QnaServiceImpl implements QnaService {
 	public boolean deleteAnswer(Long qno) {
 		return false;
 	}
-	public int getTotalCount(QnaCriteria qnaCri) {
+	public int getTotalCount(Criteria cri) {
 		return 0;
 	}
 	
-	public int getTotalCountWithId(QnaCriteria qnaCri,String id) {
+	public int getTotalCountWithId(Criteria qnacriCri,String id) {
 		return 0;
 	}
 
