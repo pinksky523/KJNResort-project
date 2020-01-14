@@ -49,7 +49,7 @@ CREATE TABLE t_condo_reserve
 	reserveno number NOT NULL,
 	id varchar2(15) NOT NULL,
 	roomtype varchar2(1) NOT NULL,
-	reservedate date DEFAULT sysdate,
+	reservedate date NOT NULL,
 	status number(1) DEFAULT 0,
 	roomno number NOT NULL,
 	checkin date NOT NULL,
@@ -117,7 +117,7 @@ CREATE TABLE t_qna
 	content varchar2(4000) NOT NULL,
 	regdate date DEFAULT sysdate,
 	answer varchar2(4000),
-	answerregdate date DEFAULT sysdate,
+	answerregdate date,
 	PRIMARY KEY (qnano)
 );
 
@@ -142,7 +142,7 @@ CREATE TABLE t_review
 	title varchar2(100) NOT NULL,
 	content varchar2(4000) NOT NULL,
 	regdate date DEFAULT sysdate,
-	viewcnt number DEFAULT 0,
+	viewcnt number DEFAULT 0 NOT NULL,
 	category varchar2(40) NOT NULL,
 	grade number(10) NOT NULL,
 	-- 예약 | 이용권
@@ -174,7 +174,7 @@ CREATE TABLE t_review_reply
 CREATE TABLE t_ticket
 (
 	type varchar2(40) NOT NULL,
-	price number,
+	price number NOT NULL,
 	PRIMARY KEY (type)
 );
 
@@ -185,9 +185,9 @@ CREATE TABLE t_ticket_buy
 	id varchar2(15) NOT NULL,
 	type varchar2(40) NOT NULL,
 	buydate date DEFAULT sysdate,
-	liftamount number,
-	toolamount number,
-	status number(1) NOT NULL,
+	liftamount number NOT NULL,
+	toolamount number NOT NULL,
+	status number(1) DEFAULT 0,
 	review number(1) DEFAULT 0,
 	PRIMARY KEY (ticketno)
 );
