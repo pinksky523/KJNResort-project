@@ -3,12 +3,12 @@ package com.kjnresort.mapper;
 import java.util.List;
 
 import com.kjnresort.domain.Criteria;
-import com.kjnresort.domain.TicketVO;
+import com.kjnresort.domain.TicketBuyVO;
 
 public interface TicketMapper {
-	public List<TicketVO> getListWithPaging(Criteria cri);					
-	public void insert(TicketVO ticket);
-	public int update(TicketVO ticket);
+	public List<TicketBuyVO> getListWithPaging(Criteria cri);					
+	public void insert(TicketBuyVO ticket);
+	public int update(TicketBuyVO ticket);
 	public int delete(Long ticketNo);
-	public TicketVO read(Long ticketNo);
+	public TicketBuyVO read(Long ticketNo);
 }
