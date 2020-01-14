@@ -12,7 +12,7 @@ public class MemberVO {
 	private String pw;
 	private String phoneNumber;
 	private Date birth;
-	private char gender;
+	private char gender;			//성별
 	private String address;			//주소
 	private boolean status;			//정지상태인지 일반상태인지
 	private Date regDate;
