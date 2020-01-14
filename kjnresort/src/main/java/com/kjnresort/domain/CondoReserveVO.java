@@ -13,7 +13,7 @@ public class CondoReserveVO { //콘도리절브브이오
 	public int nights;//자동계산하기
 	public int price;
 	public String id;
-	
+	public int review;
 	
 	
 	
