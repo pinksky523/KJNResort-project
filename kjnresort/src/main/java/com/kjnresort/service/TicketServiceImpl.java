@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.kjnresort.domain.Criteria;
-import com.kjnresort.domain.TicketVO;
+import com.kjnresort.domain.TicketBuyVO;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -14,19 +14,19 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 @AllArgsConstructor
 public class TicketServiceImpl implements TicketService{@Override
-	public List<TicketVO> getList(Criteria cri) {
+	public List<TicketBuyVO> getList(Criteria cri) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<TicketVO> getList() {
+	public List<TicketBuyVO> getList() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean modify(TicketVO ticket) {
+	public boolean modify(TicketBuyVO ticket) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -38,13 +38,13 @@ public class TicketServiceImpl implements TicketService{@Override
 	}
 
 	@Override
-	public TicketVO get(Long ticketNo) {
+	public TicketBuyVO get(Long ticketNo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public void register(TicketVO ticket) {
+	public void register(TicketBuyVO ticket) {
 		// TODO Auto-generated method stub
 		
 	}
