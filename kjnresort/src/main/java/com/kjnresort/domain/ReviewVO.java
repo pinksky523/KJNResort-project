@@ -13,7 +13,7 @@ public class ReviewVO {
 	private String	content;
 	private Date	regdate;
 	private Long    viewCnt;
-	private String  status;
+	private Long    useNo; //사용번호 이걸로 구매번호나 예약번호 들어온다
 	private String  category;
 	private String  id;
 	private Long    grade;
