@@ -13,8 +13,8 @@ public class MemberVO {
 	private String phoneNumber;
 	private Date birth;
 	private char gender;
-	private String address;
-	private boolean status;	//정지상태인지 일반상태인지
+	private String address;			//주소
+	private boolean status;			//정지상태인지 일반상태인지
 	private Date regDate;
 	private Date updateDate;
 	private List<AuthVO> authList;	
