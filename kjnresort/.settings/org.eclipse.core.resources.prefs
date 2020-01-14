@@ -12,6 +12,7 @@ encoding//src/main/java/com/kjnresort/controller/QnaController.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/CondoManageVO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/CondoReserveVO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/Criteria.java=UTF-8
+encoding//src/main/java/com/kjnresort/domain/EventVO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/PageDTO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/QnaVO.java=UTF-8
 encoding/<project>=UTF-8
