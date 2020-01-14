@@ -91,7 +91,7 @@ CREATE TABLE t_member
 	birth date NOT NULL,
 	gender char(1) DEFAULT 'M' NOT NULL,
 	address varchar2(200) NOT NULL,
-	status number(1) DEFAULT O NOT NULL,
+	status number(1) DEFAULT 0 NOT NULL,
 	PRIMARY KEY (id)
 );
 
