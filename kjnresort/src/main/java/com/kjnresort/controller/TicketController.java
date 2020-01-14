@@ -39,12 +39,6 @@ public class TicketController {
 		return "redirect:/ticket/list" + cri.getListlink();
 	}
 	
-	@GetMapping("buyTicketInfo")
-	@PreAuthorize("isAuthenticated()")
-	public void buyTicketInfo() {
-		log.info("TicketController register() - get");
-	}
-	
 	@GetMapping("buyTicketResult")
 	@PreAuthorize("isAuthenticated()")
 	public void buyTicketResult() {

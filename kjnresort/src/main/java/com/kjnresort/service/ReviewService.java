@@ -10,7 +10,6 @@ public interface ReviewService {
 	public List<ReviewAttachVO> getAttachList(Long reviewNo);
 	public int getTotalCount(Criteria cri);
 	public List<ReviewVO> getList(Criteria cri);
-	public List<ReviewVO> getList();
 	
 	public boolean modify(ReviewVO review);
 	public boolean remove(Long reviewNo);
