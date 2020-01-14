@@ -35,7 +35,7 @@ public class ApplianceController {
 		model.addAttribute("appliance", service.get(phoneNumber));
 	}
 	
-	@PostMapping("register")
+	@PostMapping("/register")
 	public String register(ApplianceVO appliance, RedirectAttributes rttr) {
 		log.info("ApplianceController register()");
 		service.register(appliance);
@@ -50,5 +50,10 @@ public class ApplianceController {
 		int total = service.getTotalCount(cri);
 		log.info("total : " + total);
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+	}
+	
+	@PostMapping("/save")
+	public String applianceSave(ApplianceVO appliance, RedirectAttributes rttr) {
+		return null;
 	}
 }

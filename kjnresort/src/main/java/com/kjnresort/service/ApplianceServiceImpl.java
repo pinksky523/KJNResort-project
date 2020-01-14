@@ -40,4 +40,10 @@ public class ApplianceServiceImpl implements ApplianceService {
 		mapper.insert(appliance);
 	}
 
+	@Override
+	public boolean modify(ApplianceVO appliance) {
+		log.info("modify....... : " + appliance);
+		return mapper.update(appliance) == 1;
+	}
+
 }
