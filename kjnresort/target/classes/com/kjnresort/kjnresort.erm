@@ -12,7 +12,7 @@
 	<category_index>0</category_index>
 	<zoom>0.75</zoom>
 	<x>0</x>
-	<y>35</y>
+	<y>0</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2020-01-14 10:44:44</creation_date>
-			<updated_date>2020-01-14 16:52:24</updated_date>
+			<updated_date>2020-01-14 18:03:22</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -757,7 +757,7 @@
 			<char_semantics>false</char_semantics>
 			<description></description>
 			<logical_name>1:1문의번호</logical_name>
-			<physical_name>qna_no</physical_name>
+			<physical_name>qnano</physical_name>
 			<type>decimal</type>
 		</word>
 		<word>
