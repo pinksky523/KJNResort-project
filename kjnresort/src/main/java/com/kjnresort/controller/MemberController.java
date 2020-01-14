@@ -92,9 +92,13 @@ public class MemberController {
 	}
 	
 	
-	@PostMapping({"mypage"})
-	public void get(String id, Model model) {
-		model.addAttribute("mypage", service.get(id));
+	@PostMapping("mypage")
+	public String modify(MemberVO member, RedirectAttributes rttr) {
+		if(service.modify(member)) {
+			rttr.addFlashAttribute("result", "수정");
+		}
+		
+		return "redirect:/";
 	}
 
 	
