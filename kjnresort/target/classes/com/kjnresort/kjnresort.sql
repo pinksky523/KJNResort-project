@@ -162,12 +162,12 @@ CREATE TABLE t_review_attach
 
 CREATE TABLE t_review_reply
 (
-	reply_no number NOT NULL,
+	replyno number NOT NULL,
 	id varchar2(15) NOT NULL,
 	reviewno number NOT NULL,
 	reply varchar2(400) NOT NULL,
 	replydate date DEFAULT sysdate,
-	PRIMARY KEY (reply_no)
+	PRIMARY KEY (replyno)
 );
 
 
