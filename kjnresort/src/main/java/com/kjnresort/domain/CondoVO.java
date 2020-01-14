@@ -1,11 +1,49 @@
 package com.kjnresort.domain;
 
-import java.sql.*;
-
-public class CondoVO { //ƒ‹µµ∫Í¿Ãø¿
+public class CondoVO { //ÏΩòÎèÑÎ∏åÏù¥Ïò§
 	public String roomType;
-	public int roomNo;
-	public int isAvailable;
-	public Date checkIn;
-	public Date checkOut;
+	public String location;
+	public String building;
+	public String bed;
+	public int accept;
+	public int price;
+	public String getRoomType() {
+		return roomType;
+	}
+	public void setRoomType(String roomType) {
+		this.roomType = roomType;
+	}
+	public String getLocation() {
+		return location;
+	}
+	public void setLocation(String location) {
+		this.location = location;
+	}
+	public String getBuilding() {
+		return building;
+	}
+	public void setBuilding(String building) {
+		this.building = building;
+	}
+	public String getBed() {
+		return bed;
+	}
+	public void setBed(String bed) {
+		this.bed = bed;
+	}
+	public int getAccept() {
+		return accept;
+	}
+	public void setAccept(int accept) {
+		this.accept = accept;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	
+	
 }
+
