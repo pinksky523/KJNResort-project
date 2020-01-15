@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-	<title>LOANS2GO | Loans HTML Template</title>
+	<title>KJN RESORT</title>
 	<meta charset="UTF-8">
 	<meta name="description" content="loans HTML Template">
 	<meta name="keywords" content="loans, html">
@@ -78,6 +78,7 @@
 				<a href="#" class="hr-btn"><i class="flaticon-029-telephone-1"></i>로그인</a>
 				<div class="hr-btn hr-btn-2">회원가입</div>
 			</div>
+			
 		</nav>
 	</header>
 	<!-- Header Section end -->
