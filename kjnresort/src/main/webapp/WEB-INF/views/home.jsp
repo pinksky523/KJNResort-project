@@ -45,7 +45,7 @@
 		</a>
 		<nav class="header-nav">
 			<ul class="main-menu">
-				<li><a href="index.html" class="active">리조트안내</a></li>
+				<li><a href="index.html">리조트안내</a></li>
 				<li><a href="about-us.html">공지사항</a></li>
 				<li><a href="#">콘도</a>
 					<ul class="sub-menu">
@@ -94,15 +94,7 @@
 						<a href="#" class="site-btn sb-dark">Find out more</a>
 					</div>
 				</div>
-				<div class="col-lg-6">
-					<form class="hero-form">
-						<input type="text" placeholder="Your Name">
-						<input type="text" placeholder="Your E-mail">
-						<input type="text" placeholder="Your Phone">
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis. </p>
-						<button class="site-btn">Apply for a loan now!</button>
-					</form>
-				</div>
+				
 			</div>
 		</div>
 		<div class="hero-slider owl-carousel">
