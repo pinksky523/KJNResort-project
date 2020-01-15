@@ -9,7 +9,7 @@ import lombok.Data;
 public class MemberVO {
 	private String name;
 	private String id;
-	private String pw;
+	private String pw;				//비밀번호
 	private String phoneNumber;		//핸드폰번호
 	private Date birth;				//생년월일
 	private char gender;			//성별
