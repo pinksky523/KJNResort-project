@@ -76,7 +76,7 @@
 			</ul>
 			<div class="header-right">
 				<a href="login.jsp" class="hr-btn"><i class="flaticon-003-like"></i>로그인</a>
-				<a href="/views/member/register" class="hr-btn hr-btn-2">회원가입</a>
+				<a href="/member/register" class="hr-btn hr-btn-2">회원가입</a>
 			</div>
 			
 		</nav>
