@@ -74,7 +74,7 @@
 					</ul>
 				</li>
 				<li><a href="customLogin" class="hr-btn" id="customLogin">로그인</a></li>
-				<li><a href="/member/register" class="hr-btn hr-btn-2" id="register">회원가입</a></li>
+				<li><a href="member/register" class="hr-btn hr-btn-2" id="register">회원가입</a></li>
 			
 				<!-- <div class="header-right">
 					<a href="customLogin" class="hr-btn"><i class="flaticon-003-like"></i>로그인</a>
@@ -179,7 +179,7 @@
 						<div class="feature-text">
 							<h2>Get a personal loan from just 8.5% APR</h2>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tem por incididunt ut labore et dolore mag na aliqua.  Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse potenti. Ut gravida mattis magna, non varius lorem sodales nec. In libero orci, ornare non nisl.</p>
-							<a href="#" class="readmore">Apply for a loan now <img src="img/arrow.png" alt=""></a>
+							<a href="#" class="readmore">Apply for a loan now <img src="resources/img/arrow.png" alt=""></a>
 						</div>
 					</div>
 				</div>

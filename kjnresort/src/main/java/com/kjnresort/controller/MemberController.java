@@ -39,7 +39,7 @@ public class MemberController {
 	
 	
 	@GetMapping("register")
-	@PreAuthorize("isAuthenticated()")
+	/* @PreAuthorize("isAuthenticated()") */
 	public void register() {
 		log.info("MemberController register() - get");
 	}
