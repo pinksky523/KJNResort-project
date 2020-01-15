@@ -45,21 +45,38 @@
 		</a>
 		<nav class="header-nav">
 			<ul class="main-menu">
-				<li><a href="index.html" class="active">Home</a></li>
-				<li><a href="about-us.html">About Us</a></li>
-				<li><a href="#">Pages</a>
+				<li><a href="index.html" class="active">리조트안내</a></li>
+				<li><a href="about-us.html">공지사항</a></li>
+				<li><a href="#">콘도</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">About Us</a></li>
-						<li><a href="loans.html">Loans</a></li>
-						<li><a href="elements.html">elements</a></li>
+						<li><a href="about-us.html">콘도 예약</a></li>
+						<li><a href="loans.html">콘도 예약내역</a></li>
 					</ul>
 				</li>
-				<li><a href="news.html">News</a></li>
-				<li><a href="contact.html">Contact</a></li>
+				<li><a href="#">이용권</a>
+					<ul class="sub-menu">
+						<li><a href="about-us.html">이용권 구매</a></li>
+						<li><a href="loans.html">이용권 구매내역</a></li>
+					</ul>
+				</li>
+				<li><a href="contact.html">이벤트</a></li>
+				<li><a href="contact.html">후기</a></li>
+				<li><a href="#">1:1문의</a>
+					<ul class="sub-menu">
+						<li><a href="about-us.html">문의하기</a></li>
+						<li><a href="loans.html">문의내역</a></li>
+					</ul>
+				</li>
+				<li><a href="#">인재채용</a>
+					<ul class="sub-menu">
+						<li><a href="about-us.html">모집공고</a></li>
+						<li><a href="loans.html">지원내역조회</a></li>
+					</ul>
+				</li>
 			</ul>
 			<div class="header-right">
-				<a href="#" class="hr-btn"><i class="flaticon-029-telephone-1"></i>Call us now! </a>
-				<div class="hr-btn hr-btn-2">+45 332 65767 42</div>
+				<a href="#" class="hr-btn"><i class="flaticon-029-telephone-1"></i>로그인</a>
+				<div class="hr-btn hr-btn-2">회원가입</div>
 			</div>
 		</nav>
 	</header>
