@@ -8,6 +8,8 @@
 <meta charset="UTF-8">
 <title>모집공고</title>
 </head>
+
+<body>
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Tables</h1>
@@ -34,11 +36,10 @@
                 <table class="table table-striped table-bordered table-hover">	   
                     <thead>
                         <tr>
-                            <th>#번호<!-- Rendering engine --></th>
+                            <th>#NO.<!-- Rendering engine --></th>
                             <th>제목<!-- Browser --></th>
-                            <th>작성자<!-- Platform(s) --></th>
-                            <th>작성일<!-- Engine version --></th>
-                            <th>수정일<!-- CSS grade --></th>
+                            <th>등록일<!-- Engine version --></th>
+                            <th>상태<!-- CSS grade --></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,63 +61,6 @@
                     </c:forEach>
                     </tbody>
                 </table><!-- END 게시물 출력 테이블 -->
-                
-                <!-- 검색 조건 및 키워드 입력 부분 -->
-                <div class="row">
-                	<div class="col-lg-12">
-                		<form id="searchForm" action="/board/list">
-                			<select name='type' id="type">
-                				<c:set var="type" value="${pageMaker.cri.type}"/>
-                				<option value="">검색 조건 지정</option>
-                				<option value="T" 
-                						<c:out value="${type == 'T'?'selected':''}"/>
-                				>제목</option>
-                				<option value="C"
-                						<c:out value="${type == 'C'?'selected':''}"/>
-                				>내용</option>
-                				<option value="W"
-                						<c:out value="${type == 'W'?'selected':''}"/>
-                				>작성자</option>
-                				<option value="TC"
-                						<c:out value="${type == 'TC'?'selected':''}"/>
-                				>제목 or 내용</option>
-                				<option value="TW"
-                						<c:out value="${type == 'TW'?'selected':''}"/>
-                				>제목 or 작성자</option>
-                				<option value="TWC"
-                						<c:out value="${type == 'TWC'?'selected':''}"/>
-                				>제목 or 내용 or 작성자</option>
-                			</select>
-                			<input type="text" name="keyword" id="keyword" 
-                				   value="${pageMaker.cri.keyword}">
-		                	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-		                	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-                			<button class="btn btn-default" id="searchBtn">Search</button>
-                		</form>
-                	</div>
-                </div>
-                <!-- END 검색 조건 및 키워드 입력 부분 -->
-                
-                <!-- 페이지 번호 출력 -->
-                <div class="pull-right">
-                	<ul class="pagination">
-                		<c:if test="${pageMaker.prev}">
-                		<li class="paginate_button previous">
-                			<a href="${pageMaker.startPage - 1}">Previous</a></li>
-                		</c:if>
-                		<c:forEach begin="${pageMaker.startPage}"
-                				   end="${pageMaker.endPage}" var="num">
-                		<li class="paginate_button
-                		   		   ${pageMaker.cri.pageNum == num ? 'active' : ''}">
-                			<a href="${num}">${num}</a></li>
-                		</c:forEach>
-                		<c:if test="${pageMaker.next}">
-                		<li class="paginate_button next">
-                			<a href="${pageMaker.endPage + 1}">Next</a></li>
-                		</c:if>
-                	</ul>
-                </div>
-                <!-- END 페이지 번호 출력 -->
                 
                 <!-- 페이지 번호 클릭 시 페이지 번호와 출력 데이터 갯수를 전달 -->
                 <form action="/board/list" id="actionForm">
@@ -157,40 +101,16 @@
 <!-- /.row -->
 
 <script>
-$(function(){
-	//검색 버튼 이벤트 처리
-	$('#searchBtn').click(function(){
-		var searchFrm = $('#searchForm');
-		
-		if(!searchFrm.find('option:selected').val()){	//검색 조건을 지정하지 않은 경우
-			alert('검색 종류를 선택하세요');
-			return false;
-		} else if(!$('#keyword').val()){		//검색어를 입력하지 않은 경우
-			alert('키워드를 입력하세요');
-			return false;
-		}
-
-		//검색 결과 페이지 번호가 1이 되도록 처리
-		searchFrm.find("input[name='pageNum']").val("1");
-		
-	});		
+$(function(){	
 	
 	//게시물 조회 링크 처리
 	$('.move').click(function(e){
 		e.preventDefault();
 		
-		$('#actionForm').append("<input type='hidden' name='bno' value='" +
+		$('#actionForm').append("<input type='hidden' name='recruitNo' value='" +
 						         $(this).attr('href') + "'>")
-						.attr('action', '/board/get')
+						.attr('action', '/recruit/get')
 						.submit();
-	});
-	
-	//페이지 번호 링크 처리
-	$('.paginate_button a').click(function(e){
-		e.preventDefault();
-		
-		$('#pageNum').val($(this).attr('href'));
-		$('#actionForm').submit();
 	});
 	
 
@@ -215,8 +135,10 @@ $(function(){
 	
 	//Register New Board 버튼을 누르면 입력 화면 표시
 	$('#regBtn').click(function(){
-		self.location = "/board/register";
+		self.location = "/recruit/register";
 	});
 });
+
 </script>
+</body>
 </html>
