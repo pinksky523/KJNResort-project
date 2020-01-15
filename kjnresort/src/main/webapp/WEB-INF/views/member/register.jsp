@@ -11,7 +11,7 @@
 <body>
 	<h1>회원가입</h1>
 	<hr>
-	<form>
+	<form id="joinForm">
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">이름</label>
     <div class="form-group mx-sm-3 mb-2">

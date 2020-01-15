@@ -1,4 +1,7 @@
 @charset "UTF-8";
 
 h1 { text-align: center; }
-hr { width: 50%; }
+hr { border: solid 2px lightgray; width: 50%;  }
+#joinForm {
+	
+}

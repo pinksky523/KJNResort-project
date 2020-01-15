@@ -40,7 +40,7 @@
 
 	<!-- Header Section -->
 	<header class="header-section">
-		<a href="index.html" class="site-logo">
+		<a href="/" class="site-logo">
 			<img src="resources/img/logo.png" alt="">
 		</a>
 		<nav class="header-nav">
