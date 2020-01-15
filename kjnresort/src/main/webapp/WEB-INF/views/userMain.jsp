@@ -73,13 +73,14 @@
 						<li><a href="loans.html">지원내역조회</a></li>
 					</ul>
 				</li>
-			</ul>
-			<div class="header-right">
-				<a href="customLogin" class="hr-btn"><i class="flaticon-003-like"></i>로그인</a>
-				<a href="/member/register" class="hr-btn hr-btn-2">회원가입</a>
-
-			</div>
+				<li><a href="customLogin" class="hr-btn" id="customLogin">로그인</a></li>
+				<li><a href="/member/register" class="hr-btn hr-btn-2" id="register">회원가입</a></li>
 			
+				<!-- <div class="header-right">
+					<a href="customLogin" class="hr-btn"><i class="flaticon-003-like"></i>로그인</a>
+					<a href="/member/register" class="hr-btn hr-btn-2">회원가입</a>
+				</div> -->
+			</ul>
 		</nav>
 	</header>
 	<!-- Header Section end -->
@@ -90,9 +91,9 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<div class="hs-text">
-						<h2>Looking for a same day loan?</h2>
-						<p>Donec eget efficitur ex. Donec eget dolor vitae eros feugiat tristique id vitae massa. Proin vulputate congue rutrum. Fusce lobortis a enim eget tempus. Class aptent taciti sociosqu ad litora torquent per conubia.</p>
-						<a href="#" class="site-btn sb-dark">Find out more</a>
+						<br><br><br><br><br>
+						<br><br><br><br><br>
+						<br><br><br><br><br>
 					</div>
 				</div>
 				
