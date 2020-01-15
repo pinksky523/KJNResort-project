@@ -31,14 +31,14 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		
 		//ROLE_ADMIN이면 /sample/admin으로 리다이렉트
 		if(roleList.contains("ROLE_ADMIN")) {
-			response.sendRedirect("/sample/admin");
+			response.sendRedirect("/admin");
 			return;
 		}
 		
 		//ROLE_MEMBER이면 /sample/member로 리다이렉트
 		if(roleList.contains("ROLE_MEMBER")) {
 			log.info("");
-			response.sendRedirect("/sample/member");
+			response.sendRedirect("/");
 			return;
 		}
 		response.sendRedirect("/");
