@@ -26,7 +26,7 @@ public class ReplyServiceImpl implements ReplyService {
 	@Override
 	public int register(ReviewReplyVO rvo) {
 		log.info("ReplyServiceImpl register() rvo : " + rvo);
-		boardMapper.updateReplyCnt(rvo.getBno(), 1);
+		boardMapper.updateReplyCnt(rvo.getReviewNo(), 1);
 		return mapper.insert(rvo);
 	}
 
@@ -35,7 +35,7 @@ public class ReplyServiceImpl implements ReplyService {
 	public int remove(Long rno) {
 		log.info("ReplyServiceImpl remove() rno : " + rno);
 		ReviewReplyVO rvo = mapper.read(rno);
-		boardMapper.updateReplyCnt(rvo.getBno(), -1);
+		boardMapper.updateReplyCnt(rvo.getReviewNo(), -1);
 		return mapper.delete(rno);
 	}
 
