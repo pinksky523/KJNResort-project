@@ -35,11 +35,11 @@ public class ApplianceController {
 		model.addAttribute("appliance", service.get(phoneNumber));
 	}
 	
-	@PostMapping("register")
+	@PostMapping("/register")
 	public String register(ApplianceVO appliance, RedirectAttributes rttr) {
 		log.info("ApplianceController register()");
 		service.register(appliance);
-		rttr.addFlashAttribute("result", appliance.getPhoneNumber());		// 등록된 게시글의 bno를 result값에 담아서 redirect로 넘겨준다.
+		rttr.addFlashAttribute("result", appliance.getRecruitNo());		// 등록된 게시글의 bno를 result값에 담아서 redirect로 넘겨준다.
 		return "redirect:/appliance/list";
 	}
 	
@@ -50,5 +50,10 @@ public class ApplianceController {
 		int total = service.getTotalCount(cri);
 		log.info("total : " + total);
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+	}
+	
+	@PostMapping("/save")
+	public String applianceSave(ApplianceVO appliance, RedirectAttributes rttr) {
+		return null;
 	}
 }

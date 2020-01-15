@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.ReplyPageDTO;
 import com.kjnresort.domain.ReviewReplyVO;
-import com.kjnresort.mapper.BoardMapper;
 import com.kjnresort.mapper.ReplyMapper;
+import com.kjnresort.mapper.ReviewMapper;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -20,13 +20,12 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class ReplyServiceImpl implements ReplyService {
 	private ReplyMapper mapper;
-	private BoardMapper boardMapper;
+	private ReviewMapper reviewMapper;
 
 	@Transactional
 	@Override
 	public int register(ReviewReplyVO rvo) {
 		log.info("ReplyServiceImpl register() rvo : " + rvo);
-		boardMapper.updateReplyCnt(rvo.getBno(), 1);
 		return mapper.insert(rvo);
 	}
 
@@ -35,7 +34,6 @@ public class ReplyServiceImpl implements ReplyService {
 	public int remove(Long rno) {
 		log.info("ReplyServiceImpl remove() rno : " + rno);
 		ReviewReplyVO rvo = mapper.read(rno);
-		boardMapper.updateReplyCnt(rvo.getBno(), -1);
 		return mapper.delete(rno);
 	}
 
