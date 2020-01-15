@@ -63,7 +63,7 @@ public class RecruitController {
 	//		등록된 게시물의 번호를 result 속성에 담아
 	//		/board/list로 리다이렉트
 	
-	@PostMapping("register")
+	@PostMapping("/register")
 	public String register(RecruitVO recruit, RedirectAttributes rttr) {
 		log.info("RecruitController register()");
 		service.register(recruit);
