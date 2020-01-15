@@ -24,61 +24,61 @@ DROP TABLE t_ticket CASCADE CONSTRAINTS;
 CREATE TABLE t_appliance
 (
 	id varchar2(15) NOT NULL,
-	recruitno number NOT NULL,
+	recruitNo number NOT NULL,
 	career varchar2(800) NOT NULL,
 	introduction varchar2(2000) NOT NULL,
 	status varchar2(20) NOT NULL,
-	regdate date DEFAULT sysdate
+	regDate date
 );
 
 
 CREATE TABLE t_condo
 (
-	roomtype varchar2(1) NOT NULL,
+	roomType varchar2(1) NOT NULL,
 	location varchar2(100) DEFAULT 'E/W빌리지',
 	building varchar2(100) DEFAULT 'SG빌딩',
 	bed varchar2(40) NOT NULL,
 	accept number(20) NOT NULL,
 	price number NOT NULL,
-	PRIMARY KEY (roomtype)
+	PRIMARY KEY (roomType)
 );
 
 
 CREATE TABLE t_condo_reserve
 (
-	reserveno number NOT NULL,
+	reserveNo number NOT NULL,
 	id varchar2(15) NOT NULL,
-	roomtype varchar2(1) NOT NULL,
-	reservedate date NOT NULL,
+	roomType varchar2(1) NOT NULL,
+	reserveDate date NOT NULL,
 	status number(1) DEFAULT 0,
-	roomno number NOT NULL,
-	checkin date NOT NULL,
-	checkout date NOT NULL,
+	roomNo number NOT NULL,
+	checkIn date NOT NULL,
+	checkOut date NOT NULL,
 	nights number NOT NULL,
 	price number NOT NULL,
 	review number(1) DEFAULT 0,
-	PRIMARY KEY (reserveno)
+	PRIMARY KEY (reserveNo)
 );
 
 
 CREATE TABLE t_event
 (
-	eventno number NOT NULL,
+	eventNo number NOT NULL,
 	id varchar2(15) NOT NULL,
 	title varchar2(100) NOT NULL,
-	eventstart date NOT NULL,
-	eventend date NOT NULL,
-	viewcnt number DEFAULT 0,
-	PRIMARY KEY (eventno)
+	eventStart date NOT NULL,
+	eventEnd date NOT NULL,
+	viewCnt number DEFAULT 0,
+	PRIMARY KEY (eventNo)
 );
 
 
 CREATE TABLE t_event_attach
 (
-	eventno number NOT NULL,
+	eventNo number NOT NULL,
 	uuid varchar2(1000) NOT NULL,
-	uploadpath varchar2(500) NOT NULL,
-	filename varchar2(100) NOT NULL
+	uploadPath varchar2(500) NOT NULL,
+	fileName varchar2(100) NOT NULL
 );
 
 
@@ -87,7 +87,7 @@ CREATE TABLE t_member
 	id varchar2(15) NOT NULL,
 	pw varchar2(15) NOT NULL,
 	name varchar2(10) NOT NULL,
-	phonenumber varchar2(13) NOT NULL UNIQUE,
+	phoneNumber varchar2(13) NOT NULL UNIQUE,
 	birth date NOT NULL,
 	gender char(1) DEFAULT 'M' NOT NULL,
 	address varchar2(200) NOT NULL,
@@ -98,27 +98,27 @@ CREATE TABLE t_member
 
 CREATE TABLE t_notice
 (
-	noticeno number NOT NULL,
+	noticeNo number NOT NULL,
 	id varchar2(15) NOT NULL,
 	title varchar2(100) NOT NULL,
 	content varchar2(4000) NOT NULL,
-	regdate date DEFAULT sysdate,
-	viewcnt number DEFAULT 0,
-	topcheck number(1) DEFAULT 0,
-	PRIMARY KEY (noticeno)
+	regDate date DEFAULT sysdate,
+	viewCnt number DEFAULT 0,
+	topCheck number(1) DEFAULT 0,
+	PRIMARY KEY (noticeNo)
 );
 
 
 CREATE TABLE t_qna
 (
-	qnano number NOT NULL,
+	qnaNo number NOT NULL,
 	id varchar2(15) NOT NULL,
 	title varchar2(100) NOT NULL,
 	content varchar2(4000) NOT NULL,
 	regdate date DEFAULT sysdate,
 	answer varchar2(4000),
-	answerregdate date,
-	PRIMARY KEY (qnano)
+	answerRegDate date,
+	PRIMARY KEY (qnaNo)
 );
 
 
@@ -128,46 +128,46 @@ CREATE TABLE t_recruit
 	id varchar2(15) NOT NULL,
 	title varchar2(100) NOT NULL,
 	content varchar2(4000) NOT NULL,
-	regdate date DEFAULT sysdate,
+	regDate date DEFAULT sysdate,
 	status varchar2(20) NOT NULL,
-	deadline date NOT NULL,
+	deadLine date NOT NULL,
 	PRIMARY KEY (recruitno)
 );
 
 
 CREATE TABLE t_review
 (
-	reviewno number NOT NULL,
+	reviewNo number NOT NULL,
 	id varchar2(15) NOT NULL,
 	title varchar2(100) NOT NULL,
 	content varchar2(4000) NOT NULL,
-	regdate date DEFAULT sysdate,
-	viewcnt number DEFAULT 0 NOT NULL,
+	regDate date DEFAULT sysdate,
+	viewCnt number DEFAULT 0 NOT NULL,
 	category varchar2(40) NOT NULL,
 	grade number(10) NOT NULL,
 	-- 예약 | 이용권
-	useno number NOT NULL,
-	PRIMARY KEY (reviewno)
+	useNo number NOT NULL,
+	PRIMARY KEY (reviewNo)
 );
 
 
 CREATE TABLE t_review_attach
 (
-	reviewno number NOT NULL,
+	reviewNo number NOT NULL,
 	uuid varchar2(1000) NOT NULL,
-	uploadpath varchar2(500) NOT NULL,
-	filename varchar2(100) NOT NULL
+	uploadPath varchar2(500) NOT NULL,
+	fileName varchar2(100) NOT NULL
 );
 
 
 CREATE TABLE t_review_reply
 (
-	replyno number NOT NULL,
+	replyNo number NOT NULL,
 	id varchar2(15) NOT NULL,
-	reviewno number NOT NULL,
+	reviewNo number NOT NULL,
 	reply varchar2(400) NOT NULL,
-	replydate date DEFAULT sysdate,
-	PRIMARY KEY (replyno)
+	replyDate date DEFAULT sysdate,
+	PRIMARY KEY (replyNo)
 );
 
 
@@ -181,15 +181,15 @@ CREATE TABLE t_ticket
 
 CREATE TABLE t_ticket_buy
 (
-	ticketno number NOT NULL,
+	ticketNo number NOT NULL,
 	id varchar2(15) NOT NULL,
 	type varchar2(40) NOT NULL,
-	buydate date DEFAULT sysdate,
-	liftamount number NOT NULL,
-	toolamount number NOT NULL,
+	buyDate date DEFAULT sysdate,
+	liftAmount number NOT NULL,
+	toolAmount number NOT NULL,
 	status number(1) DEFAULT 0,
 	review number(1) DEFAULT 0,
-	PRIMARY KEY (ticketno)
+	PRIMARY KEY (ticketNo)
 );
 
 
@@ -197,14 +197,14 @@ CREATE TABLE t_ticket_buy
 /* Create Foreign Keys */
 
 ALTER TABLE t_condo_reserve
-	ADD FOREIGN KEY (roomtype)
-	REFERENCES t_condo (roomtype)
+	ADD FOREIGN KEY (roomType)
+	REFERENCES t_condo (roomType)
 ;
 
 
 ALTER TABLE t_event_attach
-	ADD FOREIGN KEY (eventno)
-	REFERENCES t_event (eventno)
+	ADD FOREIGN KEY (eventNo)
+	REFERENCES t_event (eventNo)
 ;
 
 
@@ -263,20 +263,20 @@ ALTER TABLE t_ticket_buy
 
 
 ALTER TABLE t_appliance
-	ADD FOREIGN KEY (recruitno)
+	ADD FOREIGN KEY (recruitNo)
 	REFERENCES t_recruit (recruitno)
 ;
 
 
 ALTER TABLE t_review_attach
-	ADD FOREIGN KEY (reviewno)
-	REFERENCES t_review (reviewno)
+	ADD FOREIGN KEY (reviewNo)
+	REFERENCES t_review (reviewNo)
 ;
 
 
 ALTER TABLE t_review_reply
-	ADD FOREIGN KEY (reviewno)
-	REFERENCES t_review (reviewno)
+	ADD FOREIGN KEY (reviewNo)
+	REFERENCES t_review (reviewNo)
 ;
 
 
@@ -289,7 +289,7 @@ ALTER TABLE t_ticket_buy
 
 /* Comments */
 
-COMMENT ON COLUMN t_review.useno IS '예약 | 이용권';
+COMMENT ON COLUMN t_review.useNo IS '예약 | 이용권';
 
 
 
