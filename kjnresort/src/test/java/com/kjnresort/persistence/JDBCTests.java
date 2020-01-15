@@ -21,7 +21,7 @@ public class JDBCTests {
 	
 	@Test
 	public void testConnection() {
-		try(Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "dev", "1111")){
+		try(Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "team1", "1111")){
 			log.info(con);
 		}catch(Exception e) {
 			fail(e.getMessage());

@@ -11,4 +11,5 @@ public interface ApplianceService {
 	
 	public ApplianceVO get(String phoneNumber);
 	public void register(ApplianceVO appliance);
+	public boolean modify(ApplianceVO appliance);
 }

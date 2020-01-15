@@ -10,6 +10,7 @@ public interface ApplianceMapper {
 	public List<ApplianceVO> getListWithPaging(Criteria cri);
 			
 	public void insert(ApplianceVO appliance);
+	public int update(ApplianceVO appliance);
 	public ApplianceVO read(String phoneNumber);
 
 }
