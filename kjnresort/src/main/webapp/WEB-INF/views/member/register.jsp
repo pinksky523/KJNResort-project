@@ -11,80 +11,59 @@
 <body>
 	<h1>회원가입</h1>
 	<hr>
-	<form id="joinForm">
-  <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">이름</label>
-    <div class="form-group mx-sm-3 mb-2">
-      <input type="email" class="form-control" id="inputEmail3">
-    </div>
-  </div>
-  
-  <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">아이디</label>
-    <div class="form-group mx-sm-3 mb-2">
-      <input type="text" class="form-control" id="inputEmail3">
-    </div>
-  </div>
-  
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">비밀번호</label>
-    <div class="form-group mx-sm-3 mb-2">
-      <input type="password" class="form-control" id="inputPassword3">
-    </div>
-  </div>
-  
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">비밀번호 확인</label>
-    <div class="form-group mx-sm-3 mb-2">
-      <input type="password" class="form-control" id="inputPassword3">
-    </div>
-  </div>
-  
-  <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">핸드폰번호</label>
-    <div class="form-group mx-sm-3 mb-2">
-      <input type="text" class="form-control" id="inputEmail3">
-    </div>
-  </div>
-  
-  <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">생년월일</label>
-    <div class="form-group mx-sm-3 mb-2">
-      <input type="date" class="form-control" id="inputEmail3">
-    </div>
-  </div>
-  
-  
-    <div class="row">
-      <legend class="col-form-label col-sm-2 pt-0">성별</legend>
-      <div class="col-sm-10">
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-          <label class="form-check-label" for="gridRadios1">남</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-          <label class="form-check-label" for="gridRadios2">여</label>
-        </div>
+	<form id="joinForm" method="post">
+   <table width="100%" style="padding:5px 0 5px 0; ">
+      <tr>
+         <th> 이름</th>
+         <td><input type="name" class="form-control" id="inputName" style="width: 35%"></td>
+      </tr>
+       <tr>
+         <th>아이디</th>
+         <td>
+        <input type="text" class="form-control" id="inputId" style="width: 35%">
+         </td>
+       </tr>
+       <tr>
+         <th>비밀번호</th>
+         <td><input type="password" class="form-control" id="inputPassword" style="width: 35%"></td>
+       </tr>
+       <tr>
+         <th>비밀번호 확인</th>
+         <td><input type="password" class="form-control" id="inputPasswordChk" style="width: 35%"></td>
+       </tr>
+        <tr>
+         <th>핸드폰번호</th>
+         <td><input type="text" class="form-control" id="inputPhoneNumber" style="width: 35%"></td>
+       </tr>
+        <tr>
+         <th>생년월일</th>
+         <td><input type="date" class="form-control" id="inputBirth" style="width: 35%"></td>
+       </tr>
         
-      </div>
-    </div>
-  
-  <div class="form-group row">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">주소</label>
-    <div class="form-group col-md-6">
-      <input type="text" class="form-control" id="inputEmail3">
-    </div>
-  </div>
-  
-  
-  <div class="form-group row">
-    <div class="col-sm-10">
-   	  <button type="button" class="btn btn-secondary">취소</button>
-      <button type="submit" class="btn btn-primary">가입완료</button>
-    </div>
-  </div>
-</form>
+        
+       <tr>
+         <th>성별</th>
+           <td class="s">
+               <input type="radio" name="chk_mail" checked>남
+               <input type="radio" name="chk_mail" value="4">여
+            </td>
+         </tr>
+         
+         <tr>
+         <tr>
+         <th>주소</th>
+         <td><input type="text" class="form-control" id="inputAddress"></td>
+       </tr>
+        
+ 
+           <tr>
+             <td colspan="2" align="center">
+		   	  <button type="button" class="btn btn-secondary" id="formButton">취소</button>
+		      <button type="submit" class="btn btn-primary" id="formButton">가입완료</button>
+            </td>
+           </tr>
+           </table>
+          </form>
 
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
