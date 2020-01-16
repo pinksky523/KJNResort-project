@@ -19,9 +19,6 @@
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <!-- <table width="100%" 
-                	   class="table table-striped table-bordered table-hover" 
-                	   id="dataTables-example"> -->
                 <table class="table table-striped table-bordered table-hover">	   
                     <thead>
                         <tr>
@@ -39,8 +36,7 @@
                             		${recruit.title}
                             	</a>
                             </td>
-                            <td><fmt:formatDate value="${recruit.regDate}"
-                            					pattern="yy-MM-dd"/></td>
+                            <td><fmt:formatDate value="${recruit.regDate}" pattern="yy-MM-dd"/></td>
                            	<td>${recruit.status}</td>
                         </tr>
                     </c:forEach>
@@ -85,14 +81,17 @@ $(function(){
 	//result 값을 저장 - 게시글을 등록/수정/삭제한 경우 
 	var result = '${result}';
 	
-	//result 값이 있는지 확인하는 함수 호출
+	// result 값을 저장 - 게시글을 등록한 경우
 	checkModal(result);
 	
+	// history를 사용해서 뒤로가기를 눌렀을때, 모달창이 다시 뜨지 않게 한다.
 	history.replaceState({}, null, null);
 	
 	//result 값이 있는지 확인하는 함수
 	function checkModal(result){
-		if(result === '' || history.state )	return;
+		if(result === '' || history.state ){
+			return;
+		}
 		
 		if(parseInt(result)>0){
 			$('.modal-body').html(result + '번 게시글이 등록되었습니다.');	
