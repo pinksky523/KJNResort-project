@@ -8,7 +8,6 @@
     <div class="col-lg-12">
         <h1 class="page-header">모집공고 게시판 관리</h1>
     </div>
-    <!-- /.col-lg-12 -->
 </div>
 
 <!-- /.row -->
@@ -22,7 +21,6 @@
             <div class="panel-body">
             
 			<form method="post" action="/recruit/register" role="form">
-			
 	            <div class="form-group">
 	                <label>제목: </label>
 	                <input class="form-control" name="title"></div>
@@ -43,5 +41,32 @@
     </div>			<!-- /.col-lg-6 -->
 </div>				<!-- /.row -->
 
+ <script>
+ 	$(document).ready(function(){
+ 		
+ 		var formObj = $("form");
+ 		
+ 		$('button').on("click",function(e){
+ 			
+ 			e.preventDefault();
+ 			
+ 			var operation = $(this).data("oper");
+ 			
+ 			console.log(operation);
+ 			
+ 			if(operation === 'remove'){
+ 				formObj.attr("action","/recruit/remove");
+ 				
+ 			} else if(operation === 'list'){
+ 				//move to list
+ 				formObj.attr("action","/recruit/list").attr("method","get");
+ 				formObj.empty();
+ 				
+ 			}
+ 			formObj.submit();
+ 		});
+ 	});
+ </script>
+ 
 
 <%@ include file="../includes/footer.jsp" %>

@@ -7,9 +7,8 @@
     <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
         <h2 class="page-header">모집공고 게시판</h2>
     </div>
-    <!-- /.col-lg-12 -->
 </div>
-<!-- /.row -->
+
 <div class="row">
     <div class="col-lg-12" style="padding-bottom: 20px">
         <div class="panel panel-default">
@@ -22,10 +21,10 @@
                 <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   
                     <thead class="thead-light">
                         <tr>
-                            <th>NO.<!-- Rendering engine --></th>
-                            <th>제목<!-- Browser --></th>
-                            <th>등록일<!-- Engine version --></th>
-                            <th>상태<!-- CSS grade --></th>
+                            <th>NO.</th>
+                            <th>제목</th>
+                            <th>등록일</th>
+                            <th>상태</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -42,7 +41,7 @@
                     </c:forEach>
                     </tbody>
                 </table><!-- END 게시물 출력 테이블 -->
-                 <button id="regBtn" type="button" class="btn btn-primary pull-right">
+                 <button onclick="tt()" id="regBtn" type="button" class="btn btn-primary pull-right">
           			글쓰기	
           		</button> 
                 
@@ -100,6 +99,9 @@ $(function(){
 		$('#myModal').modal('show');
 	}
 	
+	function tt() {
+		alert("zz");
+	}
 	// 글쓰기 버튼을 누르면 게시글 작성 화면으로 이동
 	$('#regBtn').on("click",function(){
 		self.location = "/recruit/register";
