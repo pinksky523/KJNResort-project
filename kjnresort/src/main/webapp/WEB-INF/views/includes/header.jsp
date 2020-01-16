@@ -41,6 +41,7 @@
 	<!-- Header Section -->
 	<header class="header-section">
 		<a href="/" class="site-logo">
+			<img src="/resources/img/logo.png" alt="">
 		</a>
 		<nav class="header-nav">
 			<ul class="main-menu">

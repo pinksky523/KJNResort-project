@@ -6,7 +6,7 @@
 
 	<select id="getList" resultType="com.kjnresort.domain.RecruitVO">
 		<![CDATA[
-			SELECT * FROM t_recruit WHERE recruitno > 0
+			SELECT * FROM t_recruit WHERE recruitNo > 0
 		]]>
 	</select>
 	
