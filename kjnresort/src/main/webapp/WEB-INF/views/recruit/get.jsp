@@ -39,7 +39,7 @@
                     value="${recruit.content}" readonly></textarea></div>
                 <button class="btn btn-primary pull-right">지원하기</button>
                 <button data-oper='modify' class="btn btn-warning pull-right">수정</button>
-                <button data-oper='remove' type="submit"  class="btn btn-danger pull-right">삭제</button>
+                <button data-oper='remove' type="submit" class="btn btn-danger pull-right">삭제</button>
                 <button data-oper='list' class="btn btn-secondary pull-right">목록</button>
                 
 				<form id="operForm" action="/recruit/modify" method="get">

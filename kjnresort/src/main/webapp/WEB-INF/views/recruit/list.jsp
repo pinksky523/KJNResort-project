@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ include file="../includes/header.jsp" %>
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">모집공고 게시판</h1>
+<div>
+    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
+        <h2 class="page-header">모집공고 게시판</h2>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -13,16 +13,16 @@
 <div class="row">
     <div class="col-lg-12" style="padding-bottom: 20px">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <!-- DataTables Advanced Tables -->
+            <div style="text-align: center;">
                 KJN리조트와 함께 할 패기 넘치는 인재를 기다립니다.
             </div>
+            <hr style="width: 70%">
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <table class="table table-striped table-bordered table-hover">	   
-                    <thead>
+                <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   
+                    <thead class="thead-light">
                         <tr>
-                            <th>#NO.<!-- Rendering engine --></th>
+                            <th>NO.<!-- Rendering engine --></th>
                             <th>제목<!-- Browser --></th>
                             <th>등록일<!-- Engine version --></th>
                             <th>상태<!-- CSS grade --></th>
@@ -30,7 +30,7 @@
                     </thead>
                     <tbody>
                     <c:forEach items="${list}" var="recruit">
-                        <tr class="odd gradeX">
+                        <tr>
                             <td>${recruit.recruitNo}</td>
                             <td><a href='/recruit/get?recruitNo=${recruit.recruitNo}'>
                             		${recruit.title}
