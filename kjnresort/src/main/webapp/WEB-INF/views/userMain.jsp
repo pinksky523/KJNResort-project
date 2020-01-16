@@ -69,7 +69,7 @@
 				</li>
 				<li><a href="#">인재채용</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">모집공고</a></li>
+						<li><a href="recruit/list">모집공고</a></li>
 						<li><a href="loans.html">지원내역조회</a></li>
 					</ul>
 				</li>

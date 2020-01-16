@@ -71,22 +71,10 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 <script>
-
-//아이디 확인
-function idCheck(){
-	var id = document.getElementById('inputId').value;
+$(function(){
 	
-	if(id == ""){
-		document.getElementById('idChk').innerHTML="<b><font color=red size=3px>아이디를 입력해주세요.</font></b>"
-	} else if(id.length < 5 || id.length > 15){
-		document.getElementById('idChk').innerHTML="<b><font color=red size=3px>아이디는 5 - 15자 이내로 입력해주세요.</font></b>"
-	} else if(!/^(?=.*[a-z])(?=.*[0-9])[a-z0-9]{5,14}$/.test(id)){
-		document.getElementById('idChk').innerHTML="<b><font color=red size=3px>아이디는 영어 소문자, 숫자를 조합하여 입력해주세요.</font></b>"
-	} else {
-		document.getElementById('idChk').innerHTML="<b><font color=blue size=3px>아이디를 사용하실 수 있습니다.</font></b>"
-	}
-}
-
+	
+});
 </script>
 
 </body>
