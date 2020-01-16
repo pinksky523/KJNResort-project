@@ -39,9 +39,9 @@ public class MemberController {
 	
 	
 	@GetMapping("register")
-	@PreAuthorize("isAuthenticated()")
+	/* @PreAuthorize("isAuthenticated()") */
 	public void register() {
-		log.info("MemberController register() - get");
+		log.info("회원가입 창 진입성공");
 	}
 	
 	@PostMapping("register")

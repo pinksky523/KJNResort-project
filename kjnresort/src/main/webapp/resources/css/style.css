@@ -441,13 +441,13 @@ Header section
 }
 
 .header-nav {
-	text-align: right;
+	text-align: left;
 }
 
 .site-logo {
 	float: left;
 	display: inline-block;
-	padding: 33px 0;
+	padding: 8px 5px;
 }
 
 .main-menu {
@@ -466,7 +466,7 @@ Header section
 	color: #ffffff;
 	font-weight: 600;
 	padding: 33px 5px;
-	margin-right: 55px;
+	margin-right: 43px;
 }
 
 .main-menu li a:hover,
@@ -548,10 +548,25 @@ Header section
 
 .header-right .hr-btn.hr-btn-2 {
 	background: #f43f00;
-	padding: 36px 20px;
+	padding: 36px 5px;
 	min-width: 236px;
 	text-align: center;
 }
+
+#customLogin {
+	background-color: gray;
+	width: 150px;
+	text-align: center;
+	margin: 0px;
+}
+
+#register {
+	background-color: pink;
+	width: 150px;
+	text-align: center;
+	margin: 0px;
+}
+
 
 .slicknav_menu {
 	display: none;
@@ -811,7 +826,7 @@ Footer section
  ---------------------*/
 
 .footer-section {
-	padding: 100px 0 0;
+	padding: 10px 0 0;
 	background: #22242b;
 }
 

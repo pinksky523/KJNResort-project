@@ -12,12 +12,12 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 public class CommonController {
 	
-	@PostMapping("/logout")
+	@PostMapping("/customLogout")
 	public void logoutPOST() {
 		log.info("custom logout post");
 	}
 	
-	@GetMapping("/logout")
+	@GetMapping("/customLogout")
 	public void logoutGET() {
 		log.info("custom logout get");
 	}
@@ -28,14 +28,16 @@ public class CommonController {
 		model.addAttribute("msg", "접근 권한 없음");
 	}
 	
-	@GetMapping("/login")
+	@GetMapping("/customLogin")
 	public void loginInput(String error, String logout, Model model) {
 		log.info("error : " + error);
 		log.info("logout : " + logout);
+		log.info("1111");
 		
 		if(error != null) {
 			model.addAttribute("error", "Login Error! Check Your Account!!");
 		}
+		
 		
 		if(logout != null) {
 			model.addAttribute("logout", "Logout!!!");

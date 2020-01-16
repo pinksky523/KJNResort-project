@@ -20,7 +20,7 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
 		log.warn("CustomLoginSuccessHandler login success");
-
+		log.info("4444");
 		//사용자 권한을 리스트에 저장
 		List<String> roleList = new ArrayList<>();
 		authentication.getAuthorities().forEach(authority ->  {
@@ -31,17 +31,17 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		
 		//ROLE_ADMIN이면 /sample/admin으로 리다이렉트
 		if(roleList.contains("ROLE_ADMIN")) {
-			response.sendRedirect("/sample/admin");
+			response.sendRedirect("/adminMain");
 			return;
 		}
 		
 		//ROLE_MEMBER이면 /sample/member로 리다이렉트
 		if(roleList.contains("ROLE_MEMBER")) {
 			log.info("");
-			response.sendRedirect("/sample/member");
+			response.sendRedirect("/userMain");
 			return;
 		}
-		response.sendRedirect("/");
+		response.sendRedirect("/userMain");
 	}
 
 }
