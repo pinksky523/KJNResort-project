@@ -15,12 +15,12 @@
    <table width="100%" style="padding:5px 0 5px 0; ">
       <tr>
          <th> 이름</th>
-         <td><input type="name" class="form-control" id="inputName" style="width: 35%"></td>
+         <td><input type="text" class="form-control" id="inputName" style="width: 35%" ></td>
       </tr>
        <tr>
          <th>아이디</th>
-         <td>
-        <input type="text" class="form-control" id="inputId" style="width: 35%">
+         <td class="chkMessage">
+        <input type="text" class="form-control" id="inputId"  style="width: 35%" onkeyup="idCheck()"><span id="idChk" class="chkMessage"></span>
          </td>
        </tr>
        <tr>
@@ -58,7 +58,7 @@
  
            <tr>
              <td colspan="2" align="center">
-		   	  <button type="button" class="btn btn-secondary" id="formButton">취소</button>
+		   	  <button type="button" class="btn btn-secondary" id="formButton" onclick="history.back()">취소</button>
 		      <button type="submit" class="btn btn-primary" id="formButton">가입완료</button>
             </td>
            </tr>
@@ -69,5 +69,25 @@
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<script>
+
+//아이디 확인
+function idCheck(){
+	var id = document.getElementById('inputId').value;
+	
+	if(id == ""){
+		document.getElementById('idChk').innerHTML="<b><font color=red size=3px>아이디를 입력해주세요.</font></b>"
+	} else if(id.length < 5 || id.length > 15){
+		document.getElementById('idChk').innerHTML="<b><font color=red size=3px>아이디는 5 - 15자 이내로 입력해주세요.</font></b>"
+	} else if(!/^(?=.*[a-z])(?=.*[0-9])[a-z0-9]{5,14}$/.test(id)){
+		document.getElementById('idChk').innerHTML="<b><font color=red size=3px>아이디는 영어 소문자, 숫자를 조합하여 입력해주세요.</font></b>"
+	} else {
+		document.getElementById('idChk').innerHTML="<b><font color=blue size=3px>아이디를 사용하실 수 있습니다.</font></b>"
+	}
+}
+
+</script>
+
 </body>
 </html>

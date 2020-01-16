@@ -10,3 +10,6 @@ hr { border: solid 2px lightgray; width: 50%;  }
 	text-align: center;
 	margin: 10px;
 }
+.chkMessage {
+	white-space: nowrap;
+}
