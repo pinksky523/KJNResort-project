@@ -15,16 +15,16 @@
 		<collection property="authList" resultMap="authMap"/>
 	</resultMap>
 	
-	<resultMap type="com.kjnresort.domain.AuthVO" id="authMap">
+	<!-- <resultMap type="com.kjnresort.domain.AuthVO" id="authMap">
 		<result property="userid" column="userid"/>
 		<result property="auth" column="auth"/>
-	</resultMap>
+	</resultMap> -->
 	
-	<select id="read" resultMap="memberMap">
+	<!-- <select id="read" resultMap="memberMap">	
 		select t.userid, userpw, username, regdate, updatedate, enabled, auth
 		from tbl_member t, tbl_member_auth a
 		where t.userid = a.userid 
 		and t.userid = #{userid}
-	</select>
+	</select> -->
 
 </mapper>

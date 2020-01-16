@@ -21,7 +21,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler{
 		
 		log.error("CustomAccessDeniedHandler handle().......");
 		log.error("Redirect....");
-		
+		log.info("3333");
 		//액세스 거부되었을 경우
 		response.sendRedirect("/accessError");
 	}
