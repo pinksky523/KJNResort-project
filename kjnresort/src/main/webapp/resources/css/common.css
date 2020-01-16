@@ -3,5 +3,10 @@
 h1 { text-align: center; }
 hr { border: solid 2px lightgray; width: 50%;  }
 #joinForm {
-	
+	margin: 0 auto; 
+    width: 50%;
+}
+#formButton {
+	text-align: center;
+	margin: 10px;
 }
