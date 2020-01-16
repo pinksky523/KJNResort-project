@@ -54,7 +54,7 @@ h6 {
 
 p {
 	font-size: 14px;
-	color: #74757b;
+	color: #FFFFFF;
 	line-height: 2;
 }
 
@@ -831,8 +831,9 @@ Footer section
 }
 
 .footer-section p {
-	font-style: italic;
-	margin-bottom: 40px;
+	font-style: normal;
+	margin-top: 10px;
+	margin-bottom: 15px;
 }
 
 .footer-logo {
