@@ -55,7 +55,7 @@
 				</li>
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">이용권 구매</a></li>
+						<li><a href="../ticket/buyTicket">이용권 구매</a></li>
 						<li><a href="loans.html">이용권 구매내역</a></li>
 					</ul>
 				</li>

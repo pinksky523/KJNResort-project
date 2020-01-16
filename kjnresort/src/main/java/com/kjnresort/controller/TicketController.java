@@ -65,7 +65,7 @@ public class TicketController {
 	@PostMapping("cancel")
 	public String cancel(@RequestParam("ticketNo") Long ticketNo, RedirectAttributes rttr, 
 			 @ModelAttribute("cri") Criteria cri, String writer) {
-		log.info("BoardController remove() " + ticketNo);
+		log.info("TicketController remove() " + ticketNo);
 		
 		return "redirect:/ticket/list" + cri.getListlink();
 	}
