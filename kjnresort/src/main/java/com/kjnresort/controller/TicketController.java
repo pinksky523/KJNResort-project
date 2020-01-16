@@ -26,7 +26,7 @@ public class TicketController {
 	//private TicketService service;
 	
 	@GetMapping("buyTicket")
-	@PreAuthorize("isAuthenticated()")
+	//@PreAuthorize("isAuthenticated()")
 	public void buyTicket() {
 		log.info("TicketController register() - get");
 	}
@@ -45,7 +45,7 @@ public class TicketController {
 		log.info("TicketController register() - get");
 	}
 	
-//	//이용권 구매 폼으로 가는 버튼 클릭
+//	//이용권 구매 폼으로 가는 버튼 클릭 ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ
 //	@GetMapping("register")
 //	@PreAuthorize("isAuthenticated()")
 //	public void register() {
