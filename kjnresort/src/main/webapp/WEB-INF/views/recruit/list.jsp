@@ -62,14 +62,6 @@
                     </tbody>
                 </table><!-- END 게시물 출력 테이블 -->
                 
-                <!-- 페이지 번호 클릭 시 페이지 번호와 출력 데이터 갯수를 전달 -->
-                <form action="/board/list" id="actionForm">
-                	<input type="hidden" name="pageNum" id="pageNum" value="${pageMaker.cri.pageNum}">
-                	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-                	<!-- 검색 조건과 키워드 파라미터 추가 -->
-                	<input type="hidden" name="type" value="${pageMaker.cri.type}">
-                	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
-                </form>
                 
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
@@ -81,7 +73,6 @@
                                 <h4 class="modal-title" id="myModalLabel">Modal title</h4>
                             </div>
                             <div class="modal-body">
-                                <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. -->
                                                                 처리가 완료되었습니다.
                             </div>
                             <div class="modal-footer">
@@ -133,7 +124,7 @@ $(function(){
 		$('#myModal').modal('show');
 	}
 	
-	//Register New Board 버튼을 누르면 입력 화면 표시
+	//Register New Board 버튼을 누르면 게시글 작성 화면으로 이동
 	$('#regBtn').click(function(){
 		self.location = "/recruit/register";
 	});
