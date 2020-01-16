@@ -26,7 +26,7 @@ public class TicketController {
 	//private TicketService service;
 	
 	@GetMapping("buyTicket")
-	@PreAuthorize("isAuthenticated()")
+	//@PreAuthorize("isAuthenticated()")
 	public void buyTicket() {
 		log.info("TicketController register() - get");
 	}
