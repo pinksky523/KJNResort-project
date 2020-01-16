@@ -16,14 +16,14 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
  
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="../resources/css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="../resources/css/font-awesome.min.css"/>
-	<link rel="stylesheet" href="../resources/css/owl.carousel.min.css"/>
-	<link rel="stylesheet" href="../resources/css/flaticon.css"/>
-	<link rel="stylesheet" href="../resources/css/slicknav.min.css"/>
+	<link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="/resources/css/font-awesome.min.css"/>
+	<link rel="stylesheet" href="/resources/css/owl.carousel.min.css"/>
+	<link rel="stylesheet" href="/resources/css/flaticon.css"/>
+	<link rel="stylesheet" href="/resources/css/slicknav.min.css"/>
 
 	<!-- Main Stylesheets -->
-	<link rel="stylesheet" href="../resources/css/style.css"/>
+	<link rel="stylesheet" href="/resources/css/style.css"/>
 
 
 	<!--[if lt IE 9]>
@@ -41,7 +41,6 @@
 	<!-- Header Section -->
 	<header class="header-section">
 		<a href="/" class="site-logo">
-			<img src="../resources/img/logo.png" alt="">
 		</a>
 		<nav class="header-nav">
 			<ul class="main-menu">
