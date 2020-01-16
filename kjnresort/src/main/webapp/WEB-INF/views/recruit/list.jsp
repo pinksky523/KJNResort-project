@@ -11,7 +11,7 @@
 </div>
 <!-- /.row -->
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-12" style="padding-bottom: 20px">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <!-- DataTables Advanced Tables -->

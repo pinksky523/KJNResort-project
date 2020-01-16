@@ -36,7 +36,7 @@
 	            <div class="form-group">
                     <label>내용: </label>
                     <textarea class="form-control" rows="8" name="content"
-                    value="${recruit.content }" readonly></textarea></div>
+                    value="${recruit.content}" readonly></textarea></div>
                 <button class="btn btn-primary pull-right">지원하기</button>
                 <button data-oper='modify' class="btn btn-warning pull-right">수정</button>
                 <button data-oper='remove' type="submit"  class="btn btn-danger pull-right">삭제</button>
