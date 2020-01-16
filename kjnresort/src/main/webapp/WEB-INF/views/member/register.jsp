@@ -11,58 +11,55 @@
 <body>
 	<h1>회원가입</h1>
 	<hr>
-	<form id="joinForm" method="post">
+	<form id="joinForm" method="post" action="/member/register">
    <table width="100%" style="padding:5px 0 5px 0; ">
       <tr>
          <th> 이름</th>
-         <td><input type="text" class="form-control" id="inputName" style="width: 35%" ></td>
+         <td><input type="text" class="form-control" name="name" id="inputName" style="width: 35%" required></td>
       </tr>
        <tr>
          <th>아이디</th>
          <td class="chkMessage">
-        <input type="text" class="form-control" id="inputId"  style="width: 35%" onkeyup="idCheck()"><span id="idChk" class="chkMessage"></span>
+        <input type="text" class="form-control" name="id" id="inputId" style="width: 35%" onkeyup="idCheck()" required><span id="idChk" class="chkMessage"></span>
          </td>
        </tr>
        <tr>
          <th>비밀번호</th>
-         <td><input type="password" class="form-control" id="inputPassword" style="width: 35%"></td>
+         <td><input type="password" class="form-control" name="pw" id="inputPassword" style="width: 35%" required></td>
        </tr>
        <tr>
          <th>비밀번호 확인</th>
-         <td><input type="password" class="form-control" id="inputPasswordChk" style="width: 35%"></td>
+         <td><input type="password" class="form-control" id="inputPasswordChk"  style="width: 35%" required></td>
        </tr>
         <tr>
          <th>핸드폰번호</th>
-         <td><input type="text" class="form-control" id="inputPhoneNumber" style="width: 35%"></td>
+         <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" style="width: 35%" required></td>
        </tr>
         <tr>
          <th>생년월일</th>
-         <td><input type="date" class="form-control" id="inputBirth" style="width: 35%"></td>
+         <td><input type="date" class="form-control" name="birth" id="inputBirth" style="width: 35%" required></td>
        </tr>
-        
-        
        <tr>
          <th>성별</th>
            <td class="s">
-               <input type="radio" name="chk_mail" checked>남
-               <input type="radio" name="chk_mail" value="4">여
+               <input type="radio" name="gender" value="M" checked>남
+               <input type="radio" name="gender" value="F">여
             </td>
          </tr>
          
          <tr>
          <tr>
          <th>주소</th>
-         <td><input type="text" class="form-control" id="inputAddress"></td>
+         <td><input type="text" class="form-control" name="address" id="inputAddress" required></td>
        </tr>
-        
- 
            <tr>
              <td colspan="2" align="center">
-		   	  <button type="button" class="btn btn-secondary" id="formButton" onclick="history.back()">취소</button>
-		      <button type="submit" class="btn btn-primary" id="formButton">가입완료</button>
+		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="history.back()">취소</button>
+		      <button type="submit" class="btn btn-primary" id="joinResult">가입완료</button>
             </td>
            </tr>
            </table>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
           </form>
 
 
@@ -71,10 +68,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 <script>
-$(function(){
-	
-	/*  */
-});
+
+
+
 </script>
 
 </body>
