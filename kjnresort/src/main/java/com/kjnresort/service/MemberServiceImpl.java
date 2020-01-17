@@ -66,5 +66,12 @@ public class MemberServiceImpl implements MemberService {
 		log.info("회원정보 DB저장 완료");
 		
 	}
+
+	@Transactional
+	@Override
+	public boolean idCheck(String id) {
+		return mapper.idCheck(id)==1;
+	}
+	
 	
 }

@@ -8,10 +8,10 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/css/common.css"/>
 </head>
-<body class="">
+<body class="contents">
 	<h1>회원가입</h1>
 	<hr>
-	<form id="joinForm" name="frm" method="post">
+	<form id="joinForm" name="frm" method="post" action="/member/register">
    <table width="100%" style="padding:5px 0 5px 0; ">
       <tr>
          <th> 이름</th>
@@ -26,7 +26,7 @@
        </tr>
        <tr>
          <th>비밀번호</th>
-         <td><input type="password" class="form-control" id="inputPassword" style="width: 35%" onkeyup="passwordCheck1()" required>
+         <td><input type="password" class="form-control" name="pw1" id="inputPassword" style="width: 35%" onkeyup="passwordCheck1()" required>
       	 <span id="pwChk1"></span></td>
        </tr>
        <tr>
@@ -59,7 +59,7 @@
            <tr>
              <td colspan="2" align="center">
 		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="history.back()">취소</button>
-		      <button type="button" class="btn btn-primary" onclick="confirm()" id="joinResult">가입완료</button>
+		      <button type="button" class="btn btn-primary" id="joinResult" onclick="confirm()">가입완료</button>
             </td>
            </tr>
            </table>
@@ -176,12 +176,45 @@ function phoneCheck(){
 //확인 후 submit
 function confirm() {
 	if( nameChk==true && idChk==true && pwChk1==true && pwChk2==true && phoneChk==true)
-		alert("모든조건충족");
 		document.frm.submit();
+	else if(nameChk == false) {
+		alert('이름을 확인해주세요')
+		document.frm.name.focus();
+	} else if(idChk == false) {
+		alert('아이디를 확인해주세요')
+		document.frm.id.focus();
+	} else if(pwChk1 == false) {
+		alert('비밀번호를 확인해주세요')
+		document.frm.pw1.focus();
+	} else if(pwChk2 == false) {
+		alert('비밀번호를 확인해주세요')
+		document.frm.pw2.focus();
+	} else if(phoneChk == false) {
+		alert('핸드폰번호를 확인해주세요')
+		document.frm.phoneNumber.focus();
+	}
 }
 
+</script>
+<script>
+var memberIdcheck = (function() {
 
-
+	   function getId(id, callback, error) {
+	      $.get("/member/" + id + ".json", function(result){
+	         if(callback){
+	            callback(result);
+	         }
+	      }).fail(function(xhr, status, err){
+	         if(error){
+	            error();
+	         }
+	      });
+	   }
+	   
+	   return {
+		      getId : getId,
+		   };
+		})();
 </script>
 
 </body>

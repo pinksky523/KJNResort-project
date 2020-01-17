@@ -12,6 +12,12 @@
 	</insert>																																																																																																																																																																																																																																	
 	
 	
+	<!-- 회원가입ID 중복체크 -->
+	<select id="idCheck">
+		SELECT * FROM t_member WHERE id = #{id}
+	</select>
+	
+	
 	<resultMap type="com.kjnresort.domain.MemberVO" id="memberMap">
 		<id property="id" column="id"/>						<!-- Join 조건 -->
 		<result property="pw" column="pw"/>
