@@ -2,6 +2,7 @@
 <<<<<<<=HEAD
 >>>>>>>=branch 'master' of https\://github.com/jsnow0819/Project.git
 eclipse.preferences.version=1
+encoding//src/main/java/com/kjnresort/aop/LogAdvice.java=UTF-8
 encoding//src/main/java/com/kjnresort/controller/CommonController.java=UTF-8
 encoding//src/main/java/com/kjnresort/controller/CondoController.java=UTF-8
 encoding//src/main/java/com/kjnresort/controller/CondoReserveController.java=UTF-8
@@ -14,5 +15,9 @@ encoding//src/main/java/com/kjnresort/domain/Criteria.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/EventVO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/PageDTO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/QnaVO.java=UTF-8
+encoding//src/main/java/com/kjnresort/domain/TicketBuyVO.java=UTF-8
+encoding//src/main/java/com/kjnresort/kjnresort.erm=UTF-8
+encoding//src/main/java/com/kjnresort/security/CustomAccessDeniedHandler.java=UTF-8
+encoding//src/main/java/com/kjnresort/security/CustomLoginSuccessHandler.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/includes/footer.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/userMain.jsp=UTF-8

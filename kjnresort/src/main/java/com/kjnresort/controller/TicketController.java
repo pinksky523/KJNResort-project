@@ -1,6 +1,5 @@
  package com.kjnresort.controller;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kjnresort.domain.TicketBuyVO;
+import com.kjnresort.service.TicketService;
 import com.kjnresort.domain.Criteria;
 //import com.kjnresort.service.TicketService;
 
@@ -23,29 +23,33 @@ import lombok.extern.log4j.Log4j;
 @RequestMapping("/ticket/*")
 @AllArgsConstructor
 public class TicketController {
-	//private TicketService service;
+	private TicketService service;
 	
+	//이용권 구매 폼으로 이동
 	@GetMapping("buyTicket")
 	//@PreAuthorize("isAuthenticated()")
-	public void buyTicket() {
-		log.info("TicketController register() - get");
+	public void buyTicket(Model model, Criteria cri) {
+		log.info("TicketController buy() - get");
 	}
 	
+	//이용권 구매에서 다음 버튼 눌렀을때
 	@PostMapping("buyTicket")
-	@PreAuthorize("isAuthenticated()")
+	//@PreAuthorize("isAuthenticated()")
 	public String buyTicket(TicketBuyVO ticket, RedirectAttributes rttr, 
 			 @ModelAttribute("cri") Criteria cri) {
-		log.info("TicketController modify()" + ticket);
-		return "redirect:/ticket/list" + cri.getListlink();
+		log.info("TicketController buyTicket" + ticket);
+		return "redirect:/ticket/buyTicketResult";
 	}
 	
+	//이용권 구매 결과 페이지
 	@GetMapping("buyTicketResult")
-	@PreAuthorize("isAuthenticated()")
-	public void buyTicketResult() {
-		log.info("TicketController register() - get");
+	//@PreAuthorize("isAuthenticated()")
+	public void buyTicketResult(Long ticketNo, Model model) {
+		log.info("TicketController result() - get");
+		model.addAttribute("ticket", service.get(ticketNo));
 	}
 	
-//	//이용권 구매 폼으로 가는 버튼 클릭 ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ
+//	//이용권 구매 폼으로 가는 버튼 클릭 
 //	@GetMapping("register")
 //	@PreAuthorize("isAuthenticated()")
 //	public void register() {
@@ -61,7 +65,7 @@ public class TicketController {
 //	}
 	
 	//이용권 구매 취소 이건 업데이트로 바꿔야함
-	@PreAuthorize("principal.username == #writer")						// 작성자 확인
+	//@PreAuthorize("principal.username == #writer")						// 작성자 확인
 	@PostMapping("cancel")
 	public String cancel(@RequestParam("ticketNo") Long ticketNo, RedirectAttributes rttr, 
 			 @ModelAttribute("cri") Criteria cri, String writer) {
@@ -71,7 +75,7 @@ public class TicketController {
 	}
 	
 	//이용권 가격 수정
-	@PreAuthorize("principal.username == #board.writer")				// 작성자 확인
+	//@PreAuthorize("principal.username == #board.writer")				// 작성자 확인
 	@PostMapping("modify")
 	public String modify(TicketBuyVO ticket, RedirectAttributes rttr, 
 		    			 @ModelAttribute("cri") Criteria cri) {
