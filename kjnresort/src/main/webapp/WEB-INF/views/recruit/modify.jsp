@@ -42,7 +42,7 @@
 	            <div class="form-group">
                     <label>내용: </label>
                     <textarea class="form-control" rows="8" name="content"
-                    value="${recruit.content }" ></textarea></div>
+                     >${recruit.content }</textarea></div>
                     
                     <button type="submit" data-oper='modify' class="btn btn-warning pull-right">수정</button>
                     <button type="submit" data-oper='list' class="btn btn-secondary pull-right">취소</button>
