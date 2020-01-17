@@ -8,32 +8,36 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/css/common.css"/>
 </head>
-<body>
+<body class="">
 	<h1>회원가입</h1>
 	<hr>
-	<form id="joinForm" method="post" action="/member/register">
+	<form id="joinForm" name="frm" method="post">
    <table width="100%" style="padding:5px 0 5px 0; ">
       <tr>
          <th> 이름</th>
-         <td><input type="text" class="form-control" name="name" id="inputName" style="width: 35%" required></td>
+         <td><input type="text" class="form-control" name="name" id="inputName" style="width: 35%" onkeyup="nameCheck()" required>
+      	 <span id="nameChk"></span></td>
       </tr>
        <tr>
          <th>아이디</th>
          <td class="chkMessage">
-        <input type="text" class="form-control" name="id" id="inputId" style="width: 35%" onkeyup="idCheck()" required><span id="idChk" class="chkMessage"></span>
-         </td>
+        <input type="text" class="form-control" name="id" id="inputId" style="width: 35%" onkeyup="idCheck()" required>
+        <span id="idChk"></span></td>
        </tr>
        <tr>
          <th>비밀번호</th>
-         <td><input type="password" class="form-control" name="pw" id="inputPassword" style="width: 35%" required></td>
+         <td><input type="password" class="form-control" id="inputPassword" style="width: 35%" onkeyup="passwordCheck1()" required>
+      	 <span id="pwChk1"></span></td>
        </tr>
        <tr>
          <th>비밀번호 확인</th>
-         <td><input type="password" class="form-control" id="inputPasswordChk"  style="width: 35%" required></td>
+         <td><input type="password" class="form-control" name="pw" id="inputPasswordChk"  style="width: 35%" onkeyup="passwordCheck2()" required>
+		 <span id="pwChk2"></span></td>
        </tr>
         <tr>
          <th>핸드폰번호</th>
-         <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" style="width: 35%" required></td>
+         <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" style="width: 35%" onkeyup="phoneCheck()" required>
+       	 <span id="phoneChk"></span></td>
        </tr>
         <tr>
          <th>생년월일</th>
@@ -55,7 +59,7 @@
            <tr>
              <td colspan="2" align="center">
 		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="history.back()">취소</button>
-		      <button type="submit" class="btn btn-primary" id="joinResult">가입완료</button>
+		      <button type="button" class="btn btn-primary" onclick="confirm()" id="joinResult">가입완료</button>
             </td>
            </tr>
            </table>
@@ -68,6 +72,113 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 <script>
+var nameChk = false;
+var idChk = false;
+var pwChk1 = false;
+var pwChk2 = false;
+var phoneChk = false;
+
+
+
+//이름 확인
+function nameCheck(){
+	
+	var name = document.getElementById('inputName').value;
+	
+	if(name.length == 0 || name == "") {
+		document.getElementById('nameChk').innerHTML="";
+		nameChk = false;
+	}
+	else if(! /^[가-힣]{2,6}$/.test(name)) {
+		document.getElementById('nameChk').innerHTML="<b><font color=red size=1px>한글 2~6글자 이내로 입력해주세요 (자음/모음만 입력불가)</font></b>"
+		nameChk = false;
+	} else {
+		document.getElementById('nameChk').innerHTML="";
+		nameChk = true;
+	}
+}
+
+
+//아이디 확인
+function idCheck(){
+	var id = document.getElementById('inputId').value;
+	
+	if(id.length == 0 || id == "") {
+		document.getElementById('idChk').innerHTML="";
+		idChk = false;
+	} else if(((id.length < 5) || (id.length > 15))){
+		document.getElementById('idChk').innerHTML="<b><font color=red size=1px>5 - 15자 이내로 입력해주세요.</font></b>"
+		idChk = false;
+	} else if(!/^(?=.*[a-z])(?=.*[0-9])[a-z0-9]{5,15}$/.test(id)){
+		document.getElementById('idChk').innerHTML="<b><font color=red size=1px>영어 소문자, 숫자를 조합하여 입력해주세요.</font></b>"
+		idChk = false;
+	} else {
+		document.getElementById('idChk').innerHTML="<b><font color='green' size=1px>사용가능한 아이디입니다.</font></b>";
+		idChk = true;
+	}
+}
+
+
+
+//비밀번호 확인
+function passwordCheck1(){
+	passwordCheck2();
+	
+	var pw = document.getElementById('inputPassword').value;
+	if(pw.length == 0 || pw == "") {
+		document.getElementById('pwChk1').innerHTML="";
+		pwChk1 = false;
+	} else if(((pw.length < 8) || (pw.length > 15))){
+		document.getElementById('pwChk1').innerHTML="<b><font color=red size=1px>8 - 15자 이내로 입력해주세요.</font></b>"
+		pwChk1 = false;
+	} else if(!/^(?=.*[a-z])(?=.*[0-9])[a-z0-9]{8,15}$/.test(pw)){
+		document.getElementById('pwChk1').innerHTML="<b><font color=red size=1px>영어 소문자, 숫자를 조합하여 입력해주세요.</font></b>"
+		pwChk1 = false;
+	} else {
+		document.getElementById('pwChk1').innerHTML="<b><font color='green' size=1px>사용가능한 비밀번호입니다.</font></b>";
+		pwChk1 = true;
+	}
+}
+
+//비밀번호 확인
+function passwordCheck2(){
+	var pw = document.getElementById('inputPassword').value;
+	var pwChk = document.getElementById('inputPasswordChk').value;
+	
+	if(pw != pwChk){
+		document.getElementById('pwChk2').innerHTML="<b><font color=red size=1px>비밀번호가 일치하지 않습니다.</font></b>"
+		pwChk2 = false;
+	} else if(pw == pwChk){
+		document.getElementById('pwChk2').innerHTML="<b><font color='green' size=1px>비밀번호가 일치합니다.</font></b>"
+		pwChk2 = true;
+	}
+}
+
+//핸드폰 확인
+function phoneCheck(){
+	var phoneNumber = document.getElementById('inputPhoneNumber').value;
+	
+	
+	if(phoneNumber.length == 0 || phoneNumber == "") {
+		document.getElementById('phoneChk').innerHTML="";
+		phoneChk = false;
+	}
+	else if(!/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/.test(phoneNumber)) {
+		document.getElementById('phoneChk').innerHTML="<b><font color=red size=1px>하이픈(-) 포함 13자 이내로 입력해주세요.</font></b>"
+		phoneChk = false;
+	} else {
+		document.getElementById('phoneChk').innerHTML="";
+		phoneChk = true;
+	}
+}
+
+
+//확인 후 submit
+function confirm() {
+	if( nameChk==true && idChk==true && pwChk1==true && pwChk2==true && phoneChk==true)
+		alert("모든조건충족");
+		document.frm.submit();
+}
 
 
 
