@@ -33,10 +33,11 @@ public class MemberController {
 	@PostMapping("register")
 	public String register(MemberVO member, RedirectAttributes rttr) {
 		log.info("회원가입 완료");
-		log.info("register:" + member);
+		log.info("회원정보 :" + member);
 		log.info("===============================");
 		service.register(member);
-		rttr.addFlashAttribute("result", member.getId());
+		log.info("회원정보 DB에 저장완료");
+		rttr.addFlashAttribute("result", "회원가입이 완료되었습니다. 로그인 후 이용해주세요");
 		return "redirect:/customLogin";
 	}
 		

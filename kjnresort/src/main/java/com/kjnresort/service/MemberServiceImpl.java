@@ -63,8 +63,8 @@ public class MemberServiceImpl implements MemberService {
 	public void register(MemberVO member) {
 		log.info("회원가입 서비스임플 진입 : " + member);
 		mapper.insert(member);
+		log.info("회원정보 DB저장 완료");
 		
 	}
-	
 	
 }

@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+    <title>로그인</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -80,7 +80,35 @@
     	});
     
     </script>
+<script>
+$(function(){	
+	var result = '<c:out value="${result}"/>';	
+	
+	//result 값이 있는지 확인하는 함수 호출
+	checkModal(result);
+	
+	history.replaceState({}, null, null);
+	
+	
+	function checkModal(){
+		//값이 없으면 리턴시킴
+		if(result === '' || history.state){
+			return;
+		}
+		
+		//값이 있으면 메시지 띄우기
+		if(result !== ''){
+			alert(result);
+			log.info("메세지가 존재하면 alert 띄워야될텐데");
+			console.log("메세지가 존재하면 alert 띄워야될텐데");
+			
+		}
+		
+	}
+});
+	
 
+</script>
 </body>
 
 </html>

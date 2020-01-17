@@ -87,7 +87,7 @@ CREATE TABLE t_member
 	id varchar2(15) NOT NULL,
 	pw varchar2(15) NOT NULL,
 	name varchar2(10) NOT NULL,
-	phoneNumber varchar2(13) NOT NULL UNIQUE,
+	phoneNumber varchar2(15) NOT NULL,
 	birth date NOT NULL,
 	gender char(1) DEFAULT 'M' NOT NULL,
 	address varchar2(200) NOT NULL,
