@@ -1,14 +1,5 @@
 package com.kjnresort.controller;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,15 +7,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kjnresort.domain.Criteria;
-import com.kjnresort.domain.EventAttachVO;
-import com.kjnresort.domain.EventVO;
 import com.kjnresort.domain.MemberVO;
 import com.kjnresort.domain.PageDTO;
-import com.kjnresort.service.EventService;
 import com.kjnresort.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -39,23 +26,20 @@ public class MemberController {
 	
 	
 	@GetMapping("register")
-	/* @PreAuthorize("isAuthenticated()") */
 	public void register() {
-		log.info("회원가입 창 진입성공");
+		log.info("회원가입 창 진입");
 	}
 	
 	@PostMapping("register")
-	@PreAuthorize("isAuthenticated()")
 	public String register(MemberVO member, RedirectAttributes rttr) {
-		log.info("BMemberController register()");
+		log.info("회원가입 완료");
 		log.info("register:" + member);
-	
 		log.info("===============================");
 		service.register(member);
 		rttr.addFlashAttribute("result", member.getId());
-		return "redirect:/member/login";
+		return "redirect:/customLogin";
 	}
-	
+		
 	
 	@GetMapping("list")
 	public void memberList(Criteria cri, Model model) {
@@ -155,19 +139,4 @@ public class MemberController {
 		return "redirect:/member/list" + cri.getListlink();
 	}
 	
-//	@GetMapping("get")
-//	public void get(@RequestParam("bno") Long bno, Model model) {
-//		log.info("BoardController get()");
-//		model.addAttribute("board", service.get(bno));
-//	}
-	
-	
-	
-	// /board/list GET 요청을 처리하는 list() 작성
-	// 결과 뷰로 tbl_board 테이블의 전체 목록을 담아 가도록 처리
-//	@GetMapping("list")
-//	public void list(Model model) {
-//		log.info("BoardController list()");
-//		model.addAttribute("list", service.getList());
-//	}
 }

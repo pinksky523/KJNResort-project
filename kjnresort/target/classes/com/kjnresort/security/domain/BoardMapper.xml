@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.BoardMapper">
+	<!-- 쿼리 보관 -->
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title LIKE '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							content LIKE '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							writer LIKE '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+
+	<!-- 전체 데이터 개수 가져오기 -->
+	<select id="getTotalCount" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*)
+		FROM tbl_board
+		WHERE 
+		]]>
+		
+		<!-- 보관해 둔 쿼리 사용 -->
+		<include refid="criteria"></include>
+		
+		<![CDATA[
+		bno > 0
+		]]>
+	</select>
+	
+	<select id="getListWithPaging" resultType="org.zerock.domain.BoardVO">
+		<!-- 두 번째 페이지 최신 순으로 출력 -->
+		<!-- 아래대로 실행하면 1페이지 나옴 -->
+		<![CDATA[
+		SELECT *
+		FROM(
+			SELECT /*+INDEX_DESC(tbl_board pk_board)*/
+				ROWNUM rn, bno, title, content, writer, regdate, updatedate, replycnt
+			FROM tbl_board
+			WHERE
+		]]>
+			
+			<!-- 보관해 둔 쿼리 사용 -->
+			<include refid="criteria"></include>
+					
+		<![CDATA[
+			ROWNUM <= #{pageNum} * #{amount}
+		)
+		WHERE rn > (#{pageNum}-1) * #{amount}
+		]]>
+	</select>
+
+	<update id="update">
+		UPDATE tbl_board
+		SET title = #{title}, 
+		content = #{content}, 
+		writer = #{writer}, 
+		updateDate = sysdate
+		WHERE bno = #{bno}
+	</update>
+
+	<delete id="delete">
+		DELETE FROM tbl_board WHERE bno = #{bno}
+	</delete>
+
+	<select id="read" resultType="org.zerock.domain.BoardVO">
+		SELECT * FROM tbl_board WHERE bno = #{bno}
+	</select>
+
+	<insert id="insertSelectKey">
+		<selectKey keyProperty="bno" order="BEFORE" resultType="long">	<!-- insert 하기 전에 할 것이니까 BEFORE, bno의 타입이 long -->
+			SELECT seq_board.NEXTVAL FROM dual
+		</selectKey>
+	
+		INSERT INTO tbl_board(bno, title, content, writer)
+		VALUES(#{bno}, #{title}, #{content}, #{writer})
+	</insert>
+
+	<insert id="insert">
+		INSERT INTO tbl_board(bno, title, content, writer)
+		VALUES(seq_board.NEXTVAL, #{title}, #{content}, #{writer})
+	</insert>
+
+	<select id="getList" resultType="org.zerock.domain.BoardVO">	<!-- resultType을 BoardVO로 하면 mybatis가 자동으로 list로 바꿔줌 -->
+	<!-- 쿼리 안에 부등호 등의 꺽쇠가 있으면 얘가 못알아들을 수 있으므로 escape sequence를 써야 함 -->
+		<![CDATA[
+			SELECT * FROM tbl_board WHERE bno > 0
+		]]>
+	</select>
+	
+	<update id="updateReplyCnt">
+		UPDATE tbl_board SET replycnt = replycnt + #{amount} WHERE bno = #{bno}
+	</update>
+</mapper>
