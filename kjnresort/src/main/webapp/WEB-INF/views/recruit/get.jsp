@@ -38,7 +38,7 @@
 	                    <label>내용: </label>
 	                    <textarea class="form-control" rows="8" name="content"
 	                     readonly>${recruit.content}</textarea></div>
-	                <button class="btn btn-primary pull-right">지원하기</button>
+	                <button data-oper='register' class="btn btn-primary pull-right">지원하기</button>
 	                <button data-oper='modify' class="btn btn-warning pull-right">수정</button>
 	                <button data-oper='remove' class="btn btn-danger pull-right">삭제</button>
 	                <button data-oper='list' class="btn btn-secondary pull-right">목록</button>
@@ -55,6 +55,10 @@
 $(document).ready(function(){
 	
 	var operForm = $("#operForm");
+	
+	$("button[data-oper='register']").on("click", function(e){
+		operForm.attr("action","/appliance/register").submit();
+	});
 	
 	$("button[data-oper='modify']").on("click", function(e){
 		operForm.attr("action","/recruit/modify").submit();
