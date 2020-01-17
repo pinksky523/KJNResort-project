@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>아이디찾기</title>
 </head>
 <body>
-
+	<h1>여긴 아이디찾기 페이지</h1>
 </body>
 </html>
