@@ -73,8 +73,8 @@
 						<li><a href="loans.html">지원내역조회</a></li>
 					</ul>
 				</li>
-				<li><a href="customLogin" class="hr-btn" id="customLogin">로그인</a></li>
-				<li><a href="member/register" class="hr-btn hr-btn-2" id="register">회원가입</a></li>
+				<li><a href="/customLogin" class="hr-btn" id="customLogin">로그인</a></li>
+				<li><a href="/member/register" class="hr-btn hr-btn-2" id="register">회원가입</a></li>
 			
 				<!-- <div class="header-right">
 					<a href="customLogin" class="hr-btn"><i class="flaticon-003-like"></i>로그인</a>

@@ -6,7 +6,7 @@ hr { border: solid 2px lightgray; width: 50%;  }
 	margin: 0 auto; 
     width: 50%;
 }
-#formButton {
+#joinCancel, #joinResult {
 	text-align: center;
 	margin: 10px;
 }
