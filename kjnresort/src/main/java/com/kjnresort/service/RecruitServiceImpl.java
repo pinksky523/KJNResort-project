@@ -3,7 +3,6 @@ package com.kjnresort.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.RecruitVO;
 import com.kjnresort.mapper.RecruitMapper;
 
@@ -15,22 +14,16 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class RecruitServiceImpl implements RecruitService {
 	private RecruitMapper mapper;
-	
-	@Override
-	public int getTotalCount(Criteria cri) {
-		log.info("getTotalCount .......");
-		return mapper.getTotalCount(cri);
-	}
 
 	@Override
-	public List<RecruitVO> getList(Criteria cri) {
-		log.info("getList with paging.......");
-		return mapper.getListWithPaging(cri);
+	public List<RecruitVO> getList() {
+		log.info("getList .......");
+		return mapper.getList();
 	}
 
 	@Override
 	public RecruitVO get(Long recruitNo) {
-		log.info("get.......");
+		log.info("get......." + recruitNo);
 		return mapper.read(recruitNo);
 	}
 

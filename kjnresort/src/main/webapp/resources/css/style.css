@@ -54,7 +54,7 @@ h6 {
 
 p {
 	font-size: 14px;
-	color: #74757b;
+	color: #FFFFFF;
 	line-height: 2;
 }
 
@@ -436,7 +436,7 @@ Header section
 	left: 0;
 	top: 0;
 	padding-left: 53px;
-	background: rgba(0, 0, 0, 0.7);
+	background: rgba(0, 0, 0, 1);
 	z-index: 999;
 }
 
@@ -447,7 +447,7 @@ Header section
 .site-logo {
 	float: left;
 	display: inline-block;
-	padding: 33px 0;
+	padding: 8px 5px;
 }
 
 .main-menu {
@@ -548,10 +548,25 @@ Header section
 
 .header-right .hr-btn.hr-btn-2 {
 	background: #f43f00;
-	padding: 36px 20px;
+	padding: 36px 5px;
 	min-width: 236px;
 	text-align: center;
 }
+
+#customLogin {
+	background-color: gray;
+	width: 150px;
+	text-align: center;
+	margin: 0px;
+}
+
+#register {
+	background-color: #B10419;
+	width: 150px;
+	text-align: center;
+	margin: 0px;
+}
+
 
 .slicknav_menu {
 	display: none;
@@ -811,13 +826,14 @@ Footer section
  ---------------------*/
 
 .footer-section {
-	padding: 100px 0 0;
+	padding: 10px 0 0;
 	background: #22242b;
 }
 
 .footer-section p {
-	font-style: italic;
-	margin-bottom: 40px;
+	font-style: normal;
+	margin-top: 10px;
+	margin-bottom: 15px;
 }
 
 .footer-logo {

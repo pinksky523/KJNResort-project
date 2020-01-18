@@ -61,9 +61,16 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public void register(MemberVO member) {
-		log.info("register....... : " + member);
+		log.info("회원가입 서비스임플 진입 : " + member);
 		mapper.insert(member);
+		log.info("회원정보 DB저장 완료");
 		
+	}
+
+	@Transactional
+	@Override
+	public boolean idCheck(String id) {
+		return mapper.idCheck(id)==1;
 	}
 	
 	

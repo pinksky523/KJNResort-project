@@ -26,7 +26,7 @@ public class TicketController {
 	//private TicketService service;
 	
 	@GetMapping("buyTicket")
-	@PreAuthorize("isAuthenticated()")
+	//@PreAuthorize("isAuthenticated()")
 	public void buyTicket() {
 		log.info("TicketController register() - get");
 	}
@@ -45,7 +45,7 @@ public class TicketController {
 		log.info("TicketController register() - get");
 	}
 	
-//	//이용권 구매 폼으로 가는 버튼 클릭
+//	//이용권 구매 폼으로 가는 버튼 클릭 ㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇㅁㄴㅇ
 //	@GetMapping("register")
 //	@PreAuthorize("isAuthenticated()")
 //	public void register() {
@@ -65,7 +65,7 @@ public class TicketController {
 	@PostMapping("cancel")
 	public String cancel(@RequestParam("ticketNo") Long ticketNo, RedirectAttributes rttr, 
 			 @ModelAttribute("cri") Criteria cri, String writer) {
-		log.info("BoardController remove() " + ticketNo);
+		log.info("TicketController remove() " + ticketNo);
 		
 		return "redirect:/ticket/list" + cri.getListlink();
 	}

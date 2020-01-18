@@ -18,4 +18,6 @@ public interface MemberService {
 	public boolean remove(String id);
 
 	public void register(MemberVO member);
+	
+	public boolean idCheck(String id);
 }

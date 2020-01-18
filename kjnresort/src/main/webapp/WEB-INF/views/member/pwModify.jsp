@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>비밀번호 변경</title>
 </head>
 <body>
-
+	<h1>여긴 비밀번호변경 페이지</h1>
 </body>
 </html>

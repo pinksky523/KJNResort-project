@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kjnresort.mapper.RecruitMapper">
+
+	<select id="getList" resultType="com.kjnresort.domain.RecruitVO">
+		<![CDATA[
+			SELECT * FROM t_recruit ORDER BY recruitNo DESC
+		]]>
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_recruit(recruitNo, id, title, content, status, deadLine)
+		VALUES(seq_t_recruit.NEXTVAL, #{id}, #{title}, #{content}, #{status}, #{deadLine})
+	</insert>
+	
+	<select id="read" resultType="com.kjnresort.domain.RecruitVO">
+		SELECT * FROM t_recruit WHERE recruitNo = #{recruitNo}
+	</select>
+	
+	<delete id="delete">
+		DELETE FROM t_recruit WHERE recruitNo = #{recruitNo}
+	</delete>
+	
+	<update id="update">
+		UPDATE t_recruit
+		SET title = #{title}, content = #{content}, status = #{status}, deadLine = #{deadLine}
+		WHERE recruitNo = #{recruitNo}
+	</update>
+
+</mapper>

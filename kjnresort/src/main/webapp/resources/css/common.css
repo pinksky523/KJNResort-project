@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+h1 { text-align: center; }
+hr { border: solid 2px lightgray; width: 60%;  }
+.contents {
+	margin-top : 100px;
+}
+#joinForm {
+	margin: 0 auto; 
+    width: 60%;
+}
+#joinCancel, #joinResult {
+	text-align: center;
+	margin: 10px;
+}
+.chkMessage {
+	white-space: nowrap;
+}
