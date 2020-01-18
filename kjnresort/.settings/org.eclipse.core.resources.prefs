@@ -15,4 +15,4 @@ encoding//src/main/java/com/kjnresort/domain/PageDTO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/QnaVO.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/includes/footer.jsp=UTF-8
-encoding/<project>=UTF-8
+encoding//src/test/java/com/kjnresort/mapper/CondoReserveMapperTests.java=UTF-8
