@@ -46,8 +46,8 @@
 		<nav class="header-nav">
 			<ul class="main-menu">
 				<li><a href="index.html">리조트안내</a></li>
-				<li><a href="about-us.html">공지사항</a></li>
-				<li><a href="#">콘도</a>
+				<li><a href="about-us.html">공지사항 관리</a></li>
+				<li><a href="#">콘도 관리</a>
 					<ul class="sub-menu">
 						<li><a href="about-us.html">콘도 예약</a></li>
 						<li><a href="loans.html">콘도 예약내역</a></li>

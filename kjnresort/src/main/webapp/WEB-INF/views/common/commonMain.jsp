@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -73,9 +74,34 @@
 						<li><a href="loans.html">지원내역조회</a></li>
 					</ul>
 				</li>
-				<li><a href="/customLogin" class="hr-btn" id="customLogin">로그인</a></li>
-				<li><a href="/member/register" class="hr-btn hr-btn-2" id="register">회원가입</a></li>
-			
+				
+				<li>
+				
+				<!-- 로그인한 경우 -->
+				<sec:authorize access="isAuthenticated()">
+					<a href="/member/mypage" class="hr-btn hr-btn-2" id="mypage">마이페이지</a>
+				</sec:authorize>
+				
+				<!-- 로그인 안 한 경우 -->
+				<sec:authorize access="isAnonymous()">
+					<a href="/common/customLogin" class="hr-btn" id="customLogin">로그인</a>
+				</sec:authorize>
+				</li>
+				
+				<li>
+				<!-- 로그인한 경우 -->
+				<sec:authorize access="isAuthenticated()">
+					<a href="/customLogout" class="hr-btn hr-btn-2" id="customLogout">로그아웃</a>
+				</sec:authorize>
+				
+				<!-- 로그인 안 한 경우 -->
+				<sec:authorize access="isAnonymous()">
+					<a href="/common/memberJoin" class="hr-btn hr-btn-2" id="register">회원가입</a>
+				</sec:authorize>
+				</li>
+				
+	
+				
 				<!-- <div class="header-right">
 					<a href="customLogin" class="hr-btn"><i class="flaticon-003-like"></i>로그인</a>
 					<a href="/member/register" class="hr-btn hr-btn-2">회원가입</a>

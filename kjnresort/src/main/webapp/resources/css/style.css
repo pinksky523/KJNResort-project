@@ -560,6 +560,13 @@ Header section
 	margin: 0px;
 }
 
+#mypage {
+	background-color: gray;
+	width: 150px;
+	text-align: center;
+	margin: 0px;
+}
+
 #register {
 	background-color: #B10419;
 	width: 150px;
@@ -567,6 +574,12 @@ Header section
 	margin: 0px;
 }
 
+#customLogout {
+	background-color: #B10419;
+	width: 150px;
+	text-align: center;
+	margin: 0px;
+}
 
 .slicknav_menu {
 	display: none;

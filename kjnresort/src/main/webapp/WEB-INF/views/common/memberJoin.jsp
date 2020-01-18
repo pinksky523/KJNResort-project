@@ -5,7 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script> -->
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/css/common.css"/>
@@ -15,7 +14,7 @@
 <body class="contents">
 	<h1>회원가입</h1>
 	<hr>
-	<form id="joinForm" name="frm" method="post" action="/member/register">
+	<form id="joinForm" name="frm" method="post" action="/common/register">
    <table width="100%" style="padding:5px 0 5px 0; ">
       <tr>
          <th> 이름</th>
@@ -81,7 +80,7 @@ var pwChk1 = false;
 var pwChk2 = false;
 var phoneChk = false;
 var idDBChk = false;
-
+var x = document.getElementById("inputBirth").required;		//date input type 입력되어야 submit 가능.
 
 //이름 확인
 function nameCheck(){
@@ -205,7 +204,7 @@ function confirm() {
 		document.frm.pw1.focus();
 	} else if(pwChk2 == false) {
 		alert('비밀번호를 확인해주세요')
-		document.frm.pw2.focus();
+		document.frm.pw.focus();
 	} else if(phoneChk == false) {
 		alert('핸드폰번호를 확인해주세요')
 		document.frm.phoneNumber.focus();
