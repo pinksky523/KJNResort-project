@@ -69,8 +69,9 @@ public class MemberServiceImpl implements MemberService {
 
 	@Transactional
 	@Override
-	public boolean idCheck(String id) {
-		return mapper.idCheck(id)==1;
+	public MemberVO idCheck(String id) {
+		log.info("id중복확인 서비스임플 진입");
+		return mapper.idCheck(id);
 	}
 	
 	

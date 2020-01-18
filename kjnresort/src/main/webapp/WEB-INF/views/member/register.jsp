@@ -5,8 +5,12 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<!-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link rel="stylesheet" href="/resources/css/common.css"/>
+
+
 </head>
 <body class="contents">
 	<h1>회원가입</h1>
@@ -67,17 +71,16 @@
           </form>
 
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+<script type="text/javascript" src="/resources/js/idCheck.js"></script>
 <script>
 var nameChk = false;
 var idChk = false;
 var pwChk1 = false;
 var pwChk2 = false;
 var phoneChk = false;
-
+var idDBChk = false;
 
 
 //이름 확인
@@ -103,18 +106,32 @@ function nameCheck(){
 function idCheck(){
 	var id = document.getElementById('inputId').value;
 	
+	
 	if(id.length == 0 || id == "") {
-		document.getElementById('idChk').innerHTML="";
+		document.getElementById('idChk').innerHTML = "";
 		idChk = false;
 	} else if(((id.length < 5) || (id.length > 15))){
-		document.getElementById('idChk').innerHTML="<b><font color=red size=1px>5 - 15자 이내로 입력해주세요.</font></b>"
+		document.getElementById('idChk').innerHTML = "<b><font color=red size=1px>5 - 15자 이내로 입력해주세요.</font></b>"
 		idChk = false;
 	} else if(!/^(?=.*[a-z])(?=.*[0-9])[a-z0-9]{5,15}$/.test(id)){
-		document.getElementById('idChk').innerHTML="<b><font color=red size=1px>영어 소문자, 숫자를 조합하여 입력해주세요.</font></b>"
+		document.getElementById('idChk').innerHTML = "<b><font color=red size=1px>영어 소문자, 숫자를 조합하여 입력해주세요.</font></b>"
 		idChk = false;
 	} else {
-		document.getElementById('idChk').innerHTML="<b><font color='green' size=1px>사용가능한 아이디입니다.</font></b>";
-		idChk = true;
+		
+		//아이디 중복확인
+	    idCheckService.getId(id, function(result){
+	       if(id == result.id){
+	    	   document.getElementById('idChk').innerHTML = "<b><font color=red size=1px>이미 사용중인 아이디입니다.</font></b>";
+				idChk = false;
+	     	  idDBChk = false;
+	       } else{
+	    	   document.getElementById('idChk').innerHTML = "<b><font color='green' size=1px>사용가능한 아이디입니다.</font></b>";
+				idChk = true;
+	     	  idDBChk = true;
+	       }
+	    });
+		
+		
 	}
 }
 
@@ -175,12 +192,12 @@ function phoneCheck(){
 
 //확인 후 submit
 function confirm() {
-	if( nameChk==true && idChk==true && pwChk1==true && pwChk2==true && phoneChk==true)
+	if( nameChk==true && idChk==true && idDBChk && pwChk1==true && pwChk2==true && phoneChk==true)
 		document.frm.submit();
 	else if(nameChk == false) {
 		alert('이름을 확인해주세요')
 		document.frm.name.focus();
-	} else if(idChk == false) {
+	} else if((idChk == false) || (idDBChk == false)) {
 		alert('아이디를 확인해주세요')
 		document.frm.id.focus();
 	} else if(pwChk1 == false) {
@@ -196,26 +213,5 @@ function confirm() {
 }
 
 </script>
-<script>
-var memberIdcheck = (function() {
-
-	   function getId(id, callback, error) {
-	      $.get("/member/" + id + ".json", function(result){
-	         if(callback){
-	            callback(result);
-	         }
-	      }).fail(function(xhr, status, err){
-	         if(error){
-	            error();
-	         }
-	      });
-	   }
-	   
-	   return {
-		      getId : getId,
-		   };
-		})();
-</script>
-
 </body>
 </html>

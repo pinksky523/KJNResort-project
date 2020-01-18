@@ -19,5 +19,5 @@ public interface MemberService {
 
 	public void register(MemberVO member);
 	
-	public boolean idCheck(String id);
+	public MemberVO idCheck(String id);
 }
