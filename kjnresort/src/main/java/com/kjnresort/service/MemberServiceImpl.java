@@ -2,9 +2,12 @@ package com.kjnresort.service;	//이 패키지를 스프링이 자동스캔하�
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kjnresort.domain.AuthVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.EventAttachVO;
 import com.kjnresort.domain.EventVO;
@@ -27,6 +30,8 @@ import lombok.extern.log4j.Log4j;
 public class MemberServiceImpl implements MemberService {
 	private MemberMapper mapper;
 
+	@Autowired 
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@Override
 	public MemberVO get(String id) {
@@ -62,11 +67,19 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void register(MemberVO member) {
 		log.info("회원가입 서비스임플 진입 : " + member);
+		member.setPw(bcryptPasswordEncoder.encode(member.getPw()));
 		mapper.insert(member);
 		log.info("회원정보 DB저장 완료");
-		
 	}
 
+	@Transactional
+	@Override
+	public void registerAuth(AuthVO auth) {
+		log.info("회원권한등록 서비스임플 진입 : " +  auth);
+		mapper.insertAuth(auth);
+		log.info("회원권한 DB저장 완료");
+	}
+	
 	@Transactional
 	@Override
 	public MemberVO idCheck(String id) {
