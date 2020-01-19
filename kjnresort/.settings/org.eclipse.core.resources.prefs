@@ -7,6 +7,7 @@ encoding//src/main/java/com/kjnresort/controller/CondoController.java=UTF-8
 encoding//src/main/java/com/kjnresort/controller/CondoReserveController.java=UTF-8
 encoding//src/main/java/com/kjnresort/controller/EventController.java=UTF-8
 encoding//src/main/java/com/kjnresort/controller/QnaController.java=UTF-8
+encoding//src/main/java/com/kjnresort/controller/RecruitController.java=UTF-8
 encoding//src/main/java/com/kjnresort/controller/TicketController.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/CondoReserveVO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/CondoVO.java=UTF-8
@@ -14,10 +15,9 @@ encoding//src/main/java/com/kjnresort/domain/Criteria.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/EventVO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/PageDTO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/QnaVO.java=UTF-8
+encoding//src/main/java/com/kjnresort/service/CondoReserveServiceImpl.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/condoreserve/register.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/customLogin.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/includes/footer.jsp=UTF-8
-<<<<<<< HEAD
-encoding//src/test/java/com/kjnresort/mapper/CondoReserveMapperTests.java=UTF-8
-=======
 encoding//src/main/webapp/WEB-INF/views/userMain.jsp=UTF-8
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+encoding//src/test/java/com/kjnresort/mapper/CondoReserveMapperTests.java=UTF-8
