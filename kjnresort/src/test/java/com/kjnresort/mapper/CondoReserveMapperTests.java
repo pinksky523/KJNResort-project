@@ -33,11 +33,11 @@ public class CondoReserveMapperTests {
 	@Test
 	public void adasd() {
 		Calendar checkIn=Calendar.getInstance();
-		checkIn.set(2020, 0,13, 0, 0, 0);
+		checkIn.set(2020, 0,5, 0, 0, 0);
 		Calendar checkOut=Calendar.getInstance();
-		checkOut.set(2020, 0,14, 0, 0, 0);
+		checkOut.set(2020, 0,6, 0, 0, 0);
 		int count=-1;
-		String roomType="N";
+		String roomType="R";
 		int roomNo=0;
 		int reserveRoomNo=0;
 		if(roomType.equals("P")) {
