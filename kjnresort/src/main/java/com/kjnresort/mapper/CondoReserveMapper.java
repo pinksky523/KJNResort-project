@@ -20,10 +20,12 @@ public interface CondoReserveMapper {
    public int update(CondoReserveVO reserve);
    public CondoReserveVO read(Long reserveNo);
    
-   public int confirmCheckInByRoomType(@Param("checkIn") Date checkIn,@Param("roomType") String roomType);
-   public int confirmCheckOutByRoomType(@Param("checkOut") Date checkOut,@Param("roomType") String roomType);
+ 
    public int getMaxRoomNoByRoomType(String roomType);
    public int getReserveSizeByRoomType(String roomType);
+   
+   public int getOverlapDateCount(@Param("roomType") String roomType,@Param("roomNo") int roomNo,@Param("checkIn") Date checkIn,@Param("checkOut") Date checkOut);
+   public int getReserveRoomNo(@Param("roomType") String roomType,@Param("checkIn") Date checkIn,@Param("checkOut") Date checkOut);
    //Å×½ºÆ®
    public void insertdate(Date mydate);
    public Date get();

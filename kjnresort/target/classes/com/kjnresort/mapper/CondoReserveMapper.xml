@@ -18,24 +18,17 @@ from view_condo_reserve
 where roomType=#{roomType}
 </select>
 
-<select id="getReserveSizeByRoomType" resultType="int">
+
+<select id="getOverlapDateCount" resultType="int">
+<![CDATA[
 select count(*)
 from view_condo_reserve
-where roomType=#{roomType}
-</select>
-
-
-<select id="confirmCheckInByRoomType" resultType="int">
-<![CDATA[
-select count(*) from view_condo_reserve where checkin <= #{checkIn} and #{checkIn} < checkout and roomType=#{roomType}
+where ((checkin<=#{checkIn} and #{checkIn} < checkout) or (checkin<#{checkIn} and #{checkIn}<=checkout))
+and roomno=#{roomNo} and roomtype=#{roomType}
 ]]>
 </select>
 
-<select id="confirmCheckOutByRoomType" resultType="int">
-<![CDATA[
-select count(*) from view_condo_reserve where checkin < #{checkOut} and #{checkOut} <=checkout and roomType=#{roomType}
-]]>
-</select>
+
 
 <update id="update">
 update t_condo_reserve status=#{status} where reserveno=#{reserveNo}

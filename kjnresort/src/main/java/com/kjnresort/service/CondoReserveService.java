@@ -15,5 +15,6 @@ public interface CondoReserveService {
 	 public CondoReserveVO get(Long reserveNo);
 	 public int getTotalCount(Criteria cri);
 	 public int getTotalCountWithId(Criteria cri,String id);
-	 public List<String> getAvailableRoomType(String roomType,Calendar CheckIn,Calendar checkOut);
+	 public List<String> getAvailableRoomType(Calendar checkIn,Calendar checkOut);
+	 
 }

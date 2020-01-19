@@ -1,7 +1,9 @@
 package com.kjnresort.controller;
 
 import java.security.Principal;
+import java.util.Calendar;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,7 +15,14 @@ import com.kjnresort.domain.Criteria;
 import com.kjnresort.service.CondoReserveService;
 
 
-@RequestMapping("/condoreserve")
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+
+
+@Log4j
+@RequestMapping("/condoreserve/*")
+@AllArgsConstructor
+@Controller
 public class CondoReserveController { //헐 이제 될거같아
 	CondoReserveService service;
 	
@@ -48,5 +57,7 @@ public class CondoReserveController { //헐 이제 될거같아
 	public String register(CondoReserveVO crVO,RedirectAttributes rttr) {
 		return null;
 	}
+	
+
 	
 }

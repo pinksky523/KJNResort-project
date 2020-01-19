@@ -3,7 +3,9 @@ package com.kjnresort.mapper;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,12 +29,104 @@ public class CondoReserveMapperTests {
 	//@Setter(onMethod_=@Autowired)
 	//private CondoMapper priceMapper;
 	
+	
+	@Test
+	public void adasd() {
+		Calendar checkIn=Calendar.getInstance();
+		checkIn.set(2020, 0,13, 0, 0, 0);
+		Calendar checkOut=Calendar.getInstance();
+		checkOut.set(2020, 0,14, 0, 0, 0);
+		int count=-1;
+		String roomType="N";
+		int roomNo=0;
+		int reserveRoomNo=0;
+		if(roomType.equals("P")) {
+			roomNo=100;
+		}else if(roomType.equals("D")){
+			roomNo=200;
+		}else if(roomType.equals("N")) {
+			roomNo=300;
+		}else{
+			roomNo=400;
+		}
+		
+		for(int i=1;i<10;i++) {
+			count=mapper.getOverlapDateCount(roomType, roomNo+i, checkIn.getTime(), checkOut.getTime());
+			if(count==0) {
+				reserveRoomNo=roomNo+i;
+				break;
+			}
+		}
+		
+		log.info(reserveRoomNo);
+	
+	}
+	
+	
 	//@Test
-	public void nulltest() {
-		log.info(mapper.getReserveSizeByRoomType("S"));
+	public void reserveTEST() {
+		Calendar checkIn=Calendar.getInstance();
+		checkIn.set(2020, 0, 6, 0, 0, 0);
+		Calendar checkOut=Calendar.getInstance();
+		checkOut.set(2020, 0, 8, 0, 0, 0);
+		List<String> availableRoomType=new ArrayList<String>();
+		
+		String[] roomTypeArr= {"P","D","N","R"};
+		String type;
+		int size=-1;
+		int roomNo=0;
+		for(int i=0;i<4;i++) {
+			type=roomTypeArr[i];
+			roomNo=(i+1)*100;
+			for(int j=1;j<10;j++) {
+				size=mapper.getOverlapDateCount(type, roomNo+j, checkIn.getTime(), checkOut.getTime());
+				if(size==0) {
+					availableRoomType.add(type);
+					break;
+				}
+			}
+		}
+		
+		log.info("====================");
+		log.info(availableRoomType);
+		
+		
 	}
 	
 	@Test
+	public void SGSEFE() {
+		Calendar checkIn=Calendar.getInstance();
+		checkIn.set(2020, 0, 6, 0, 0, 0);
+		Calendar checkOut=Calendar.getInstance();
+		checkOut.set(2020, 0, 8, 0, 0, 0);
+		List<String> nonAvailableRoomType=new ArrayList<String>();
+		List<String> availableRoomType=new ArrayList<String>();
+		Map<String,Integer> roomType=new HashMap<String,Integer>();
+		roomType.put("P",1);
+		roomType.put("D",1);
+		roomType.put("N",1);
+		roomType.put("R",1);
+		//nonAvailableRoomType=mapper.getNonAvailableRoomType(checkIn.getTime(), checkOut.getTime());
+		
+		for(String type:roomType.keySet()) {
+			for (String nonType : nonAvailableRoomType) {
+				if(type.equals(nonType)&&mapper.getMaxRoomNoByRoomType(nonType)%100==9){
+					roomType.replace(type, 0);
+				}
+			} 
+		}//end map foreach
+		
+		for(Map.Entry<String,Integer> entry:roomType.entrySet()) {
+			if(entry.getValue()==1) {
+				availableRoomType.add(entry.getKey());
+			}
+		}//end map foreach
+		
+		
+		log.info(availableRoomType);
+	}
+	
+	//@Test
 	public void testreserve() {
 		int checkInRe=-1;
 		int checkOutRe=-1;
@@ -49,10 +143,10 @@ public class CondoReserveMapperTests {
 		if(reserveSizeByRoomType==0) { //예약이 하나도 없을 때 바로가능
 			availableRoomType.add("P"); //바로 가능
 		}else {//예약이 하나 이상
-			checkInRe=mapper.confirmCheckInByRoomType(checkIn.getTime(),"P");
+			//checkInRe=mapper.confirmCheckInByRoomType(checkIn.getTime(),"P");
 			lastRoomNo=mapper.getMaxRoomNoByRoomType("P");
 			if(checkInRe==0) {//re가 0이여야 가능 1이상 불가능
-				checkOutRe=mapper.confirmCheckOutByRoomType(checkOut.getTime(),"P");
+			//	checkOutRe=mapper.confirmCheckOutByRoomType(checkOut.getTime(),"P");
 				
 				if(checkOutRe==0) {
 					availableRoomType.add("P");
@@ -77,9 +171,9 @@ public class CondoReserveMapperTests {
 		if(reserveSizeByRoomType==0) { //예약이 하나도 없을 때 바로가능
 			availableRoomType.add("D"); //바로 가능
 		}else {//예약이 하나 이상
-			checkInRe=mapper.confirmCheckInByRoomType(checkIn.getTime(),"D");
+			//checkInRe=mapper.confirmCheckInByRoomType(checkIn.getTime(),"D");
 			if(checkInRe==0) {//re가 0이여야 가능 1이상 불가능
-				checkOutRe=mapper.confirmCheckOutByRoomType(checkOut.getTime(),"D");
+			//	checkOutRe=mapper.confirmCheckOutByRoomType(checkOut.getTime(),"D");
 				lastRoomNo=mapper.getMaxRoomNoByRoomType("D");
 				if(checkOutRe==0) {
 					availableRoomType.add("D");
@@ -104,9 +198,9 @@ public class CondoReserveMapperTests {
 		if(reserveSizeByRoomType==0) { //예약이 하나도 없을 때 바로가능
 			availableRoomType.add("N"); //바로 가능
 		}else {//예약이 하나 이상
-			checkInRe=mapper.confirmCheckInByRoomType( checkIn.getTime(),"N");
+			//checkInRe=mapper.confirmCheckInByRoomType( checkIn.getTime(),"N");
 			if(checkInRe==0) {//re가 0이여야 가능 1이상 불가능
-				checkOutRe=mapper.confirmCheckOutByRoomType(checkOut.getTime(),"N");
+			//	checkOutRe=mapper.confirmCheckOutByRoomType(checkOut.getTime(),"N");
 				lastRoomNo=mapper.getMaxRoomNoByRoomType("N");
 				if(checkOutRe==0) {
 					availableRoomType.add("N");
@@ -131,9 +225,9 @@ public class CondoReserveMapperTests {
 		if(reserveSizeByRoomType==0) { //예약이 하나도 없을 때 바로가능
 			availableRoomType.add("R"); //바로 가능
 		}else {//예약이 하나 이상
-			checkInRe=mapper.confirmCheckInByRoomType(checkIn.getTime(),"R");
+			//checkInRe=mapper.confirmCheckInByRoomType(checkIn.getTime(),"R");
 			if(checkInRe==0) {//re가 0이여야 가능 1이상 불가능
-				checkOutRe=mapper.confirmCheckOutByRoomType(checkOut.getTime(),"R");
+			//	checkOutRe=mapper.confirmCheckOutByRoomType(checkOut.getTime(),"R");
 				lastRoomNo=mapper.getMaxRoomNoByRoomType("N");
 				if(checkOutRe==0) {
 					availableRoomType.add("R");
