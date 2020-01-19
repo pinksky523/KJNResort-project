@@ -22,29 +22,30 @@
 <div class="container">
 <div class="row">
     <div class="col-lg-5 col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-    	<form role="form">
+    	<form role="form" method="post" action="/login">
 			<fieldset>
 				<h3>로그인</h3>
-				<hr style="border: solid 2px lightgray">
+				<hr style="width: 100%; border: solid 2px lightgray;">
 				<div class="form-group">
-                    <input type="text" name="email" id="email" class="form-control input-lg" placeholder="아이디">
+                    <input type="text" name="username" id="inputId" class="form-control input-lg" placeholder="아이디" required autofocus>
 				</div>
 				<div class="form-group">
-                    <input type="password" name="password" id="password" class="form-control input-lg" placeholder="비밀번호">
+                    <input type="password" name="password" id="inputPassword" class="form-control input-lg" placeholder="비밀번호" required>
 				</div>
-					<a href="/member/findId" class="btn btn-link pull-left">아이디 찾기</a>
-					<a href="/member/findPw" class="btn btn-link pull-right">비밀번호 찾기</a>
-				<br><hr>
+					<a href="/common/findId" class="btn btn-link pull-left">아이디 찾기</a>
+					<a href="/common/findPw" class="btn btn-link pull-right">비밀번호 찾기</a>
+				<br><hr style="width: 100%">
 				
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-md-6">
                         <input type="submit" class="btn btn-lg btn-success btn-block" value="로그인">
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-6">
-						<a href="/member/register" class="btn btn-lg btn-primary btn-block">회원가입</a>
+						<a href="/common/memberJoin" class="btn btn-lg btn-primary btn-block">회원가입</a>
 					</div>
 				</div>
 			</fieldset>
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 		</form>
 	</div>
 </div>
@@ -55,10 +56,15 @@ $(function(){
 	
 	//result 값이 있는지 확인하는 함수 호출
 	checkModal(result);
-	
 	history.replaceState({}, null, null);
 	
+	$(".btn-success").on("click", function(e){
+		e.preventDefault();
+		$("form").submit();
+	});
 	
+	
+	//메세지가 존재하면 alert창 띄우기
 	function checkModal(){
 		//값이 없으면 리턴시킴
 		if(result === '' || history.state){
@@ -68,8 +74,6 @@ $(function(){
 		//값이 있으면 메시지 띄우기
 		if(result !== ''){
 			alert(result);
-			console.log("메세지가 존재하면 alert 띄워야될텐데");
-			
 		}
 		
 	}
