@@ -13,8 +13,8 @@
 	
 	
 	<!-- 회원가입ID 중복체크 -->
-	<select id="idCheck">
-		SELECT * FROM t_member WHERE id = #{id}
+	<select id="idCheck" resultType="com.kjnresort.domain.MemberVO">
+		SELECT id FROM t_member WHERE id = #{id}
 	</select>
 	
 	

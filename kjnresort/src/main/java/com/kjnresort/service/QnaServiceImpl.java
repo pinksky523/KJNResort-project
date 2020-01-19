@@ -2,10 +2,19 @@ package com.kjnresort.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.QnaVO;
 import com.kjnresort.mapper.QnaMapper;
 
+
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+
+@Service
+@Log4j
+@AllArgsConstructor
 public class QnaServiceImpl implements QnaService {
 	QnaMapper mapper;
 	public List<QnaVO> getListWithPaging(Criteria cri){
