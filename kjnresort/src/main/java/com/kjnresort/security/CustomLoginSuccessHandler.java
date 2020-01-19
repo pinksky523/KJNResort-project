@@ -30,16 +30,18 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 		
 		//ROLE_ADMIN이면 /admin/adminMain으로 리다이렉트
 		if(roleList.contains("ROLE_ADMIN")) {
+			log.info("관리자 권한으로 로그인");
 			response.sendRedirect("/admin/adminMain");
 			return;
 		}
 		
 		//ROLE_MEMBER이면 /common/commonMain로 리다이렉트
 		if(roleList.contains("ROLE_MEMBER")) {
+			log.info("일반회원 권한으로 로그인");
 			response.sendRedirect("/common/commonMain");
 			return;
 		}
-		response.sendRedirect("/common/commonMain");
+		response.sendRedirect("/");
 	}
 
 }

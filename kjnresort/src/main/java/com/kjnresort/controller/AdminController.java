@@ -22,9 +22,8 @@ public class AdminController {
 	private MemberService service;
 	
 	@GetMapping("adminMain")
-	public String register() {
+	public void adminMain() {
 		log.info("관리자 메인화면 진입");
-		return "redirect:adminMain";
 	}
 	
 	

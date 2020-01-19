@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -11,7 +12,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<!-- Favicon -->
-	<link href="img/favicon.ico" rel="shortcut icon"/>
+	<link href="/resources/img/favicon.ico" rel="shortcut icon"/>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
@@ -41,14 +42,14 @@
 
 	<!-- Header Section -->
 	<header class="header-section">
-		<a href="/" class="site-logo">
-			<img src="resources/img/logo.png" alt="">
+		<a href="index.html" class="site-logo">
+			<img src="/resources/img/logo.png" alt="">
 		</a>
 		<nav class="header-nav">
 			<ul class="main-menu">
 				<li><a href="index.html">리조트안내</a></li>
-				<li><a href="about-us.html">공지사항</a></li>
-				<li><a href="#">콘도</a>
+				<li><a href="about-us.html">공지사항 관리</a></li>
+				<li><a href="#">콘도 관리</a>
 					<ul class="sub-menu">
 						<li><a href="about-us.html">콘도 예약</a></li>
 						<li><a href="loans.html">콘도 예약내역</a></li>
@@ -56,7 +57,7 @@
 				</li>
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
-						<li><a href="ticket/buyTicket">이용권 구매</a></li>
+						<li><a href="about-us.html">이용권 구매</a></li>
 						<li><a href="loans.html">이용권 구매내역</a></li>
 					</ul>
 				</li>
@@ -70,16 +71,13 @@
 				</li>
 				<li><a href="#">인재채용</a>
 					<ul class="sub-menu">
-						<li><a href="recruit/list">모집공고</a></li>
+						<li><a href="about-us.html">모집공고</a></li>
 						<li><a href="loans.html">지원내역조회</a></li>
 					</ul>
 				</li>
-				
 				<li>
-				
-				<!-- 로그인한 경우 -->
+					<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-					<button type="button" onclick="location.href='/member/mypage'" class="btn btn-secondary" id="mypage">마이페이지</button>
 				</sec:authorize>
 				
 				<!-- 로그인 안 한 경우 -->
@@ -101,8 +99,10 @@
 				<sec:authorize access="isAnonymous()">
 					<button type="button" onclick="location.href='/common/memberJoin'" class="btn btn-danger" id="register">회원가입</button>
 				</sec:authorize>
+				
 				</li>
 			</ul>
+			
 		</nav>
 	</header>
 	<!-- Header Section end -->
@@ -150,7 +150,7 @@
 	<script src="/resources/js/jquery-ui.min.js"></script>
 	<script src="/resources/js/main.js"></script>
 	
-		
+	
 	 <script>
     	$(".btn-danger").on("click", function(e){
     		e.preventDefault();
@@ -159,6 +159,5 @@
     	});
     
     </script>
-    
 	</body>
 </html>

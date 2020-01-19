@@ -54,11 +54,6 @@ public class CommonController {
 	}
 	
 	
-	@PostMapping("/customLogout")
-	public void logoutPOST() {
-		log.info("custom logout post");
-	}
-	
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth, Model model) {
 		log.info("conmmonController accessDenied() : " + auth);
@@ -78,6 +73,14 @@ public class CommonController {
 		if(logout != null) {
 			model.addAttribute("logout", "로그아웃!!");
 		}
+	}
+	
+	@GetMapping("/customLogout")
+	public void logoutGet(){
+	}
+	
+	@GetMapping("/commonMain")
+	public void commonMain() {
 	}
 	
 }
