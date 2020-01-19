@@ -11,7 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	
 	<!-- Favicon -->
-	<link href="img/favicon.ico" rel="shortcut icon"/>
+	<link href="/resources/img/favicon.ico" rel="shortcut icon"/>
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@
 	<!-- Header Section -->
 	<header class="header-section">
 		<a href="/" class="site-logo">
-			<img src="resources/img/logo.png" alt="">
+			<img src="/resources/img/logo.png" alt="">
 		</a>
 		<nav class="header-nav">
 			<ul class="main-menu">
@@ -152,7 +152,7 @@
 	
 		
 	 <script>
-    	$(".btn-danger").on("click", function(e){
+    	$("#customLogout").on("click", function(e){
     		e.preventDefault();
     		alert('로그아웃 되었습니다.');
     		$("form").submit();

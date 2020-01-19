@@ -152,7 +152,7 @@
 	
 	
 	 <script>
-    	$(".btn-danger").on("click", function(e){
+    	$("#customLogout").on("click", function(e){
     		e.preventDefault();
     		alert('로그아웃 되었습니다.');
     		$("form").submit();
