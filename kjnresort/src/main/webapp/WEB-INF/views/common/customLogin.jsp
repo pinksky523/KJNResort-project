@@ -33,12 +33,12 @@
                     <input type="password" name="password" id="inputPassword" class="form-control input-lg" placeholder="비밀번호" required>
 				</div>
 					<a href="/common/findId" class="btn btn-link pull-left">아이디 찾기</a>
-					<a href="/common/findPw" class="btn btn-link pull-right">비밀번호 찾기</a>
+					<a href="findPw" class="btn btn-link pull-right">비밀번호 찾기</a>
 				<br><hr style="width: 100%">
 				
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-md-6">
-						<a href="/common/memberJoin" class="btn btn-lg btn-primary btn-block">회원가입</a>
+						<a href="memberJoin" class="btn btn-lg btn-primary btn-block">회원가입</a>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-6">
                         <input type="submit" class="btn btn-lg btn-success btn-block" value="로그인">

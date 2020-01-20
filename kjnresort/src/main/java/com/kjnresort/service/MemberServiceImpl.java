@@ -87,5 +87,12 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.idCheck(id);
 	}
 	
-	
+	@Transactional
+	@Override
+	public String findId(String name, String phoneNumber) {
+		log.info("아이디찾기 서비스임플 진입");
+		log.info("전달된 이름 값 : " + name);
+		log.info("전달된 핸드폰번호 값 : " + phoneNumber);
+		return mapper.findId(name, phoneNumber);
+	}
 }
