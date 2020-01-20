@@ -84,5 +84,4 @@ public class CommonController {
 	@GetMapping("/home")
 	public void commonMain() {
 	}
-	
 }
