@@ -5,6 +5,13 @@
 <mapper namespace="com.kjnresort.mapper.MemberMapper">
 	
 	
+	
+	<!-- 아이디찾기 -->
+	<select id="findId" resultType="String">
+		SELECT id FROM t_member WHERE name = #{name} and phoneNumber = #{phoneNumber}
+	</select>		
+	
+	
 	<!-- 회원등록(가입) -->
 	<insert id="insert">
 		INSERT INTO t_member(id, pw, name, phoneNumber, birth, gender, address)
