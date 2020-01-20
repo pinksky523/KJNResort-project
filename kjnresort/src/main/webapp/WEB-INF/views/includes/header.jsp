@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -75,8 +76,31 @@
 						<li><a href="/appliance/list">지원내역조회</a></li>
 					</ul>
 				</li>
-				<li><a href="/customLogin" class="hr-btn" id="customLogin">로그인</a></li>
-				<li><a href="/member/register" class="hr-btn hr-btn-2" id="register">회원가입</a></li>
+				<!-- 로그인한 경우 -->
+				<sec:authorize access="isAuthenticated()">
+					<button type="button" onclick="location.href='/member/mypage'" class="btn btn-secondary" id="mypage">마이페이지</button>
+				</sec:authorize>
+				
+				<!-- 로그인 안 한 경우 -->
+				<sec:authorize access="isAnonymous()">
+					<button type="button" onclick="location.href='/common/customLogin'" class="btn btn-secondary" id="customLogin">로그인</button>
+				</sec:authorize>
+				</li>
+				
+				<li>
+				<!-- 로그인한 경우 -->
+				<sec:authorize access="isAuthenticated()">
+				<form method="post" action="/common/customLogout">
+					<button type="submit" class="btn btn-danger" id="customLogout">로그아웃</button>
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				</form>
+				</sec:authorize>
+				
+				<!-- 로그인 안 한 경우 -->
+				<sec:authorize access="isAnonymous()">
+					<button type="button" onclick="location.href='/common/memberJoin'" class="btn btn-danger" id="register">회원가입</button>
+				</sec:authorize>
+				</li>
 			
 			</ul>
 		</nav>
