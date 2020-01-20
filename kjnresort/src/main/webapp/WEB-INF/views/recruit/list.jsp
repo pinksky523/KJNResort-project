@@ -5,13 +5,13 @@
 <%@ include file="../includes/header.jsp" %>
 <div>
     <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
-        <h2 class="page-header">모집공고 게시판</h2>
+        <h2>모집공고 게시판</h2>
     </div>
 </div>
 
 <div class="row">
     <div class="col-lg-12" style="padding-bottom: 20px">
-        <div class="panel panel-default">
+        <div>
             <div style="text-align: center;">
                 KJN리조트와 함께 할 패기 넘치는 인재를 기다립니다.
             </div>

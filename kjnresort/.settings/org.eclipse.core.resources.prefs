@@ -31,7 +31,17 @@ encoding//src/main/webapp/WEB-INF/views/common/customLogin.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/common/home.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/condoreserve/register.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/includes/footer.jsp=UTF-8
+<<<<<<< HEAD
+<<<<<<< HEAD
+encoding//src/test/java/com/kjnresort/mapper/CondoReserveMapperTests.java=UTF-8
+=======
+=======
 encoding//src/main/webapp/WEB-INF/views/ticket/buyTicketKakao.jsp=UTF-8
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 encoding//src/main/webapp/WEB-INF/views/userMain.jsp=UTF-8
+<<<<<<< HEAD
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+=======
 encoding//src/test/java/com/kjnresort/mapper/CondoReserveMapperTests.java=UTF-8
 encoding//src/test/java/com/kjnresort/mapper/MemberMapperTests.java=UTF-8
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
