@@ -1,8 +1,6 @@
 package com.kjnresort.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -64,19 +62,6 @@ public class CommonController {
 		model.addAttribute("result", "해당 서비스는 로그인 후 이용가능합니다.");
 		//return "redirect:/common/customLogin";
 	}
-	
-
-	/*
-	 * @GetMapping("/customLogin") public void loginInput(String error, String
-	 * logout, Model model) { log.info("error : " + error); log.info("logout : " +
-	 * logout); log.info("1111");
-	 * 
-	 * if(error != null) { model.addAttribute("error",
-	 * "Login Error! Check Your Account!!"); }
-	 * 
-	 * 
-	 * if(logout != null) { model.addAttribute("logout", "Logout!!!"); } }
-	 */
 
 	@GetMapping("/customLogin")
 	public void loginInput(String error, String logout, Model model) {
@@ -100,5 +85,4 @@ public class CommonController {
 	public void commonMain() {
 	}
 	
-
 }
