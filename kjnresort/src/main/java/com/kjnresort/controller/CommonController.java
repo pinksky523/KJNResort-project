@@ -96,7 +96,7 @@ public class CommonController {
 	public void logoutGet(){
 	}
 	
-	@GetMapping("/commonMain")
+	@GetMapping("/home")
 	public void commonMain() {
 	}
 	
