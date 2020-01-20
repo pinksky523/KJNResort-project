@@ -58,8 +58,8 @@ var x = document.getElementById("deadLine").required;
  			
  			console.log(operation);
  			
- 			if(operation === 'remove'){
- 				formObj.attr("action","/recruit/remove");
+ 			if(operation === 'modify'){
+ 				alert("수정이 완료되었습니다.");
  				
  			} else if(operation === 'list'){
  				//move to list

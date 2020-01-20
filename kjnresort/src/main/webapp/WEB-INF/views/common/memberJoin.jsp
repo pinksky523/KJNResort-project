@@ -81,6 +81,7 @@ var pwChk1 = false;
 var pwChk2 = false;
 var phoneChk = false;
 var idDBChk = false;
+var x = document.getElementById("inputBirth").required;
 
 //이름 확인
 function nameCheck(){

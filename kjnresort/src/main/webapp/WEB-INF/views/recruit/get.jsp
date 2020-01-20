@@ -44,12 +44,12 @@
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<button data-oper='modify' class="btn btn-warning pull-right">수정</button>
 	                	<button data-oper='remove' class="btn btn-danger pull-right">삭제</button>
-						<input type="hidden" name="id" value="admin">
-	                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					</sec:authorize>
 	                <button data-oper='list' class="btn btn-secondary pull-right">목록</button>
              	 <form action="/recruit/modify" method="get" id="operForm" >	
              		<input type="hidden" id="recruitNo" name="recruitNo" value='<c:out value="${recruit.recruitNo}"/>'>
+             		<input type="hidden" name="id" value="admin">
+	                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
              	</form>
 				
             </div>	<!-- /.panel-body -->
@@ -72,7 +72,11 @@ $(document).ready(function(){
 	});
 	
 	$("button[data-oper='remove']").on("click", function(e){
-		operForm.attr("action","/recruit/remove").submit();
+		if(confirm("정말 삭제하시겠습니까?")) {
+			alert("삭제가 완료되었습니다.")
+			operForm.attr("action","/recruit/remove").attr("method","post");
+			operForm.submit();
+		}
 	});
 	
 	$("button[data-oper='list']").on("click", function(e){
