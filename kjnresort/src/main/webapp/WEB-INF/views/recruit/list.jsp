@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
 <%@ include file="../includes/header.jsp" %>
 <div>
     <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
@@ -41,10 +42,11 @@
                     </c:forEach>
                     </tbody>
                 </table><!-- END 게시물 출력 테이블 -->
-                 <button onclick="tt()" id="regBtn" type="button" class="btn btn-primary pull-right">
-          			글쓰기	
-          		</button> 
-                
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+	                <button onclick="tt()" id="regBtn" type="button" class="btn btn-primary pull-right">
+	          			글쓰기	
+	          		</button> 
+                </sec:authorize>
                 
                 <!-- Modal -->
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
