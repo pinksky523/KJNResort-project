@@ -29,12 +29,12 @@
 	    pg : 'kakao', // version 1.1.0부터 지원.
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
-	    name : '주문명:kjnresort',
-	    amount : 14000,
+	    name : '주문명 : kjnresort',
+	    amount : ,
 	    buyer_email : 'iamport@siot.do',
 	    buyer_name : '남 구',
 	    buyer_tel : '010-1234-5678',
-	    buyer_addr : '서울특별시 강남구 삼성동',
+	    buyer_addr : '서울특별시 마포구 월드컵북로',
 	    buyer_postcode : '123-456',
 	    m_redirect_url : 'http://localhost8090/ticket/buyTicketResult'
 	}, function(rsp) {
