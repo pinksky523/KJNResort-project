@@ -49,14 +49,14 @@ function search(){
 			type:'post',
 			url:'/condoreserve/availableRoomType',
 			data:{checkIn:checkIn,checkOut:checkOut},
-			success:function(roomList,status,xhr){
-				if(callback){
+			success:function(roomList){
+			
 					console.log(roomList);
-				}
+				
 			},
 			error:function(xhr,status,error){
 				if(error){
-					error(error);
+					error(status+""+error);
 				}
 			}
 		});
