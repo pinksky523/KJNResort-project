@@ -45,7 +45,7 @@
 		select t.id, pw, name, regdate, auth
 		from t_member t, t_member_auth a
 		where t.id = a.id 
-		and t.id = #{id}
+		and t.id = #{id} and pw = #{pw}
 	</select>
 
 </mapper>
