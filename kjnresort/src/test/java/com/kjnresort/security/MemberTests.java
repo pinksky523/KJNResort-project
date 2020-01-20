@@ -25,8 +25,8 @@ public class MemberTests {
    @Setter(onMethod_ = @Autowired)
    private DataSource ds;
    
-//   @Test
-   public void testInsertMember() {
+   @Test
+   public void testA() {
       
       String query = "insert into "
             + "t_member(id, pw, name, phoneNumber, birth, address, status)"
@@ -71,7 +71,7 @@ public class MemberTests {
    }
    
    @Test
-   public void testInsertAuth() {
+   public void testB() {
       String query = "insert into t_member_auth (id, auth) values(?, ?)";
          
          try(Connection con = ds.getConnection(); 

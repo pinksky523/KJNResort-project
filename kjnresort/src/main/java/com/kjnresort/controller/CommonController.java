@@ -35,7 +35,7 @@ public class CommonController {
 		service.register(member);
 		service.registerAuth(auth);
 		log.info("회원정보 DB에 저장완료");
-		rttr.addFlashAttribute("result", "회원가입이 완료되었습니다. 로그인 후 이용해주세요");
+		rttr.addFlashAttribute("msg", "회원가입이 완료되었습니다. 로그인 후 이용해주세요");
 		return "redirect:/common/customLogin";
 	}
 	
@@ -59,7 +59,7 @@ public class CommonController {
 	@GetMapping("/accessError")
 	public void accessDenied(Authentication auth, Model model) {
 		log.info("conmmonController accessDenied() : " + auth);
-		model.addAttribute("result", "해당 서비스는 로그인 후 이용가능합니다.");
+		model.addAttribute("msg", "해당 서비스는 로그인 후 이용가능합니다.");
 		//return "redirect:/common/customLogin";
 	}
 
@@ -69,16 +69,24 @@ public class CommonController {
 		log.info("logout: " + logout);
 		
 		if(error != null) {
-			model.addAttribute("result", "로그인 에러. 계정을 확인해 주세요.");
+			model.addAttribute("msg", "로그인 에러. 계정을 확인해 주세요.");
+			log.info("에러1");
 		}
 		
 		if(logout != null) {
-			model.addAttribute("result", "로그아웃!!");
+			model.addAttribute("msg", "로그아웃!!");
+			log.info("에러2");
 		}
 	}
 	
 	@GetMapping("/customLogout")
 	public void logoutGet(){
+	}
+	
+	@GetMapping("customLoginError")
+	public String customLoginError(RedirectAttributes rttr) {
+		rttr.addFlashAttribute("msg", "아이디와 비밀번호를 다시 확인해주세요");
+		return "redirect:/common/customLogin";
 	}
 	
 	@GetMapping("/home")
