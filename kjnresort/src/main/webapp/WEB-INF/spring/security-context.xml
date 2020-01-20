@@ -15,9 +15,10 @@
 <security:http>
 <!-- <security:http auto-config="true" use-expressions="true"> -->
 
-	<security:intercept-url pattern="/common/**" access="permitAll"/>
+	<security:intercept-url pattern="/*" access="permitAll"/>
+	<!-- <security:intercept-url pattern="/common/**" access="permitAll"/>
 	<security:intercept-url pattern="/member/**" access="hasRole('ROLE_MEMBER')"/>
-	<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+	<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/> -->
 	
 	<!-- 로그인 처리 -->
 	<!-- 로그인 성공 핸들러 지정 -->
@@ -26,7 +27,7 @@
 	
 	<!-- 로그아웃 처리 -->
 	<!-- 로그아웃하면 자동 로그인 관련 쿠키 삭제 -->
-	<security:logout logout-url="/common/customLogout" logout-success-url="/common/commonMain" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/>
+	<security:logout logout-url="/common/customLogout" logout-success-url="/common/home" invalidate-session="true" delete-cookies="remember-me,JSESSION_ID"/>
 	<!-- 로그아웃 후 다른 페이지로 넘기고 싶다면, logout-success-url 속성 이용하면 됨 -->
 	
 	<!-- 접근 권한 메시지 핸들러 지정 -->
