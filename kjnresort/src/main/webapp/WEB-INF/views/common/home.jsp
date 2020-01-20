@@ -50,7 +50,7 @@
 				<li><a href="about-us.html">공지사항</a></li>
 				<li><a href="#">콘도</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">콘도 예약</a></li>
+						<li><a href="condoreserve/register">콘도 예약</a></li>
 						<li><a href="loans.html">콘도 예약내역</a></li>
 					</ul>
 				</li>
