@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../includes/header.jsp" %>    
-<br><br><br><br>
-	<h1>이용권 구매</h1>
+<br><br><br><br><br>
+	<h2 text-align="center">이용권 구매</h2>
 	<hr>
 	<form id="buyForm" method="get" action="buyTicketKakao">
    <table width="100%" style="padding:5px 0 5px 0; ">
@@ -18,7 +18,7 @@
       <tr>
          <th><span id="liftAmount">수량 선택
          
-        <select name="liftAmount" class="form-control" id="liftAmount"  style="width: 70%" onchange="getValue(this)">
+        <select name="liftAmount" class="form-control" id="Amount"  style="width: 70%" onchange="getValue(this)">
         	<option value="1">1 </option>
         	<option value="2">2 </option>
         	<option value="3">3 </option>
@@ -35,7 +35,7 @@
        <tr>
          <th> <span id="toolAmount">수량 선택
          
-        <select name="toolAmount" class="form-control" id="toolAmount"  style="width: 70%" onchange="getToolValue(this)">
+        <select name="toolAmount" class="form-control" id="Amount"  style="width: 70%" onchange="getToolValue(this)">
         	<option value="1">1</option>
         	<option value="2">2</option>
         	<option value="3">3</option>
@@ -45,7 +45,7 @@
        </tr>
        <tr>
        		<th>총금액</th>
-       		<td><% %></td>
+       		<td><span id="text1"></span></td>
 
        </tr>
        <tr>
@@ -68,16 +68,20 @@
 	var lift = obj.options[obj.selectedIndex].text * ${tPrice.price};
 	}  */
 
-function getToolValue(obj){
+/* function getToolValue(obj){
 	alert("장비가격 : " + obj.options[obj.selectedIndex].text * ${ttPrice.price});  
 	var tool = obj.options[obj.selectedIndex].text * ${ttPrice.price};
-	}
+	} */
 
 $(function(){	
 	
-	$("select[name=liftAmount]").change(function(obj){
-		alert("리프트가격 : " );
-	});
+ 	$("select[id=Amount]").change(function(obj){
+ 		var str = document.getElementById("text1");
+ 		var lift = $("select[name=liftAmount]").val() * ${tPrice.price};
+ 		var tool = $("select[name=toolAmount]").val() * ${ttPrice.price};
+ 		document.getElementById("text1").innerHTML = (lift + tool);
+ 		/* alert("총금액 : " + (lift + tool)); */
+	}) 
 	
 	// 라디오버튼 클릭시 이벤트 발생
 	$("input:radio[name=lift]").click(function(){
