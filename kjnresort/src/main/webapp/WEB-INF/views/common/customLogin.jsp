@@ -52,10 +52,10 @@
 </div>
 <script>
 $(function(){	
-	var result = '<c:out value="${result}"/>';	
+	var msg = '<c:out value="${msg}"/>';	
 	
 	//result 값이 있는지 확인하는 함수 호출
-	checkModal(result);
+	checkModal(msg);
 	history.replaceState({}, null, null);
 	
 	$(".btn-success").on("click", function(e){
@@ -67,13 +67,13 @@ $(function(){
 	//메세지가 존재하면 alert창 띄우기
 	function checkModal(){
 		//값이 없으면 리턴시킴
-		if(result === '' || history.state){
+		if(msg === '' || history.state){
 			return;
 		}
 		
 		//값이 있으면 메시지 띄우기
-		if(result !== ''){
-			alert(result);
+		if(msg !== ''){
+			alert(msg);
 		}
 		
 	}
