@@ -10,7 +10,6 @@ import org.springframework.security.core.userdetails.User;
 import com.kjnresort.domain.MemberVO;
 
 import lombok.Getter;
-import lombok.extern.log4j.Log4j;
 
 @Getter
 public class CustomUser extends User {
