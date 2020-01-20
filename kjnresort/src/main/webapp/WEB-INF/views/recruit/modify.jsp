@@ -20,24 +20,19 @@
   				<form role="form" action="/recruit/modify" method="post">
 	             	<div class="form-group">
 		                <label>제목: </label>
-		                <input class="form-control" name="title"
-		                value="${recruit.title }" ></div>
+		                <input class="form-control" name="title" value="${recruit.title }" required="required"></div>
 		            <div class="form-group">
 		                <label>글 번호: </label>
-		                <input class="form-control" name="recruitNo"
-		                value="${recruit.recruitNo }" readonly></div>
+		                <input class="form-control" name="recruitNo" value="${recruit.recruitNo }" readonly></div>
 		            <div class="form-group">
 		                <label>상태: </label>
-		                <input class="form-control" name="status"
-		                value="${recruit.status }" ></div>
+		                <input class="form-control" name="status" value="${recruit.status }" required></div>
 		            <div class="form-group">
 		                <label>접수마감: </label>
-		                <input type="date" class="form-control" name="deadLine"
-		                value="${recruit.deadLine}" ></div>
+		                <input type="date" class="form-control" name="deadLine" id="deadLine" value="${recruit.deadLine}"></div>
 		            <div class="form-group">
 	                    <label>내용: </label>
-	                    <textarea class="form-control" rows="8" name="content"
-	                     >${recruit.content }</textarea></div>
+	                    <textarea class="form-control" rows="8" name="content" required>${recruit.content }</textarea></div>
 	                    <input type="hidden" name="id" value="admin00">
 	                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                     <button type="submit" data-oper='modify' class="btn btn-warning pull-right">수정</button>
@@ -49,6 +44,8 @@
 </div> 				<!-- /.row -->
 
  <script>
+var x = document.getElementById("deadLine").required;	
+ 
  	$(document).ready(function(){
  		
  		var formObj = $("form");
