@@ -18,7 +18,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 	@Setter(onMethod_ = @Autowired)
 	private MemberMapper memberMapper;
 	
-	 @Override public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { 
+	 @Override 
+	 public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { 
 	 log.info("2222");
 	 log.info("Load User By UserName : " + username); 
 	 MemberVO mvo = memberMapper.read(username); 

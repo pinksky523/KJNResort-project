@@ -1,6 +1,8 @@
 package com.kjnresort.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kjnresort.domain.AuthVO;
 import com.kjnresort.domain.MemberVO;
 import com.kjnresort.service.MemberService;
 
@@ -16,8 +19,8 @@ import lombok.extern.log4j.Log4j;
 
 @Controller
 @Log4j
-@RequestMapping("/common/*")
 @AllArgsConstructor
+@RequestMapping("/common/*")
 public class CommonController {
 	private MemberService service;
 	
@@ -27,11 +30,12 @@ public class CommonController {
 	}
 	
 	@PostMapping("register")
-	public String register(MemberVO member, RedirectAttributes rttr) {
+	public String register(MemberVO member, AuthVO auth, RedirectAttributes rttr) {
 		log.info("회원가입 완료");
 		log.info("회원정보 :" + member);
 		log.info("===============================");
 		service.register(member);
+		service.registerAuth(auth);
 		log.info("회원정보 DB에 저장완료");
 		rttr.addFlashAttribute("result", "회원가입이 완료되었습니다. 로그인 후 이용해주세요");
 		return "redirect:/common/customLogin";
@@ -61,17 +65,30 @@ public class CommonController {
 		//return "redirect:/common/customLogin";
 	}
 	
+<<<<<<< HEAD
+	/*
+	 * @GetMapping("/customLogin") public void loginInput(String error, String
+	 * logout, Model model) { log.info("error : " + error); log.info("logout : " +
+	 * logout); log.info("1111");
+	 * 
+	 * if(error != null) { model.addAttribute("error",
+	 * "Login Error! Check Your Account!!"); }
+	 * 
+	 * 
+	 * if(logout != null) { model.addAttribute("logout", "Logout!!!"); } }
+	 */
+=======
 	@GetMapping("/customLogin")
 	public void loginInput(String error, String logout, Model model) {
 		log.info("error: " + error);
 		log.info("logout: " + logout);
 		
 		if(error != null) {
-			model.addAttribute("error", "로그인 에러. 계정을 확인해 주세요.");
+			model.addAttribute("result", "로그인 에러. 계정을 확인해 주세요.");
 		}
 		
 		if(logout != null) {
-			model.addAttribute("logout", "로그아웃!!");
+			model.addAttribute("result", "로그아웃!!");
 		}
 	}
 	
@@ -83,4 +100,5 @@ public class CommonController {
 	public void commonMain() {
 	}
 	
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 }

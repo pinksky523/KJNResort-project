@@ -9,7 +9,13 @@
 	<insert id="insert">
 		INSERT INTO t_member(id, pw, name, phoneNumber, birth, gender, address)
 		VALUES(#{id}, #{pw}, #{name}, #{phoneNumber}, #{birth}, #{gender}, #{address})
-	</insert>																																																																																																																																																																																																																																	
+	</insert>		
+	
+	<!-- 회원권한등록(가입) -->
+	<insert id="insertAuth">
+		INSERT INTO t_member_auth(id)
+		VALUES(#{id})
+	</insert>																																																																																																																																																																																																																															
 	
 	
 	<!-- 회원가입ID 중복체크 -->
@@ -26,19 +32,21 @@
 		<result property="birth" column="birth"/>
 		<result property="gender" column="gender"/>
 		<result property="address" column="address"/>
+		<result property="status" column="status"/>
+		<result property="regDate" column="regdate"/>
 		<collection property="authList" resultMap="authMap"/>
 	</resultMap>
 	
-	<!-- <resultMap type="com.kjnresort.domain.AuthVO" id="authMap">
-		<result property="userid" column="userid"/>
+	<resultMap type="com.kjnresort.domain.AuthVO" id="authMap">
+		<result property="id" column="id"/>
 		<result property="auth" column="auth"/>
-	</resultMap> -->
+	</resultMap>
 	
-	<!-- <select id="read" resultMap="memberMap">	
-		select t.userid, userpw, username, regdate, updatedate, enabled, auth
-		from tbl_member t, tbl_member_auth a
-		where t.userid = a.userid 
-		and t.userid = #{userid}
-	</select> -->
+	<select id="read" resultMap="memberMap">	
+		select t.id, pw, name, regdate, auth
+		from t_member t, t_member_auth a
+		where t.id = a.id 
+		and t.id = #{id}
+	</select>
 
 </mapper>
