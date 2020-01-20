@@ -29,10 +29,12 @@
 	                <input class="form-control" name="status"></div>
 	            <div class="form-group">
 	                <label>접수마감: </label>
-	                <input class="form-control" name="deadLine"></div>
+	                <input type="date" class="form-control" name="deadLine"></div>
 	            <div class="form-group">
                     <label>내용: </label>
                     <textarea class="form-control" rows="8" name="content"></textarea></div>
+                    <input type="hidden" name="id" value="admin00">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <button type="submit" class="btn btn-primary pull-right">등록</button>
                 <button type="submit" data-oper='list' class="btn btn-secondary pull-right">취소</button>
 			</form>
