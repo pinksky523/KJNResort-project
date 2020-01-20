@@ -5,6 +5,13 @@
 <mapper namespace="com.kjnresort.mapper.MemberMapper">
 	
 	
+	
+	<!-- 아이디찾기 -->
+	<select id="findId" resultType="String">
+		SELECT id FROM t_member WHERE name = #{name} and phoneNumber = #{phoneNumber}
+	</select>		
+	
+	
 	<!-- 회원등록(가입) -->
 	<insert id="insert">
 		INSERT INTO t_member(id, pw, name, phoneNumber, birth, gender, address)
@@ -33,7 +40,6 @@
 		<result property="gender" column="gender"/>
 		<result property="address" column="address"/>
 		<result property="status" column="status"/>
-		<result property="regDate" column="regdate"/>
 		<collection property="authList" resultMap="authMap"/>
 	</resultMap>
 	
@@ -46,7 +52,7 @@
 		select t.id, pw, name, regdate, auth
 		from t_member t, t_member_auth a
 		where t.id = a.id 
-		and t.id = #{id}
+		and t.id = #{id} and pw = #{pw}
 	</select>
 
 </mapper>

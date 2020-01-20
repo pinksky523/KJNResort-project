@@ -24,7 +24,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 	 log.info("Load User By UserName : " + username); 
 	 MemberVO mvo = memberMapper.read(username); 
 	 log.info("queried by member mapper : " + mvo);
-	 
 	 return mvo == null ? null : new CustomUser(mvo); }
 	 
 

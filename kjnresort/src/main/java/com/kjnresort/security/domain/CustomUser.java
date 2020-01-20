@@ -18,11 +18,13 @@ public class CustomUser extends User {
 	public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
 		super(username, password, authorities);
 	}
-
+	
 	public CustomUser(MemberVO mvo) {
+		
 		super(mvo.getId(), mvo.getPw(), mvo.getAuthList().stream()
 				.map(auth -> new SimpleGrantedAuthority(auth.getAuth())).collect(Collectors.toList()));
 		this.mvo = mvo;
+		
 	}
 	
 	

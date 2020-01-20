@@ -23,4 +23,6 @@ public interface MemberService {
 	public void registerAuth(AuthVO auth);
 	
 	public MemberVO idCheck(String id);
+	
+	public String findId(String name, String phoneNumber);
 }

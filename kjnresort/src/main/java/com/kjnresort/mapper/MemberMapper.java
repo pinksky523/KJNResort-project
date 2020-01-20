@@ -2,6 +2,8 @@ package com.kjnresort.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.kjnresort.domain.AuthVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
@@ -14,9 +16,10 @@ public interface MemberMapper {
 	public List<MemberVO> getListWithPaging(Criteria cri);		
 	public int update(MemberVO member);	
 	public int delete(String id);	
-	public void insert(MemberVO member);
-	public void insertAuth(AuthVO auth);
-	public MemberVO idCheck(String id);
+	public void insert(MemberVO member);	//회원가입
+	public void insertAuth(AuthVO auth);	//회원가입 자동권한생성
+	public MemberVO idCheck(String id);		//회원가입 아이디 중복체크
+	public String findId(@Param("name") String name, @Param("phoneNumber") String phoneNumber);	//아이디찾기
 
 
 }

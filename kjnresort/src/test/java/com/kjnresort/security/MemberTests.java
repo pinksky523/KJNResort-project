@@ -1,12 +1,9 @@
 package com.kjnresort.security;
 
 import java.sql.*;
-import java.util.*;
 
 import javax.sql.DataSource;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +11,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import lombok.AllArgsConstructor;
 import lombok.Setter;
-import lombok.extern.log4j.Log4j;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@Log4j
 @ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml",
                               "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 public class MemberTests {
@@ -31,48 +25,76 @@ public class MemberTests {
    @Setter(onMethod_ = @Autowired)
    private DataSource ds;
    
-//   @Test
-   public void testInsertMember() {
+   @Test
+   public void testA() {
       
       String query = "insert into "
-            + "member(id, pw, name, phoneNumber, birth, adress"
-            + "memberPhoneSecond, memberPhoneThird, memberBirth, memberEmail, memberEmailSecond, memberRegDate) "
-            + "values(?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?, sysdate)";
+            + "t_member(id, pw, name, phoneNumber, birth, address, status)"
+            + "values(?, ?, ?, ?, ?, ?, ?)";
       
       try(Connection con = ds.getConnection(); 
             PreparedStatement pstmt = con.prepareStatement(query)) {
-         for(int i=0; i<100; i++) {
-            pstmt.setString(2, pwencoder.encode("1111"));
-            if(i<100) {
-               pstmt.setString(1, "member"+i);
-               pstmt.setString(3, "일반사용자"+i);
-               pstmt.setString(4, "test주소");
-               pstmt.setString(5, "010");
-               pstmt.setString(6, "4189");
-               pstmt.setString(7, "5485");
-               pstmt.setString(8, "ywc412");
-               pstmt.setString(9,"naver.com");
-            }
-            pstmt.executeUpdate();
-         }
+        
+    	   //관리자계정 기본생성
+    	   pstmt.setString(1, "admin");
+           pstmt.setString(2, pwencoder.encode("1111"));
+           pstmt.setString(3, "관리자");
+           pstmt.setString(4, "000-0000-0000");
+           pstmt.setString(5, "11/11/11");
+           pstmt.setString(6, "서울특별시 마포구 월드컵북로 21 풍성빌딩 4층");
+           pstmt.setInt(7, 1);
+           pstmt.executeUpdate();
+           
+           //일반회원 기본생성
+           pstmt.setString(1, "user00");
+           pstmt.setString(2, pwencoder.encode("1111"));
+           pstmt.setString(3, "일반회원");
+           pstmt.setString(4, "111-1111-1111");
+           pstmt.setString(5, "11/11/11");
+           pstmt.setString(6, "서울특별시 마포구 월드컵북로 21 풍성빌딩 4층");
+           pstmt.setInt(7, 1);
+           pstmt.executeUpdate();
+           	
+           //정지회원 기본생성
+           pstmt.setString(1, "user01");
+           pstmt.setString(2, pwencoder.encode("1111"));
+           pstmt.setString(3, "정지회원");
+           pstmt.setString(4, "222-2222-222");
+           pstmt.setString(5, "11/11/11");
+           pstmt.setString(6, "서울특별시 마포구 월드컵북로 21 풍성빌딩 4층");
+           pstmt.setInt(7, 0);
+           pstmt.executeUpdate();
+           
       } catch(Exception e) {
          e.printStackTrace();
       }
    }
    
-//   @Test
-   public void testInsertAuth() {
-      String query = "insert into auth (memberid, memberauth) values(?, ?)";
+   @Test
+   public void testB() {
+      String query = "insert into t_member_auth (id, auth) values(?, ?)";
          
          try(Connection con = ds.getConnection(); 
                PreparedStatement pstmt = con.prepareStatement(query)) {
-            for(int i=0; i<100; i++) {
-               if(i<100) {
-                  pstmt.setString(1, "member"+i);
-                  pstmt.setString(2, "ROLE_MEMBER");
-               }
-               pstmt.executeUpdate();
-            }
+           
+              //관리자계정에 관리자 권한부여
+              pstmt.setString(1, "admin");
+              pstmt.setString(2, "ROLE_ADMIN");
+              pstmt.executeUpdate();
+              pstmt.setString(1, "admin");
+              pstmt.setString(2, "ROLE_MEMBER");
+              pstmt.executeUpdate();
+            
+              //일반회원계정에 권한부여
+              pstmt.setString(1, "user00");
+              pstmt.setString(2, "ROLE_MEMBER");
+              pstmt.executeUpdate();
+              
+              //정지회원계정에 권한부여
+              pstmt.setString(1, "user01");
+              pstmt.setString(2, "ROLE_MEMBER");
+              pstmt.executeUpdate();
+              
          } catch(Exception e) {
             e.printStackTrace();
          }
