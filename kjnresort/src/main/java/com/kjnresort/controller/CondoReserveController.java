@@ -1,8 +1,13 @@
 package com.kjnresort.controller;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.kjnresort.domain.CondoReserveVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.service.CondoReserveService;
-
+import com.kjnresort.service.CondoReserveServiceImpl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -24,8 +29,17 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 @Controller
 public class CondoReserveController { //헐 이제 될거같아
-	CondoReserveService service;
+	private CondoReserveService service;
 	
+	@PostMapping(value="/availableRoomType")
+	public ResponseEntity<Object> getAvailableRoomTypeList(Date checkIn,Date checkOut) {
+		log.info("getAvailableRoomTypeList Controller 진입");
+		Calendar in=Calendar.getInstance();
+		Calendar out=Calendar.getInstance();
+		in.setTime(checkIn);
+		out.setTime(checkOut);
+		return new ResponseEntity<>(service.getAvailableRoomType(in, out),HttpStatus.OK);
+	}
 	@GetMapping("/list")
 	public void list(Model model,Criteria cri,Principal principal) {
 		
