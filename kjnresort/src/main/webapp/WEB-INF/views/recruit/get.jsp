@@ -18,7 +18,6 @@
         <div class="panel panel-default">
             <!-- /.panel-heading -->
             <div class="panel-body">
-            
 		            <div class="form-group">
 		                <label>제목: </label>
 		                <input class="form-control" name="title"
@@ -47,8 +46,10 @@
 	                	<button data-oper='remove' class="btn btn-danger pull-right">삭제</button>
 					</sec:authorize>
 	                <button data-oper='list' class="btn btn-secondary pull-right">목록</button>
-              	<form id="operForm" action="/recruit/modify" method="get">
+             	 <form action="/recruit/modify" method="get" id="operForm" >	
              		<input type="hidden" id="recruitNo" name="recruitNo" value='<c:out value="${recruit.recruitNo}"/>'>
+             		<input type="hidden" name="id" value="admin">
+	                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
              	</form>
 				
             </div>	<!-- /.panel-body -->
@@ -68,6 +69,14 @@ $(document).ready(function(){
 	
 	$("button[data-oper='modify']").on("click", function(e){
 		operForm.attr("action","/recruit/modify").submit();
+	});
+	
+	$("button[data-oper='remove']").on("click", function(e){
+		if(confirm("정말 삭제하시겠습니까?")) {
+			alert("삭제가 완료되었습니다.")
+			operForm.attr("action","/recruit/remove").attr("method","post");
+			operForm.submit();
+		}
 	});
 	
 	$("button[data-oper='list']").on("click", function(e){
