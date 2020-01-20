@@ -2,44 +2,53 @@ package com.kjnresort.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.QnaVO;
 import com.kjnresort.mapper.QnaMapper;
 
+
+import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j;
+
+@Service
+@Log4j
+@AllArgsConstructor
 public class QnaServiceImpl implements QnaService {
-	QnaMapper mapper;
+	QnaMapper qnaMapper;
 	public List<QnaVO> getListWithPaging(Criteria cri){
-		return null;
+		return qnaMapper.getListWithPaging(cri);
 	}
 	
 	public List<QnaVO> getListWithId(Criteria cri,String id){
-		return null;
+		return qnaMapper.getListWithId(cri, id);
 	}
 	
 	public boolean modify(QnaVO qvo) {
-		return false;
+		return qnaMapper.update(qvo)==1;
 	}
 	public boolean remove(Long qno) {
-		return false;
+		return qnaMapper.delete(qno)==1;
 	}
 	public QnaVO get(Long qno) {
-		return null;
+		return qnaMapper.read(qno);
 	}
 	public void register(QnaVO qvo) {
-		
+		qnaMapper.insert(qvo);
 	}
 	public boolean modifyAnswer(QnaVO qvo) {
-		return false;
+		return qnaMapper.updateAnswer(qvo)==1;
 	}
 	public boolean deleteAnswer(Long qno) {
-		return false;
+		return qnaMapper.deleteAnswer(qno)==1;
 	}
 	public int getTotalCount(Criteria cri) {
-		return 0;
+		return qnaMapper.getTotalCount(cri);
 	}
 	
-	public int getTotalCountWithId(Criteria qnacriCri,String id) {
-		return 0;
+	public int getTotalCountWithId(Criteria cri,String id) {
+		return qnaMapper.getTotalCountWithId(cri, id);
 	}
 
 	

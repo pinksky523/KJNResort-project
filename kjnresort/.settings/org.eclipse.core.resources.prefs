@@ -1,9 +1,13 @@
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
->>>>>>>=branch 'master' of https\://github.com/jsnow0819/Project.git
+>>>>>>>=branch 'master' of https\://github.com/jsnow0819/Project
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/main/java/com/kjnresort/aop/LogAdvice.java=UTF-8
 encoding//src/main/java/com/kjnresort/controller/ApplianceController.java=UTF-8
+=======
+encoding//src/main/java/com/kjnresort/controller/AdminController.java=UTF-8
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 encoding//src/main/java/com/kjnresort/controller/CommonController.java=UTF-8
 encoding//src/main/java/com/kjnresort/controller/CondoController.java=UTF-8
 encoding//src/main/java/com/kjnresort/controller/CondoReserveController.java=UTF-8
@@ -18,12 +22,23 @@ encoding//src/main/java/com/kjnresort/domain/Criteria.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/EventVO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/PageDTO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/QnaVO.java=UTF-8
+<<<<<<< HEAD
 encoding//src/main/java/com/kjnresort/domain/TicketBuyVO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/TicketVO.java=UTF-8
 encoding//src/main/java/com/kjnresort/kjnresort.erm=UTF-8
 encoding//src/main/java/com/kjnresort/security/CustomAccessDeniedHandler.java=UTF-8
 encoding//src/main/java/com/kjnresort/security/CustomLoginSuccessHandler.java=UTF-8
+=======
+encoding//src/main/java/com/kjnresort/service/CondoReserveServiceImpl.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/common/commonMain.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/common/customLogin.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/condoreserve/register.jsp=UTF-8
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 encoding//src/main/webapp/WEB-INF/views/includes/footer.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/ticket/buyTicketKakao.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/userMain.jsp=UTF-8
+<<<<<<< HEAD
 encoding//src/test/java/com/kjnresort/mapper/MemberMapperTests.java=UTF-8
+=======
+encoding//src/test/java/com/kjnresort/mapper/CondoReserveMapperTests.java=UTF-8
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git

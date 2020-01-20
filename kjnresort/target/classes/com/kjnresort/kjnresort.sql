@@ -6,6 +6,7 @@ DROP TABLE t_condo_reserve CASCADE CONSTRAINTS;
 DROP TABLE t_condo CASCADE CONSTRAINTS;
 DROP TABLE t_event_attach CASCADE CONSTRAINTS;
 DROP TABLE t_event CASCADE CONSTRAINTS;
+DROP TABLE t_member_auth CASCADE CONSTRAINTS;
 DROP TABLE t_notice CASCADE CONSTRAINTS;
 DROP TABLE t_qna CASCADE CONSTRAINTS;
 DROP TABLE t_recruit CASCADE CONSTRAINTS;
@@ -23,7 +24,7 @@ DROP TABLE t_ticket CASCADE CONSTRAINTS;
 
 CREATE TABLE t_appliance
 (
-	id varchar2(15) NOT NULL,
+	id varchar2(20) NOT NULL,
 	recruitNo number NOT NULL,
 	career varchar2(800) NOT NULL,
 	introduction varchar2(2000) NOT NULL,
@@ -47,7 +48,7 @@ CREATE TABLE t_condo
 CREATE TABLE t_condo_reserve
 (
 	reserveNo number NOT NULL,
-	id varchar2(15) NOT NULL,
+	id varchar2(20) NOT NULL,
 	roomType varchar2(1) NOT NULL,
 	reserveDate date NOT NULL,
 	status number(1) DEFAULT 0,
@@ -64,7 +65,7 @@ CREATE TABLE t_condo_reserve
 CREATE TABLE t_event
 (
 	eventNo number NOT NULL,
-	id varchar2(15) NOT NULL,
+	id varchar2(20) NOT NULL,
 	title varchar2(100) NOT NULL,
 	eventStart date NOT NULL,
 	eventEnd date NOT NULL,
@@ -84,23 +85,30 @@ CREATE TABLE t_event_attach
 
 CREATE TABLE t_member
 (
-	id varchar2(15) NOT NULL,
-	pw varchar2(15) NOT NULL,
-	name varchar2(10) NOT NULL,
-	phoneNumber varchar2(13) NOT NULL UNIQUE,
+	id varchar2(20) NOT NULL,
+	pw varchar2(100) NOT NULL,
+	name varchar2(20) NOT NULL,
+	phoneNumber varchar2(15) NOT NULL,
 	birth date NOT NULL,
 	gender char(1) DEFAULT 'M' NOT NULL,
 	address varchar2(200) NOT NULL,
-	status number(1) DEFAULT 0 NOT NULL,
+	status number(1) DEFAULT 1 NOT NULL,
 	regDate date DEFAULT SYSDATE,
 	PRIMARY KEY (id)
+);
+
+
+CREATE TABLE t_member_auth
+(
+	id varchar2(20) NOT NULL,
+	auth varchar2(50) DEFAULT 'ROLE_MEMBER' NOT NULL
 );
 
 
 CREATE TABLE t_notice
 (
 	noticeNo number NOT NULL,
-	id varchar2(15) NOT NULL,
+	id varchar2(20) NOT NULL,
 	title varchar2(100) NOT NULL,
 	content varchar2(4000) NOT NULL,
 	regDate date DEFAULT sysdate,
@@ -113,7 +121,7 @@ CREATE TABLE t_notice
 CREATE TABLE t_qna
 (
 	qnaNo number NOT NULL,
-	id varchar2(15) NOT NULL,
+	id varchar2(20) NOT NULL,
 	title varchar2(100) NOT NULL,
 	content varchar2(4000) NOT NULL,
 	regdate date DEFAULT sysdate,
@@ -126,7 +134,7 @@ CREATE TABLE t_qna
 CREATE TABLE t_recruit
 (
 	recruitno number NOT NULL,
-	id varchar2(15) NOT NULL,
+	id varchar2(20) NOT NULL,
 	title varchar2(100) NOT NULL,
 	content varchar2(4000) NOT NULL,
 	regDate date DEFAULT sysdate,
@@ -139,7 +147,7 @@ CREATE TABLE t_recruit
 CREATE TABLE t_review
 (
 	reviewNo number NOT NULL,
-	id varchar2(15) NOT NULL,
+	id varchar2(20) NOT NULL,
 	title varchar2(100) NOT NULL,
 	content varchar2(4000) NOT NULL,
 	regDate date DEFAULT sysdate,
@@ -164,7 +172,7 @@ CREATE TABLE t_review_attach
 CREATE TABLE t_review_reply
 (
 	replyNo number NOT NULL,
-	id varchar2(15) NOT NULL,
+	id varchar2(20) NOT NULL,
 	reviewNo number NOT NULL,
 	reply varchar2(400) NOT NULL,
 	replyDate date DEFAULT sysdate,
@@ -183,7 +191,7 @@ CREATE TABLE t_ticket
 CREATE TABLE t_ticket_buy
 (
 	ticketNo number NOT NULL,
-	id varchar2(15) NOT NULL,
+	id varchar2(20) NOT NULL,
 	type varchar2(40) NOT NULL,
 	buyDate date DEFAULT sysdate,
 	liftAmount number NOT NULL,
@@ -222,6 +230,12 @@ ALTER TABLE t_condo_reserve
 
 
 ALTER TABLE t_event
+	ADD FOREIGN KEY (id)
+	REFERENCES t_member (id)
+;
+
+
+ALTER TABLE t_member_auth
 	ADD FOREIGN KEY (id)
 	REFERENCES t_member (id)
 ;

@@ -1,9 +1,13 @@
 package com.kjnresort.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,21 +29,19 @@ public class MemberController {
 	private MemberService service;
 	
 	
-	@GetMapping("register")
-	public void register() {
-		log.info("회원가입 창 진입");
-	}
 	
-	@PostMapping("register")
-	public String register(MemberVO member, RedirectAttributes rttr) {
-		log.info("회원가입 완료");
-		log.info("register:" + member);
-		log.info("===============================");
-		service.register(member);
-		rttr.addFlashAttribute("result", member.getId());
-		return "redirect:/customLogin";
-	}
 		
+	   
+	/*
+	 * @GetMapping(value="/{id}", produces = {MediaType.APPLICATION_XML_VALUE,
+	 * MediaType.APPLICATION_JSON_UTF8_VALUE}) public ResponseEntity<MemberVO>
+	 * get(@PathVariable("id") String id){
+	 * 
+	 * return new ResponseEntity<>(service.idCheck(id), HttpStatus.OK); }
+	 */
+	
+	
+	
 	
 	@GetMapping("list")
 	public void memberList(Criteria cri, Model model) {
@@ -62,26 +64,16 @@ public class MemberController {
 		model.addAttribute("member", service.get(id));
 	}
 	
-	@GetMapping({"findId"})
-	public void get(String id, String phoneNumber, Model model) {
-		model.addAttribute("findId", service.get(id));
-	}
-	
-	@GetMapping({"findPw"})
-	public String get(String id, String name, String phoneNumber, Model model) {
-		model.addAttribute("findPw", service.get(id));
-		
-		return "redirect:/member/pwModify";
-	}
 	
 	
-	@PostMapping("mypage")
+	
+	@GetMapping("mypage")
 	public String modify(MemberVO member, RedirectAttributes rttr) {
 		if(service.modify(member)) {
 			rttr.addFlashAttribute("result", "수정");
 		}
 		
-		return "redirect:/";
+		return "redirect:/member/mypage";
 	}
 
 	

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kjnresort.mapper.CondoMapper">
+
+<select id="getPriceByRoomType" resultType="int">
+select price from t_condo where roomtype=#{roomType} <!-- 꼭 대문자로 넣어줘야함 -->
+</select>
+
+</mapper>
