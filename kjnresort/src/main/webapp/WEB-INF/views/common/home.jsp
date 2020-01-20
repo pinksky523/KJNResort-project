@@ -56,7 +56,7 @@
 				</li>
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
-						<li><a href="ticket/buyTicket">이용권 구매</a></li>
+						<li><a href="/ticket/buyTicket">이용권 구매</a></li>
 						<li><a href="loans.html">이용권 구매내역</a></li>
 					</ul>
 				</li>
@@ -70,7 +70,7 @@
 				</li>
 				<li><a href="#">인재채용</a>
 					<ul class="sub-menu">
-						<li><a href="recruit/list">모집공고</a></li>
+						<li><a href="/recruit/list">모집공고</a></li>
 						<li><a href="loans.html">지원내역조회</a></li>
 					</ul>
 				</li>

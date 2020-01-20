@@ -16,17 +16,18 @@
 	<hr>
 	<form id="joinForm" name="frm" method="post" action="/common/register">
    <table width="100%" style="padding:5px 0 5px 0; ">
-      <tr>
-         <th> 이름</th>
-         <td><input type="text" class="form-control" name="name" id="inputName" style="width: 35%" onkeyup="nameCheck()" required>
-      	 <span id="nameChk"></span></td>
-      </tr>
+      
        <tr>
          <th>아이디</th>
          <td class="chkMessage">
         <input type="text" class="form-control" name="id" id="inputId" style="width: 35%" onkeyup="idCheck()" required>
         <span id="idChk"></span></td>
        </tr>
+       <tr>
+         <th> 이름</th>
+         <td><input type="text" class="form-control" name="name" id="inputName" style="width: 35%" onkeyup="nameCheck()" required>
+      	 <span id="nameChk"></span></td>
+      </tr>
        <tr>
          <th>비밀번호</th>
          <td><input type="password" class="form-control" name="pw1" id="inputPassword" style="width: 35%" onkeyup="passwordCheck1()" required>

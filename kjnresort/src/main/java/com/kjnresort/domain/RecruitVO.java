@@ -12,5 +12,5 @@ public class RecruitVO {
 	private String	content;			// 내용
 	private Date	regDate;			// 작성일시
 	private String	status;				// 상태(모집중, 마감)
-	private Date	deadLine;			// 접수기간
+	private String	deadLine;			// 접수기간
 }
