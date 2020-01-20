@@ -33,7 +33,6 @@
 	            <div class="form-group">
                     <label>내용: </label>
                     <textarea class="form-control" rows="8" name="content"></textarea></div>
-
                     <input type="hidden" name="id" value="admin00">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 <button type="submit" class="btn btn-primary pull-right">등록</button>
