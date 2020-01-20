@@ -65,7 +65,7 @@ public class CommonController {
 		//return "redirect:/common/customLogin";
 	}
 	
-<<<<<<< HEAD
+
 	/*
 	 * @GetMapping("/customLogin") public void loginInput(String error, String
 	 * logout, Model model) { log.info("error : " + error); log.info("logout : " +
@@ -77,7 +77,7 @@ public class CommonController {
 	 * 
 	 * if(logout != null) { model.addAttribute("logout", "Logout!!!"); } }
 	 */
-=======
+
 	@GetMapping("/customLogin")
 	public void loginInput(String error, String logout, Model model) {
 		log.info("error: " + error);
@@ -100,5 +100,5 @@ public class CommonController {
 	public void commonMain() {
 	}
 	
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+
 }
