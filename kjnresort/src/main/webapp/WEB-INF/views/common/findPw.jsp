@@ -22,7 +22,7 @@
 <div class="container">
 <div class="row">
     <div class="col-lg-5 col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-    	<form role="form" method="post" action="/common/findId">
+    	<form role="form" method="post" action="/common/findPw">
 			<fieldset>
 				<h3>비밀번호 찾기</h3>
 				<hr style="width: 100%; border: solid 2px lightgray;">
@@ -33,7 +33,7 @@
                     <input type="text" name="name" id="inputName" class="form-control input-lg" placeholder="이름" required>
 				</div>
 				<div class="form-group">
-                    <input type="text" name="password" id="inputPhoneNumber" class="form-control input-lg" placeholder="핸드폰번호" required>
+                    <input type="text" name="phoneNumber" id="inputPhoneNumber" class="form-control input-lg" placeholder="핸드폰번호 (하이픈(-)포함 13자 이내)" required>
 				</div>
 				<br><hr style="width: 100%">
 				
@@ -43,7 +43,7 @@
 					</div>
 					
 					<div class="col-xs-6 col-sm-6 col-md-6">
-						<input type="button" onclick="" class="btn btn-lg btn-primary btn-block" value="찾기">
+						<input type="submit" class="btn btn-lg btn-primary btn-block" value="찾기">
 					</div>
 				</div>
 			</fieldset>

@@ -30,7 +30,7 @@
                     <input type="text" name="name" id="inputName" class="form-control input-lg" placeholder="이름" required autofocus>
 				</div>
 				<div class="form-group">
-                    <input type="text" name="phoneNumber" id="inputPhoneNumber" class="form-control input-lg" placeholder="핸드폰번호" required>
+                    <input type="text" name="phoneNumber" id="inputPhoneNumber" class="form-control input-lg" placeholder="핸드폰번호 (하이픈(-)포함 13자 이내)" required>
 				</div>
 				<br><hr style="width: 100%">
 				

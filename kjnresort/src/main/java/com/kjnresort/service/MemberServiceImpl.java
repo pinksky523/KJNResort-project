@@ -39,12 +39,12 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.read(id);
 	}
 
-	
 	@Override
 	public boolean modify(MemberVO member) {
 
 		return mapper.update(member) == 1;
 	}
+	
 
 	@Override
 	public boolean remove(String id) {
@@ -63,6 +63,10 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.getListWithPaging(cri);
 	}	
 	
+	//////////////////////////////////////////////////
+	
+	
+	//회원가입
 	@Transactional
 	@Override
 	public void register(MemberVO member) {
@@ -72,6 +76,7 @@ public class MemberServiceImpl implements MemberService {
 		log.info("회원정보 DB저장 완료");
 	}
 
+	//회원권한등록
 	@Transactional
 	@Override
 	public void registerAuth(AuthVO auth) {
@@ -80,6 +85,7 @@ public class MemberServiceImpl implements MemberService {
 		log.info("회원권한 DB저장 완료");
 	}
 	
+	//회원가입 아이디 중복확인
 	@Transactional
 	@Override
 	public MemberVO idCheck(String id) {
@@ -87,12 +93,30 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.idCheck(id);
 	}
 	
+	//아이디찾기
 	@Transactional
 	@Override
 	public String findId(String name, String phoneNumber) {
 		log.info("아이디찾기 서비스임플 진입");
-		log.info("전달된 이름 값 : " + name);
-		log.info("전달된 핸드폰번호 값 : " + phoneNumber);
 		return mapper.findId(name, phoneNumber);
 	}
+	
+	//비밀번호찾기
+	@Transactional
+	@Override
+	public String findPw(String id, String name, String phoneNumber) {
+		log.info("비밀번호찾기 서비스임플 진입");
+		return mapper.findPw(id, name, phoneNumber);
+	}
+	
+	
+	//비밀번호변경 
+	@Transactional
+	@Override
+	public boolean pwModify(MemberVO member) {
+		member.setPw(bcryptPasswordEncoder.encode(member.getPw()));
+		return mapper.pwUpdate(member) == 1;
+	}
+	
+	
 }

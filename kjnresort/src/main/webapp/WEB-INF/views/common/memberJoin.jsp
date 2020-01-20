@@ -196,8 +196,9 @@ function confirm() {
 	var birthChk = document.getElementById("inputBirth").value;
 	var addressChk = document.getElementById("inputAddress").value;
 	
-	if( nameChk==true && idChk==true && idDBChk && pwChk1==true && pwChk2==true && phoneChk==true && birthChk!="" && addressChk!="")
+	if( nameChk==true && idChk==true && idDBChk && pwChk1==true && pwChk2==true && phoneChk==true && birthChk!="" && addressChk!="") {
 		document.frm.submit();
+	}
 	else if((idChk == false) || (idDBChk == false)) {
 		alert('아이디를 확인해주세요');
 		document.frm.id.focus();
