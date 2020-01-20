@@ -3,7 +3,9 @@ package com.kjnresort.service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -22,135 +24,30 @@ import lombok.extern.log4j.Log4j;
 public class CondoReserveServiceImpl implements CondoReserveService {
 	CondoReserveMapper condoReservemapper;
 	
-	
 
 	@Override
-	public List<String> getAvailableRoomType(String roomType, Calendar checkIn, Calendar checkOut) {
-		log.info("getAvailableRoomType in serviceImple....");
-		int checkInRe=-1;
-		int checkOutRe=-1;
-		int lastRoomNo=-1;
-		int reserveSizeByRoomType=-1;
+	public List<String> getAvailableRoomType(Calendar checkIn, Calendar checkOut) {
 		List<String> availableRoomType=new ArrayList<String>();
 		
-		
-		/*Calendar checkIn=Calendar.getInstance();
-		checkIn.set(2020, 0, 6, 0, 0, 0);
-		Calendar checkOut=Calendar.getInstance();
-		checkOut.set(2020, 0, 8, 0, 0, 0);
-		*/
-		reserveSizeByRoomType=condoReservemapper.getReserveSizeByRoomType("P");
-		if(reserveSizeByRoomType==0) { //예약이 하나도 없을 때 바로가능
-			availableRoomType.add("P"); //바로 가능
-		}else {//예약이 하나 이상
-			checkInRe=condoReservemapper.confirmCheckInByRoomType(checkIn.getTime(),"P");
-			lastRoomNo=condoReservemapper.getMaxRoomNoByRoomType("P");
-			if(checkInRe==0) {//re가 0이여야 가능 1이상 불가능
-				checkOutRe=condoReservemapper.confirmCheckOutByRoomType(checkOut.getTime(),"P");
-				
-				if(checkOutRe==0) {
-					availableRoomType.add("P");
-				}else { //체크아웃 범위가 안맞을 때 
-					if(lastRoomNo<109) {
-						availableRoomType.add("P");
-					}
-				}
-			}else {//체크인 범위가 안맞을 때 
-				if(lastRoomNo<109) {
-					availableRoomType.add("P");
+		String[] roomTypeArr= {"P","D","N","R"};
+		String type;
+		int count=-1;
+		int roomNo=0;
+		for(int i=0;i<4;i++) {
+			type=roomTypeArr[i];
+			roomNo=(i+1)*100;
+			for(int j=1;j<10;j++) {
+				count=condoReservemapper.getOverlapDateCount(type, roomNo+j, checkIn.getTime(), checkOut.getTime());
+				if(count==0) {
+					availableRoomType.add(type);
+					break;
 				}
 			}
-		}//END P
-		
-		checkInRe=-1;
-		checkOutRe=-1;
-		lastRoomNo=-1;
-		reserveSizeByRoomType=-1;
-		
-		reserveSizeByRoomType=condoReservemapper.getReserveSizeByRoomType("D");
-		if(reserveSizeByRoomType==0) { //예약이 하나도 없을 때 바로가능
-			availableRoomType.add("D"); //바로 가능
-		}else {//예약이 하나 이상
-			checkInRe=condoReservemapper.confirmCheckInByRoomType(checkIn.getTime(),"D");
-			if(checkInRe==0) {//re가 0이여야 가능 1이상 불가능
-				checkOutRe=condoReservemapper.confirmCheckOutByRoomType(checkOut.getTime(),"D");
-				lastRoomNo=condoReservemapper.getMaxRoomNoByRoomType("D");
-				if(checkOutRe==0) {
-					availableRoomType.add("D");
-				}else {
-					if(lastRoomNo<209) {
-						availableRoomType.add("D");
-					}
-				}
-			}else {//체크인 범위가 안맞을 때 
-				if(lastRoomNo<209) {
-					availableRoomType.add("D");
-				}
-			}
-		}//END D
-		
-		checkInRe=-1;
-		checkOutRe=-1;
-		lastRoomNo=-1;
-		reserveSizeByRoomType=-1;
-		
-		reserveSizeByRoomType=condoReservemapper.getReserveSizeByRoomType("N");
-		if(reserveSizeByRoomType==0) { //예약이 하나도 없을 때 바로가능
-			availableRoomType.add("N"); //바로 가능
-		}else {//예약이 하나 이상
-			checkInRe=condoReservemapper.confirmCheckInByRoomType( checkIn.getTime(),"N");
-			if(checkInRe==0) {//re가 0이여야 가능 1이상 불가능
-				checkOutRe=condoReservemapper.confirmCheckOutByRoomType(checkOut.getTime(),"N");
-				lastRoomNo=condoReservemapper.getMaxRoomNoByRoomType("N");
-				if(checkOutRe==0) {
-					availableRoomType.add("N");
-				}else {
-					if(lastRoomNo<309) {
-						availableRoomType.add("N");
-					}
-				}
-			}else {
-				if(lastRoomNo<309) {
-					availableRoomType.add("N");
-				}
-			}
-		}//END N
-		
-		checkInRe=-1;
-		checkOutRe=-1;
-		lastRoomNo=-1;
-		reserveSizeByRoomType=-1;
-		
-		reserveSizeByRoomType=condoReservemapper.getReserveSizeByRoomType("R");
-		if(reserveSizeByRoomType==0) { //예약이 하나도 없을 때 바로가능
-			availableRoomType.add("R"); //바로 가능
-		}else {//예약이 하나 이상
-			checkInRe=condoReservemapper.confirmCheckInByRoomType(checkIn.getTime(),"R");
-			if(checkInRe==0) {//re가 0이여야 가능 1이상 불가능
-				checkOutRe=condoReservemapper.confirmCheckOutByRoomType(checkOut.getTime(),"R");
-				lastRoomNo=condoReservemapper.getMaxRoomNoByRoomType("N");
-				if(checkOutRe==0) {
-					availableRoomType.add("R");
-				}else {
-					if(lastRoomNo<109) {
-						availableRoomType.add("R");
-					}
-				}
-			}else {
-				if(lastRoomNo<409) {
-					availableRoomType.add("R");
-				}
-			}
-		}//END R
-		
-		for (String string : availableRoomType) {
-			log.warn("available RoomType:"+string);
 		}
 		return availableRoomType;
 	}
 
-
-
+	
 	@Override
 	public List<CondoReserveVO> getListWithPaging(Criteria cri) {
 		// TODO Auto-generated method stub
@@ -170,6 +67,28 @@ public class CondoReserveServiceImpl implements CondoReserveService {
 	@Override
 	public void register(CondoReserveVO reserve) {
 		log.info("register reserve in serviceImpl.....");
+		
+		int count=-1;
+		int roomNo=-1;
+		int reserveRoomNo=-1;
+		if(reserve.getRoomType().equals("P")) {
+			roomNo=100;
+		}else if(reserve.getRoomType().equals("D")){
+			roomNo=200;
+		}else if(reserve.getRoomType().equals("N")) {
+			roomNo=300;
+		}else{
+			roomNo=400;
+		}
+		
+		for(int i=1;i<10;i++) {
+			count=condoReservemapper.getOverlapDateCount(reserve.getRoomType(), roomNo+i,reserve.getCheckIn(),reserve.getCheckOut());
+			if(count==0) {
+				reserveRoomNo=roomNo+i;
+				break;
+			}
+		}
+		reserve.setRoomNo(reserveRoomNo);
 		condoReservemapper.insert(reserve);
 		
 	}
@@ -205,6 +124,9 @@ public class CondoReserveServiceImpl implements CondoReserveService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+
+
 	
 	
 }

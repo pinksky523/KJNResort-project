@@ -1,144 +1,113 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>모집공고</title>
-</head>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ include file="../includes/header.jsp" %>    
+<br><br><br><br>
+	<h1>이용권 구매</h1>
+	<hr>
+	<form id="buyForm" method="get" action="buyTicketKakao">
+   <table width="100%" style="padding:5px 0 5px 0; ">
+   	
+      <tr>
+         <th>리프트권 선택</th>
+         <td>리프트 미선택                      <input type="radio" name="lift" class="form-control" id="liftNoUse" value="0" style="width: 35%"></td>
+         <td>4시간 이용권(<c:out value="${tPrice.price}"/>원/1매)<input type="radio" name="lift" class="form-control" id="liftUse"   value="1" style="width: 35%" checked="checked"></td>
+      </tr>
+      
+      <tr>
+         <th><span id="liftAmount">수량 선택
+         
+        <select name="liftAmount" class="form-control" id="liftAmount"  style="width: 70%" onchange="getValue(this)">
+        	<option value="1">1 </option>
+        	<option value="2">2 </option>
+        	<option value="3">3 </option>
+        	<option value="4">4 </option>
+        	<option value="5">5 </option> 
+        </select> </span>	</th>
+       </tr>
+       <tr>
+         <th>장비렌탈 선택</th>
+         <td>장비렌탈 미선택<input type="radio" name="tool" class="form-control" id="toolNoUse" value="0" style="width: 35%" ></td>
+         <td>4시간 이용권(<c:out value="${ttPrice.price}"/>원/1매)<input type="radio" name="tool" class="form-control" id="toolUse" value="1" style="width: 35%" checked="checked"></td>
+       </tr>
+       
+       <tr>
+         <th> <span id="toolAmount">수량 선택
+         
+        <select name="toolAmount" class="form-control" id="toolAmount"  style="width: 70%" onchange="getToolValue(this)">
+        	<option value="1">1</option>
+        	<option value="2">2</option>
+        	<option value="3">3</option>
+        	<option value="4">4</option>
+        	<option value="5">5</option>
+        </select>	</span> </th>
+       </tr>
+       <tr>
+       		<th>총금액</th>
+       		<td><% %></td>
 
-<body>
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">Tables</h1>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <!-- DataTables Advanced Tables -->
-                Board List Page
-                <button id="regBtn" type="button"
-          				class="btn btn-xs pull-right">
-          			Register New Board		
-          		</button>
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <!-- <table width="100%" 
-                	   class="table table-striped table-bordered table-hover" 
-                	   id="dataTables-example"> -->
-                <table class="table table-striped table-bordered table-hover">	   
-                    <thead>
-                        <tr>
-                            <th>#NO.<!-- Rendering engine --></th>
-                            <th>제목<!-- Browser --></th>
-                            <th>등록일<!-- Engine version --></th>
-                            <th>상태<!-- CSS grade --></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${list }" var="board">
-                        <tr class="odd gradeX">
-                            <td>${board.bno }</td>
-                            <td><a class="move" href="${board.bno}">
-                            		${board.title }
-                            	<c:if test="${board.replyCnt > 0}">
-                            		[${board.replyCnt }] 
-                            	</c:if>
-                            	</a></td>
-                            <td>${board.writer }</td>
-                            <td><fmt:formatDate value="${board.regdate}"
-                            					pattern="yyyy-MM-dd"/></td>
-                            <td><fmt:formatDate value="${board.updateDate}"
-                            					pattern="yyyy-MM-dd"/></td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table><!-- END 게시물 출력 테이블 -->
-                
-                <!-- 페이지 번호 클릭 시 페이지 번호와 출력 데이터 갯수를 전달 -->
-                <form action="/board/list" id="actionForm">
-                	<input type="hidden" name="pageNum" id="pageNum" value="${pageMaker.cri.pageNum}">
-                	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-                	<!-- 검색 조건과 키워드 파라미터 추가 -->
-                	<input type="hidden" name="type" value="${pageMaker.cri.type}">
-                	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
-                </form>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
-               		 aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                            </div>
-                            <div class="modal-body">
-                                <!-- Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. -->
-                                                                처리가 완료되었습니다.
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div>    <!-- /.modal-dialog -->
-                </div>        <!-- /.modal -->
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-    </div>
-    <!-- /.col-lg-6 -->
-</div>
-<!-- /.row -->
+       </tr>
+       <tr>
+         <td colspan="2" align="right">
+		    <button type="submit" class="btn btn-primary" id="formButton">다음</button>
+         </td>
+       </tr>
+    </table>
+</form>
+<br><br><br><br>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 <script>
+
+/*  function getValue(obj){
+	alert("리프트가격 : " + obj.options[obj.selectedIndex].text * ${tPrice.price});   
+	var lift = obj.options[obj.selectedIndex].text * ${tPrice.price};
+	}  */
+
+function getToolValue(obj){
+	alert("장비가격 : " + obj.options[obj.selectedIndex].text * ${ttPrice.price});  
+	var tool = obj.options[obj.selectedIndex].text * ${ttPrice.price};
+	}
+
 $(function(){	
 	
-	//게시물 조회 링크 처리
-	$('.move').click(function(e){
-		e.preventDefault();
-		
-		$('#actionForm').append("<input type='hidden' name='recruitNo' value='" +
-						         $(this).attr('href') + "'>")
-						.attr('action', '/recruit/get')
-						.submit();
+	$("select[name=liftAmount]").change(function(obj){
+		alert("리프트가격 : " );
 	});
 	
-
-	//result 값을 저장 - 게시글을 등록/수정/삭제한 경우 
-	var result = '${result}';
+	// 라디오버튼 클릭시 이벤트 발생
+	$("input:radio[name=lift]").click(function(){
+		 
+        if($("input[name=lift]:checked").val() == "1"){
+            $("#liftAmount").attr("hidden",false);
+            // radio 버튼의 value 값이 1이라면 활성화
+ 
+        }else if($("input[name=lift]:checked").val() == "0"){
+              $("#liftAmount").attr("hidden",true);
+            // radio 버튼의 value 값이 0이라면 비활성화
+        }
+    });
 	
-	//result 값이 있는지 확인하는 함수 호출
-	checkModal(result);
-	
-	history.replaceState({}, null, null);
-	
-	//result 값이 있는지 확인하는 함수
-	function checkModal(result){
-		if(result === '' || history.state )	return;
-		
-		if(parseInt(result)>0){
-			$('.modal-body').html(result + '번 게시글이 등록되었습니다.');	
-		}
-		
-		$('#myModal').modal('show');
-	}
-	
-	//Register New Board 버튼을 누르면 입력 화면 표시
-	$('#regBtn').click(function(){
-		self.location = "/recruit/register";
-	});
+    $("input:radio[name=tool]").click(function(){
+    	 
+        if($("input[name=tool]:checked").val() == "1"){
+            $("#toolAmount").attr("hidden",false);
+            // radio 버튼의 value 값이 1이라면 활성화
+ 
+        }else if($("input[name=tool]:checked").val() == "0"){
+              $("#toolAmount").attr("hidden",true);
+            // radio 버튼의 value 값이 0이라면 비활성화
+        }
+    });
+    
+    
 });
 
 </script>
-</body>
-</html>
+
+
+<%@ include file="../includes/footer.jsp" %>

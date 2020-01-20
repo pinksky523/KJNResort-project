@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 @Data
 public class QnaVO { //큐엔에이 브이오
-	private long qno;
+	private long qnaNo;
 	private String title;
 	private String id;
 	private String contents;
