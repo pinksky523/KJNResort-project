@@ -1,5 +1,6 @@
  package com.kjnresort.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +44,7 @@ public class TicketController {
 	
 	//이용권 구매 폼으로 이동
 	@GetMapping("buyTicket")
-	//@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated()")
 	public void buyTicket(Model model, Criteria cri) {
 		log.info("TicketController buy() - get");
 		model.addAttribute("tPrice", service.getPrice());
@@ -54,9 +55,9 @@ public class TicketController {
 	//이용권 구매에서 다음 버튼 눌렀을때
 	@PostMapping("buyTicket")
 	//@PreAuthorize("isAuthenticated()")
-	public String buyTicket(TicketBuyVO ticket, RedirectAttributes rttr, 
-			 @ModelAttribute("cri") Criteria cri) {
-		log.info("TicketController buyTicket" + ticket);
+	public String buyTicket(TicketBuyVO ticket, Model model, RedirectAttributes rttr) {
+		log.info("TicketController buyTicket() - Post" + ticket);
+		
 		return "redirect:/ticket/buyTicketResult";
 	}
 	

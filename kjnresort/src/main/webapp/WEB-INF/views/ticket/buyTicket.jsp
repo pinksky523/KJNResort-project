@@ -6,7 +6,7 @@
 <br><br><br><br><br>
 	<h2 text-align="center">이용권 구매</h2>
 	<hr>
-	<form id="buyForm" method="get" action="buyTicketKakao">
+	<form id="buyForm" method="post" action="buyTicketKakao">
    <table width="100%" style="padding:5px 0 5px 0; ">
    	
       <tr>
@@ -45,7 +45,7 @@
        </tr>
        <tr>
        		<th>총금액</th>
-       		<td><span id="text1"></span></td>
+       		<td><span name="totalPrice" id="text1"></span></td>
 
        </tr>
        <tr>
