@@ -5,7 +5,7 @@
 <%@ include file="../includes/header.jsp" %>
 <div>
     <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
-        <h2 class="page-header">모집공고 게시판</h2>
+        <h2>모집공고 게시판</h2>
     </div>
 </div>
 
