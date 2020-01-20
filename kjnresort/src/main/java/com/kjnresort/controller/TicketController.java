@@ -25,11 +25,30 @@ import lombok.extern.log4j.Log4j;
 public class TicketController {
 	private TicketService service;
 	
+	//이용권 외부 결제 폼으로 이동
+	@GetMapping("buyTicketKakao")
+	//@PreAuthorize("isAuthenticated()")
+	public void buyTicketKakao() {
+		log.info("TicketController buyTicketKakao() - get");
+	}
+	
+	//이용권 외부 결제에서 결제완료 버튼 눌렀을때
+	@PostMapping("buyTicketKakao")
+	//@PreAuthorize("isAuthenticated()")
+	public String buyTicketKakao(TicketBuyVO ticket, RedirectAttributes rttr, 
+			 @ModelAttribute("cri") Criteria cri) {
+		log.info("TicketController buyTicketKakao" + ticket);
+		return "redirect:/ticket/buyTicket";
+	}
+	
 	//이용권 구매 폼으로 이동
 	@GetMapping("buyTicket")
 	//@PreAuthorize("isAuthenticated()")
 	public void buyTicket(Model model, Criteria cri) {
 		log.info("TicketController buy() - get");
+		model.addAttribute("tPrice", service.getPrice());
+		model.addAttribute("ttPrice", service.getPriceT());
+		log.info("getPrice()--------------");
 	}
 	
 	//이용권 구매에서 다음 버튼 눌렀을때
@@ -49,20 +68,7 @@ public class TicketController {
 		model.addAttribute("ticket", service.get(ticketNo));
 	}
 	
-//	//이용권 구매 폼으로 가는 버튼 클릭 
-//	@GetMapping("register")
-//	@PreAuthorize("isAuthenticated()")
-//	public void register() {
-//		log.info("TicketController register() - get");
-//	}
-//	
-//	//이용권 결제 버튼 클릭
-//	@PostMapping("register")
-//	@PreAuthorize("isAuthenticated()")
-//	public String register(TicketVO ticket, RedirectAttributes rttr) {
-//		log.info("TicketController register()");
-//		return "redirect:/ticket/list";
-//	}
+
 	
 	//이용권 구매 취소 이건 업데이트로 바꿔야함
 	//@PreAuthorize("principal.username == #writer")						// 작성자 확인

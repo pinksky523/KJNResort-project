@@ -5,7 +5,7 @@
   
 <mapper namespace="com.kjnresort.mapper.TicketMapper">
 
-	<select id="getList" resultType="com.kjnresort.domain.ticketBuyVO">
+	<select id="getList" resultType="com.kjnresort.domain.TicketBuyVO">
 		<![CDATA[
 			SELECT * FROM t_ticket_buy where ticketNo > 0
 		]]>	
@@ -16,9 +16,18 @@
 	    values (SEQ_T_TICKET_BUY.nextval, 'user00', 'lift', sysdate, 1, 1, 0, 0)
 	</insert>
 	
-	<select id="read" resultType="com.kjnresort.domain.ticketBuyVO">
+	<select id="read" resultType="com.kjnresort.domain.TicketBuyVO">
 		<![CDATA[
 			SELECT * FROM t_ticket_buy where ticketNo = #{ticketNo}
 		]]>	
 	</select>
+	
+	<select id="readPrice" resultType="com.kjnresort.domain.TicketVO">	
+			SELECT price FROM t_ticket where type = 'lift'
+	</select>
+	
+	<select id="readPriceT" resultType="com.kjnresort.domain.TicketVO">	
+			SELECT price FROM t_ticket where type = 'tool'
+	</select>
+	
 </mapper>
