@@ -50,9 +50,9 @@ public class ApplianceController {
 	}
 	
 	@GetMapping("/get")											// 지원서 상세조회(관리자)
-	public void get(@RequestParam("id") String id, Model model, @ModelAttribute("cri") Criteria cri) {
+	public void get(@RequestParam("applianceNo") Long applianceNo, Model model, @ModelAttribute("cri") Criteria cri) {
 		log.info("지원서 상세조회");
-		model.addAttribute("appliance", service.get(id));
+		model.addAttribute("appliance", service.get(applianceNo));
 	}
 	
 	@GetMapping("/list")										// 전체 지원내역 리스트(관리자)

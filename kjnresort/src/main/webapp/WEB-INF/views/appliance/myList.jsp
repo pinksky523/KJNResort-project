@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
+<%@ include file="../includes/header.jsp" %>
+<div>
+    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
+        <h2>지원내역 조회</h2>
+    </div>
+</div>
 
-</body>
-</html>
+<%@ include file="../includes/footer.jsp" %>
