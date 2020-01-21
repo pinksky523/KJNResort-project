@@ -46,6 +46,11 @@
 		SELECT id FROM t_member WHERE id = #{id}
 	</select>
 	
+	<!-- 회원가입 핸드폰번호 중복체크 -->
+	<select id="phoneNumberCheck" resultType="com.kjnresort.domain.MemberVO">
+		SELECT phoneNumber FROM t_member WHERE phoneNumber = #{phoneNumber}
+	</select>
+	
 	
 	<resultMap type="com.kjnresort.domain.MemberVO" id="memberMap">
 		<id property="id" column="id"/>						<!-- Join 조건 -->

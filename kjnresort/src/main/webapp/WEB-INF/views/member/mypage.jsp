@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,12 +23,12 @@
        <tr>
          <th>아이디</th>
          <td class="chkMessage">
-        <input type="text" class="form-control" name="id" id="inputId" style="width: 35%" onkeyup="idCheck()">
-        <span id="idChk"></span></td>
+        <input type="text" class="form-control" name="id" id="inputId" value="${member.id}" style="width: 35%" readonly>
+        </td>
        </tr>
        <tr>
          <th> 이름</th>
-         <td><input type="text" class="form-control" name="name" id="inputName" style="width: 35%" onkeyup="nameCheck()">
+         <td><input type="text" class="form-control" name="name" id="inputName" value="${member.name}" style="width: 35%" readonly>
       	 <span id="nameChk"></span></td>
       </tr>
        <tr>
@@ -40,25 +43,37 @@
        </tr>
         <tr>
          <th>핸드폰번호</th>
-         <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" style="width: 35%" onkeyup="phoneCheck()">
+         <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" value="${member.phoneNumber}" style="width: 35%" onkeyup="phoneCheck()">
        	 <span id="phoneChk"></span></td>
        </tr>
         <tr>
          <th>생년월일</th>
-         <td><input type="date" class="form-control" name="birth" id="inputBirth" style="width: 35%"></td>
+         <td><input type="date" class="form-control" name="birth" id="inputBirth" value="${member.birth}" style="width: 35%"></td>
        </tr>
        <tr>
          <th>성별</th>
            <td class="s">
-               <input type="radio" name="gender" value="M" checked>남
-               <input type="radio" name="gender" value="F">여
+           		<!-- M일경우 '남성' F일경우 '여성' -->
+           		<c:if test="${fn:contains(member.gender, 'M')}">
+           			<c:set var="gender" value="남성"></c:set>
+           		</c:if>
+           		<c:if test="${fn:contains(member.gender, 'F')}">
+           			<c:set var="gender" value="여성"></c:set>
+           		</c:if>
+           		
+           		<input type="text" class="form-control" name="gender" value="${gender}" style="width: 35%" readonly>
             </td>
          </tr>
          
          <tr>
          <tr>
          <th>주소</th>
-         <td><input type="text" class="form-control" name="address" id="inputAddress"></td>
+         <td><input type="text" class="form-control" name="address" id="inputAddress" value="${member.address}"></td>
+       </tr>
+       <tr>
+         <th>가입일자</th>
+         <td><input type="text" class="form-control" name="regDate" id="inputRegDate" value='<fmt:formatDate value="${member.regDate}" type="date" dateStyle="full"/>' style="width: 35%" readonly>
+       	 <span id="phoneChk"></span></td>
        </tr>
            <tr>
              <td colspan="2" align="center">
@@ -66,6 +81,7 @@
 		      <button type="button" class="btn btn-warning" id="joinResult" onclick="confirm()">수정</button>
             </td>
            </tr>
+           
            </table>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
           </form>
@@ -75,65 +91,11 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/resources/js/idCheck.js"></script>
 <script>
-var nameChk = false;
-var idChk = false;
 var pwChk1 = false;
 var pwChk2 = false;
 var phoneChk = false;
 var idDBChk = false;
 var x = document.getElementById("inputBirth").required;
-
-//이름 확인
-function nameCheck(){
-	
-	var name = document.getElementById('inputName').value;
-	
-	if(name.length == 0 || name == "") {
-		document.getElementById('nameChk').innerHTML="";
-		nameChk = false;
-	}
-	else if(! /^[가-힣]{2,6}$/.test(name)) {
-		document.getElementById('nameChk').innerHTML="<b><font color=red size=1px>한글 2~6글자 이내로 입력해주세요 (자음/모음만 입력불가)</font></b>"
-		nameChk = false;
-	} else {
-		document.getElementById('nameChk').innerHTML="";
-		nameChk = true;
-	}
-}
-
-
-//아이디 확인
-function idCheck(){
-	var id = document.getElementById('inputId').value;
-	
-	
-	if(id.length == 0 || id == "") {
-		document.getElementById('idChk').innerHTML = "";
-		idChk = false;
-	} else if(((id.length < 5) || (id.length > 15))){
-		document.getElementById('idChk').innerHTML = "<b><font color=red size=1px>5 - 15자 이내로 입력해주세요.</font></b>"
-		idChk = false;
-	} else if(!/^(?=.*[a-z])(?=.*[0-9])[a-z0-9]{5,15}$/.test(id)){
-		document.getElementById('idChk').innerHTML = "<b><font color=red size=1px>영어 소문자, 숫자를 조합하여 입력해주세요.</font></b>"
-		idChk = false;
-	} else {
-		
-		//아이디 중복확인
-	    idCheckService.getId(id, function(result){
-	       if(id == result.id){
-	    	   document.getElementById('idChk').innerHTML = "<b><font color=red size=1px>이미 사용중인 아이디입니다.</font></b>";
-				idChk = false;
-	     	  idDBChk = false;
-	       } else{
-	    	   document.getElementById('idChk').innerHTML = "<b><font color='green' size=1px>사용가능한 아이디입니다.</font></b>";
-				idChk = true;
-	     	  idDBChk = true;
-	       }
-	    });
-		
-		
-	}
-}
 
 
 

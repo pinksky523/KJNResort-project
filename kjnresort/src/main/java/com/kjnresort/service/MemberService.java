@@ -12,10 +12,11 @@ public interface MemberService {
 	public List<MemberVO> getList(Criteria cri);
 	
 	
-	
+	public MemberVO get(String id);				//로그인
 	public void register(MemberVO member);		//회원가입
 	public void registerAuth(AuthVO auth);		//회원권한등록
 	public MemberVO idCheck(String id);			//회원가입 아이디 중복체크
+	public MemberVO phoneNumberCheck(String phoneNumber);			//회원가입 핸드폰번호 중복체크
 	public String findId(String name, String phoneNumber);	//아이디찾기
 	public String findPw(String id, String name, String phoneNumber);	//비밀번호찾기
 	public boolean pwModify(MemberVO member);		//비밀번호변경

@@ -70,6 +70,16 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.idCheck(id);
 	}
 	
+	
+	//회원가입 아이디 중복확인
+	@Transactional
+	@Override
+	public MemberVO phoneNumberCheck(String phoneNumber) {
+		log.info("phoneNumber중복확인 서비스임플 진입");
+		return mapper.phoneNumberCheck(phoneNumber);
+	}
+		
+		
 	//아이디찾기
 	@Transactional
 	@Override
@@ -101,5 +111,12 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO mypageGet(MemberVO member) {
 
 		return mapper.mypageRead(member);
+	}
+	
+	//로그인
+	@Transactional
+	@Override
+	public MemberVO get(String id) {
+		return mapper.read(id);
 	}
 }

@@ -70,7 +70,7 @@ public class MemberTests {
       }
    }
    
-
+   @Test
    public void testB() {
       String query = "insert into t_member_auth (id, auth) values(?, ?)";
          

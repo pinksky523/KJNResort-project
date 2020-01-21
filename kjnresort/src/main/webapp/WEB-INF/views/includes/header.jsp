@@ -76,9 +76,13 @@
 						<li><a href="/appliance/list">지원내역조회</a></li>
 					</ul>
 				</li>
+				<li>
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-					<button type="button" onclick="location.href='/member/mypage'" class="btn btn-secondary" id="mypage">마이페이지</button>
+					<form id="mypageForm" action="/member/mypage" method="get">
+						<button type="submit" class="btn btn-secondary" id="mypage">마이페이지</button>
+						<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
+					 </form>
 				</sec:authorize>
 				
 				<!-- 로그인 안 한 경우 -->
