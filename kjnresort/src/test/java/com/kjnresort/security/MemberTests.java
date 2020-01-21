@@ -25,7 +25,7 @@ public class MemberTests {
    @Setter(onMethod_ = @Autowired)
    private DataSource ds;
    
-   @Test
+//   @Test
    public void testInsertMember() {
       
       String query = "insert into "
@@ -70,7 +70,7 @@ public class MemberTests {
       }
    }
    
-//   @Test
+   @Test
    public void testInsertAuth() {
       String query = "insert into t_member_auth (id, auth) values(?, ?)";
          

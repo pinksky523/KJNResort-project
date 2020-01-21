@@ -10,7 +10,7 @@ public interface TicketService {
 	public List<TicketBuyVO> getList(Criteria cri);
 	public List<TicketBuyVO> getList();
 	
-	public boolean modify(TicketBuyVO ticket);
+	public boolean modify(TicketVO tVO);
 	public boolean remove(Long ticketNo);
 	public TicketBuyVO get(Long ticketNo);
 	public TicketVO getPrice();
