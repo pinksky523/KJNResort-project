@@ -23,7 +23,8 @@
 	<!-- 로그인 처리 -->
 	<!-- 로그인 성공 핸들러 지정 -->
 	 <!-- <security:form-login/> --> 
-	<security:form-login login-page="/common/customLogin" authentication-success-handler-ref="customLoginSuccess"/>
+	<security:form-login login-page="/common/customLogin" default-target-url="/" authentication-success-handler-ref="customLoginSuccess"
+	authentication-failure-url="/common/customLoginError" />
 	
 	<!-- 로그아웃 처리 -->
 	<!-- 로그아웃하면 자동 로그인 관련 쿠키 삭제 -->
@@ -58,8 +59,9 @@
 			users-by-username-query="SELECT id, pw, status FROM t_member WHERE id = ?"
 		 	authorities-by-username-query="SELECT id, auth FROM t_member_auth WHERE id = ?"/>
 		 	
-		<security:password-encoder hash="bcrypt"/>
+		<security:password-encoder ref="bcryptPasswordEncoder"/>
 		<!-- <security:password-encoder ref="customNoOpPasswordEncoder"/> -->
+		
 	</security:authentication-provider>
 	
 	

@@ -20,32 +20,32 @@
        <tr>
          <th>아이디</th>
          <td class="chkMessage">
-        <input type="text" class="form-control" name="id" id="inputId" style="width: 35%" onkeyup="idCheck()" required>
+        <input type="text" class="form-control" name="id" id="inputId" style="width: 35%" onkeyup="idCheck()">
         <span id="idChk"></span></td>
        </tr>
        <tr>
          <th> 이름</th>
-         <td><input type="text" class="form-control" name="name" id="inputName" style="width: 35%" onkeyup="nameCheck()" required>
+         <td><input type="text" class="form-control" name="name" id="inputName" style="width: 35%" onkeyup="nameCheck()">
       	 <span id="nameChk"></span></td>
       </tr>
        <tr>
          <th>비밀번호</th>
-         <td><input type="password" class="form-control" name="pw1" id="inputPassword" style="width: 35%" onkeyup="passwordCheck1()" required>
+         <td><input type="password" class="form-control" name="pw1" id="inputPassword" style="width: 35%" onkeyup="passwordCheck1()">
       	 <span id="pwChk1"></span></td>
        </tr>
        <tr>
          <th>비밀번호 확인</th>
-         <td><input type="password" class="form-control" name="pw" id="inputPasswordChk"  style="width: 35%" onkeyup="passwordCheck2()" required>
+         <td><input type="password" class="form-control" name="pw" id="inputPasswordChk"  style="width: 35%" onkeyup="passwordCheck2()">
 		 <span id="pwChk2"></span></td>
        </tr>
         <tr>
          <th>핸드폰번호</th>
-         <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" style="width: 35%" onkeyup="phoneCheck()" required>
+         <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" style="width: 35%" onkeyup="phoneCheck()">
        	 <span id="phoneChk"></span></td>
        </tr>
         <tr>
          <th>생년월일</th>
-         <td><input type="date" class="form-control" name="birth" id="inputBirth" style="width: 35%" required></td>
+         <td><input type="date" class="form-control" name="birth" id="inputBirth" style="width: 35%"></td>
        </tr>
        <tr>
          <th>성별</th>
@@ -58,11 +58,11 @@
          <tr>
          <tr>
          <th>주소</th>
-         <td><input type="text" class="form-control" name="address" id="inputAddress" required></td>
+         <td><input type="text" class="form-control" name="address" id="inputAddress"></td>
        </tr>
            <tr>
              <td colspan="2" align="center">
-		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="history.back()">취소</button>
+		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="location.href='/common/home'">취소</button>
 		      <button type="button" class="btn btn-primary" id="joinResult" onclick="confirm()">가입완료</button>
             </td>
            </tr>
@@ -81,7 +81,7 @@ var pwChk1 = false;
 var pwChk2 = false;
 var phoneChk = false;
 var idDBChk = false;
-var x = document.getElementById("inputBirth").required;		//date input type 입력되어야 submit 가능.
+var x = document.getElementById("inputBirth").required;
 
 //이름 확인
 function nameCheck(){
@@ -192,23 +192,34 @@ function phoneCheck(){
 
 //확인 후 submit
 function confirm() {
-	if( nameChk==true && idChk==true && idDBChk && pwChk1==true && pwChk2==true && phoneChk==true)
+	
+	var birthChk = document.getElementById("inputBirth").value;
+	var addressChk = document.getElementById("inputAddress").value;
+	
+	if( nameChk==true && idChk==true && idDBChk && pwChk1==true && pwChk2==true && phoneChk==true && birthChk!="" && addressChk!="") {
 		document.frm.submit();
-	else if(nameChk == false) {
-		alert('이름을 확인해주세요')
-		document.frm.name.focus();
-	} else if((idChk == false) || (idDBChk == false)) {
-		alert('아이디를 확인해주세요')
+	}
+	else if((idChk == false) || (idDBChk == false)) {
+		alert('아이디를 확인해주세요');
 		document.frm.id.focus();
+	} else if(nameChk == false ) {
+		alert('이름을 확인해주세요');
+		document.frm.name.focus();
 	} else if(pwChk1 == false) {
-		alert('비밀번호를 확인해주세요')
+		alert('비밀번호를 확인해주세요');
 		document.frm.pw1.focus();
 	} else if(pwChk2 == false) {
-		alert('비밀번호를 확인해주세요')
+		alert('비밀번호를 확인해주세요');
 		document.frm.pw.focus();
 	} else if(phoneChk == false) {
-		alert('핸드폰번호를 확인해주세요')
+		alert('핸드폰번호를 확인해주세요');
 		document.frm.phoneNumber.focus();
+	} else if(birthChk == null || birthChk === "") {
+		alert('생년월일을 확인해주세요');
+		document.frm.birth.focus();
+	} else if(addressChk == null || addressChk == "") {
+		alert('주소를 확인해주세요');
+		document.frm.address.focus();
 	}
 }
 

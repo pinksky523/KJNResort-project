@@ -25,8 +25,13 @@ public class MemberTests {
    @Setter(onMethod_ = @Autowired)
    private DataSource ds;
    
+<<<<<<< HEAD
 //   @Test
    public void testInsertMember() {
+=======
+   @Test
+   public void testA() {
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
       
       String query = "insert into "
             + "t_member(id, pw, name, phoneNumber, birth, address, status)"
@@ -59,7 +64,7 @@ public class MemberTests {
            pstmt.setString(1, "user01");
            pstmt.setString(2, pwencoder.encode("1111"));
            pstmt.setString(3, "정지회원");
-           pstmt.setString(4, "222-2222-222");
+           pstmt.setString(4, "222-2222-2222");
            pstmt.setString(5, "11/11/11");
            pstmt.setString(6, "서울특별시 마포구 월드컵북로 21 풍성빌딩 4층");
            pstmt.setInt(7, 0);
@@ -71,7 +76,11 @@ public class MemberTests {
    }
    
    @Test
+<<<<<<< HEAD
    public void testInsertAuth() {
+=======
+   public void testB() {
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
       String query = "insert into t_member_auth (id, auth) values(?, ?)";
          
          try(Connection con = ds.getConnection(); 

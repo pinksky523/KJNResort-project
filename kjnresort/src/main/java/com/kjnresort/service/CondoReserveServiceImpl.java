@@ -27,6 +27,7 @@ public class CondoReserveServiceImpl implements CondoReserveService {
 
 	@Override
 	public List<String> getAvailableRoomType(Calendar checkIn, Calendar checkOut) {
+		log.info("getAvailableRoomType Service Impl 진입");
 		List<String> availableRoomType=new ArrayList<String>();
 		
 		String[] roomTypeArr= {"P","D","N","R"};

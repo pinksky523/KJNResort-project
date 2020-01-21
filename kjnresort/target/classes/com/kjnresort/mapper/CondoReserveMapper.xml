@@ -23,7 +23,7 @@ where roomType=#{roomType}
 <![CDATA[
 select count(*)
 from view_condo_reserve
-where ((checkin<=#{checkIn} and #{checkIn} < checkout) or (checkin<#{checkIn} and #{checkIn}<=checkout))
+where ((checkin<=#{checkIn} and #{checkIn} < checkout) or (checkin<#{checkOut} and #{checkOut}<=checkout))
 and roomno=#{roomNo} and roomtype=#{roomType}
 ]]>
 </select>

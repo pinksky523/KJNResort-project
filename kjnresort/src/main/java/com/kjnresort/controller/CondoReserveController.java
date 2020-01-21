@@ -5,14 +5,21 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.ibatis.annotations.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kjnresort.domain.CondoReserveVO;
@@ -31,13 +38,19 @@ import lombok.extern.log4j.Log4j;
 public class CondoReserveController { //헐 이제 될거같아
 	private CondoReserveService service;
 	
-	@PostMapping(value="/availableRoomType")
-	public ResponseEntity<Object> getAvailableRoomTypeList(Date checkIn,Date checkOut) {
+	//@DateTimeFormat(pattern="yyyy-MM-dd")
+	//produces= {MediaType.TEXT_PLAIN_VALUE}
+	//consumes = "application/json"
+	@ResponseBody
+	@RequestMapping(value="/availableRoomType",method = RequestMethod.POST)
+	public ResponseEntity<Object> getAvailableRoomTypeList(@Param("checkIn") @DateTimeFormat(pattern="yyyy-MM-dd") Date checkIn,@Param("checkOut") @DateTimeFormat(pattern="yyyy-MM-dd") Date checkOut) {
 		log.info("getAvailableRoomTypeList Controller 진입");
 		Calendar in=Calendar.getInstance();
-		Calendar out=Calendar.getInstance();
+		
 		in.setTime(checkIn);
+		Calendar out=Calendar.getInstance();
 		out.setTime(checkOut);
+	
 		return new ResponseEntity<>(service.getAvailableRoomType(in, out),HttpStatus.OK);
 	}
 	@GetMapping("/list")

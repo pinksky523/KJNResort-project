@@ -33,12 +33,12 @@
                     <input type="password" name="password" id="inputPassword" class="form-control input-lg" placeholder="비밀번호" required>
 				</div>
 					<a href="/common/findId" class="btn btn-link pull-left">아이디 찾기</a>
-					<a href="/common/findPw" class="btn btn-link pull-right">비밀번호 찾기</a>
+					<a href="findPw" class="btn btn-link pull-right">비밀번호 찾기</a>
 				<br><hr style="width: 100%">
 				
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-md-6">
-						<a href="/common/memberJoin" class="btn btn-lg btn-primary btn-block">회원가입</a>
+						<a href="memberJoin" class="btn btn-lg btn-primary btn-block">회원가입</a>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-6">
                         <input type="submit" class="btn btn-lg btn-success btn-block" value="로그인">
@@ -52,10 +52,10 @@
 </div>
 <script>
 $(function(){	
-	var result = '<c:out value="${result}"/>';	
+	var msg = '<c:out value="${msg}"/>';	
 	
 	//result 값이 있는지 확인하는 함수 호출
-	checkModal(result);
+	checkModal(msg);
 	history.replaceState({}, null, null);
 	
 	$(".btn-success").on("click", function(e){
@@ -67,13 +67,13 @@ $(function(){
 	//메세지가 존재하면 alert창 띄우기
 	function checkModal(){
 		//값이 없으면 리턴시킴
-		if(result === '' || history.state){
+		if(msg === '' || history.state){
 			return;
 		}
 		
 		//값이 있으면 메시지 띄우기
-		if(result !== ''){
-			alert(result);
+		if(msg !== ''){
+			alert(msg);
 		}
 		
 	}
