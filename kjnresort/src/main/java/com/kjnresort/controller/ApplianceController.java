@@ -26,24 +26,36 @@ public class ApplianceController {
 	
 	@GetMapping("/register")
 	public void register() {
-		
-	}
-	
-	@GetMapping("/get")
-	public void get(@RequestParam("id") String id, Model model, @ModelAttribute("cri") Criteria cri) {
-		log.info("ApplianceController get()");
-		model.addAttribute("appliance", service.get(id));
+		log.info("지원서 등록창 진입");
 	}
 	
 	@PostMapping("/register")
 	public String register(ApplianceVO appliance, RedirectAttributes rttr) {
-		log.info("ApplianceController register()");
 		service.register(appliance);
+		log.info("지원서 등록");
 		rttr.addFlashAttribute("result", appliance.getRecruitNo());		// 등록된 게시글의 recruitNo를 result값에 담아서 redirect로 넘겨준다.
 		return "redirect:/appliance/list";
 	}
 	
-	@GetMapping("/list")
+	@PostMapping("/save")
+	public String applianceSave(ApplianceVO appliance, RedirectAttributes rttr) {
+		log.info("지원서 임시저장");
+		return null;
+	}
+	
+	@GetMapping("/myList")										// 나의 지원내역 리스트(사용자)
+	public void list(Model model) {
+		log.info("나의 지원내역 조회");
+		model.addAttribute("list", service.getList());
+	}
+	
+	@GetMapping("/get")											// 지원서 상세조회(관리자)
+	public void get(@RequestParam("id") String id, Model model, @ModelAttribute("cri") Criteria cri) {
+		log.info("지원서 상세조회");
+		model.addAttribute("appliance", service.get(id));
+	}
+	
+	@GetMapping("/list")										// 전체 지원내역 리스트(관리자)
 	public void list(Criteria cri, Model model) {
 		log.info("list: " + cri);
 		model.addAttribute("list", service.getList(cri));
@@ -52,8 +64,5 @@ public class ApplianceController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 	
-	@PostMapping("/save")
-	public String applianceSave(ApplianceVO appliance, RedirectAttributes rttr) {
-		return null;
-	}
+	
 }

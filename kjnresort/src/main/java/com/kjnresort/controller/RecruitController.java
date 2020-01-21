@@ -26,7 +26,15 @@ public class RecruitController {
 		
 	}
 	
-	@PostMapping("/remove")
+	@PostMapping("/register")									// 게시글 등록
+	public String register(RecruitVO recruit, RedirectAttributes rttr) {
+		log.info("RecruitController register()");
+		service.register(recruit);
+		rttr.addFlashAttribute("result", recruit.getRecruitNo());		// 등록된 게시글의 RecruitNo를 result값에 담아서 redirect로 넘겨준다.
+		return "redirect:/recruit/list";
+	}
+	
+	@PostMapping("/remove")										// 게시글 삭제
 	public String remove(@RequestParam("recruitNo") Long recruitNo, RedirectAttributes rttr) {
 		log.info("RecruitController remove()... " + recruitNo);
 		if(service.remove(recruitNo)) {
@@ -35,7 +43,7 @@ public class RecruitController {
 		return "redirect:/recruit/list";
 	}
 	
-	@PostMapping("/modify")
+	@PostMapping("/modify")										// 게시글 수정
 	public String modify(RecruitVO recruit, RedirectAttributes rttr) {
 		log.info("RecruitController modify()");
 		if(service.modify(recruit)) {
@@ -50,15 +58,7 @@ public class RecruitController {
 		model.addAttribute("recruit", service.get(recruitNo));
 	}
 	
-	@PostMapping("/register")
-	public String register(RecruitVO recruit, RedirectAttributes rttr) {
-		log.info("RecruitController register()");
-		service.register(recruit);
-		rttr.addFlashAttribute("result", recruit.getRecruitNo());		// 등록된 게시글의 RecruitNo를 result값에 담아서 redirect로 넘겨준다.
-		return "redirect:/recruit/list";
-	}
-	
-	@GetMapping("/list")
+	@GetMapping("/list")										// 게시글 목록
 	public void list(Model model) {
 		log.info("list");
 		model.addAttribute("list", service.getList());
