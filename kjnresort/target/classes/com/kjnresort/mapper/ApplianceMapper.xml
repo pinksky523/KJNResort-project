@@ -28,9 +28,8 @@
 	<select id="getListWithPaging" resultType="org.zerock.domain.ApplianceVO">
 	   <![CDATA[
 	    SELECT  * 
-	    FROM 	( SELECT /*+INDEX_DESC(tbl_board pk_board) */ 
-	    				 rownum rn, bno, title, content, writer, 
-	    				 regdate, updatedate, replyCnt
+	    FROM 	( SELECT /*+INDEX_DESC(t_appliance pk_board) */ 
+	    				 rownum rn, applianceNo, name, regDate, phoneNumber
 	    		  FROM   t_appliance
 	    		  WHERE  
 	   ]]>
