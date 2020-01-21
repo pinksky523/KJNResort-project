@@ -59,7 +59,7 @@
 			users-by-username-query="SELECT id, pw, status FROM t_member WHERE id = ?"
 		 	authorities-by-username-query="SELECT id, auth FROM t_member_auth WHERE id = ?"/>
 		 	
-		<security:password-encoder hash="bcrypt"/>
+		<security:password-encoder ref="bcryptPasswordEncoder"/>
 		<!-- <security:password-encoder ref="customNoOpPasswordEncoder"/> -->
 		
 	</security:authentication-provider>

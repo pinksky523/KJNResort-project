@@ -62,7 +62,7 @@
        </tr>
            <tr>
              <td colspan="2" align="center">
-		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="history.back()">취소</button>
+		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="location.href='/common/home'">취소</button>
 		      <button type="button" class="btn btn-primary" id="joinResult" onclick="confirm()">가입완료</button>
             </td>
            </tr>
@@ -196,8 +196,9 @@ function confirm() {
 	var birthChk = document.getElementById("inputBirth").value;
 	var addressChk = document.getElementById("inputAddress").value;
 	
-	if( nameChk==true && idChk==true && idDBChk && pwChk1==true && pwChk2==true && phoneChk==true && birthChk!="" && addressChk!="")
+	if( nameChk==true && idChk==true && idDBChk && pwChk1==true && pwChk2==true && phoneChk==true && birthChk!="" && addressChk!="") {
 		document.frm.submit();
+	}
 	else if((idChk == false) || (idDBChk == false)) {
 		alert('아이디를 확인해주세요');
 		document.frm.id.focus();
