@@ -49,30 +49,30 @@
 			<ul class="main-menu">
 				<li><a href="index.html">리조트안내</a></li>
 				<li><a href="/notice/list">공지사항 관리</a></li>
-				<li><a href="#">콘도 관리</a>
+				<li><a href="#">콘도</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">콘도 예약</a></li>
-						<li><a href="loans.html">콘도 예약내역</a></li>
+						<li><a href="about-us.html">콘도 예약 관리</a></li>
+						<li><a href="loans.html">콘도 관리</a></li>
 					</ul>
 				</li>
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">이용권 구매</a></li>
+<<<<<<< HEAD
+						<li><a href="/ticket/modify">이용권 관리</a></li>
 						<li><a href="loans.html">이용권 구매내역</a></li>
+=======
+						<li><a href="about-us.html">이용권 판매 관리</a></li>
+						<li><a href="loans.html">이용권 관리</a></li>
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 					</ul>
 				</li>
-				<li><a href="contact.html">이벤트</a></li>
-				<li><a href="contact.html">후기</a></li>
-				<li><a href="#">1:1문의</a>
-					<ul class="sub-menu">
-						<li><a href="about-us.html">문의하기</a></li>
-						<li><a href="loans.html">문의내역</a></li>
-					</ul>
-				</li>
+				<li><a href="contact.html">이벤트 관리</a></li>
+				<li><a href="contact.html">후기 관리</a></li>
+				<li><a href="#">1:1문의 관리</a></li>
 				<li><a href="#">인재채용</a>
 					<ul class="sub-menu">
-						<li><a href="/recruit/list">모집공고</a></li>
-						<li><a href="/appliance/list">지원내역조회</a></li>
+						<li><a href="/recruit/list">모집공고 관리</a></li>
+						<li><a href="/appliance/list">지원자 관리</a></li>
 					</ul>
 				</li>
 				<li>
