@@ -36,7 +36,7 @@
 				
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-md-6">
-                        <input type="button" class="btn btn-lg btn-secondary btn-block" onclick="history.back()" value="취소">
+                        <input type="button" class="btn btn-lg btn-secondary btn-block" onclick="location.href='/common/customLogin'" value="취소">
 					</div>
 					
 					<div class="col-xs-6 col-sm-6 col-md-6">

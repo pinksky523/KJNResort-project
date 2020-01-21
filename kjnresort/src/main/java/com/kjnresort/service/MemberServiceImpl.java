@@ -9,12 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kjnresort.domain.AuthVO;
 import com.kjnresort.domain.Criteria;
-import com.kjnresort.domain.EventAttachVO;
-import com.kjnresort.domain.EventVO;
 import com.kjnresort.domain.MemberVO;
-import com.kjnresort.domain.ReviewAttachVO;
-import com.kjnresort.mapper.EventAttachMapper;
-import com.kjnresort.mapper.EventMapper;
 import com.kjnresort.mapper.MemberMapper;
 
 import lombok.AllArgsConstructor;

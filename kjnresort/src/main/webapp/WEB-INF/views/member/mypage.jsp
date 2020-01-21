@@ -7,6 +7,6 @@
 <title>마이페이지</title>
 </head>
 <body>
-	<h1>여긴 마이페이지</h1>
+	<h1>여긴 마이페이지ㅋㅋ</h1>
 </body>
 </html>

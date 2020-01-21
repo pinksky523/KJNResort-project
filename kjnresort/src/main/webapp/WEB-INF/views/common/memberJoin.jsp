@@ -62,7 +62,7 @@
        </tr>
            <tr>
              <td colspan="2" align="center">
-		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="history.back()">취소</button>
+		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="location.href='/common/home'">취소</button>
 		      <button type="button" class="btn btn-primary" id="joinResult" onclick="confirm()">가입완료</button>
             </td>
            </tr>
