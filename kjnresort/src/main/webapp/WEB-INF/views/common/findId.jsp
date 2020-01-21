@@ -57,12 +57,6 @@ $(function(){
 	checkModal(msg);
 	history.replaceState({}, null, null);
 	
-	$(".btn-success").on("click", function(e){
-		e.preventDefault();
-		$("form").submit();
-	});
-	
-	
 	//메세지가 존재하면 alert창 띄우기
 	function checkModal(){
 		//값이 없으면 리턴시킴

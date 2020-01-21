@@ -28,24 +28,6 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired 
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	@Override
-	public MemberVO get(String id) {
-
-		return mapper.read(id);
-	}
-
-	@Override
-	public boolean modify(MemberVO member) {
-
-		return mapper.update(member) == 1;
-	}
-	
-
-	@Override
-	public boolean remove(String id) {
-
-		return mapper.delete(id) == 1;
-	}
 
 	@Override
 	public int getTotal(Criteria cri) {
@@ -113,5 +95,11 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.pwUpdate(member) == 1;
 	}
 	
-	
+	//마이페이지 조회
+	@Transactional
+	@Override
+	public MemberVO mypageGet(MemberVO member) {
+
+		return mapper.mypageRead(member);
+	}
 }
