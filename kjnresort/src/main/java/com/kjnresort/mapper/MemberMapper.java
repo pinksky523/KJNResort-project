@@ -9,13 +9,11 @@ import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
 
 public interface MemberMapper {
-	public MemberVO read(String id);
+	public MemberVO read(String id);	//권한조회
 	
 	public int getTotalCount(Criteria cri);
 	
 	public List<MemberVO> getListWithPaging(Criteria cri);		
-	public int update(MemberVO member);	
-	public int delete(String id);	
 	
 	////////////////////////////////////////////
 	
@@ -25,4 +23,5 @@ public interface MemberMapper {
 	public String findId(@Param("name") String name, @Param("phoneNumber") String phoneNumber);	//아이디찾기
 	public String findPw(@Param("id") String id, @Param("name") String name, @Param("phoneNumber") String phoneNumber);	//비밀번호찾기
 	public int pwUpdate(MemberVO member);	//비밀번호 변경
+	public MemberVO mypageRead(MemberVO member);	//마이페이지 조회
 }
