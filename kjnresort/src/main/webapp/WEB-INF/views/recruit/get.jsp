@@ -48,9 +48,9 @@
 	                <button data-oper='list' class="btn btn-secondary pull-right">목록</button>
              	 <form action="/recruit/modify" method="get" id="operForm" >	
              		<input type="hidden" id="recruitNo" name="recruitNo" value='<c:out value="${recruit.recruitNo}"/>'>
-             		<input type="hidden" name="id" value="admin">
+             		<input type="hidden" id="id" name="id" value='<c:out value="${member.id}"/>'>
 	                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-             	</form>
+             	</form>          		
 				
             </div>	<!-- /.panel-body -->
         </div>		<!-- /.panel -->
