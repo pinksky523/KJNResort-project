@@ -12,7 +12,7 @@ public interface ApplianceMapper {
 			
 	public void insert(ApplianceVO appliance);						// 게시글 등록(사용자)
 	public int update(ApplianceVO appliance);						// 게시글 수정(사용자)
-	public ApplianceVO read(String id);								// 게시글 조회(관리자)
+	public ApplianceVO read(Long applianceNo);						// 게시글 조회(관리자)
 	
 }
 
