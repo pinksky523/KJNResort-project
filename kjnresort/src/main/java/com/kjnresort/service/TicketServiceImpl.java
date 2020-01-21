@@ -34,8 +34,9 @@ public class TicketServiceImpl implements TicketService{
 	}
 
 	@Override
-	public boolean modify(TicketBuyVO ticket) {
-		return false;
+	public boolean modify(TicketVO tVO) {
+		log.info("modify------------");
+		return mapper.updateL(tVO) == 1;
 	}
 
 	@Override
