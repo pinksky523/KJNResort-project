@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
     <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
@@ -22,7 +24,10 @@ p{padding-left:30px;}
 .roomTypeRadioDiv{padding-left:30px;}
 .radioUl{list-style:none; text-align: center; }
 .radioUl>li{display: inline-block; font-size:23px;   margin-right: 55px;}
-.roomInfoDiv{padding-left:30px; background: red; width:900px;}
+.roomInfoDiv{ width:900px;  align-self: center; margin:0 auto; display: none; }
+.condoImg{width:320px; height:210px; margin-right:50px; float:left; margin-left:200px;}
+.roomInfoUl{  margin-top:50px;}
+.roomInfoUl>li{margin-bottom: 10px; font-size: 18px; }
 </style>
 <body>
 	<h1>콘도예약</h1>
@@ -42,7 +47,9 @@ p{padding-left:30px;}
 		</div>
 		</div>
 		<div class="roomInfoDiv">
-		  <img src=>
+		  <img class="condoImg" src="/resources/img/condo/prime.jpg">
+		  <ul class="roomInfoUl">
+		  </ul>
 		</div>
     </div>
 <ul class="test"></ul>
@@ -50,22 +57,36 @@ p{padding-left:30px;}
 
 <script>
 
-
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
 function showRoomInfo(event){
-	var type=event.target.id;
+	var roomType=event.target.id;
+	var location;
+	var building;
+	var accept;
+	var bed;
+	var price;
+
+	$.getJSON("/condomanage/"+roomType+".json",
+			function(data){
+		console.log(data);
+			var li="";
+			li+="<li>가격 :"+numberWithCommas(data.price)+"원</li>";
+			li+="<li>위치 : "+data.location+"</li>";
+			li+="<li>건물 : "+data.building+"</li>";
+			li+="<li>수용인원 : "+data.accept+"명</li>";
+			li+="<li>"+data.bed+"</li>";
+			$('.roomInfoUl').append(li);
+			$('.roomInfoDiv').css('display','block');
+			
+		}).fail(function(xhr,status,err){
+			if(err){
+				console.log(err);
+			}
+		});
 	
-	if(type=='P'){
-		
-	}
-	if(type=='D'){
-		
-	}
-	if(type=='N'){
 	
-	}
-	if(type=='R'){
-	
-	}
 }
 
 function showAvailableRoomType(data){
