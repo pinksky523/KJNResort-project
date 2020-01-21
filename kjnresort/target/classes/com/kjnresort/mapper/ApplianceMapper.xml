@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kjnresort.mapper.ApplianceMapper">
+
+	  <!-- 쿼리 보관 -->
+	  <sql id="criteria">
+	  	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach collection="typeArr" item='type'>
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'N'.toString()">
+							name 			LIKE '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'D'.toString()">
+							regDate			LIKE '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'P'.toString()">
+							phoneNumber		LIKE '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>		
+		</trim>
+	</sql>
+	  
+	<select id="getListWithPaging" resultType="org.zerock.domain.ApplianceVO">
+	   <![CDATA[
+	    SELECT  * 
+	    FROM 	( SELECT /*+INDEX_DESC(tbl_board pk_board) */ 
+	    				 rownum rn, bno, title, content, writer, 
+	    				 regdate, updatedate, replyCnt
+	    		  FROM   t_appliance
+	    		  WHERE  
+	   ]]>
+		<!-- 보관해 둔 쿼리 사용 -->
+		<include refid="criteria"></include>
+	   <![CDATA[ 		  
+	    		  rownum <= #{pageNum} * #{amount} )
+	    WHERE   rn > (#{pageNum} -1) * #{amount}
+	   ]]> 		  
+	</select>
+	  
+	<select id="getTotalCount" resultType="int">
+	   <![CDATA[
+	    SELECT COUNT(*) FROM t_appliance 
+	    WHERE 
+	   ]]> 	
+	   	<!-- 보관해 둔 쿼리 사용 -->
+		<include refid="criteria"></include>
+	   <![CDATA[  recruitNo > 0
+	   ]]>
+	</select>
+
+	<select id="getList" resultType="com.kjnresort.domain.ApplianceVO">
+		SELECT * FROM t_appliance
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO t_recruit(recruitNo, id, title, content, status, deadLine)
+		VALUES(seq_t_recruit.NEXTVAL, #{id}, #{title}, #{content}, #{status}, #{deadLine})
+	</insert>
+	
+	<select id="read" resultType="com.kjnresort.domain.ApplianceVO">
+		SELECT * FROM t_appliance WHERE id = #{id}
+	</select>
+	
+	<update id="update">
+		UPDATE t_appliance
+		SET career = #{career}, introduction = #{introduction}, status = #{status}
+		WHERE id = #{id}
+	</update>
+
+</mapper>
