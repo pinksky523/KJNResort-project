@@ -30,16 +30,16 @@ public class ApplianceController {
 	}
 	
 	@GetMapping("/get")
-	public void get(@RequestParam("phoneNumber") String phoneNumber, Model model, @ModelAttribute("cri") Criteria cri) {
+	public void get(@RequestParam("id") String id, Model model, @ModelAttribute("cri") Criteria cri) {
 		log.info("ApplianceController get()");
-		model.addAttribute("appliance", service.get(phoneNumber));
+		model.addAttribute("appliance", service.get(id));
 	}
 	
 	@PostMapping("/register")
 	public String register(ApplianceVO appliance, RedirectAttributes rttr) {
 		log.info("ApplianceController register()");
 		service.register(appliance);
-		rttr.addFlashAttribute("result", appliance.getRecruitNo());		// 등록된 게시글의 bno를 result값에 담아서 redirect로 넘겨준다.
+		rttr.addFlashAttribute("result", appliance.getRecruitNo());		// 등록된 게시글의 recruitNo를 result값에 담아서 redirect로 넘겨준다.
 		return "redirect:/appliance/list";
 	}
 	
