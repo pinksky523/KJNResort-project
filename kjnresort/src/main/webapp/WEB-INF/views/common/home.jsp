@@ -71,7 +71,7 @@
 				<li><a href="#">인재채용</a>
 					<ul class="sub-menu">
 						<li><a href="/recruit/list">모집공고</a></li>
-						<li><a href="/appliance/list">지원내역조회</a></li>
+						<li><a href="/appliance/MyList">지원내역조회</a></li>
 					</ul>
 				</li>
 				
