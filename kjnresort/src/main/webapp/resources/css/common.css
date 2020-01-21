@@ -2,6 +2,11 @@
 
 h1 { text-align: center; }
 hr { border: solid 2px lightgray; width: 60%;  }
+th { text-align: center; }
+
+
+
+
 .contents {
 	margin-top : 100px;
 }
@@ -14,5 +19,5 @@ hr { border: solid 2px lightgray; width: 60%;  }
 	margin: 10px;
 }
 .chkMessage {
-	white-space: nowrap;
+	text-align: center;	
 }

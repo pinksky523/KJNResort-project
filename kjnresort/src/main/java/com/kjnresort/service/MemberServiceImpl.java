@@ -1,5 +1,8 @@
 package com.kjnresort.service;	//이 패키지를 스프링이 자동스캔하도록 root-context.xml 설정
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +52,7 @@ public class MemberServiceImpl implements MemberService {
 	public void register(MemberVO member) {
 		log.info("회원가입 서비스임플 진입 : " + member);
 		member.setPw(bcryptPasswordEncoder.encode(member.getPw()));
+		
 		mapper.insert(member);
 		log.info("회원정보 DB저장 완료");
 	}
@@ -101,6 +105,7 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public boolean pwModify(MemberVO member) {
+		log.info("비밀번호 변경 서비스임플 진입");
 		member.setPw(bcryptPasswordEncoder.encode(member.getPw()));
 		return mapper.pwUpdate(member) == 1;
 	}
@@ -109,9 +114,27 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public MemberVO mypageGet(MemberVO member) {
-
+		log.info("마이페이지 조회 서비스임플 진입");
+		MemberVO mvo = mapper.mypageRead(member);
+		
+		String year = mvo.getBirth().substring(0, 4);
+		String month = mvo.getBirth().substring(5, 7);
+		String day = mvo.getBirth().substring(8, 10);
+		mvo.setBirth(year + "년 " + month + "월 " + day + "일");
 		return mapper.mypageRead(member);
 	}
+	
+	//마이페이지 수정
+	@Transactional
+	@Override
+	public boolean modifyMypage(MemberVO member) {
+		
+		log.info("마이페이지 수정 서비스 임플 진입");
+		member.setPw(bcryptPasswordEncoder.encode(member.getPw()));
+		return mapper.mypageUpdate(member);
+	}
+	
+	
 	
 	//로그인
 	@Transactional

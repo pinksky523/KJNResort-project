@@ -21,4 +21,5 @@ public interface MemberService {
 	public String findPw(String id, String name, String phoneNumber);	//비밀번호찾기
 	public boolean pwModify(MemberVO member);		//비밀번호변경
 	public MemberVO mypageGet(MemberVO member);		//마이페이지 조회
+	public boolean modifyMypage(MemberVO member);	//마이페이지 수정
 }
