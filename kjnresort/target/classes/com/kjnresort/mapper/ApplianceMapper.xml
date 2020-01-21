@@ -25,7 +25,7 @@
 		</trim>
 	</sql>
 	  
-	<select id="getListWithPaging" resultType="org.zerock.domain.ApplianceVO">
+	<select id="getListWithPaging" resultType="com.kjnresort.domain.ApplianceVO">
 	   <![CDATA[
 	    SELECT  * 
 	    FROM 	( SELECT /*+INDEX_DESC(t_appliance pk_applianceNo) */ 
