@@ -20,7 +20,7 @@
        <tr>
          <th>아이디</th>
          <td class="chkMessage">
-        <input type="text" class="form-control" name="id" id="inputId" style="width: 35%" onkeyup="idCheck()">
+        <input type="text" class="form-control" name="id" id="inputId" style="width: 35%;" onkeyup="idCheck()">
         <span id="idChk"></span></td>
        </tr>
        <tr>
@@ -62,7 +62,7 @@
        </tr>
            <tr>
              <td colspan="2" align="center">
-		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="history.back()">취소</button>
+		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="location.href='/common/home'">취소</button>
 		      <button type="button" class="btn btn-primary" id="joinResult" onclick="confirm()">가입완료</button>
             </td>
            </tr>
@@ -73,7 +73,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/resources/js/idCheck.js"></script>
+<script type="text/javascript" src="/resources/js/joongBokCheck.js"></script>
 <script>
 var nameChk = false;
 var idChk = false;
@@ -122,7 +122,7 @@ function idCheck(){
 	    idCheckService.getId(id, function(result){
 	       if(id == result.id){
 	    	   document.getElementById('idChk').innerHTML = "<b><font color=red size=1px>이미 사용중인 아이디입니다.</font></b>";
-				idChk = false;
+				idChk = false;	
 	     	  idDBChk = false;
 	       } else{
 	    	   document.getElementById('idChk').innerHTML = "<b><font color='green' size=1px>사용가능한 아이디입니다.</font></b>";
@@ -184,8 +184,19 @@ function phoneCheck(){
 		document.getElementById('phoneChk').innerHTML="<b><font color=red size=1px>하이픈(-) 포함 13자 이내로 입력해주세요.</font></b>"
 		phoneChk = false;
 	} else {
-		document.getElementById('phoneChk').innerHTML="";
-		phoneChk = true;
+		
+		//핸드폰번호 중복확인
+	    phoneCheckService.getPhoneNumber(phoneNumber, function(result){
+	       if(phoneNumber == result.phoneNumber){
+	    	   document.getElementById('phoneChk').innerHTML = "<b><font color=red size=1px>이미 사용중인 핸드폰번호입니다.</font></b>";
+	    	   phoneChk = false;
+	    	   phoneDBChk = false;
+	       } else{
+	    	   document.getElementById('phoneChk').innerHTML = "<b><font color='green' size=1px>사용가능한 핸드폰번호입니다.</font></b>";
+	    	   phoneChk = true;
+	     	  phoneDBChk = true;
+	       }
+	    });
 	}
 }
 
@@ -196,8 +207,9 @@ function confirm() {
 	var birthChk = document.getElementById("inputBirth").value;
 	var addressChk = document.getElementById("inputAddress").value;
 	
-	if( nameChk==true && idChk==true && idDBChk && pwChk1==true && pwChk2==true && phoneChk==true && birthChk!="" && addressChk!="")
+	if( nameChk==true && idChk==true && idDBChk && pwChk1==true && pwChk2==true && phoneChk==true && phoneDBChk==true && birthChk!="" && addressChk!="") {
 		document.frm.submit();
+	}
 	else if((idChk == false) || (idDBChk == false)) {
 		alert('아이디를 확인해주세요');
 		document.frm.id.focus();

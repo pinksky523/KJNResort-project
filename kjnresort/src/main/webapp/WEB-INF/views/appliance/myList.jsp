@@ -3,10 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
-<%@ include file="../includes/adminHeader.jsp" %>
+<%@ include file="../includes/header.jsp" %>
 <div>
     <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
-        <h2>지원자 관리</h2>
+        <h2>지원내역 조회</h2>
     </div>
 </div>
 

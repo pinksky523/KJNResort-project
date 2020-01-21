@@ -22,7 +22,7 @@
 <div class="container">
 <div class="row">
     <div class="col-lg-5 col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-    	<form role="form" method="post" action="/login">
+    	<form role="form" name="frm" method="post" action="/login">
 			<fieldset>
 				<h3>로그인</h3>
 				<hr style="width: 100%; border: solid 2px lightgray;">
@@ -41,7 +41,7 @@
 						<a href="memberJoin" class="btn btn-lg btn-primary btn-block">회원가입</a>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-6">
-                        <input type="submit" class="btn btn-lg btn-success btn-block" value="로그인">
+                        <input type="button" onclick="confirm()" class="btn btn-lg btn-success btn-block" value="로그인">
 					</div>
 				</div>
 			</fieldset>
@@ -51,17 +51,11 @@
 </div>
 </div>
 <script>
-$(function(){	
 	var msg = '<c:out value="${msg}"/>';	
 	
 	//result 값이 있는지 확인하는 함수 호출
 	checkModal(msg);
 	history.replaceState({}, null, null);
-	
-	$(".btn-success").on("click", function(e){
-		e.preventDefault();
-		$("form").submit();
-	});
 	
 	
 	//메세지가 존재하면 alert창 띄우기
@@ -77,9 +71,29 @@ $(function(){
 		}
 		
 	}
-});
 	
-
+	
+	
+	//확인 후 submit
+	function confirm() {
+		
+		var idChk = document.getElementById("inputId").value;
+		var pwChk = document.getElementById("inputPassword").value;
+		
+		if( idChk!="" && pwChk!="") {
+			document.frm.submit();
+		}
+		else if(idChk == "") {
+			alert('아이디를 확인해주세요');
+			document.frm.username.focus();
+		} else if(pwChk == "") {
+			alert('비밀번호를 확인해주세요');
+			document.frm.password.focus();
+		} 
+	}
+	
+	
+	
 </script>
 </body>
 

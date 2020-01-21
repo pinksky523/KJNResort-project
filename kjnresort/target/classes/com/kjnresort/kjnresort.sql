@@ -24,12 +24,14 @@ DROP TABLE t_ticket CASCADE CONSTRAINTS;
 
 CREATE TABLE t_appliance
 (
+	applianceNo number NOT NULL,
 	id varchar2(20) NOT NULL,
 	recruitNo number NOT NULL,
 	career varchar2(800) NOT NULL,
 	introduction varchar2(2000) NOT NULL,
 	status varchar2(20) NOT NULL,
-	regDate date
+	regDate date,
+	PRIMARY KEY (applianceNo)
 );
 
 

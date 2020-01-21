@@ -1,17 +1,17 @@
 package com.kjnresort.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kjnresort.domain.AuthVO;
-import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
 import com.kjnresort.service.MemberService;
 
@@ -50,14 +50,13 @@ public class CommonController {
 	@PostMapping({"findId"})
 	public String findIdPost(@Param("name") String name, @Param("phoneNumber") String phoneNumber, RedirectAttributes rttr) {
 		
-		if (service.findId(name, phoneNumber) == null) {
+		String id = service.findId(name, phoneNumber);
+		
+		if (id == null) {
 			rttr.addFlashAttribute("msg", "일치하는 회원정보가 없습니다.");
 			return "redirect:/common/findId";
-		} else if (service.findId(name, phoneNumber).contains("admin")) {
-			rttr.addFlashAttribute("msg", "관리자 계정은 찾을 수 없습니다.");
-			return "redirect:/common/findId";
 		} else {
-			rttr.addFlashAttribute("msg", "회원님의 ID는 " + service.findId(name, phoneNumber) + " 입니다.");
+			rttr.addFlashAttribute("msg", "회원님의 ID는 " + id + " 입니다.");
 			return "redirect:/common/customLogin";
 		}
 		
@@ -69,14 +68,39 @@ public class CommonController {
 	}
 	
 	@PostMapping({"findPw"})
-	public String get(String id, String name, String phoneNumber, Model model) {
-//		model.addAttribute("findPw", service.get(id));
+	public String findPwPost(@Param("id") String id, @Param("name") String name, 
+			@Param("phoneNumber") String phoneNumber, RedirectAttributes rttr, Model model) {
 		
-		return "redirect:/common/pwModify";
+		//값이 존재하는지만 확인위해 regDate 반환
+		String regDate = service.findPw(id, name, phoneNumber);
+		
+		if (regDate == null) {
+			rttr.addFlashAttribute("msg", "일치하는 회원정보가 없습니다.");
+			return "redirect:/common/findPw";
+		} else {
+			rttr.addFlashAttribute("msg", "비밀번호 변경페이지로 이동합니다.");
+			rttr.addFlashAttribute("id", id);
+			return "redirect:/common/pwModify";
+		}
 	}
 	
 	@GetMapping({"pwModify"})
-	public void get(String name, Model model) {
+	public void pwModifyGet(HttpServletRequest request, Model model) {
+		log.info("비밀번호변경 창 진입");
+	}
+	
+	@PostMapping({"pwModify"})
+	public String pwModifyPost(MemberVO member, RedirectAttributes rttr) {
+		
+		boolean result = service.pwModify(member);
+		
+		if (result == true) {
+			rttr.addFlashAttribute("msg", "비밀번호가 변경되었습니다. 다시 로그인해주세요.");
+			return "redirect:/common/customLogin";
+		} else {
+			rttr.addFlashAttribute("msg", "비밀번호 변경 실패. 다시 시도해주세요.");
+			return "redirect:/common/findPw";
+		}
 	}
 	
 	

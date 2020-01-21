@@ -5,9 +5,7 @@
 <mapper namespace="com.kjnresort.mapper.RecruitMapper">
 
 	<select id="getList" resultType="com.kjnresort.domain.RecruitVO">
-		<![CDATA[
-			SELECT * FROM t_recruit ORDER BY recruitNo DESC
-		]]>
+		SELECT * FROM t_recruit ORDER BY recruitNo DESC
 	</select>
 	
 	<insert id="insert">

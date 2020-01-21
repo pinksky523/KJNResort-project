@@ -3,10 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../includes/header.jsp" %>    
-<br><br><br><br><br>
-	<h2 text-align="center">이용권 구매</h2>
+<br><br><br>
+	<div class="col-lg-12" style="padding-top: 120px; text-align: center;">
+        <h2>이용권 구매</h2>
+    </div>
 	<hr>
-	<form id="buyForm" method="post" action="buyTicketKakao">
+	<form id="buyForm" method="get" action="buyTicketKakao">
    <table width="100%" style="padding:5px 0 5px 0; ">
    	
       <tr>
@@ -18,7 +20,7 @@
       <tr>
          <th><span id="liftAmount">수량 선택
          
-        <select name="liftAmount" class="form-control" id="Amount"  style="width: 70%" onchange="getValue(this)">
+        <select name="liftAmount" class="form-control" id="Amount"  style="width: 70%">
         	<option value="1">1 </option>
         	<option value="2">2 </option>
         	<option value="3">3 </option>
@@ -35,7 +37,7 @@
        <tr>
          <th> <span id="toolAmount">수량 선택
          
-        <select name="toolAmount" class="form-control" id="Amount"  style="width: 70%" onchange="getToolValue(this)">
+        <select name="toolAmount" class="form-control" id="Amount"  style="width: 70%">
         	<option value="1">1</option>
         	<option value="2">2</option>
         	<option value="3">3</option>
@@ -45,12 +47,14 @@
        </tr>
        <tr>
        		<th>총금액</th>
-       		<td><span name="totalPrice" id="text1"></span></td>
+       		<td><span name="totalPrice" id="text1">110000원</span></td>
 
        </tr>
        <tr>
          <td colspan="2" align="right">
-		    <button type="submit" class="btn btn-primary" id="formButton">다음</button>
+         	<input type="hidden" name="id" value="user00">
+         	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		    <button type="submit" class="btn btn-primary" id="buyForm">다음</button>
          </td>
        </tr>
     </table>
@@ -75,23 +79,23 @@
 
 $(function(){	
 	
- 	$("select[id=Amount]").change(function(obj){
+	$("select[id=Amount]").change(function(obj){
  		var str = document.getElementById("text1");
- 		var lift = $("select[name=liftAmount]").val() * ${tPrice.price};
- 		var tool = $("select[name=toolAmount]").val() * ${ttPrice.price};
- 		document.getElementById("text1").innerHTML = (lift + tool);
- 		/* alert("총금액 : " + (lift + tool)); */
-	}) 
+ 		var lift = ($("select[name=liftAmount]").val() * ${tPrice.price});
+ 		var tool = ($("select[name=toolAmount]").val() * ${ttPrice.price});
+ 		
+ 		document.getElementById("text1").innerHTML = (lift + tool) + "원";
+	}); 
 	
 	// 라디오버튼 클릭시 이벤트 발생
 	$("input:radio[name=lift]").click(function(){
 		 
         if($("input[name=lift]:checked").val() == "1"){
-            $("#liftAmount").attr("hidden",false);
+            $("#liftAmount").attr("remove",false);
             // radio 버튼의 value 값이 1이라면 활성화
  
         }else if($("input[name=lift]:checked").val() == "0"){
-              $("#liftAmount").attr("hidden",true);
+              $("#liftAmount").attr("remove",true);
             // radio 버튼의 value 값이 0이라면 비활성화
         }
     });
@@ -111,6 +115,22 @@ $(function(){
     
 });
 
+	/* $("select[id=Amount]").change(function(obj){
+ 		var str = document.getElementById("text1");
+ 		var lift = ($("select[name=liftAmount]").val() * ${tPrice.price});
+ 		var tool = ($("select[name=toolAmount]").val() * ${ttPrice.price});
+ 		if($("input[name=lift]:checked").val() == "1" || $("input[name=tool]:checked").val() == "1"){
+ 			document.getElementById("text1").innerHTML = (lift + tool) + "원";
+ 		} else if("input[name=lift]:checked").val() == "1" || $("input[name=tool]:checked").val() == "0") {
+ 			document.getElementById("text1").innerHTML = lift + "원";
+ 		} else if("input[name=lift]:checked").val() == "0" || $("input[name=tool]:checked").val() == "1") {
+		document.getElementById("text1").innerHTML = tool + "원";
+		} else {
+			document.getElementById("text1").innerHTML = "이용권을 선택해 주세요.";
+		}
+ 		
+	});  */
+	
 </script>
 
 

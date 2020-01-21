@@ -24,26 +24,33 @@ public class ApplianceServiceImpl implements ApplianceService {
 
 	@Override
 	public List<ApplianceVO> getList(Criteria cri) {
-		log.info("getList with paging.......");
+		log.info("회원 지원내역 조회");
 		return mapper.getListWithPaging(cri);
+	}
+	
+	@Override
+	public List<ApplianceVO> getList() {
+		log.info("나의 지원내역 조회");
+		return mapper.getList();
 	}
 
 	@Override
-	public ApplianceVO get(String phoneNumber) {
-		log.info("get.......");
-		return mapper.read(phoneNumber);
+	public ApplianceVO get(Long applianceNo) {
+		log.info("게시글 조회");
+		return mapper.read(applianceNo);
 	}
 
 	@Override
 	public void register(ApplianceVO appliance) {
-		log.info("register........ : " + appliance);
+		log.info("지원서 등록 : " + appliance);
 		mapper.insert(appliance);
 	}
 
 	@Override
 	public boolean modify(ApplianceVO appliance) {
-		log.info("modify....... : " + appliance);
+		log.info("지원서 임시저장 : " + appliance);
 		return mapper.update(appliance) == 1;
 	}
+
 
 }
