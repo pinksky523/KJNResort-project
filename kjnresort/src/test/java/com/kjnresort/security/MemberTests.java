@@ -25,13 +25,8 @@ public class MemberTests {
    @Setter(onMethod_ = @Autowired)
    private DataSource ds;
    
-<<<<<<< HEAD
-//   @Test
-   public void testInsertMember() {
-=======
    @Test
    public void testA() {
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
       
       String query = "insert into "
             + "t_member(id, pw, name, phoneNumber, birth, address, status)"
@@ -75,12 +70,8 @@ public class MemberTests {
       }
    }
    
-   @Test
-<<<<<<< HEAD
-   public void testInsertAuth() {
-=======
+
    public void testB() {
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
       String query = "insert into t_member_auth (id, auth) values(?, ?)";
          
          try(Connection con = ds.getConnection(); 
