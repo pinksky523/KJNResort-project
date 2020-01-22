@@ -2,6 +2,7 @@ package com.kjnresort.service;	//이 패키지를 스프링이 자동스캔하�
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -147,15 +148,17 @@ public class MemberServiceImpl implements MemberService {
 	//내가 쓴 리뷰 목록 페이징
 	@Transactional
 	@Override
-	public List<ReviewVO> myreviewList(String id, Criteria cri) {
+	public List<ReviewVO> myreviewList(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount) {
 		log.info("내가 쓴 리뷰 목록 서비스임플 진입");
-		return mapper.myreviewList(id, cri);
+		return mapper.myreviewList(id, pageNum, amount);
 	}
 	
 	//내가 쓴 리뷰 전체개수 가져오기
 	@Transactional
 	@Override
-	public int getTotalMyReview(String id, Criteria cri) {
+	public int getTotalMyReview(@Param("id") String id, Criteria cri) {
+		log.info("내가 쓴 리뷰 전체개수 서비스임플 진입");
+		
 		return mapper.getTotalMyReview(id, cri);
 	}
 	

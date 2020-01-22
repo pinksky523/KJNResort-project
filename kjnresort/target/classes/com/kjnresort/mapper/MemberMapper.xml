@@ -8,12 +8,10 @@
 	<select id="getTotalMyReview" resultType="int">
 		<![CDATA[
 		SELECT COUNT(*)
-		FROM tbl_board
-		WHERE bno > 0
+		FROM t_review
+		WHERE reviewNo > 0 AND id = #{id}
 		]]>
 	</select>
-	
-	
 	
 	
 	
@@ -24,16 +22,13 @@
 		<![CDATA[
 		SELECT *
 		FROM(
-			SELECT /*+INDEX_DESC(tbl_board pk_board)*/
-				ROWNUM rn, bno, title, content, writer, regdate, updatedate, replycnt
-			FROM tbl_board
+			SELECT /*+INDEX_DESC(t_review SYS_C0011654)*/
+				ROWNUM rn, reviewNo, category, title, id, regdate, viewCnt
+			FROM t_review
 			WHERE
-		]]>
-			
-		<![CDATA[
 			ROWNUM <= #{pageNum} * #{amount}
 		)
-		WHERE rn > (#{pageNum}-1) * #{amount}
+		WHERE rn > (#{pageNum}-1) * #{amount} AND id = #{id}
 		]]>
 	</select>
 	

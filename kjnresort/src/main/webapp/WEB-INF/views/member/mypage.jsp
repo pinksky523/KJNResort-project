@@ -198,14 +198,10 @@ $('button').click(function(e) {
 		modify();
 	} else if (oper === 'review') {
 		frm.attr('action', '/member/myreview');
-		myReview();
+		
+		document.frm.submit();
 	}
 });
-
-//내가 쓴 리뷰 버튼 클릭이벤트
-function myReview() {
-	
-}
 
 
 

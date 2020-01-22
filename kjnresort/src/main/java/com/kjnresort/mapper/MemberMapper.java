@@ -30,6 +30,6 @@ public interface MemberMapper {
 	public boolean mypageUpdate(MemberVO member);	//마이페이지 수정
 	public boolean mypageUpdate2(MemberVO member);	//마이페이지 비밀번호 제외 수정
 	public int delete(MemberVO member);			//마이페이지 회원탈퇴
-	public List<ReviewVO> myreviewList(String id, Criteria cri);		//내가 쓴 리뷰 목록
-	public int getTotalMyReview(String id, Criteria cri);		//전체 게시물 가져오기
+	public List<ReviewVO> myreviewList(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount);		//내가 쓴 리뷰 목록
+	public int getTotalMyReview(@Param("id") String id, Criteria cri);		//전체 게시물 가져오기
 }

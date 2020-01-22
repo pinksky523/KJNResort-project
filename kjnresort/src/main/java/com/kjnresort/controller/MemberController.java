@@ -3,6 +3,7 @@ package com.kjnresort.controller;
 
 
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,11 +28,14 @@ public class MemberController {
 	private MemberService service;
 	
 	
-	@GetMapping("myreview")
-	public void list(String id, Criteria cri, Model model) {
+	@PostMapping("myreview")
+	public void list(@Param("id") String id, Criteria cri, Model model) {
 		log.info("내가 쓴 후기 창 진입");
-		log.info("MemberController list()" + cri);
-		model.addAttribute("list", service.myreviewList(id, cri));
+		log.info("내가쓴후기 컨트롤러 id 값체크 : " + id);
+		log.info("내가쓴후기 컨트롤러 cri 값체크 : " + cri);
+		int pageNum = cri.getPageNum();
+		int amount = cri.getAmount();
+		model.addAttribute("list", service.myreviewList(id, pageNum, amount));
 		
 		int total = service.getTotalMyReview(id, cri);
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
