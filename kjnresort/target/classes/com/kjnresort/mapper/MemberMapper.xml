@@ -4,6 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kjnresort.mapper.MemberMapper">
 	
+	<!-- 마이페이지 비밀번호 공백일경우 비밀번호만 제외하고 수정 -->
+	<update id="mypageUpdate2">
+		UPDATE t_member SET phoneNumber = #{phoneNumber}, address = #{address} WHERE id = #{id}
+	</update>
+	
+	
 	<!-- 마이페이지 수정 -->
 	<update id="mypageUpdate">
 		UPDATE t_member SET pw = #{pw}, phoneNumber = #{phoneNumber}, address = #{address} WHERE id = #{id}

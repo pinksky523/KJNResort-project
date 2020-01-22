@@ -40,7 +40,7 @@ public class MemberTests {
            pstmt.setString(2, pwencoder.encode("1111"));
            pstmt.setString(3, "관리자");
            pstmt.setString(4, "000-0000-0000");
-           pstmt.setString(5, "11/11/11");
+           pstmt.setString(5, "2000-11-11");
            pstmt.setString(6, "서울특별시 마포구 월드컵북로 21 풍성빌딩 4층");
            pstmt.setInt(7, 1);
            pstmt.executeUpdate();
@@ -50,7 +50,7 @@ public class MemberTests {
            pstmt.setString(2, pwencoder.encode("1111"));
            pstmt.setString(3, "일반회원");
            pstmt.setString(4, "111-1111-1111");
-           pstmt.setString(5, "11/11/11");
+           pstmt.setString(5, "2011-11-11");
            pstmt.setString(6, "서울특별시 마포구 월드컵북로 21 풍성빌딩 4층");
            pstmt.setInt(7, 1);
            pstmt.executeUpdate();
@@ -60,7 +60,7 @@ public class MemberTests {
            pstmt.setString(2, pwencoder.encode("1111"));
            pstmt.setString(3, "정지회원");
            pstmt.setString(4, "222-2222-2222");
-           pstmt.setString(5, "11/11/11");
+           pstmt.setString(5, "2012-11-11");
            pstmt.setString(6, "서울특별시 마포구 월드컵북로 21 풍성빌딩 4층");
            pstmt.setInt(7, 0);
            pstmt.executeUpdate();

@@ -32,9 +32,13 @@ public class MemberController {
 	}
 	
 	@PostMapping("mypage")
-	public void mypagePost(MemberVO member, RedirectAttributes rttr) {
+	public String mypagePost(MemberVO member, RedirectAttributes rttr) {
 		if(service.modifyMypage(member)) {
 			rttr.addFlashAttribute("msg", "정보가 수정되었습니다.");
+		} else {
+			rttr.addFlashAttribute("msg", "정보 수정 실패");
 		}
+		
+		return "redirect:/member/mypage?id=" + member.getId();
 	}
 }

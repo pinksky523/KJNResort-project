@@ -22,7 +22,7 @@
       
        <tr>
          <th>아이디</th>
-         <td><input type="text" class="form-control" name="id" id="inputId" value="${member.id}" readonly></td>
+         <td><input type="text" name="id" class="form-control" id="inputId" value="${member.id}" readonly></td>
        </tr>
        <tr>
          <th> 이름</th>
@@ -45,7 +45,7 @@
        </tr>
         <tr>
          <th>생년월일</th>
-         <td><input type="text" class="form-control" id="inputBirth" value="${member.birth}" readonly></td>
+         <td><input type="date" class="form-control" id="inputBirth" value="${member.birth}" readonly></td>
        </tr>															
        <tr>
          <th>성별</th>
@@ -69,12 +69,12 @@
        </tr>
        <tr>
          <th>가입일자</th>
-         <td><input type="text" class="form-control" name="regDate" id="inputRegDate" value='<fmt:formatDate value="${member.regDate}" pattern="yyyy년 MM월 dd일"/>' readonly>
+         <td><input type="date" class="form-control" id="inputRegDate" value='<fmt:formatDate value="${member.regDate}" pattern="yyyy-MM-dd"/>' readonly>
        	 <span id="phoneChk"></span></td>
        </tr>
            <tr>
              <td colspan="3" align="center">
-		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="location.href='/common/home'">취소</button>
+		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="location.href='/common/home'">메인화면으로</button>
 		      <button type="button" class="btn btn-warning" id="joinResult" onclick="confirm()">수정</button>
             </td>
            </tr>
@@ -83,14 +83,16 @@
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
           </form>
 
-
+	
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/resources/js/joongBokCheck.js"></script>
+<script type="text/javascript" src="/resources/js/mypage.js"></script>
 <script>
-var pwChk1 = false;
-var pwChk2 = false;
+var pwChk1 = true;
+var pwChk2 = true;
 var phoneChk = true;
+
 
 var msg = '<c:out value="${msg}"/>';	
 
@@ -121,7 +123,7 @@ function passwordCheck1(){
 	var pw = document.getElementById('inputPassword').value;
 	if(pw.length == 0 || pw == "") {
 		document.getElementById('pwChk1').innerHTML="";
-		pwChk1 = false;
+		pwChk1 = true;
 	} else if(((pw.length < 8) || (pw.length > 15))){
 		document.getElementById('pwChk1').innerHTML="<b><font color=red size=2px>8 - 15자 이내로 입력해주세요.</font></b>"
 		pwChk1 = false;
@@ -139,7 +141,10 @@ function passwordCheck2(){
 	var pw = document.getElementById('inputPassword').value;
 	var pwChk = document.getElementById('inputPasswordChk').value;
 	
-	if(pw != pwChk){
+	if(pwChk.length == 0 || pwChk == "") {
+		document.getElementById('pwChk2').innerHTML="";
+		pwChk2 = true;
+	} else if(pw != pwChk){
 		document.getElementById('pwChk2').innerHTML="<b><font color=red size=2px>비밀번호가 일치하지 않습니다.</font></b>"
 		pwChk2 = false;
 	} else if(pw == pwChk){

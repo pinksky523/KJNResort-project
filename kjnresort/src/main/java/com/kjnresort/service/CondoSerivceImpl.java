@@ -15,10 +15,23 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class CondoSerivceImpl implements CondoService {
 		CondoMapper mapper;
+		
+		@Override
+		public CondoVO get(String roomType) {
+			return mapper.get(roomType);
+		}
+
+		@Override
 		public int modify(CondoVO cmvo) {
+			// TODO Auto-generated method stub
 			return 0;
 		}
-		public List<Integer> getPriceList(){
+
+		@Override
+		public List<Integer> getPriceList() {
+			// TODO Auto-generated method stub
 			return null;
 		}
+		
+		
 }

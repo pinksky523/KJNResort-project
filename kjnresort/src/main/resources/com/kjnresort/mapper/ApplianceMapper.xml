@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kjnresort.mapper.ApplianceMapper">
 
-	  <!-- 쿼리 보관 -->
-	  <sql id="criteria">
+	<!-- 쿼리 보관 -->
+	<sql id="criteria">
 	  	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 			<foreach collection="typeArr" item='type'>
 				<trim prefix="OR">
@@ -29,7 +29,7 @@
 	   <![CDATA[
 	    SELECT  * 
 	    FROM 	( SELECT /*+INDEX_DESC(t_appliance pk_applianceNo) */ 
-	    				 rownum rn, applianceNo, name, regDate, phoneNumber
+	    				 rownum rn, applianceNo, id
 	    		  FROM   t_appliance
 	    		  WHERE  
 	   ]]>
@@ -48,7 +48,7 @@
 	   ]]> 	
 	   	<!-- 보관해 둔 쿼리 사용 -->
 		<include refid="criteria"></include>
-	   <![CDATA[  recruitNo > 0
+	   <![CDATA[  applianceNo > 0
 	   ]]>
 	</select>
 
@@ -57,8 +57,8 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO t_recruit(recruitNo, id, title, content, status, deadLine)
-		VALUES(seq_t_recruit.NEXTVAL, #{id}, #{title}, #{content}, #{status}, #{deadLine})
+		INSERT INTO t_appliance(applianceNo, id, recruitNo, career, introduction, status)
+		VALUES(seq_t_appliance.NEXTVAL, #{id}, #{recruitNo}, #{career}, #{introduction}, #{status})
 	</insert>
 	
 	<select id="read" resultType="com.kjnresort.domain.ApplianceVO">

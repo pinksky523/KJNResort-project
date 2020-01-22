@@ -2,20 +2,23 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ include file="../includes/header.jsp" %>
 
- <div class="row">
-     <div class="col-lg-12">
-         <h1 class="page-header">모집공고 게시판 관리</h1>
-     </div>
- </div>
+<div>
+    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
+        <h2>모집공고 게시글 수정</h2>
+    </div>
+</div>
  
 <div class="row">
-     <div class="col-lg-12">
-         <div class="panel panel-default">
-             <div class="panel-heading">
-             	게시글 수정
-             </div> <!-- /.panel-heading -->
+    <div class="col-lg-12" style="padding-bottom: 20px">
+        <div>
+            <div style="text-align: center;">
+                KJN리조트와 함께 할 패기 넘치는 인재를 기다립니다.
+            </div>
+            <hr style="width: 70%">
+            <!-- /.panel-heading -->
              <div class="panel-body">
   				<form method="post" action="/recruit/modify" name="frm">
 	             	<div class="form-group">
@@ -29,7 +32,7 @@
 		                <input class="form-control" name="status" id="inputStatus" value="${recruit.status }" ></div>
 		            <div class="form-group">
 		                <label>접수마감: </label>
-		                <input type="date" class="form-control" name="deadLine" id="inputDeadLine" value="${recruit.deadLine}" ></div>
+		                <input type="date" class="form-control" name="deadLine" id="inputDeadLine" value="${recruit.deadLine}"/></div>
 		            <div class="form-group">
 	                    <label>내용: </label>
 	                    <textarea class="form-control" rows="8" name="content" id="inputContent">${recruit.content }</textarea></div>
@@ -45,7 +48,6 @@
 
 <script>
 function modify() {
-	
 		var titleChk = document.getElementById("inputTitle").value;
 		var statusChk = document.getElementById("inputStatus").value;
 		var deadLineChk = document.getElementById("inputDeadLine").value;

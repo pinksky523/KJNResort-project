@@ -141,7 +141,7 @@ CREATE TABLE t_recruit
 	content varchar2(4000) NOT NULL,
 	regDate date DEFAULT sysdate,
 	status varchar2(20) NOT NULL,
-	deadLine date NOT NULL,
+	deadLine varchar2(20) NOT NULL,
 	PRIMARY KEY (recruitno)
 );
 

@@ -4,12 +4,12 @@ import lombok.Data;
 
 @Data
 public class CondoVO { //콘도브이오
-	private String roomType;
-	private String location;
-	private String building;
-	private String bed;
-	private int accept;
-	private int price;
+	public String roomType;
+	public String location;
+	public String building;
+	public String bed;
+	public int accept;
+	public int price;
 	
 	
 	
