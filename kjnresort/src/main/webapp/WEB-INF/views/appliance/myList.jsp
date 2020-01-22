@@ -19,30 +19,34 @@
             <hr style="width: 70%">
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   
-                    <thead class="thead-light">
-                        <tr>
-                            <th>이름</th>
-                            <th>핸드폰 번호</th>
-                            <th>지원상태</th>
-                            <th>제출일</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${list}" var="appliance">
-                        <tr>
-                            <td>${appliance.name}</td>
-                            <td>${appliance.phoneNumber}</td>
-                            <td>${appliance.status}</</td>
-                           	<td><fmt:formatDate value="${appliance.regDate}" pattern="yy-MM-dd"/></td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table><!-- END 게시물 출력 테이블 -->
-                <button id="regBtn" type="button" class="btn btn-primary pull-right">
-          			지원서 작성	
-          		</button> 
-   
+            	<sec:authentication property="principal" var="pinfo"/>
+            	<sec:authorize access="isAuthenticated()">
+	                <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   
+	                    <thead class="thead-light">
+	                        <tr>
+	                            <th>이름</th>
+	                            <th>핸드폰 번호</th>
+	                            <th>지원상태</th>
+	                            <th>제출일</th>
+	                        </tr>
+	                    </thead>
+	                    <tbody>
+	                    <c:forEach items="${list}" var="appliance">
+	                   	 <c:if test="${pinfo.username eq appliance.id }">
+	                        <tr>
+	                            <td>${appliance.name}</td>
+	                            <td>${appliance.phoneNumber}</td>
+	                            <td>${appliance.status}</</td>
+	                           	<td><fmt:formatDate value="${appliance.regDate}" pattern="yy-MM-dd"/></td>
+	                        </tr>
+	                      </c:if>
+	                    </c:forEach>
+	                    </tbody>
+	                </table><!-- END 게시물 출력 테이블 -->
+	                <button id="regBtn" type="button" class="btn btn-primary pull-right">
+	          			지원서 작성	
+	          		</button>
+   				</sec:authorize>
             </div>
             <!-- /.panel-body -->
         </div>
