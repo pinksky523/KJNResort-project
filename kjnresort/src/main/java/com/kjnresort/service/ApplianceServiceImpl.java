@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
+import com.kjnresort.domain.RecruitVO;
 import com.kjnresort.domain.ApplianceVO;
 import com.kjnresort.mapper.ApplianceMapper;
 
@@ -42,7 +43,7 @@ public class ApplianceServiceImpl implements ApplianceService {
 	}
 
 	@Override
-	public void register(MemberVO member, ApplianceVO appliance) {
+	public void register(ApplianceVO appliance) {
 		log.info("지원서 등록 : " + appliance);
 		mapper.insert(appliance);
 	}
@@ -51,6 +52,16 @@ public class ApplianceServiceImpl implements ApplianceService {
 	public boolean modify(ApplianceVO appliance) {
 		log.info("지원서 임시저장 : " + appliance);
 		return mapper.update(appliance) == 1;
+	}
+
+	@Override
+	public MemberVO memberGet(MemberVO member) {
+		return mapper.memberRead(member);
+	}
+
+	@Override
+	public RecruitVO recruitGet(Long recruitNo) {
+		return mapper.recruitRead(recruitNo);
 	}
 
 

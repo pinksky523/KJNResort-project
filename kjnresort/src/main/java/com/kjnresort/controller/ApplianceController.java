@@ -26,16 +26,18 @@ public class ApplianceController {
 	private ApplianceService service;
 	
 	@GetMapping("/register")
-	public void register() {
+	public void register(MemberVO member, Long recruitNo, Model model) {
 		log.info("지원서 등록창 진입");
+		model.addAttribute("member", service.memberGet(member));
+		model.addAttribute("recruit", service.recruitGet(recruitNo));
 	}
 	
 	@PostMapping("/register")
-	public String register(MemberVO member, ApplianceVO appliance, RedirectAttributes rttr) {
-		service.register(member, appliance);
+	public String register(ApplianceVO appliance, RedirectAttributes rttr) {
+		service.register(appliance);
 		log.info("지원서 등록");
 		rttr.addFlashAttribute("result", appliance.getRecruitNo());		// 등록된 게시글의 recruitNo를 result값에 담아서 redirect로 넘겨준다.
-		return "redirect:/appliance/list";
+		return "redirect:/appliance/myList";
 	}
 	
 	@PostMapping("/save")
@@ -44,13 +46,13 @@ public class ApplianceController {
 		return null;
 	}
 	
-	@GetMapping("/myList")										// 나의 지원내역 리스트(사용자)
+	@GetMapping("/myList")												// 나의 지원내역 리스트(사용자)
 	public void list(Model model) {
 		log.info("나의 지원내역 조회");
 		model.addAttribute("list", service.getList());
 	}
 	
-	@GetMapping("/get")											// 지원서 상세조회(관리자)
+	@GetMapping("/get")													// 지원서 상세조회(관리자)
 	public void get(@RequestParam("applianceNo") Long applianceNo, Model model, @ModelAttribute("cri") Criteria cri) {
 		log.info("지원서 상세조회");
 		model.addAttribute("appliance", service.get(applianceNo));

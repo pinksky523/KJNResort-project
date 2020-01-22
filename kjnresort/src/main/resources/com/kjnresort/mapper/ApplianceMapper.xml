@@ -3,6 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kjnresort.mapper.ApplianceMapper">
+	
+	<!-- 회원 정보 조회 -->
+	<select id="memberRead" resultType="com.kjnresort.domain.MemberVO">
+		SELECT * FROM t_member WHERE id = #{id}
+	</select>
+	<!-- 지원서 정보 조회 -->
+	<select id="recruitRead" resultType="com.kjnresort.domain.RecruitVO">
+		SELECT * FROM t_recruit
+	</select>
 
 	<!-- 쿼리 보관 -->
 	<sql id="criteria">
@@ -57,8 +66,8 @@
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO t_appliance(applianceNo, id, recruitNo, career, introduction, status)
-		VALUES(seq_t_appliance.NEXTVAL, #{id}, #{recruitNo}, #{career}, #{introduction}, #{status})
+		INSERT INTO t_appliance(applianceNo, id, name, phoneNumber, address, recruitNo, career, introduction, status, regDate)
+		VALUES(seq_t_appliance.NEXTVAL, #{id}, #{name}, #{phoneNumber}, #{address}, #{recruitNo}, #{career}, #{introduction}, '제출완료', sysdate)
 	</insert>
 	
 	<select id="read" resultType="com.kjnresort.domain.ApplianceVO">
