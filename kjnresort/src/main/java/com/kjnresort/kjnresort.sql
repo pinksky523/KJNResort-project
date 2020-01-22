@@ -90,8 +90,8 @@ CREATE TABLE t_member
 	id varchar2(20) NOT NULL,
 	pw varchar2(100) NOT NULL,
 	name varchar2(20) NOT NULL,
-	phoneNumber varchar2(15) NOT NULL,
-	birth date NOT NULL,
+	phoneNumber varchar2(15) NOT NULL UNIQUE,
+	birth varchar2(20) NOT NULL,
 	gender char(1) DEFAULT 'M' NOT NULL,
 	address varchar2(200) NOT NULL,
 	status number(1) DEFAULT 1 NOT NULL,
@@ -141,7 +141,7 @@ CREATE TABLE t_recruit
 	content varchar2(4000) NOT NULL,
 	regDate date DEFAULT sysdate,
 	status varchar2(20) NOT NULL,
-	deadLine date NOT NULL,
+	deadLine varchar2(20) NOT NULL,
 	PRIMARY KEY (recruitno)
 );
 

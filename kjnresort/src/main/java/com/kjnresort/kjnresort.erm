@@ -12,7 +12,7 @@
 	<category_index>0</category_index>
 	<zoom>0.75</zoom>
 	<x>0</x>
-	<y>31</y>
+	<y>27</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -135,7 +135,11 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2020-01-14 10:44:44</creation_date>
-			<updated_date>2020-01-21 12:28:59</updated_date>
+<<<<<<< HEAD
+			<updated_date>2020-01-22 00:28:39</updated_date>
+=======
+			<updated_date>2020-01-22 10:00:51</updated_date>
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -282,7 +286,7 @@
 		</word>
 		<word>
 			<id>7</id>
-			<length>null</length>
+			<length>20</length>
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
@@ -294,7 +298,7 @@
 			<description></description>
 			<logical_name>생년월일</logical_name>
 			<physical_name>birth</physical_name>
-			<type>date</type>
+			<type>varchar(n)</type>
 		</word>
 		<word>
 			<id>8</id>
@@ -458,7 +462,7 @@
 		</word>
 		<word>
 			<id>18</id>
-			<length>null</length>
+			<length>20</length>
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
@@ -470,7 +474,7 @@
 			<description></description>
 			<logical_name>마감일자</logical_name>
 			<physical_name>deadLine</physical_name>
-			<type>date</type>
+			<type>varchar(n)</type>
 		</word>
 		<word>
 			<id>19</id>
@@ -853,7 +857,7 @@
 			<char_semantics>false</char_semantics>
 			<description></description>
 			<logical_name>작성일시</logical_name>
-			<physical_name>regDate</physical_name>
+			<physical_name>regdate</physical_name>
 			<type>date</type>
 		</word>
 		<word>
@@ -885,7 +889,7 @@
 			<char_semantics>false</char_semantics>
 			<description></description>
 			<logical_name>작성일시</logical_name>
-			<physical_name>regdate</physical_name>
+			<physical_name>regDate</physical_name>
 			<type>date</type>
 		</word>
 		<word>
@@ -1499,7 +1503,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>73</word_id>
+					<word_id>74</word_id>
 					<id>1</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1532,7 +1536,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>71</word_id>
+					<word_id>70</word_id>
 					<id>2</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1565,7 +1569,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>23</word_id>
+					<word_id>22</word_id>
 					<id>3</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1662,7 +1666,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>35</word_id>
+					<word_id>34</word_id>
 					<id>5</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1782,7 +1786,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>74</word_id>
+					<word_id>73</word_id>
 					<id>7</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1815,7 +1819,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>70</word_id>
+					<word_id>71</word_id>
 					<id>8</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1848,7 +1852,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>22</word_id>
+					<word_id>23</word_id>
 					<id>9</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2001,7 +2005,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>65</word_id>
+					<word_id>63</word_id>
 					<id>12</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2034,7 +2038,11 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>15</word_id>
+<<<<<<< HEAD
+					<word_id>14</word_id>
+=======
+					<word_id>17</word_id>
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project
 					<id>13</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2067,7 +2075,11 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>43</word_id>
+<<<<<<< HEAD
+					<word_id>44</word_id>
+=======
+					<word_id>42</word_id>
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project
 					<id>14</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2139,7 +2151,7 @@
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>date</type>
+					<type>varchar(n)</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -2286,7 +2298,11 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>66</word_id>
+<<<<<<< HEAD
+					<word_id>64</word_id>
+=======
+					<word_id>62</word_id>
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project
 					<id>19</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2385,7 +2401,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>75</word_id>
+					<word_id>77</word_id>
 					<id>22</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2538,7 +2554,11 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>64</word_id>
+<<<<<<< HEAD
+					<word_id>65</word_id>
+=======
+					<word_id>63</word_id>
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project
 					<id>25</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2571,7 +2591,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>16</word_id>
+					<word_id>15</word_id>
 					<id>26</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2604,7 +2624,11 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>42</word_id>
+<<<<<<< HEAD
+					<word_id>43</word_id>
+=======
+					<word_id>41</word_id>
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project
 					<id>27</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2637,7 +2661,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>77</word_id>
+					<word_id>76</word_id>
 					<id>28</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2899,7 +2923,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>34</word_id>
+					<word_id>35</word_id>
 					<id>35</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3052,7 +3076,11 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>62</word_id>
+<<<<<<< HEAD
+					<word_id>66</word_id>
+=======
+					<word_id>64</word_id>
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project
 					<id>38</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3085,7 +3113,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>17</word_id>
+					<word_id>16</word_id>
 					<id>39</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3118,7 +3146,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>44</word_id>
+					<word_id>42</word_id>
 					<id>40</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3624,7 +3652,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>51</word_id>
+					<word_id>52</word_id>
 					<id>53</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -4019,7 +4047,11 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>63</word_id>
+<<<<<<< HEAD
+					<word_id>62</word_id>
+=======
+					<word_id>66</word_id>
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project
 					<id>61</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -4052,7 +4084,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>14</word_id>
+					<word_id>17</word_id>
 					<id>62</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -4085,7 +4117,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>41</word_id>
+					<word_id>43</word_id>
 					<id>63</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -4118,7 +4150,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>76</word_id>
+					<word_id>75</word_id>
 					<id>64</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -4558,7 +4590,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>52</word_id>
+					<word_id>51</word_id>
 					<id>75</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -4734,7 +4766,7 @@
 					<foreign_key>false</foreign_key>
 					<not_null>true</not_null>
 					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
+					<unique_key>true</unique_key>
 					<character_set></character_set>
 					<collation></collation>
 					<sequence>
@@ -4760,7 +4792,7 @@
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>date</type>
+					<type>varchar(n)</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>

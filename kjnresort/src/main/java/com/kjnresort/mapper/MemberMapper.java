@@ -25,4 +25,6 @@ public interface MemberMapper {
 	public String findPw(@Param("id") String id, @Param("name") String name, @Param("phoneNumber") String phoneNumber);	//비밀번호찾기
 	public int pwUpdate(MemberVO member);	//비밀번호 변경
 	public MemberVO mypageRead(MemberVO member);	//마이페이지 조회
+	public boolean mypageUpdate(MemberVO member);	//마이페이지 수정
+	public boolean mypageUpdate2(MemberVO member);	//마이페이지 비밀번호 제외 수정
 }

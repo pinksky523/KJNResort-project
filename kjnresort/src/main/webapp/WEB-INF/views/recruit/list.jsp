@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
 <%@ include file="../includes/header.jsp" %>
+<link rel="stylesheet" href="/resources/css/table.css"/>
 <div>
     <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
         <h2>모집공고 게시판</h2>

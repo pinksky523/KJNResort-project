@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kjnresort.domain.ApplianceVO;
 import com.kjnresort.domain.Criteria;
+import com.kjnresort.domain.MemberVO;
 import com.kjnresort.domain.PageDTO;
 import com.kjnresort.service.ApplianceService;
 import lombok.AllArgsConstructor;
@@ -30,8 +31,8 @@ public class ApplianceController {
 	}
 	
 	@PostMapping("/register")
-	public String register(ApplianceVO appliance, RedirectAttributes rttr) {
-		service.register(appliance);
+	public String register(MemberVO member, ApplianceVO appliance, RedirectAttributes rttr) {
+		service.register(member, appliance);
 		log.info("지원서 등록");
 		rttr.addFlashAttribute("result", appliance.getRecruitNo());		// 등록된 게시글의 recruitNo를 result값에 담아서 redirect로 넘겨준다.
 		return "redirect:/appliance/list";
