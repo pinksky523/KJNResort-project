@@ -1,4 +1,4 @@
-console.log("idCheck Module(js file)......");
+console.log("joongBokCheck Module(js file)......");
 
 var idCheckService = (function() {
 	   function getId(id, callback, error) {

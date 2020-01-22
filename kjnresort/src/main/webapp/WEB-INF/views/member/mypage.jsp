@@ -17,39 +17,36 @@
 <body class="contents">
 	<h1>마이페이지</h1>
 	<hr>
-	<form id="joinForm" name="frm" method="post" action="/common/register">
-   <table width="100%" style="padding:5px 0 5px 0; ">
+	<form id="joinForm" name="frm" method="post" action="/member/mypage">
+   <table width="100%" style="padding:5px 0 5px 0; table-layout: fixed;">
       
        <tr>
          <th>아이디</th>
-         <td class="chkMessage">
-        <input type="text" class="form-control" name="id" id="inputId" value="${member.id}" style="width: 35%" readonly>
-        </td>
+         <td><input type="text" name="id" class="form-control" id="inputId" value="${member.id}" readonly></td>
        </tr>
        <tr>
          <th> 이름</th>
-         <td><input type="text" class="form-control" name="name" id="inputName" value="${member.name}" style="width: 35%" readonly>
-      	 <span id="nameChk"></span></td>
+         <td><input type="text" class="form-control" id="inputName" value="${member.name}" readonly></td>
       </tr>
        <tr>
          <th>비밀번호</th>
-         <td><input type="password" class="form-control" name="pw1" id="inputPassword" style="width: 35%" onkeyup="passwordCheck1()">
-      	 <span id="pwChk1"></span></td>
+         <td><input type="password" class="form-control" name="pw1" id="inputPassword" onkeyup="passwordCheck1()"></td>
+      	 <td class="chkMessage"><span id="pwChk1"></span></td>
        </tr>
        <tr>
          <th>비밀번호 확인</th>
-         <td><input type="password" class="form-control" name="pw" id="inputPasswordChk"  style="width: 35%" onkeyup="passwordCheck2()">
-		 <span id="pwChk2"></span></td>
+         <td><input type="password" class="form-control" name="pw" id="inputPasswordChk" onkeyup="passwordCheck2()"></td>
+		 <td class="chkMessage"><span id="pwChk2"></span></td>
        </tr>
         <tr>
          <th>핸드폰번호</th>
-         <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" value="${member.phoneNumber}" style="width: 35%" onkeyup="phoneCheck()">
-       	 <span id="phoneChk"></span></td>
+         <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" value="${member.phoneNumber}" onkeyup="phoneCheck()"></td>
+       	 <td class="chkMessage"><span id="phoneChk"></span></td>
        </tr>
         <tr>
          <th>생년월일</th>
-         <td><input type="date" class="form-control" name="birth" id="inputBirth" value="${member.birth}" style="width: 35%"></td>
-       </tr>
+         <td><input type="date" class="form-control" id="inputBirth" value="${member.birth}" readonly></td>
+       </tr>															
        <tr>
          <th>성별</th>
            <td class="s">
@@ -61,23 +58,23 @@
            			<c:set var="gender" value="여성"></c:set>
            		</c:if>
            		
-           		<input type="text" class="form-control" name="gender" value="${gender}" style="width: 35%" readonly>
+           		<input type="text" class="form-control" value="${gender}" readonly>
             </td>
          </tr>
          
          <tr>
          <tr>
          <th>주소</th>
-         <td><input type="text" class="form-control" name="address" id="inputAddress" value="${member.address}"></td>
+         <td><input type="text" class="form-control" name="address" id="inputAddress" value="${member.address}" style="width: 150%"></td>
        </tr>
        <tr>
          <th>가입일자</th>
-         <td><input type="text" class="form-control" name="regDate" id="inputRegDate" value='<fmt:formatDate value="${member.regDate}" type="date" dateStyle="full"/>' style="width: 35%" readonly>
+         <td><input type="date" class="form-control" id="inputRegDate" value='<fmt:formatDate value="${member.regDate}" pattern="yyyy-MM-dd"/>' readonly>
        	 <span id="phoneChk"></span></td>
        </tr>
            <tr>
-             <td colspan="2" align="center">
-		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="location.href='/common/home'">취소</button>
+             <td colspan="3" align="center">
+		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="location.href='/common/home'">메인화면으로</button>
 		      <button type="button" class="btn btn-warning" id="joinResult" onclick="confirm()">수정</button>
             </td>
            </tr>
@@ -86,17 +83,37 @@
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
           </form>
 
-
+	
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<script type="text/javascript" src="/resources/js/idCheck.js"></script>
+<script type="text/javascript" src="/resources/js/joongBokCheck.js"></script>
+<script type="text/javascript" src="/resources/js/mypage.js"></script>
 <script>
-var pwChk1 = false;
-var pwChk2 = false;
-var phoneChk = false;
-var idDBChk = false;
-var x = document.getElementById("inputBirth").required;
+var pwChk1 = true;
+var pwChk2 = true;
+var phoneChk = true;
 
+
+var msg = '<c:out value="${msg}"/>';	
+
+//result 값이 있는지 확인하는 함수 호출
+checkModal(msg);
+history.replaceState({}, null, null);
+
+
+//메세지가 존재하면 alert창 띄우기
+function checkModal(){
+	//값이 없으면 리턴시킴
+	if(msg === '' || history.state){
+		return;
+	}
+	
+	//값이 있으면 메시지 띄우기
+	if(msg !== ''){
+		alert(msg);
+	}
+	
+}
 
 
 //비밀번호 확인
@@ -106,15 +123,15 @@ function passwordCheck1(){
 	var pw = document.getElementById('inputPassword').value;
 	if(pw.length == 0 || pw == "") {
 		document.getElementById('pwChk1').innerHTML="";
-		pwChk1 = false;
+		pwChk1 = true;
 	} else if(((pw.length < 8) || (pw.length > 15))){
-		document.getElementById('pwChk1').innerHTML="<b><font color=red size=1px>8 - 15자 이내로 입력해주세요.</font></b>"
+		document.getElementById('pwChk1').innerHTML="<b><font color=red size=2px>8 - 15자 이내로 입력해주세요.</font></b>"
 		pwChk1 = false;
 	} else if(!/^(?=.*[a-z])(?=.*[0-9])[a-z0-9]{8,15}$/.test(pw)){
-		document.getElementById('pwChk1').innerHTML="<b><font color=red size=1px>영어 소문자, 숫자를 조합하여 입력해주세요.</font></b>"
+		document.getElementById('pwChk1').innerHTML="<b><font color=red size=2px>영어 소문자, 숫자를 조합하여 입력해주세요.</font></b>"
 		pwChk1 = false;
 	} else {
-		document.getElementById('pwChk1').innerHTML="<b><font color='green' size=1px>사용가능한 비밀번호입니다.</font></b>";
+		document.getElementById('pwChk1').innerHTML="<b><font color='green' size=2px>사용가능한 비밀번호입니다.</font></b>";
 		pwChk1 = true;
 	}
 }
@@ -124,11 +141,14 @@ function passwordCheck2(){
 	var pw = document.getElementById('inputPassword').value;
 	var pwChk = document.getElementById('inputPasswordChk').value;
 	
-	if(pw != pwChk){
-		document.getElementById('pwChk2').innerHTML="<b><font color=red size=1px>비밀번호가 일치하지 않습니다.</font></b>"
+	if(pwChk.length == 0 || pwChk == "") {
+		document.getElementById('pwChk2').innerHTML="";
+		pwChk2 = true;
+	} else if(pw != pwChk){
+		document.getElementById('pwChk2').innerHTML="<b><font color=red size=2px>비밀번호가 일치하지 않습니다.</font></b>"
 		pwChk2 = false;
 	} else if(pw == pwChk){
-		document.getElementById('pwChk2').innerHTML="<b><font color='green' size=1px>비밀번호가 일치합니다.</font></b>"
+		document.getElementById('pwChk2').innerHTML="<b><font color='green' size=2px>비밀번호가 일치합니다.</font></b>"
 		pwChk2 = true;
 	}
 }
@@ -143,11 +163,25 @@ function phoneCheck(){
 		phoneChk = false;
 	}
 	else if(!/^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/.test(phoneNumber)) {
-		document.getElementById('phoneChk').innerHTML="<b><font color=red size=1px>하이픈(-) 포함 13자 이내로 입력해주세요.</font></b>"
+		document.getElementById('phoneChk').innerHTML="<b><font color=red size=2px>하이픈(-) 포함 13자 이내로 입력해주세요.</font></b>";
 		phoneChk = false;
 	} else {
-		document.getElementById('phoneChk').innerHTML="";
-		phoneChk = true;
+		
+		//핸드폰번호 중복확인
+	    phoneCheckService.getPhoneNumber(phoneNumber, function(result){
+	       if(phoneNumber == result.phoneNumber){
+	    	   if( phoneNumber == "${member.phoneNumber}") {
+	    		   document.getElementById('phoneChk').innerHTML = "";
+	    		   phoneChk = true;
+	    	   } else {
+		    	   document.getElementById('phoneChk').innerHTML = "<b><font color=red size=2px>이미 사용중인 핸드폰번호입니다.</font></b>";
+		    	   phoneChk = false;
+	    	   }
+	       } else{
+	    	   document.getElementById('phoneChk').innerHTML = "<b><font color='green' size=2px>사용가능한 핸드폰번호입니다.</font></b>";
+	    	   phoneChk = true;
+	       }
+	    });
 	}
 }
 
@@ -155,18 +189,10 @@ function phoneCheck(){
 //확인 후 submit
 function confirm() {
 	
-	var birthChk = document.getElementById("inputBirth").value;
 	var addressChk = document.getElementById("inputAddress").value;
 	
-	if( nameChk==true && idChk==true && idDBChk && pwChk1==true && pwChk2==true && phoneChk==true && birthChk!="" && addressChk!="") {
+	if( pwChk1==true && pwChk2==true && phoneChk==true && addressChk!="") {
 		document.frm.submit();
-	}
-	else if((idChk == false) || (idDBChk == false)) {
-		alert('아이디를 확인해주세요');
-		document.frm.id.focus();
-	} else if(nameChk == false ) {
-		alert('이름을 확인해주세요');
-		document.frm.name.focus();
 	} else if(pwChk1 == false) {
 		alert('비밀번호를 확인해주세요');
 		document.frm.pw1.focus();
@@ -176,9 +202,6 @@ function confirm() {
 	} else if(phoneChk == false) {
 		alert('핸드폰번호를 확인해주세요');
 		document.frm.phoneNumber.focus();
-	} else if(birthChk == null || birthChk === "") {
-		alert('생년월일을 확인해주세요');
-		document.frm.birth.focus();
 	} else if(addressChk == null || addressChk == "") {
 		alert('주소를 확인해주세요');
 		document.frm.address.focus();
