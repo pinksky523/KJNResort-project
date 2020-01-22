@@ -29,12 +29,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${list}" var="member">
+                    <c:forEach items="${list}" var="appliance">
                         <tr>
-                            <td>${member.name}</td>
-                            <td>${member.phoneNumber}</td>
+                            <td>${appliance.name}</td>
+                            <td>${appliance.phoneNumber}</td>
                             <td>${appliance.status}</</td>
-                           	<td>${appliance.regDate}</td>
+                           	<td><fmt:formatDate value="${appliance.regDate}" pattern="yy-MM-dd"/></td>
                         </tr>
                     </c:forEach>
                     </tbody>
