@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   
+ <%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
 
     <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <style>
@@ -73,7 +74,7 @@ p{padding-left:30px;}
 				<span class="total">· 총 금액 : </span><span class="won"></span>
 			</div>
 			<div class="buttonsDiv">
-			<button class="btn btn-default btn-lg reserve_cancle">취소</button><button class="btn btn-primary btn-lg">결제하기</button>
+			<button class="btn btn-default btn-lg" id="reserve_cancle">취소</button><button class="btn btn-primary btn-lg" id="payCharge">결제하기</button>
 			</div>
 		</div>
 		
@@ -82,8 +83,114 @@ p{padding-left:30px;}
 </body>
 
 <script>
+var IMP = window.IMP; 
+IMP.init('imp39785834')
+successPay(123231,123232)
+function successPay(payAmount,payDate){
+	var pd=new Date(payDate);
+	var login_ID=null;
+	
+	<sec:authorize access="isAuthenticated()">
+		login_ID='<sec:authentication property="principal.username"/>';
+	</sec:authorize>
+	
+	var csrfHeaderName='${_csrf.headerName}';
+	var csrfTokenValue='${_csrf.token}';//CSRF 토큰 관련 변수 추가
+	
+	var form = document.createElement("form");
+	form.setAttribute("charset", "UTF-8");
+	form.setAttribute("method", "Post"); // Get 또는 Post 입력
+	form.setAttribute("action", "/condoreserve/register.jsp");
+	
+	var hiddenField = document.createElement("input");
+	hiddenField.setAttribute("type", "hidden");
+	hiddenField.setAttribute("name", csrfHeaderName);
+	hiddenField.setAttribute("value", csrfTokenValue);
+	form.appendChild(hiddenField);
+	
+	//보내줘야 할거  2.결제날짜  4.체크인 5.체크아웃 6.방종류 7.숙박일
+	//1.아이디
+	var  inputId=document.createElement("input");
+	inputId.setAttribute("type", "text");
+	inputId.setAttribute("name", "id");
+	inputId.setAttribute("value",login_ID);
+	form.appendChild(inputId);
+	
+	//2.결제금액
+	var  price=document.createElement("input");
+	price.setAttribute("type", "number");
+	price.setAttribute("name","price");
+	price.setAttribute("value",payAmount);
+	form.appendChild(price);
+	
+	//3.결제날짜
+	var  paidDate=document.createElement("input");
+	paidDate.setAttribute("type", "date");
+	paidDate.setAttribute("name", "reservedate");
+	paidDate.setAttribute("value",pd);
+	form.appendChild(paidDate);
+	//여기까지
+	
+	//4.체크인
+	var  inputId=document.createElement("input");
+	inputId.setAttribute("type", "text");
+	inputId.setAttribute("name", "id");
+	inputId.setAttribute("value",login_ID);
+	form.appendChild(inputId);
+	
+	//5.체크아웃
+	var  inputId=document.createElement("input");
+	inputId.setAttribute("type", "text");
+	inputId.setAttribute("name", "id");
+	inputId.setAttribute("value",login_ID);
+	form.appendChild(inputId);
+	
+	//6.방종류
+	var  inputId=document.createElement("input");
+	inputId.setAttribute("type", "text");
+	inputId.setAttribute("name", "id");
+	inputId.setAttribute("value",login_ID);
+	form.appendChild(inputId);
+	
+	//7.숙박일
+	var  inputId=document.createElement("input");
+	inputId.setAttribute("type", "text");
+	inputId.setAttribute("name", "id");
+	inputId.setAttribute("value",login_ID);
+	form.appendChild(inputId);
+	
+	
+}
 
-$('.reserve_cancle').on("click",function(){
+$('#payCharge').on("click",function(){
+
+	IMP.request_pay({
+	    pg : 'kakaopay',
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : 'KJN 리조트 콘도',
+	    amount : charge,
+	    buyer_tel : '010-1111-1111',
+	    buyer_name : '구매자이름',
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	       // var msg = '결제가 완료되었습니다.';
+	        //msg += '결제 금액 : ' + rsp.paid_amount;
+	       	//msg += '결제승인시각 : ' + rsp.paid_at;
+	    
+	       	successPay(rsp.paid_amount,rsp.paid_at);
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        alert(msg);
+	    }
+
+	   
+	});
+	
+	
+});
+$('#reserve_cancle').on("click",function(){
 	if(confirm('예약을 취소하시겠습니까?')){
 		console.log('예약취소');
 		location.href = "/";
@@ -105,6 +212,7 @@ function getNights(checkIn,checkOut){
 	 return difDay;
 }
 var nights;
+var charge;
 $('.reserve_ok').on("click",function(){
 	if($('.reserveInfoUl li').length!=0){
 		$('.reserveInfoUl li').remove();
@@ -127,6 +235,7 @@ $('.reserve_ok').on("click",function(){
 		$('.reserveInfoDiv').css('display','block');
 		$('.won').html(numberWithCommas(totalWon*nights)+' '+'&#8361');
 		$('.reserveDiv').css('height','1050px');
+		charge=numberWithCommas(totalWon*nights);
 		
 });
 function numberWithCommas(x) {

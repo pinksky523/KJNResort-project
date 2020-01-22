@@ -17,7 +17,10 @@ DROP TABLE t_ticket_buy CASCADE CONSTRAINTS;
 DROP TABLE t_member CASCADE CONSTRAINTS;
 DROP TABLE t_ticket CASCADE CONSTRAINTS;
 
+/ * Drop Sequence */
 
+DROP SERUENCE seq_t_condo_reserve;
+DROP SERUENCE seq_t_qna;
 
 
 /* Create Tables */
