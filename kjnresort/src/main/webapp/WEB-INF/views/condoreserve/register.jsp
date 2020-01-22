@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
     <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <style>
-.reserveBox{background: #EAEAEA; width:900px; height:200px; align-self: center; margin:0 auto; }
-.dateBox{ align-self: center; margin:0 auto; text-align: center;}
+.reserveDiv{background: #EAEAEA; width:900px; height:600px; align-self: center; margin:0 auto; }
+.dateDiv{ align-self: center; margin:0 auto; text-align: center;}
+.roomTypeDiv{background: #EAEAEA; width:900px; display: none; }
 h1{text-align: center;}
 hr{text-align: center; width:1000px;}
 h2{padding-left: 30px; padding-top: 30px; }
@@ -18,22 +21,110 @@ p{padding-left:30px;}
         width:30%;
     }
 
-
+.roomTypeRadioDiv{padding-left:30px;}
+.radioUl{list-style:none; text-align: center; }
+.radioUl>li{display: inline-block; font-size:23px;   margin-right: 55px;}
+.roomInfoDiv{ width:900px;  align-self: center; margin:0 auto; display: none; }
+.condoImg{width:320px; height:210px; margin-right:50px; float:left; margin-left:200px;}
+.roomInfoUl{  margin-top:50px;}
+.roomInfoUl>li{margin-bottom: 10px; font-size: 18px; }
 </style>
 <body>
 	<h1>콘도예약</h1>
 	<hr>
-	<div class="reserveBox">
-		<h2>Step1. 날짜 선택</h2>
-		<p>· 체크인/체크아웃 날짜를 선택하세요.</p>
-		<div class="dateBox">
+	<div class="reserveDiv">
+		<h2 >Step1. 날짜 선택</h2>
+		<p class="reserveP">· 체크인/체크아웃 날짜를 선택하세요.</p>
+		<div class="dateDiv">
 			<span>· 체크인 날짜</span> <input type="date" name="checkIn" id="checkIn" oninput="inputCheckIn()"> <span>· 체크아웃 날짜</span> <input type="date" name="checkOut" id="checkOut" oninput="inputCheckOut()"> <button class="btn btn-primary btn-sm" onclick="search()">검색</button>
 		</div>
+		<div class="roomTypeDiv">
+		<h2 >Step2. 객실 선택</h2>
+		<p class="reserveP">· 이용할 객실 종류를 선택하세요.</p>
+		<div class="roomTypeRadioDiv">
+			<ul class="radioUl">
+			</ul>
+		</div>
+		</div>
+		<div class="roomInfoDiv">
+		  <img class="condoImg" src="/resources/img/condo/prime.jpg">
+		  <ul class="roomInfoUl">
+		  </ul>
+		</div>
     </div>
-
+<ul class="test"></ul>
 </body>
+
 <script>
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+function showRoomInfo(event){
+	var roomType=event.target.id;
+	var location;
+	var building;
+	var accept;
+	var bed;
+	var price;
+
+	$.getJSON("/condomanage/"+roomType+".json",
+			function(data){
+		console.log(data);
+			var li="";
+			li+="<li>가격 :"+numberWithCommas(data.price)+"원</li>";
+			li+="<li>위치 : "+data.location+"</li>";
+			li+="<li>건물 : "+data.building+"</li>";
+			li+="<li>수용인원 : "+data.accept+"명</li>";
+			li+="<li>"+data.bed+"</li>";
+			$('.roomInfoUl').append(li);
+			$('.roomInfoDiv').css('display','block');
+			
+		}).fail(function(xhr,status,err){
+			if(err){
+				console.log(err);
+			}
+		});
+	
+	
+}
+
+function showAvailableRoomType(data){
+	console.log(data);
+	
+	if(data.length==0){
+		alert("예약가능한 객실이 없습니다!");
+	}else{
+		var roomType;
+		//var radioUl=document.createElement('ul'); 
+		//radioUl.setAttribute('class', 'radioUl'); 
+		//$('.roomTypeRadioDiv').append(radioUl);
+		var li="";
+		for(d of data){
+			if(d=='P')
+				roomType='프라임P';
+			if(d=='D')
+				roomType='디럭스D';
+			if(d=='N')
+				roomType='노블N';
+			if(d=='R')
+				roomType='로얄R';
+			li+="<li class='radioLi'><input type='radio' id='"+d+"'name='roomType' value='"+d+"'><label class='clickLi' id='"+d+"' for='"+d+"'>"+roomType+"</label></li>";
+		}
+		$('.radioUl').append(li);
+		$('.roomTypeDiv').css('display','block'); //이용가능 객실 종류 출력
+		//$(".radioLi").off("click").on("click",function(e){alert('a');});
+		$(".clickLi").on("click",showRoomInfo);
+	}
+	
+}
+
+
+
 function search(){
+	//$(".clickLi").off("click"); //객체가 삭제될때 같이 삭제되므로 굳이 삭제해 줄 필요 없다.
+	$(".radioLi").remove(); //이벤트도 같이 삭제됨
+	$('.roomTypeDiv').css('display','none');
 	 var checkIn = document.getElementById("checkIn").value; 
 	 var checkOut = document.getElementById("checkOut").value;
 	 
@@ -53,14 +144,13 @@ function search(){
 			type:'post',
 			url:'/condoreserve/availableRoomType',
 			data:{checkIn:checkIn,checkOut:checkOut},
+			dataType:"json",
 			beforeSend : function(xhr)
             {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
                 xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
             },
-			success:function(roomList){
-			
-					console.log(roomList);
-				
+			success:function(data){
+				showAvailableRoomType(data);			
 			},
 			error:function(xhr,status,error){
 				if(error){
@@ -72,6 +162,9 @@ function search(){
 	 
 }
 function inputCheckOut(){
+	//$(".clickLi").off("click");
+	$(".radioLi").remove();
+	$('.roomTypeDiv').css('display','none');
 	 var today=new Date();
 	 var checkIn = document.getElementById("checkIn").value; 
 	 var checkOut = document.getElementById("checkOut").value;
@@ -118,8 +211,10 @@ function inputCheckOut(){
 }
 
 	function inputCheckIn() {
-		
-		
+	//	$(".clickLi").off("click");
+		$(".radioLi").remove();
+		$('.roomTypeDiv').css('display','none');
+		document.getElementById("checkOut").value="";
 		var today = new Date(); //today.getXX() ->숫자임
 		var checkInDate = document.getElementById("checkIn").value; //입력된 날짜 받아오기
 		var re=isDateBeforeToday(checkInDate); //입력한 값이 오늘보다 이전날인지 확인

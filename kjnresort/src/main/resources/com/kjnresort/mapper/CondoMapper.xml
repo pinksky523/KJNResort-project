@@ -8,4 +8,8 @@
 select price from t_condo where roomtype=#{roomType} <!-- 꼭 대문자로 넣어줘야함 -->
 </select>
 
+<select id="get" resultType="com.kjnresort.domain.CondoVO">
+select * from t_condo where roomtype=#{roomType}
+</select>
+
 </mapper>
