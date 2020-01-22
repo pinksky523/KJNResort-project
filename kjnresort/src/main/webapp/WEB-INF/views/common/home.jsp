@@ -155,6 +155,7 @@
 	
 		
 <script>
+
 	 	//로그아웃버튼 클릭이벤트
     	$("#customLogout").on("click", function(e){
     		e.preventDefault();

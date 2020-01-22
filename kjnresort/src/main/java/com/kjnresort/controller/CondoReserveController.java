@@ -81,6 +81,7 @@ public class CondoReserveController { //헐 이제 될거같아
 	public void register() {
 		
 	}
+	
 	@PostMapping("/register")
 	public String register(CondoReserveVO crVO,RedirectAttributes rttr) {
 		return null;

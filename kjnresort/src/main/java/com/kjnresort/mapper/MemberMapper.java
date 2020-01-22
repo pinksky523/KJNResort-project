@@ -9,14 +9,14 @@ import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
 
 public interface MemberMapper {
-	public MemberVO read(String id);	//권한조회
+	
 	
 	public int getTotalCount(Criteria cri);
 	
 	public List<MemberVO> getListWithPaging(Criteria cri);		
 	
 	////////////////////////////////////////////
-	
+	public MemberVO read(String id);	//권한조회
 	public void insert(MemberVO member);	//회원가입
 	public void insertAuth(AuthVO auth);	//회원가입 자동권한생성
 	public MemberVO idCheck(String id);		//회원가입 아이디 중복체크
@@ -27,4 +27,5 @@ public interface MemberMapper {
 	public MemberVO mypageRead(MemberVO member);	//마이페이지 조회
 	public boolean mypageUpdate(MemberVO member);	//마이페이지 수정
 	public boolean mypageUpdate2(MemberVO member);	//마이페이지 비밀번호 제외 수정
+	public int delete(MemberVO member);			//마이페이지 회원탈퇴
 }

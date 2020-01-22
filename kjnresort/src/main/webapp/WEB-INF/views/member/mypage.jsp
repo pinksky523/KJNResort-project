@@ -17,7 +17,7 @@
 <body class="contents">
 	<h1>마이페이지</h1>
 	<hr>
-	<form id="joinForm" name="frm" method="post" action="/member/mypage">
+	<form role="form" id="joinForm" name="frm" method="post" action="/member/mypageModify">
    <table width="100%" style="padding:5px 0 5px 0; table-layout: fixed;">
       
        <tr>
@@ -71,24 +71,25 @@
          <th>가입일자</th>
          <td><input type="date" class="form-control" id="inputRegDate" value='<fmt:formatDate value="${member.regDate}" pattern="yyyy-MM-dd"/>' readonly>
        	 <span id="phoneChk"></span></td>
-       </tr>
+       </tr><tr><td>&nbsp</td></tr>
            <tr>
              <td colspan="3" align="center">
-		   	  <button type="button" class="btn btn-secondary" id="joinCancel" onclick="location.href='/common/home'">메인화면으로</button>
-		      <button type="button" class="btn btn-warning" id="joinResult" onclick="confirm()">수정</button>
+		   	  <button type="button" class="btn btn-secondary" id="cancelBtn" onclick="location.href='/common/home'">메인화면으로</button>
+		      <button type="button" class="btn btn-success" id="myReviewBtn" onclick="">내가 쓴 후기</button>
+		      <button type="button" data-oper="remove" class="btn btn-danger" id="leaveBtn">회원탈퇴</button>
+		      <button type="button" data-oper="modify" class="btn btn-warning" id="modifyBtn">수정완료</button>
             </td>
            </tr>
            
            </table>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
           </form>
-
-	
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/resources/js/joongBokCheck.js"></script>
 <script type="text/javascript" src="/resources/js/mypage.js"></script>
 <script>
+
 var pwChk1 = true;
 var pwChk2 = true;
 var phoneChk = true;
@@ -185,9 +186,30 @@ function phoneCheck(){
 	}
 }
 
+var frm = $('form');
+$('button').click(function(e) {
+	e.preventDefault();
+	var oper = $(this).data('oper');
+	
+	if(oper === 'remove') {
+		frm.attr('action', '/member/remove');
+		deleteMember();
+	} else if (oper === 'modify') {
+		modify();
+	}
+});
+
+
+//회원탈퇴버튼 클릭이벤트
+function deleteMember() {
+	if(confirm("정말 탈퇴하시겠습니까?")) {
+		document.frm.submit();
+	} 
+}
+
 
 //확인 후 submit
-function confirm() {
+function modify() {
 	
 	var addressChk = document.getElementById("inputAddress").value;
 	

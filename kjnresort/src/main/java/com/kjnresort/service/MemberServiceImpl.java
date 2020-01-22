@@ -133,9 +133,18 @@ public class MemberServiceImpl implements MemberService {
 			member.setPw(bcryptPasswordEncoder.encode(member.getPw()));
 			return mapper.mypageUpdate(member);
 		}
-		
-		
 	}
+	
+	
+	//회원탈퇴
+	@Transactional
+	@Override
+	public boolean remove(MemberVO member) {
+		log.info("마이페이지 회원탈퇴 서비스임플 진입");
+			
+		return mapper.delete(member) == 1;
+	}
+	
 	
 	
 	//로그인
