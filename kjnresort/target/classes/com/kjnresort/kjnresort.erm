@@ -12,7 +12,7 @@
 	<category_index>0</category_index>
 	<zoom>0.75</zoom>
 	<x>0</x>
-	<y>27</y>
+	<y>0</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -135,15 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2020-01-14 10:44:44</creation_date>
-<<<<<<< HEAD
-			<updated_date>2020-01-22 14:35:49</updated_date>
-=======
-<<<<<<< HEAD
-			<updated_date>2020-01-22 00:28:39</updated_date>
-=======
-			<updated_date>2020-01-22 10:00:51</updated_date>
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+			<updated_date>2020-01-22 22:11:50</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -252,7 +244,7 @@
 			<args></args>
 			<char_semantics>false</char_semantics>
 			<description></description>
-			<logical_name>지원자 번호</logical_name>
+			<logical_name>지원서 번호</logical_name>
 			<physical_name>applianceNo</physical_name>
 			<type>decimal</type>
 		</word>
@@ -290,7 +282,7 @@
 		</word>
 		<word>
 			<id>7</id>
-			<length>20</length>
+			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
@@ -302,7 +294,7 @@
 			<description></description>
 			<logical_name>생년월일</logical_name>
 			<physical_name>birth</physical_name>
-			<type>varchar(n)</type>
+			<type>date</type>
 		</word>
 		<word>
 			<id>8</id>
@@ -466,7 +458,7 @@
 		</word>
 		<word>
 			<id>18</id>
-			<length>20</length>
+			<length>null</length>
 			<decimal>null</decimal>
 			<array>false</array>
 			<array_dimension>null</array_dimension>
@@ -478,7 +470,7 @@
 			<description></description>
 			<logical_name>마감일자</logical_name>
 			<physical_name>deadLine</physical_name>
-			<type>varchar(n)</type>
+			<type>date</type>
 		</word>
 		<word>
 			<id>19</id>
@@ -1573,7 +1565,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>22</word_id>
+					<word_id>23</word_id>
 					<id>3</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1856,7 +1848,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>23</word_id>
+					<word_id>22</word_id>
 					<id>9</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -1900,11 +1892,11 @@
 		<table>
 			<id>3</id>
 			<height>230</height>
-			<width>314</width>
+			<width>313</width>
 				<font_name>맑은 고딕</font_name>
 				<font_size>9</font_size>
 			<x>41</x>
-			<y>455</y>
+			<y>444</y>
 			<color>
 				<r>128</r>
 				<g>128</g>
@@ -2009,11 +2001,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>66</word_id>
-=======
 					<word_id>63</word_id>
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 					<id>12</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2046,15 +2034,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>14</word_id>
-=======
-<<<<<<< HEAD
-					<word_id>14</word_id>
-=======
-					<word_id>17</word_id>
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+					<word_id>16</word_id>
 					<id>13</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2087,15 +2067,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>43</word_id>
-=======
-<<<<<<< HEAD
-					<word_id>44</word_id>
-=======
-					<word_id>42</word_id>
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+					<word_id>41</word_id>
 					<id>14</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2167,7 +2139,7 @@
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>varchar(n)</type>
+					<type>date</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -2314,15 +2286,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
 					<word_id>64</word_id>
-=======
-<<<<<<< HEAD
-					<word_id>64</word_id>
-=======
-					<word_id>62</word_id>
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 					<id>19</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2574,11 +2538,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>65</word_id>
-=======
-					<word_id>63</word_id>
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project
+					<word_id>66</word_id>
 					<id>25</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2611,7 +2571,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>15</word_id>
+					<word_id>17</word_id>
 					<id>26</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -2644,11 +2604,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
-					<word_id>43</word_id>
-=======
-					<word_id>41</word_id>
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project
+					<word_id>44</word_id>
 					<id>27</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3096,15 +3052,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
 					<word_id>62</word_id>
-=======
-<<<<<<< HEAD
-					<word_id>66</word_id>
-=======
-					<word_id>64</word_id>
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 					<id>38</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3137,7 +3085,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>16</word_id>
+					<word_id>15</word_id>
 					<id>39</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3293,7 +3241,7 @@
 			<connections>
 				<relation>
 					<id>6</id>
-					<source>6</source>
+					<source>13</source>
 					<target>8</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -3315,7 +3263,7 @@
 				</relation>
 				<relation>
 					<id>7</id>
-					<source>13</source>
+					<source>6</source>
 					<target>8</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -3379,7 +3327,7 @@
 				<normal_column>
 					<id>44</id>
 					<referenced_column>78</referenced_column>
-					<relation>7</relation>
+					<relation>6</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3413,7 +3361,7 @@
 				<normal_column>
 					<id>45</id>
 					<referenced_column>30</referenced_column>
-					<relation>6</relation>
+					<relation>7</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3676,7 +3624,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>52</word_id>
+					<word_id>51</word_id>
 					<id>53</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -3733,7 +3681,7 @@
 			<connections>
 				<relation>
 					<id>8</id>
-					<source>13</source>
+					<source>10</source>
 					<target>9</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -3755,7 +3703,7 @@
 				</relation>
 				<relation>
 					<id>9</id>
-					<source>10</source>
+					<source>13</source>
 					<target>9</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -3819,7 +3767,7 @@
 				<normal_column>
 					<id>55</id>
 					<referenced_column>78</referenced_column>
-					<relation>8</relation>
+					<relation>9</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -3853,7 +3801,7 @@
 				<normal_column>
 					<id>56</id>
 					<referenced_column>59</referenced_column>
-					<relation>9</relation>
+					<relation>8</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -4071,15 +4019,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-<<<<<<< HEAD
 					<word_id>65</word_id>
-=======
-<<<<<<< HEAD
-					<word_id>62</word_id>
-=======
-					<word_id>66</word_id>
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 					<id>61</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -4112,7 +4052,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>17</word_id>
+					<word_id>14</word_id>
 					<id>62</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -4145,7 +4085,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>44</word_id>
+					<word_id>43</word_id>
 					<id>63</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -4334,7 +4274,7 @@
 			<connections>
 				<relation>
 					<id>11</id>
-					<source>13</source>
+					<source>1</source>
 					<target>11</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -4356,7 +4296,7 @@
 				</relation>
 				<relation>
 					<id>12</id>
-					<source>1</source>
+					<source>13</source>
 					<target>11</target>
 						<source_xp>-1</source_xp>
 						<source_yp>-1</source_yp>
@@ -4420,7 +4360,7 @@
 				<normal_column>
 					<id>69</id>
 					<referenced_column>78</referenced_column>
-					<relation>11</relation>
+					<relation>12</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -4454,7 +4394,7 @@
 				<normal_column>
 					<id>70</id>
 					<referenced_column>4</referenced_column>
-					<relation>12</relation>
+					<relation>11</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
@@ -4618,7 +4558,7 @@
 					</sequence>
 				</normal_column>
 				<normal_column>
-					<word_id>51</word_id>
+					<word_id>52</word_id>
 					<id>75</id>
 					<description></description>
 					<unique_key_name></unique_key_name>
@@ -4661,337 +4601,6 @@
 		</table>
 		<table>
 			<id>12</id>
-<<<<<<< HEAD
-=======
-			<height>256</height>
-			<width>381</width>
-				<font_name>맑은 고딕</font_name>
-				<font_size>9</font_size>
-			<x>556</x>
-			<y>324</y>
-			<color>
-				<r>128</r>
-				<g>128</g>
-				<b>192</b>
-			</color>
-			<connections>
-			</connections>
-			<physical_name>t_member</physical_name>
-			<logical_name>회원정보</logical_name>
-			<description></description>
-			<constraint></constraint>
-			<primary_key_name></primary_key_name>
-			<option></option>
-			<columns>
-				<normal_column>
-					<word_id>26</word_id>
-					<id>76</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>varchar(n)</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>true</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>37</word_id>
-					<id>77</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>varchar(n)</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>30</word_id>
-					<id>78</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>varchar(n)</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>33</word_id>
-					<id>79</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>varchar(n)</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>true</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>7</word_id>
-					<id>80</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>varchar(n)</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>24</word_id>
-					<id>81</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>character(n)</type>
-					<constraint></constraint>
-					<default_value>M</default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>1</word_id>
-					<id>82</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>varchar(n)</type>
-					<constraint></constraint>
-					<default_value></default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>59</word_id>
-					<id>83</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>decimal(p)</type>
-					<constraint></constraint>
-					<default_value>1</default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>true</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-				<normal_column>
-					<word_id>40</word_id>
-					<id>84</id>
-					<description></description>
-					<unique_key_name></unique_key_name>
-					<logical_name></logical_name>
-					<physical_name></physical_name>
-					<type>date</type>
-					<constraint></constraint>
-					<default_value>SYSDATE</default_value>
-					<auto_increment>false</auto_increment>
-					<foreign_key>false</foreign_key>
-					<not_null>false</not_null>
-					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
-					<character_set></character_set>
-					<collation></collation>
-					<sequence>
-						<name></name>
-						<schema></schema>
-						<increment></increment>
-						<min_value></min_value>
-						<max_value></max_value>
-						<start></start>
-						<cache></cache>
-						<nocache>false</nocache>
-						<cycle>false</cycle>
-						<order>false</order>
-						<description></description>
-						<data_type></data_type>
-						<decimal_size>0</decimal_size>
-					</sequence>
-				</normal_column>
-			</columns>
-			<indexes>
-			</indexes>
-			<complex_unique_key_list>
-			</complex_unique_key_list>
-			<table_properties>
-				<schema></schema>
-			</table_properties>
-		</table>
-		<table>
-			<id>13</id>
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 			<height>100</height>
 			<width>253</width>
 				<font_name>맑은 고딕</font_name>
@@ -5245,7 +4854,7 @@
 					<foreign_key>false</foreign_key>
 					<not_null>true</not_null>
 					<primary_key>false</primary_key>
-					<unique_key>false</unique_key>
+					<unique_key>true</unique_key>
 					<character_set></character_set>
 					<collation></collation>
 					<sequence>
