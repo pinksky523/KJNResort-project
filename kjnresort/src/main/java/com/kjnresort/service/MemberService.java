@@ -22,4 +22,5 @@ public interface MemberService {
 	public boolean pwModify(MemberVO member);		//비밀번호변경
 	public MemberVO mypageGet(MemberVO member);		//마이페이지 조회
 	public boolean modifyMypage(MemberVO member);	//마이페이지 수정
+	public boolean remove(MemberVO member);			//회원탈퇴
 }
