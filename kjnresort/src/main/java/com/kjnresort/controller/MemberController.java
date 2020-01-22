@@ -1,27 +1,20 @@
 package com.kjnresort.controller;
 
 
-import java.util.List;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
+import com.kjnresort.domain.PageDTO;
 import com.kjnresort.service.MemberService;
+import com.kjnresort.service.ReviewService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -34,6 +27,19 @@ public class MemberController {
 	private MemberService service;
 	
 	
+	@GetMapping("myreview")
+	public void list(String id, Criteria cri, Model model) {
+		log.info("내가 쓴 후기 창 진입");
+		log.info("MemberController list()" + cri);
+		model.addAttribute("list", service.myreviewList(id, cri));
+		
+		int total = service.getTotalMyReview(id, cri);
+		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		
+		log.info("total" + total);
+	}
+	
+	
 	//마이페이지 회원탈퇴 버튼
 	@PostMapping("remove")
 	public String remove(MemberVO member, RedirectAttributes rttr) {
@@ -42,7 +48,7 @@ public class MemberController {
 		if(service.remove(member)) {
 			rttr.addFlashAttribute("msg", "계정이 삭제되었습니다");
 			
-			return "redirect:/common/home";
+			return "/common/logout";
 		} else {
 			rttr.addFlashAttribute("msg", "계정 삭제 실패");
 			return "redirect:/member/mypage?id=" + member.getId();

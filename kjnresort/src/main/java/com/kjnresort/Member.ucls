@@ -131,72 +131,68 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <association id="15">    
-    <end type="SOURCE" refId="10" navigable="false">      
-      <attribute id="16" name="memberMapper"/>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
+  <realization id="15">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <association id="16">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="17" name="mapper">        
+        <position height="0" width="0" x="106" y="191"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="1">        
+        <position height="0" width="0" x="106" y="191"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="18">    
+  <association id="19">    
     <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="19" name="mvo"/>      
-      <multiplicity id="20" minimum="0" maximum="1"/>    
+      <attribute id="20" name="mvo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="21" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="21">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="5"/>  
-  </realization>  
   <association id="22">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="23" name="service">        
-        <position height="0" width="0" x="-35" y="-83"/>      
-      </attribute>      
-      <multiplicity id="24" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-35" y="-83"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="25">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="26" name="mapper">        
-        <position height="0" width="0" x="106" y="191"/>      
-      </attribute>      
-      <multiplicity id="27" minimum="0" maximum="1">        
-        <position height="0" width="0" x="106" y="191"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="4" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="28">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="29" name="cri">        
+      <attribute id="23" name="cri">        
         <position height="0" width="0" x="5" y="50"/>      
       </attribute>      
-      <multiplicity id="30" minimum="0" maximum="1">        
+      <multiplicity id="24" minimum="0" maximum="1">        
         <position height="0" width="0" x="5" y="50"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="31">    
-    <end type="SOURCE" refId="3" navigable="false">      
-      <attribute id="32" name="authList">        
-        <position height="20" width="54" x="536" y="456"/>      
+  <association id="25">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="26" name="service">        
+        <position height="0" width="0" x="-35" y="-83"/>      
       </attribute>      
-      <multiplicity id="33" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="340" y="467"/>      
+      <multiplicity id="27" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-35" y="-83"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="2" navigable="true"/>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="28">    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="29" name="memberMapper">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="30" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
