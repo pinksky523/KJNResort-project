@@ -85,7 +85,7 @@ p{padding-left:30px;}
 <script>
 var IMP = window.IMP; 
 IMP.init('imp39785834')
-successPay(123231,123232)
+
 function successPay(payAmount,payDate){
 	var pd=new Date(payDate);
 	var login_ID=null;
@@ -100,7 +100,7 @@ function successPay(payAmount,payDate){
 	var form = document.createElement("form");
 	form.setAttribute("charset", "UTF-8");
 	form.setAttribute("method", "Post"); // Get 또는 Post 입력
-	form.setAttribute("action", "/condoreserve/register.jsp");
+	form.setAttribute("action", "/condoreserve/register");
 	
 	var hiddenField = document.createElement("input");
 	hiddenField.setAttribute("type", "hidden");
@@ -132,33 +132,57 @@ function successPay(payAmount,payDate){
 	//여기까지
 	
 	//4.체크인
-	var  inputId=document.createElement("input");
-	inputId.setAttribute("type", "text");
-	inputId.setAttribute("name", "id");
-	inputId.setAttribute("value",login_ID);
-	form.appendChild(inputId);
+	
+	
+	var InputDate = finalCheckIn; //입력된 날짜 받아오기
+	var dateSplit = InputDate.split("-"); //입력값을 '-'을 기준으로 나누어 배열에 저장해 주는 함수 split
+
+	year = dateSplit[0]; //첫번째 배열은 년
+	month = dateSplit[1]; //월
+	day = dateSplit[2]; //일
+	
+	var dateCheckIn=new Date(parseInt(year),parseInt(month)-1,parseInt(day));
+	var inputCheckIn=document.createElement("input");
+	inputCheckIn.setAttribute("type", "date");
+	inputCheckIn.setAttribute("name", "checkIn");
+	inputCheckIn.setAttribute("value",dateCheckIn);
+	form.appendChild(inputCheckIn);
 	
 	//5.체크아웃
-	var  inputId=document.createElement("input");
-	inputId.setAttribute("type", "text");
-	inputId.setAttribute("name", "id");
-	inputId.setAttribute("value",login_ID);
-	form.appendChild(inputId);
+	
+	var InputDate = finalCheckOut; //입력된 날짜 받아오기
+	var dateSplit = InputDate.split("-"); //입력값을 '-'을 기준으로 나누어 배열에 저장해 주는 함수 split
+
+	year = dateSplit[0]; //첫번째 배열은 년
+	month = dateSplit[1]; //월
+	day = dateSplit[2]; //일
+	
+	var dateCheckOut=new Date(parseInt(year),parseInt(month)-1,parseInt(day));
+	
+	var  inputCheckOut=document.createElement("input");
+	inputCheckOut.setAttribute("type", "date");
+	inputCheckOut.setAttribute("name", "checkOut");
+	inputCheckOut.setAttribute("value",dateCheckOut);
+	form.appendChild(inputCheckOut);
 	
 	//6.방종류
-	var  inputId=document.createElement("input");
-	inputId.setAttribute("type", "text");
-	inputId.setAttribute("name", "id");
-	inputId.setAttribute("value",login_ID);
-	form.appendChild(inputId);
+	var  inputRoomType=document.createElement("input");
+	inputRoomType.setAttribute("type", "text");
+	inputRoomType.setAttribute("name", "roomType");
+	inputRoomType.setAttribute("value",roomType);
+	form.appendChild(inputRoomType);
 	
 	//7.숙박일
-	var  inputId=document.createElement("input");
-	inputId.setAttribute("type", "text");
-	inputId.setAttribute("name", "id");
-	inputId.setAttribute("value",login_ID);
-	form.appendChild(inputId);
+	var  inputNights=document.createElement("input");
+	inputNights.setAttribute("type", "number");
+	inputNights.setAttribute("name", "nights");
+	inputNights.setAttribute("value",nights);
+	form.appendChild(inputNights);
 	
+	document.body.appendChild(form);
+	console.log("before submit");
+	form.submit();
+	console.log("after submit");
 	
 }
 
@@ -213,17 +237,20 @@ function getNights(checkIn,checkOut){
 }
 var nights;
 var charge;
+var finalCheckIn;
+var finalCheckOut;
+
 $('.reserve_ok').on("click",function(){
 	if($('.reserveInfoUl li').length!=0){
 		$('.reserveInfoUl li').remove();
 	}
-	 var checkIn = document.getElementById("checkIn").value; 
-	 var checkOut = document.getElementById("checkOut").value;
-	 nights=getNights(checkIn,checkOut);
-	var rType;
+	  finalCheckIn = document.getElementById("checkIn").value; 
+	  finalCheckOut = document.getElementById("checkOut").value;
+	 nights=getNights(finalCheckIn,finalCheckOut);
+	 var rType;
 	var li="";
-		li="<li><span class='reserveInfoLi'>체크인 : </span><span>"+checkIn+"</span></li>";
-		li+="<li><span class='reserveInfoLi'>체크아웃 : </span><span>"+checkOut+"</span></li>";
+		li="<li><span class='reserveInfoLi'>체크인 : </span><span>"+finalCheckIn+"</span></li>";
+		li+="<li><span class='reserveInfoLi'>체크아웃 : </span><span>"+finalCheckOut+"</span></li>";
 		li+="<li><span class='reserveInfoLi'>숙박일 수 : </span><span>"+nights+"일</span></li>";
 		if(roomType=='P'){rType='프라임P'}
 		if(roomType=='D'){rType='디럭스D'}
@@ -252,7 +279,7 @@ function showRoomInfo(event){
 	}else{
 	$('.roomInfoLi').remove();
 	}
-	roomType=event.target.id;
+	roomType=event.target.id; //전역변수에 할당
 	var location;
 	var building;
 	var accept;

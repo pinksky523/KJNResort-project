@@ -5,13 +5,13 @@ import java.util.Date;
 import lombok.Data;
 @Data
 public class QnaVO { //큐엔에이 브이오
-	private long qnaNo;
-	private String title;
-	private String id;
-	private String contents;
-	private Date regDate;
-	private String answer;
-	private Date answerRegDate;
+	public long qnaNo;
+	public String title;
+	public String id;
+	public String contents;
+	public Date regDate;
+	public String answer;
+	public Date answerRegDate;
    
 
 }
