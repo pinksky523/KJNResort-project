@@ -43,6 +43,10 @@
 	                    </c:forEach>
 	                    </tbody>
 	                </table><!-- END 게시물 출력 테이블 -->
+	                <form method="get" id="operForm" >	
+             			<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
+	               		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+             		</form> 
 	                <button id="regBtn" type="button" class="btn btn-primary pull-right">
 	          			지원서 작성	
 	          		</button>
@@ -58,9 +62,10 @@
 
 <script>
 $(function(){	
-	// 글쓰기 버튼을 누르면 게시글 작성 화면으로 이동
+	var operForm = $("#operForm");
+	
 	$('#regBtn').on("click",function(){
-		self.location = "/appliance/register";
+		operForm.attr("action","/appliance/register").submit();
 	});
 });
 </script>
