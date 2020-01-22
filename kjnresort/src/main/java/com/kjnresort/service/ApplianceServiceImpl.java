@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 import com.kjnresort.domain.Criteria;
+import com.kjnresort.domain.MemberVO;
 import com.kjnresort.domain.ApplianceVO;
 import com.kjnresort.mapper.ApplianceMapper;
 
@@ -41,7 +42,7 @@ public class ApplianceServiceImpl implements ApplianceService {
 	}
 
 	@Override
-	public void register(ApplianceVO appliance) {
+	public void register(MemberVO member, ApplianceVO appliance) {
 		log.info("지원서 등록 : " + appliance);
 		mapper.insert(appliance);
 	}
