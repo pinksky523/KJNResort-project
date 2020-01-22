@@ -23,7 +23,6 @@ encoding//src/main/java/com/kjnresort/domain/QnaVO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/RecruitVO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/TicketBuyVO.java=UTF-8
 encoding//src/main/java/com/kjnresort/domain/TicketVO.java=UTF-8
-encoding//src/main/java/com/kjnresort/kjnresort.erm=UTF-8
 encoding//src/main/java/com/kjnresort/security/CustomAccessDeniedHandler.java=UTF-8
 encoding//src/main/java/com/kjnresort/security/CustomLoginSuccessHandler.java=UTF-8
 encoding//src/main/java/com/kjnresort/service/CondoReserveServiceImpl.java=UTF-8

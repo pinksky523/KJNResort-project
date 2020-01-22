@@ -38,7 +38,7 @@
 	   <![CDATA[
 	    SELECT  * 
 	    FROM 	( SELECT /*+INDEX_DESC(t_appliance pk_applianceNo) */ 
-	    				 rownum rn, applianceNo, id
+	    				 rownum rn, applianceNo, id, name, regDate, phoneNumber
 	    		  FROM   t_appliance
 	    		  WHERE  
 	   ]]>
@@ -46,13 +46,13 @@
 		<include refid="criteria"></include>
 	   <![CDATA[ 		  
 	    		  rownum <= #{pageNum} * #{amount} )
-	    WHERE   rn > (#{pageNum} -1) * #{amount}
+	    		  WHERE   rn > (#{pageNum} -1) * #{amount}
 	   ]]> 		  
 	</select>
 	  
 	<select id="getTotalCount" resultType="int">
 	   <![CDATA[
-	    SELECT COUNT(*) FROM t_appliance 
+	    SELECT COUNT(*) FROM t_appliance
 	    WHERE 
 	   ]]> 	
 	   	<!-- 보관해 둔 쿼리 사용 -->
@@ -71,7 +71,7 @@
 	</insert>
 	
 	<select id="read" resultType="com.kjnresort.domain.ApplianceVO">
-		SELECT * FROM t_appliance WHERE id = #{id}
+		SELECT * FROM t_appliance WHERE applianceNo = #{applianceNo}
 	</select>
 	
 	<update id="update">

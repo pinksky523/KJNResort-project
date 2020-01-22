@@ -33,7 +33,7 @@ public class CondoController {//콘도 매니지컨트롤러
 					MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<CondoVO> get(@PathVariable("roomType") String roomType){
 		log.info("get CondoVO Controller..."+roomType);
-		log.info("하 결과출력.."+service.get(roomType));
+	
 		return new ResponseEntity<>(service.get(roomType),HttpStatus.OK);
 	}
 	

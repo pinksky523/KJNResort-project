@@ -1,5 +1,6 @@
 package com.kjnresort.controller;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,6 +47,7 @@ public class ApplianceController {
 		return null;
 	}
 	
+	@PreAuthorize("principal.username == #appliance.id")
 	@GetMapping("/myList")												// 나의 지원내역 리스트(사용자)
 	public void list(Model model) {
 		log.info("나의 지원내역 조회");
