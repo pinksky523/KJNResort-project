@@ -28,7 +28,7 @@
 		     					<option value="D" <c:out value="${pageMaker.cri.type eq 'D'?'selected':''}"/>>지원일자</option>
 		     					<option value="P" <c:out value="${pageMaker.cri.type eq 'P'?'selected':''}"/>>핸드폰 번호</option>
 		     			</select>
-		     			<input type="text" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'/>
+		     			<input type="text" name="keyword" placeholder="내용을 입력해주세요." value='<c:out value="${pageMaker.cri.keyword}"/>'/>
 		     			<input type="hidden" name="pageNum" value='<c:out value="${pageMaker.cri.pageNum}"/>'/>
 		     			<input type="hidden" name="amount" value='<c:out value="${pageMaker.cri.amount}"/>'/>
 		     			<button class='btn btn-default'>검색</button>
@@ -129,7 +129,7 @@ $(function(){
 				 return false;
 			 }
 			 if(!searchForm.find("input[name='keyword']").val()){			//검색어를 입력하지 않은 경우
-				 alert("키워드를 입력하세요.");
+				 alert("검색어를 입력하세요.");
 				 return false;
 			 }
 			 

@@ -3,16 +3,60 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kjnresort.mapper.NoticeMapper">
-
+	
+	  <!-- 쿼리 보관 -->
+	  <sql id="criteria">
+	  	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+				<foreach collection="typeArr" item='type'>
+					<trim prefix="OR">
+						<choose>
+							<when test="type == 'T'.toString()">
+								title 	LIKE '%'||#{keyword}||'%'
+							</when>
+							<when test="type == 'C'.toString()">
+								content	LIKE '%'||#{keyword}||'%'
+							</when>
+						</choose>
+					</trim>
+				</foreach>		
+			</trim>
+	  </sql>
+	  
+	 <select id="getListWithPaging" resultType="com.kjnresort.domain.NoticeVO">
+	   <![CDATA[
+	    SELECT  * 
+	    FROM 	( SELECT /*+INDEX_DESC(t_notice pk_noticeNo) */ 
+	    				 rownum rn, noticeNo, id, title, content, topCheck, regDate, viewCnt
+	    		  FROM   t_notice
+	    		  WHERE  
+	   ]]>
+		<!-- 보관해 둔 쿼리 사용 -->
+		<include refid="criteria"></include>
+	   <![CDATA[ 		  
+	    		  rownum <= #{pageNum} * #{amount} )
+	    		  WHERE   rn > (#{pageNum} -1) * #{amount}
+	  	ORDER BY noticeNo DESC
+	   ]]>  		  
+	</select>
+	
+	<select id="getTotalCount" resultType="int">
+	   <![CDATA[
+	    SELECT COUNT(*) FROM t_notice
+	    WHERE 
+	   ]]> 	
+	   	<!-- 보관해 둔 쿼리 사용 -->
+		<include refid="criteria"></include>
+	   <![CDATA[  noticeNo > 0
+	   ]]>
+	</select>
+	
 	<select id="getList" resultType="com.kjnresort.domain.NoticeVO">
-		<![CDATA[
 			SELECT * FROM t_notice ORDER BY noticeNo DESC
-		]]>
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO t_recruit(noticeNo, id, title, content)
-		VALUES(seq_t_notice.NEXTVAL, #{id}, #{title}, #{content})
+		INSERT INTO t_notice(noticeNo, id, title, content, topCheck)
+		VALUES(seq_t_notice.NEXTVAL, #{id}, #{title}, #{content}, #{topCheck})
 	</insert>
 	
 	<select id="read" resultType="com.kjnresort.domain.NoticeVO">
