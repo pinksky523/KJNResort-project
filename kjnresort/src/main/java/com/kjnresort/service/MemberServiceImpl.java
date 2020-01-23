@@ -1,11 +1,8 @@
 package com.kjnresort.service;	//이 패키지를 스프링이 자동스캔하도록 root-context.xml 설정
 
-import java.lang.reflect.Member;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kjnresort.domain.AuthVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
+import com.kjnresort.domain.ReviewVO;
 import com.kjnresort.mapper.MemberMapper;
 
 import lombok.AllArgsConstructor;
@@ -145,6 +143,24 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.delete(member) == 1;
 	}
 	
+	
+	
+	//내가 쓴 리뷰 목록 페이징
+	@Transactional
+	@Override
+	public List<ReviewVO> myreviewList(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount) {
+		log.info("내가 쓴 리뷰 목록 서비스임플 진입");
+		return mapper.myreviewList(id, pageNum, amount);
+	}
+	
+	//내가 쓴 리뷰 전체개수 가져오기
+	@Transactional
+	@Override
+	public int getTotalMyReview(@Param("id") String id, Criteria cri) {
+		log.info("내가 쓴 리뷰 전체개수 서비스임플 진입");
+		
+		return mapper.getTotalMyReview(id, cri);
+	}
 	
 	
 	//로그인

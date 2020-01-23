@@ -4,13 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kjnresort.mapper.MemberMapper">
 	
+	<!-- 내가쓴 후기 전체 데이터 개수 가져오기 -->
+	<select id="getTotalMyReview" resultType="int">
+		<![CDATA[
+		SELECT COUNT(*)
+		FROM t_review
+		WHERE reviewNo > 0 AND id = #{id}
+		]]>
+	</select>
+	
+	
+	
+	<!-- 내가 쓴 리뷰 목록 페이징 -->
+	<select id="myreviewList" resultType="com.kjnresort.domain.ReviewVO">
+		<!-- 두 번째 페이지 최신 순으로 출력 -->
+		<!-- 아래대로 실행하면 1페이지 나옴 -->
+		<![CDATA[
+		SELECT *
+		FROM(
+			SELECT /*+INDEX_DESC(t_review SYS_C0011654)*/
+				ROWNUM rn, reviewNo, category, title, id, regdate, viewCnt
+			FROM t_review
+			WHERE
+			ROWNUM <= #{pageNum} * #{amount}
+		)
+		WHERE rn > (#{pageNum}-1) * #{amount} AND id = #{id}
+		]]>
+	</select>
+	
+	
+	
 	<!-- 마이페이지 회원탈퇴 -->
 	<delete id="delete">
 		DELETE FROM t_member WHERE id = #{id}
 	</delete>
 	
 	
-	 
 	<!-- 마이페이지 비밀번호 공백일경우 비밀번호만 제외하고 수정 -->
 	<update id="mypageUpdate2">
 		UPDATE t_member SET phoneNumber = #{phoneNumber}, address = #{address} WHERE id = #{id}

@@ -2,9 +2,12 @@ package com.kjnresort.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.kjnresort.domain.AuthVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
+import com.kjnresort.domain.ReviewVO;
 
 	
 public interface MemberService {
@@ -23,4 +26,6 @@ public interface MemberService {
 	public MemberVO mypageGet(MemberVO member);		//마이페이지 조회
 	public boolean modifyMypage(MemberVO member);	//마이페이지 수정
 	public boolean remove(MemberVO member);			//회원탈퇴
+	public List<ReviewVO> myreviewList(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount);	//내가 쓴 리뷰 목록 페이징
+	public int getTotalMyReview(@Param("id") String id, Criteria cri);
 }

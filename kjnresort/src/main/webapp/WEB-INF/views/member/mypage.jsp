@@ -75,7 +75,7 @@
            <tr>
              <td colspan="3" align="center">
 		   	  <button type="button" class="btn btn-secondary" id="cancelBtn" onclick="location.href='/common/home'">메인화면으로</button>
-		      <button type="button" class="btn btn-success" id="myReviewBtn" onclick="">내가 쓴 후기</button>
+		      <button type="button" data-oper="review" class="btn btn-success" id="myReviewBtn" onclick="location.href='/member/myreview'">내가 쓴 후기</button>
 		      <button type="button" data-oper="remove" class="btn btn-danger" id="leaveBtn">회원탈퇴</button>
 		      <button type="button" data-oper="modify" class="btn btn-warning" id="modifyBtn">수정완료</button>
             </td>
@@ -196,14 +196,19 @@ $('button').click(function(e) {
 		deleteMember();
 	} else if (oper === 'modify') {
 		modify();
+	} else if (oper === 'review') {
+		frm.attr('action', '/member/myreview');
+		
+		document.frm.submit();
 	}
 });
+
 
 
 //회원탈퇴버튼 클릭이벤트
 function deleteMember() {
 	if(confirm("정말 탈퇴하시겠습니까?")) {
-		document.frm.submit();
+			document.frm.submit();
 	} 
 }
 

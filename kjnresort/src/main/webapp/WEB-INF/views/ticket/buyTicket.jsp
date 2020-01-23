@@ -21,6 +21,7 @@
          <th><span id="liftAmount">수량 선택
          
         <select name="liftAmount" class="form-control" id="Amount"  style="width: 70%">
+        	<option value="0">0 </option>
         	<option value="1">1 </option>
         	<option value="2">2 </option>
         	<option value="3">3 </option>
@@ -38,6 +39,7 @@
          <th> <span id="toolAmount">수량 선택
          
         <select name="toolAmount" class="form-control" id="Amount"  style="width: 70%">
+        	<option value="0">0</option>
         	<option value="1">1</option>
         	<option value="2">2</option>
         	<option value="3">3</option>
@@ -47,7 +49,7 @@
        </tr>
        <tr>
        		<th>총금액</th>
-       		<td><span name="totalPrice" id="text1">110000원</span></td>
+       		<td><span name="totalPrice" id="text1" class="form-control">원</span></td>
 
        </tr>
        <tr>
@@ -67,35 +69,43 @@
 
 <script>
 
-/*  function getValue(obj){
-	alert("리프트가격 : " + obj.options[obj.selectedIndex].text * ${tPrice.price});   
-	var lift = obj.options[obj.selectedIndex].text * ${tPrice.price};
-	}  */
-
-/* function getToolValue(obj){
-	alert("장비가격 : " + obj.options[obj.selectedIndex].text * ${ttPrice.price});  
-	var tool = obj.options[obj.selectedIndex].text * ${ttPrice.price};
-	} */
-
 $(function(){	
+	
 	
 	$("select[id=Amount]").change(function(obj){
  		var str = document.getElementById("text1");
  		var lift = ($("select[name=liftAmount]").val() * ${tPrice.price});
  		var tool = ($("select[name=toolAmount]").val() * ${ttPrice.price});
- 		
- 		document.getElementById("text1").innerHTML = (lift + tool) + "원";
+ 	
+ 		 if($("input[name=lift]:checked").val()  && $("input[name=tool]:checked").val()) {
+ 			document.getElementById("text1").innerHTML = (lift + tool) + "원";
+ 		} 
 	}); 
 	
+	$("select[id=Amount]").change(function(obj){
+		var lift = ($("select[name=liftAmount]").val() * ${tPrice.price});
+ 		var tool = ($("select[name=toolAmount]").val() * ${ttPrice.price});
+ 		 if($("input[name=lift]:checked").val()  && $("input[name=tool]:checked").val() == "0") {
+ 			document.getElementById("text1").innerHTML = lift + "원";
+ 		}
+	});
+	
+	$("select[id=Amount]").change(function(obj){
+		var lift = ($("select[name=liftAmount]").val() * ${tPrice.price});
+ 		var tool = ($("select[name=toolAmount]").val() * ${ttPrice.price});
+ 		 if($("input[name=lift]:checked").val() == "0"  && $("input[name=tool]:checked").val()) {
+ 			document.getElementById("text1").innerHTML = tool + "원";
+ 		}
+	});
 	// 라디오버튼 클릭시 이벤트 발생
 	$("input:radio[name=lift]").click(function(){
 		 
         if($("input[name=lift]:checked").val() == "1"){
-            $("#liftAmount").attr("remove",false);
+            $("#liftAmount").attr("hidden",false);
             // radio 버튼의 value 값이 1이라면 활성화
  
         }else if($("input[name=lift]:checked").val() == "0"){
-              $("#liftAmount").attr("remove",true);
+              $("#liftAmount").attr("hidden",true);
             // radio 버튼의 value 값이 0이라면 비활성화
         }
     });
@@ -114,22 +124,6 @@ $(function(){
     
     
 });
-
-	/* $("select[id=Amount]").change(function(obj){
- 		var str = document.getElementById("text1");
- 		var lift = ($("select[name=liftAmount]").val() * ${tPrice.price});
- 		var tool = ($("select[name=toolAmount]").val() * ${ttPrice.price});
- 		if($("input[name=lift]:checked").val() == "1" || $("input[name=tool]:checked").val() == "1"){
- 			document.getElementById("text1").innerHTML = (lift + tool) + "원";
- 		} else if("input[name=lift]:checked").val() == "1" || $("input[name=tool]:checked").val() == "0") {
- 			document.getElementById("text1").innerHTML = lift + "원";
- 		} else if("input[name=lift]:checked").val() == "0" || $("input[name=tool]:checked").val() == "1") {
-		document.getElementById("text1").innerHTML = tool + "원";
-		} else {
-			document.getElementById("text1").innerHTML = "이용권을 선택해 주세요.";
-		}
- 		
-	});  */
 	
 </script>
 
