@@ -2,6 +2,7 @@ package com.kjnresort.service;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.NoticeVO;
@@ -31,6 +32,7 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public NoticeVO get(Long noticeNo) {
 		log.info("게시글 조회 :" + noticeNo);
+		mapper.updateViewCnt(noticeNo);
 		return mapper.read(noticeNo);
 	}
 
@@ -51,5 +53,6 @@ public class NoticeServiceImpl implements NoticeService {
 		log.info("게시글 등록 : " + notice);
 		mapper.insert(notice);
 	}
+
 
 }
