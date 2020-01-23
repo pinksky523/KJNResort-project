@@ -13,8 +13,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,11 +57,26 @@ public class CondoReserveController { //헐 이제 될거같아
 		return new ResponseEntity<>(service.getAvailableRoomType(in, out),HttpStatus.OK);
 	}
 	
+	
 	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/register")
-	public String register(CondoReserveVO crVO,RedirectAttributes rttr) {
+	@PostMapping(value="/register",consumes="application/json",produces= {MediaType.TEXT_PLAIN_VALUE})
+	@Transactional
+	public ResponseEntity<String> register(@RequestBody CondoReserveVO crVO) {
 		log.info("post /register 컨트롤러");
-		return "redirect:/condoreserve/payChargeResult";
+		log.info(crVO.getCheckIn());
+		log.info(crVO.getCheckOut());
+		log.info(crVO.getId());
+		log.info(crVO.getPrice());
+		log.info(crVO.getNights());
+		log.info(crVO.getReserveDate());
+		log.info(crVO.getRoomType());
+		int insertCount=service.register(crVO);
+		long reserveNo=-1;
+		if(insertCount==1) {
+			reserveNo=service.getMaxReserveNo();
+		}
+		return insertCount==1?new ResponseEntity<>(""+reserveNo,HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@GetMapping("/list")
@@ -91,7 +108,11 @@ public class CondoReserveController { //헐 이제 될거같아
 	}
 	
 	
-	
+	@GetMapping("/payChargeResult/{rno}")
+	public String chargeResult(@PathVariable long rno,Model model) {
+		model.addAttribute("reserve",service.get(rno));
+		return "condoreserve/payChargeResult";
+	}
 
 	
 }

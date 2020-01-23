@@ -24,31 +24,31 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public List<NoticeVO> getList(Criteria cri) {
-		log.info("getList with paging.......");
+		log.info("공지사항 리스트 조회");
 		return mapper.getListWithPaging(cri);
 	}
 
 	@Override
 	public NoticeVO get(Long noticeNo) {
-		log.info("get.......");
+		log.info("게시글 조회 :" + noticeNo);
 		return mapper.read(noticeNo);
 	}
 
 	@Override
 	public boolean modify(NoticeVO notice) {
-		log.info("modify....... : " + notice);
+		log.info("게시글 수정 : " + notice);
 		return mapper.update(notice) == 1;
 	}
 
 	@Override
 	public boolean remove(Long noticeNo) {
-		log.info("remove....... : " + noticeNo);
+		log.info("게시글 삭제 : " + noticeNo);
 		return mapper.delete(noticeNo) == 1;
 	}
 
 	@Override
 	public void register(NoticeVO notice) {
-		log.info("register........ : " + notice);
+		log.info("게시글 등록 : " + notice);
 		mapper.insert(notice);
 	}
 

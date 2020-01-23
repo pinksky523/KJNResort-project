@@ -68,7 +68,7 @@ public class CondoReserveServiceImpl implements CondoReserveService {
 
 
 	@Override
-	public void register(CondoReserveVO reserve) {
+	public int register(CondoReserveVO reserve) {
 		log.info("register reserve in serviceImpl.....");
 		
 		int count=-1;
@@ -92,7 +92,7 @@ public class CondoReserveServiceImpl implements CondoReserveService {
 			}
 		}
 		reserve.setRoomNo(reserveRoomNo);
-		condoReservemapper.insert(reserve);
+		return condoReservemapper.insert(reserve);
 		
 	}
 
@@ -126,6 +126,12 @@ public class CondoReserveServiceImpl implements CondoReserveService {
 	public int getTotalCountWithId(Criteria cri, String id) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+	@Override
+	public long getMaxReserveNo() {
+		return condoReservemapper.getMaxReserveNo();
 	}
 
 

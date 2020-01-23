@@ -16,10 +16,10 @@ import com.kjnresort.domain.Criteria;
 public interface CondoReserveMapper {
    public List<CondoReserveVO> getListWithPaging(Criteria cri);
    public List<CondoReserveVO> getListWithId(Criteria cri,String id);
-   public void insert(CondoReserveVO reserve);
+   public int insert(CondoReserveVO reserve);
    public int update(CondoReserveVO reserve);
    public CondoReserveVO read(Long reserveNo);
-   
+   public long getMaxReserveNo();
  
    public int getMaxRoomNoByRoomType(String roomType);
    public int getReserveSizeByRoomType(String roomType);
