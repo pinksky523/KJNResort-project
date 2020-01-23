@@ -6,11 +6,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.kjnresort.domain.PageDTO;
 
 import com.kjnresort.domain.TicketBuyVO;
 import com.kjnresort.domain.TicketVO;
@@ -32,13 +34,14 @@ public class TicketController {
 	@GetMapping("buyTicketKakao")
 	//@PreAuthorize("isAuthenticated()")
 	public void buyTicketKakao(Model model, HttpServletRequest request) {
-		int liftAmount = Integer.parseInt(request.getParameter("liftAmount"));
-		int toolAmount = Integer.parseInt(request.getParameter("toolAmount"));
-		request.setAttribute("liftAmount", liftAmount);
-		request.setAttribute("toolAmount", toolAmount);
-		model.addAttribute("tPrice", service.getPrice());
-		model.addAttribute("ttPrice", service.getPriceT());
-		log.info("TicketController buyTicketKakao() - get!!!!!!!!~~~~!!!!!");
+		 int liftAmount = Integer.parseInt(request.getParameter("liftAmount")); 
+		 int toolAmount = Integer.parseInt(request.getParameter("toolAmount"));
+		 request.setAttribute("liftAmount", liftAmount);
+		 request.setAttribute("toolAmount", toolAmount); 
+		 model.addAttribute("tPrice", service.getPrice());
+		 model.addAttribute("ttPrice", service.getPriceT());
+		 
+		log.info("TicketController buyTicketKakao() - get!!");
 	}
 	
 	//이용권 외부 결제에서 결제완료 버튼 눌렀을때
@@ -81,22 +84,22 @@ public class TicketController {
 	//이용권 구매 취소 이건 업데이트로 바꿔야함
 	//@PreAuthorize("principal.username == #writer")						// 작성자 확인
 	@PostMapping("cancel")
-	public String cancel(@RequestParam("ticketNo") Long ticketNo, RedirectAttributes rttr, 
-			 @ModelAttribute("cri") Criteria cri, String writer) {
-		log.info("TicketController remove() " + ticketNo);
-		
-		return "redirect:/ticket/list" + cri.getListlink();
+	public String cancel(TicketBuyVO ticket ,Long ticketNo, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri, String writer) {
+		log.info("TicketController cancel() " + ticketNo);
+		service.modifyStatus(ticket);
+		return "redirect:/ticket/buyTicketList" + cri.getListlink();
 	}
 	
 	//이용권 가격 수정
 	//@PreAuthorize("principal.username == #board.writer")				// 작성자 확인
 	@PostMapping("modify")
-	public String modify(TicketVO tVO, RedirectAttributes rttr) {
-		log.info("TicketController modify() price" + tVO);
-		if(service.modify(tVO)) {
-			rttr.addFlashAttribute("result", "success");
-		}
-		return "redirect:/admin/adminMain";
+	public String modify(TicketVO tPrice, TicketVO ttPrice, RedirectAttributes rttr) {
+		log.info("TicketController modify() price" + tPrice);
+		service.modify(tPrice);
+//		if(service.modify(tPrice)) {
+//			rttr.addFlashAttribute("result", "success");
+//		}
+		return "redirect:/ticket/modify";
 	}
 	
 	//이용권 가격 수정 폼으로
@@ -108,10 +111,28 @@ public class TicketController {
 
 	}
 	
+	
+	@GetMapping(value = {"buyTicketGet/{ticketNo}/{id}"})
+	public String buyTicketGet(@PathVariable("ticketNo") Long ticketNo, @PathVariable("id") String id, Model model, 
+				    @ModelAttribute("cri") Criteria cri) {
+		log.info("TicketController buyTicketGet()----------------");
+		log.info("id : " + id);
+		log.info("no : " + ticketNo);
+		model.addAttribute("ticket", service.get(ticketNo));
+		model.addAttribute("tPrice", service.getPrice());
+		model.addAttribute("ttPrice", service.getPriceT());
+		model.addAttribute("member", service.getMember(id));
+		return "ticket/buyTicketGet";
+	}
+	
 	//이용권 구매 내역 리스트
-	@GetMapping("list")
-	public void list(Criteria cri, Model model) {
+	@GetMapping("buyTicketList")
+	public void buyTicketList(Criteria cri, String id, Model model) {
 		log.info("TicketController list() with cri : " + cri);
+		model.addAttribute("list", service.getList(cri));
+		model.addAttribute("pageMaker", 
+							new PageDTO(cri, service.getTotalCount(cri)));
+		
 	}
 
 }

@@ -54,6 +54,14 @@ public class CondoReserveController { //헐 이제 될거같아
 	
 		return new ResponseEntity<>(service.getAvailableRoomType(in, out),HttpStatus.OK);
 	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/register")
+	public String register(CondoReserveVO crVO,RedirectAttributes rttr) {
+		log.info("post /register 컨트롤러");
+		return "redirect:/condoreserve/payChargeResult";
+	}
+	
 	@GetMapping("/list")
 	public void list(Model model,Criteria cri,Principal principal) {
 		
@@ -82,10 +90,7 @@ public class CondoReserveController { //헐 이제 될거같아
 		
 	}
 	
-	@PostMapping("/register")
-	public String register(CondoReserveVO crVO,RedirectAttributes rttr) {
-		return null;
-	}
+	
 	
 
 	
