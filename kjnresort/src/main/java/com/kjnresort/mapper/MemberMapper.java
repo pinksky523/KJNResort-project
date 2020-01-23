@@ -7,15 +7,9 @@ import org.apache.ibatis.annotations.Param;
 import com.kjnresort.domain.AuthVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
+import com.kjnresort.domain.ReviewVO;
 
 public interface MemberMapper {
-	
-	
-	public int getTotalCount(Criteria cri);
-	
-	public List<MemberVO> getListWithPaging(Criteria cri);		
-	
-	////////////////////////////////////////////
 	public MemberVO read(String id);	//권한조회
 	public void insert(MemberVO member);	//회원가입
 	public void insertAuth(AuthVO auth);	//회원가입 자동권한생성
@@ -28,4 +22,8 @@ public interface MemberMapper {
 	public boolean mypageUpdate(MemberVO member);	//마이페이지 수정
 	public boolean mypageUpdate2(MemberVO member);	//마이페이지 비밀번호 제외 수정
 	public int delete(MemberVO member);			//마이페이지 회원탈퇴
+	public List<ReviewVO> myreviewList(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount);		//내가 쓴 리뷰 목록
+	public int getTotalMyReview(@Param("id") String id, Criteria cri);		//내 리뷰 전체 개수 가져오기
+	public List<MemberVO> memberList(Criteria cri);	//전체회원목록
+	public int totalMemberCount(Criteria cri);		//전체회원 수 가져오기
 }

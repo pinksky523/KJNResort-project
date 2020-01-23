@@ -26,12 +26,12 @@ public class NoticeController {
 	
 	@GetMapping("/register")
 	public void register() {
-		
+		log.info("공지사항 등록창 진입");
 	}
 	
 	@PostMapping("/remove")
 	public String remove(@RequestParam("noticeNo") Long noticeNo,  @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		log.info("NoticeController remove()... " + noticeNo);
+		log.info("공지사항 게시글 삭제 : " + noticeNo);
 		if(service.remove(noticeNo)) {
 			rttr.addFlashAttribute("result", "success");
 		}
@@ -40,11 +40,10 @@ public class NoticeController {
 	
 	@PostMapping("/modify")
 	public String modify(NoticeVO notice, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		log.info("NoticeController modify()");
+		log.info("공지사항 게시글 수정 완료");
 		if(service.modify(notice)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		
 		return "redirect:/notice/list" + cri.getListlink();
 	}
 	
@@ -56,40 +55,20 @@ public class NoticeController {
 		model.addAttribute("notice", service.get(noticeNo));
 	}
 	
-	// /board/register POST 요청을 처리하는 register() 작성
-	// 파라미터는 등록된 게시물의 정보를 갖는 BoardVO 객체와
-	// /board/list로 리다이렉트하기 위한 RedirectAttributes 객체를 받음
-	// 기능 : 파라미터로 받은 BoardVO 객체를 tbl_board 테이블에 저장하고
-	//		등록된 게시물의 번호를 result 속성에 담아
-	//		/board/list로 리다이렉트
-	
 	@PostMapping("register")
 	public String register(NoticeVO notice, RedirectAttributes rttr) {
-		log.info("NoticeController register()");
+		log.info("공지사항 게시글 등록 완료");
 		service.register(notice);
-		rttr.addFlashAttribute("result", notice.getNoticeNo());		// 등록된 게시글의 bno를 result값에 담아서 redirect로 넘겨준다.
+		rttr.addFlashAttribute("result", notice.getNoticeNo());		// 등록된 게시글의 noticeNo를 result값에 담아서 redirect로 넘겨준다.
 		return "redirect:/notice/list";
 	}
-	
-	// /board/list GET 요청을 처리하는 list() 작성
-	// 결과 뷰로 tbl_board 테이블의 전체 목록을 담아 가도록 처리
-	
-//	@GetMapping("/list")
-//	public void list(Model model) {
-//		log.info("BoardController list()");
-//		model.addAttribute("list", service.getList());
-//	}
 	
 	@GetMapping("/list")
 	public void list(Criteria cri, Model model) {
 		log.info("list: " + cri);
 		model.addAttribute("list", service.getList(cri));
-	//	model.addAttribute("pageMaker", new PageDTO(cri, 123));
-		
 		int total = service.getTotalCount(cri);
-		
 		log.info("total : " + total);
-		
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 }

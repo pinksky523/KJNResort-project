@@ -5,6 +5,7 @@
 <html lang="zxx">
 <head>
 	<title>KJN RESORT</title>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<meta charset="UTF-8">
 	<meta name="description" content="loans HTML Template">
 	<meta name="keywords" content="loans, html">
@@ -22,7 +23,8 @@
 	<link rel="stylesheet" href="/resources/css/owl.carousel.min.css"/>
 	<link rel="stylesheet" href="/resources/css/flaticon.css"/>
 	<link rel="stylesheet" href="/resources/css/slicknav.min.css"/>
-	
+	<link rel="stylesheet" href="/resources/css/common.css"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	
 	<!-- Main Stylesheets -->
@@ -35,7 +37,7 @@
 	<![endif]-->
 
 </head>
-<body>
+<body class="contents">
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -79,9 +81,10 @@
 				<li>
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-					<form id="mypageForm" action="/member/mypage" method="get">
+					<form id="mypageForm" action="/member/mypage" method="post">
 						<button type="submit" class="btn btn-secondary" id="mypage">마이페이지</button>
 						<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					 </form>
 				</sec:authorize>
 				

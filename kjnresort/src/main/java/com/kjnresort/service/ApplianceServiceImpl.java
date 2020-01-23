@@ -38,7 +38,7 @@ public class ApplianceServiceImpl implements ApplianceService {
 
 	@Override
 	public ApplianceVO get(Long applianceNo) {
-		log.info("게시글 조회");
+		log.info("게시글 조회 : " + applianceNo);
 		return mapper.read(applianceNo);
 	}
 
