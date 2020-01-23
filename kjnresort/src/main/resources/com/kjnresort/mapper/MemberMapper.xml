@@ -4,19 +4,37 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kjnresort.mapper.MemberMapper">
 	<!-- 쿼리 보관 -->
-	<sql id="criteria">
+	<sql id="criteria1">
 		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 			<foreach item='type' collection="typeArr">
 				<trim prefix="OR">
 					<choose>
-						<when test="type == 'T'.toString()">
-							title LIKE '%'||#{keyword}||'%'
+						<when test="type == 'O'.toString()">
+							status = 1
 						</when>
-						<when test="type == 'C'.toString()">
-							content LIKE '%'||#{keyword}||'%'
+						<when test="type == 'X'.toString()">
+							status = 0
 						</when>
-						<when test="type == 'W'.toString()">
-							writer LIKE '%'||#{keyword}||'%'
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<!-- 쿼리 보관 -->
+	<sql id="criteria2">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type2' collection="typeArr2">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'I'.toString()">
+							id LIKE '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'N'.toString()">
+							name LIKE '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'P'.toString()">
+							phoneNumber LIKE '%'||#{keyword}||'%'
 						</when>
 					</choose>
 				</trim>
@@ -29,11 +47,11 @@
 	<select id="totalMemberCount" resultType="int">
 		SELECT COUNT(*)
 		FROM t_member
-		WHERE 
-
+		WHERE
 		<!-- 보관해 둔 쿼리 사용 -->
-		<include refid="criteria"></include>
-	
+		<include refid="criteria1"></include>
+		<include refid="criteria2"></include>
+		id IS NOT NULL
 	</select>
 	
 	
@@ -44,14 +62,15 @@
 		<![CDATA[
 		SELECT *
 		FROM(
-			SELECT /*+INDEX_DESC(tbl_board pk_board)*/
-				ROWNUM rn, bno, title, content, writer, regdate, updatedate, replycnt
-			FROM tbl_board
+			SELECT /*+INDEX_DESC(t_member SYS_C0011840)*/
+				ROWNUM rn, id, name, phoneNumber, status
+			FROM t_member
 			WHERE
 		]]>
 			
 			<!-- 보관해 둔 쿼리 사용 -->
-			<include refid="criteria"></include>
+			<include refid="criteria1"></include>
+			<include refid="criteria2"></include>
 					
 		<![CDATA[
 			ROWNUM <= #{pageNum} * #{amount}
@@ -84,7 +103,7 @@
 		FROM(
 			SELECT /*+INDEX_DESC(t_review SYS_C0011654)*/
 				ROWNUM rn, reviewNo, category, title, id, regdate, viewCnt
-			FROM t_review
+			FROM t_member
 			WHERE
 			ROWNUM <= #{pageNum} * #{amount}
 		)
