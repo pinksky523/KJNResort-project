@@ -5,7 +5,7 @@
 <mapper namespace="com.kjnresort.mapper.CondoReserveMapper">
 
 <insert id="insert">
-insert into t_condo_reserve values(seq_t_condo_reserve.nextval,#{id},#{roomType},#{reserveDate},#{status},#{roomNo},#{checkIn},#{checkOut},#{nights},#{price},#{review})
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,#{id},#{roomType},#{reserveDate},0,#{roomNo},#{checkIn},#{checkOut},#{nights},#{price},0)
 </insert>
 
 <select id="read" resultType="com.kjnresort.domain.CondoReserveVO">
@@ -18,6 +18,9 @@ from view_condo_reserve
 where roomType=#{roomType}
 </select>
 
+<select id="getMaxReserveNo" resultType="long">
+select max(reserveno) from t_condo_reserve
+</select>
 
 <select id="getOverlapDateCount" resultType="int">
 <![CDATA[

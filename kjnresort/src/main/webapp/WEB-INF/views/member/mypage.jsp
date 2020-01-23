@@ -192,7 +192,7 @@ $('button').click(function(e) {
 	var oper = $(this).data('oper');
 	
 	if(oper === 'remove') {
-		frm.attr('action', '/common/customLogout');
+		frm.attr('action', '/member/remove');
 		deleteMember();
 	} else if (oper === 'modify') {
 		modify();
@@ -208,7 +208,7 @@ $('button').click(function(e) {
 //회원탈퇴버튼 클릭이벤트
 function deleteMember() {
 	if(confirm("정말 탈퇴하시겠습니까?")) {
-		document.frm.submit();
+			document.frm.submit();
 	} 
 }
 
