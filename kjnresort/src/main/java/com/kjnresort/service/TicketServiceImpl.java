@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.kjnresort.domain.Criteria;
+import com.kjnresort.domain.MemberVO;
 import com.kjnresort.domain.TicketBuyVO;
 import com.kjnresort.domain.TicketVO;
 import com.kjnresort.mapper.TicketMapper;
@@ -32,11 +33,19 @@ public class TicketServiceImpl implements TicketService{
 		log.info("getList------------");
 		return mapper.getList();
 	}
+	
+	@Override
+	public int getTotalCount(Criteria cri) {
+		log.info("getList------------");
+		return mapper.getTotalCount(cri);
+	}
+	
+	
 
 	@Override
-	public boolean modify(TicketVO tVO) {
+	public boolean modify(TicketVO tPrice) {
 		log.info("modify------------");
-		return mapper.updateL(tVO) == 1;
+		return mapper.updateL(tPrice) == 1;
 	}
 
 	@Override
@@ -65,6 +74,18 @@ public class TicketServiceImpl implements TicketService{
 	public TicketVO getPriceT() {
 		log.info("getPriceT--------------------");
 		return mapper.readPriceT();
+	}
+
+	@Override
+	public MemberVO getMember(String id) {
+		log.info("getMember------------");
+		return mapper.readMember(id);
+	}
+
+	@Override
+	public boolean modifyStatus(TicketBuyVO ticket) {
+		log.info("modify------------");
+		return mapper.updateStatus(ticket) == 1;
 	}
 
 }

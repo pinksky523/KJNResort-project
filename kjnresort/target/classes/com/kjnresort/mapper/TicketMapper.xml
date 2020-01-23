@@ -5,18 +5,69 @@
   
 <mapper namespace="com.kjnresort.mapper.TicketMapper">
 	
-	<update id="updateL">
-	    UPDATE 	t_ticket 
-	    SET		price = #{price}
-	    WHERE 	type = 'lift'
-  	</update>
+	<!-- 쿼리 보관 -->	  
+	<sql id="criteria">
+  		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach collection="typeArr" item='type'>
+				<trim prefix="OR">						
+					<choose>
+						<when test="type == 'T'.toString()">
+							id 	LIKE '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							ticketNo	LIKE '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>		
+		</trim>
+	</sql>
+	
+	<select id="getListWithPaging" resultType="com.kjnresort.domain.TicketBuyVO">
+     <![CDATA[
+      SELECT  * 
+      FROM 	  ( SELECT /*+INDEX_DESC(t_ticket_buy pk_ticket) */ 
+    				   rownum rn, ticketNo, id, buyDate, liftAmount, 
+    			  	   toolAmount, status, review
+    		    FROM   t_ticket_buy
+    		    WHERE  
+     ]]>
+	  	  <!-- 보관해 둔 쿼리 사용 -->
+	  	  <include refid="criteria"></include>
+     <![CDATA[ 		  
+    		    rownum <= #{pageNum} * #{amount} )
+      WHERE   rn > (#{pageNum} -1) * #{amount}
+     ]]> 		  
+    </select>
 	
 	<select id="getList" resultType="com.kjnresort.domain.TicketBuyVO">
 		<![CDATA[
 			SELECT * FROM t_ticket_buy where ticketNo > 0
 		]]>	
 	</select>
-
+	
+	<select id="getTotalCount" resultType="int">
+     <![CDATA[
+      SELECT COUNT(*) FROM t_ticket_buy
+      WHERE 
+     ]]> 	<!-- 보관해 둔 쿼리 사용 -->
+	      <include refid="criteria"></include>
+     <![CDATA[  ticketNo > 0
+     ]]>
+    </select>
+	
+	<update id="updateL">
+	    UPDATE 	t_ticket 
+	    SET		price = #{price}
+	    WHERE 	type = #{type}
+  	</update>
+  	
+  	<update id="updateStatus">
+	    UPDATE 	t_ticket_buy 
+	    SET		status = 1
+	    WHERE 	ticketNo = #{ticketNo}
+  	</update>
+	
 	<insert id="insert">
 		insert into t_ticket_buy
 	    values (SEQ_T_TICKET_BUY.nextval, 'user00', 'lift', sysdate, 1, 1, 0, 0)
@@ -25,6 +76,12 @@
 	<select id="read" resultType="com.kjnresort.domain.TicketBuyVO">
 		<![CDATA[
 			SELECT * FROM t_ticket_buy where ticketNo = #{ticketNo}
+		]]>	
+	</select>
+	
+	<select id="readMember" resultType="com.kjnresort.domain.MemberVO">
+		<![CDATA[
+			SELECT * FROM t_member where id = #{id}
 		]]>	
 	</select>
 	
