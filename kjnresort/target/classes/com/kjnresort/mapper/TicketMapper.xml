@@ -39,14 +39,8 @@
       WHERE   rn > (#{pageNum} -1) * #{amount}
      ]]> 		  
     </select>
-	
-	<select id="getList" resultType="com.kjnresort.domain.TicketBuyVO">
-		<![CDATA[
-			SELECT * FROM t_ticket_buy where ticketNo > 0
-		]]>	
-	</select>
-	
-	<select id="getTotalCount" resultType="int">
+    
+    <select id="getTotalCount" resultType="int">
      <![CDATA[
       SELECT COUNT(*) FROM t_ticket_buy
       WHERE 
@@ -54,6 +48,19 @@
 	      <include refid="criteria"></include>
      <![CDATA[  ticketNo > 0
      ]]>
+    </select>
+    
+    <select id="getListWithPagingUser" resultType="com.kjnresort.domain.TicketBuyVO">
+     <![CDATA[
+      SELECT  * 
+      FROM 	  t_ticket_buy
+      WHERE   id = #{id}   
+     ]]> 		  
+    </select>
+    
+    <select id="getTotalCountUser" resultType="int">
+      SELECT COUNT(*) FROM t_ticket_buy
+      WHERE  id = #{id}
     </select>
 	
 	<update id="updateL">
@@ -65,6 +72,12 @@
   	<update id="updateStatus">
 	    UPDATE 	t_ticket_buy 
 	    SET		status = 1
+	    WHERE 	ticketNo = #{ticketNo}
+  	</update>
+  	
+  	<update id="updateStatusUse">
+	    UPDATE 	t_ticket_buy 
+	    SET		status = 2
 	    WHERE 	ticketNo = #{ticketNo}
   	</update>
 	

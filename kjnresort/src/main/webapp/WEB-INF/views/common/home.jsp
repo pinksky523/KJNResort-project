@@ -3,6 +3,14 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!DOCTYPE html>
 <html lang="zxx">
+<style>
+#ticketBtn  { background-color: transparent !important;
+    		  background-image: none !important;
+    		  border-color: transparent;
+    		  border: none;
+    		  color: black;
+    		  font-weight: bold; }
+</style>
 <head>
 	<title>KJN RESORT</title>
 	<meta charset="UTF-8">
@@ -57,7 +65,15 @@
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
 						<li><a href="/ticket/buyTicket">이용권 구매</a></li>
-						<li><a href="loans.html">이용권 구매내역</a></li>
+						<li>
+							<sec:authorize access="isAuthenticated()">
+							<form id="buyTicketListUser" action="/ticket/buyTicketListUser" method="post">
+								<input type="submit" id="ticketBtn" value="   이용권 구매내역">
+								<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					 		</form>
+					 		</sec:authorize>
+						</li>
 					</ul>
 				</li>
 				<li><a href="contact.html">이벤트</a></li>

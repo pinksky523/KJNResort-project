@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.TicketVO;
 
 import lombok.Setter;

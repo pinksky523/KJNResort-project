@@ -56,10 +56,8 @@ button { margin-right: 5px;}
 	                <label>결제금액</label>
 	                <input class="form-control" name="writer"
 	                	   value="${(tPrice.price * ticket.liftAmount) + (ttPrice.price * ticket.toolAmount)}" readonly></div>    	       	       	   
-                             
-               	<!-- <button data-oper='review' class="btn btn-primary pull-right">후기등록</button> -->
-               	<c:if test="${ticket.status == 0}">
-               	<button data-oper='use' name="use" class="btn btn-success pull-right">이용 확인</button>
+                <c:if test="${ticket.status == 2}">             
+               	<button data-oper='review' class="btn btn-primary pull-right">후기등록</button>
                	</c:if>
                	<c:if test="${ticket.status == 0}">
                	<button data-oper='cancel' name="cancel" class="btn btn-danger pull-right">구매 취소</button>
@@ -67,7 +65,8 @@ button { margin-right: 5px;}
                	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
                	
                 <form method="post" action="/ticket/cancel" id="operForm">
-                	<input type="hidden" id="ticketNo" name="ticketNo" value="${ticket.ticketNo}">
+                	
+                	<input type="hidden" id="ticketNo" name="id" value="${ticket.id}">
                 	<input type="hidden" name="pageNum" value="${cri.pageNum}">
                 	<input type="hidden" name="amount" value="${cri.amount}">
                 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -85,7 +84,7 @@ $(function(){
 	var frm = $('#operForm');
 	
 	$("button[data-oper='list']").click(function(e){
-		frm.attr("action", "/ticket/buyTicketList").submit();
+		frm.attr("action", "/ticket/buyTicketListUser").submit();
 	});
 	
 	$("button[data-oper='cancel']").click(function(e){
@@ -97,16 +96,7 @@ $(function(){
 			e.preventDefault();
 		}
 	}); 
-	 
-	$("button[data-oper='use']").click(function(e){
-		 var answer;
-		 answer = confirm("이용 확인 하시겠습니까?");
-		 if (answer == true) {
-			 frm.attr("action", "/ticket/use").submit();
-		 } else {
-			 e.preventDefault();
-		 }
-	});  
+ 
 });
 </script>
 

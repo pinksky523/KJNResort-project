@@ -20,7 +20,7 @@
 
 <button><a href="buyTicketResult">구매내역으로 이동</a></button>
 
-
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script> 
 
 	var IMP = window.IMP; // 생략가능
@@ -41,7 +41,7 @@
 	    if ( rsp.success ) {
 	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 	    	jQuery.ajax({
-	    		url: "buyTicket", //cross-domain error가 발생하지 않도록 주의해주세요
+	    		url: "buyTicketResult", //cross-domain error가 발생하지 않도록 주의해주세요
 	    		type: 'POST',
 	    		dataType: 'json',
 	    		data: {
@@ -57,6 +57,7 @@
 	    			msg += '카드 승인번호 : ' + rsp.apply_num;
 	    			 //db에 넣기
 	    			alert(msg);
+	    			 location.href = 'buyTicketResult';
 	    		} else {
 	    			//[3] 아직 제대로 결제가 되지 않았습니다.
 	    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.

@@ -9,12 +9,14 @@ import com.kjnresort.domain.MemberVO;
 
 public interface TicketService {
 	public List<TicketBuyVO> getList(Criteria cri); //getListWithPaging ¾¸
-	public List<TicketBuyVO> getList();
 	public int getTotalCount(Criteria cri);
 	
-	public boolean modify(TicketVO tPrice);
-	public boolean modifyStatus(TicketBuyVO ticket);
+	public List<TicketBuyVO> getListUser(String id); //getListWithPaging ¾¸
+	public int getTotalCountUser(Criteria cri, String id);
 	
+	public boolean modify(TicketVO tPrice);
+	public boolean modifyStatus(Long ticketNo);
+	public boolean modifyStatusUse(Long ticketNo);
 	public boolean remove(Long ticketNo);
 	public TicketBuyVO get(Long ticketNo);
 	public MemberVO getMember(String id);

@@ -18,7 +18,7 @@ import lombok.Setter;
                               "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 public class MemberTests {
    
-<<<<<<< HEAD
+
 	
 	  @Setter(onMethod_ = @Autowired) 
 	  private PasswordEncoder pwencoder; 
@@ -99,7 +99,7 @@ public class MemberTests {
 	  
 	  } catch(Exception e) { e.printStackTrace(); } }
 	 
-=======
+
    @Setter(onMethod_ = @Autowired)
    private PasswordEncoder pwencoder;
    // PasswordEncoder를 구현한 CustomNoOpPasswordEncoder의 메소드를 이용할 수 있음
@@ -181,6 +181,6 @@ public class MemberTests {
             e.printStackTrace();
          }
    }
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+
 }
    
