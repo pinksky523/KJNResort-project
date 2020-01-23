@@ -11,10 +11,10 @@ public interface NoticeMapper {
 	public int getTotalCount(Criteria cri);
 	public List<NoticeVO> getListWithPaging(Criteria cri);
 							
-	public void insert(NoticeVO notice);
-	public int update(NoticeVO notice);
-	public int delete(Long noticeNo);
-	public NoticeVO read(Long noticeNo);
+	public void insert(NoticeVO notice);					// 게시글 등록
+	public int update(NoticeVO notice);						// 게시글 수정
+	public int delete(Long noticeNo);						// 게시글 삭제
+	public NoticeVO read(Long noticeNo);					// 게시글 조회
 
 }
 
