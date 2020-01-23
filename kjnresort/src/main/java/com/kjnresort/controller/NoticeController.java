@@ -26,12 +26,12 @@ public class NoticeController {
 	
 	@GetMapping("/register")
 	public void register() {
-		
+		log.info("공지사항 등록창 진입");
 	}
 	
 	@PostMapping("/remove")
 	public String remove(@RequestParam("noticeNo") Long noticeNo,  @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		log.info("NoticeController remove()... " + noticeNo);
+		log.info("공지사항 게시글 삭제 : " + noticeNo);
 		if(service.remove(noticeNo)) {
 			rttr.addFlashAttribute("result", "success");
 		}
@@ -40,11 +40,10 @@ public class NoticeController {
 	
 	@PostMapping("/modify")
 	public String modify(NoticeVO notice, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		log.info("NoticeController modify()");
+		log.info("공지사항 게시글 수정 완료");
 		if(service.modify(notice)) {
 			rttr.addFlashAttribute("result", "success");
 		}
-		
 		return "redirect:/notice/list" + cri.getListlink();
 	}
 	
@@ -65,7 +64,7 @@ public class NoticeController {
 	
 	@PostMapping("register")
 	public String register(NoticeVO notice, RedirectAttributes rttr) {
-		log.info("NoticeController register()");
+		log.info("공지사항 게시글 등록 완료");
 		service.register(notice);
 		rttr.addFlashAttribute("result", notice.getNoticeNo());		// 등록된 게시글의 bno를 result값에 담아서 redirect로 넘겨준다.
 		return "redirect:/notice/list";
