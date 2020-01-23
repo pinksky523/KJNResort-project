@@ -32,18 +32,21 @@
 	    merchant_uid : 'merchant_' + new Date().getTime(),
 	    name : 'kjnresort',
 	    amount : (${tPrice.price} * ${liftAmount} + ${ttPrice.price} * ${toolAmount}),
-	    buyer_email : 'iamport@siot.do',
-	    buyer_name : '남 구', //아이디값 받아서 넣어주기
-	    buyer_tel : '010-1234-5678',//전화번호
-	    buyer_addr : '서울특별시 마포구 월드컵북로',//주소
-	    buyer_postcode : '123-456'
+	    email : 'iamport@siot.do',
+	    name : '남 구', //아이디값 받아서 넣어주기
+	    tel : '010-1234-5678',//전화번호
+	    addr : '서울특별시 마포구 월드컵북로',//주소
+	    postcode : '123-456'
 	}, function(rsp) {
 	    if ( rsp.success ) {
 	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
 	    	jQuery.ajax({
-	    		url: "buyTicketResult", //cross-domain error가 발생하지 않도록 주의해주세요
+	    		url: "buyTicket", //cross-domain error가 발생하지 않도록 주의해주세요
 	    		type: 'POST',
-	    		
+	    		dataType: 'json',
+	    		data: {
+		    		imp_uid : rsp.imp_uid
+	    		}
 	    	}).done(function(data) {
 	    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
 	    		if ( everythings_fine ) {
@@ -52,7 +55,7 @@
 	    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
 	    			msg += '\결제 금액 : ' + rsp.paid_amount;
 	    			msg += '카드 승인번호 : ' + rsp.apply_num;
-	    			
+	    			 //db에 넣기
 	    			alert(msg);
 	    		} else {
 	    			//[3] 아직 제대로 결제가 되지 않았습니다.
