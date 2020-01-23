@@ -31,8 +31,7 @@ public class ReviewTests {
       
       try(Connection con = ds.getConnection(); 
             PreparedStatement pstmt = con.prepareStatement(query)) {
-    	  for(int k=0; k<2; k++) {
-    		  pstmt.setString(1, "user"+k);
+    		  pstmt.setString(1, "user00");
 	         for(int i=0; i<99; i++) {
 	            if(i<49) {
 	               
@@ -42,7 +41,6 @@ public class ReviewTests {
 	               pstmt.setInt(5, 5);
 	               pstmt.setInt(6, 0);
 	            } else {
-		        	pstmt.setString(1, "user"+i);
 		            pstmt.setString(2, "제목----"+i);
 		            pstmt.setString(3, "내용----"+i);
 		            pstmt.setString(4, "콘도");
@@ -50,7 +48,6 @@ public class ReviewTests {
 		            pstmt.setInt(6, 1);
 	            }
 	            pstmt.executeUpdate();
-	         }
     	  }
       } catch(Exception e) {
          e.printStackTrace();

@@ -3,6 +3,9 @@ package com.kjnresort.controller;
 
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +18,6 @@ import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
 import com.kjnresort.domain.PageDTO;
 import com.kjnresort.service.MemberService;
-import com.kjnresort.service.ReviewService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -46,13 +48,13 @@ public class MemberController {
 	
 	//마이페이지 회원탈퇴 버튼
 	@PostMapping("remove")
-	public String remove(MemberVO member, RedirectAttributes rttr) {
+	public String remove(MemberVO member, RedirectAttributes rttr, HttpSession session) {
 		
 		
 		if(service.remove(member)) {
 			rttr.addFlashAttribute("msg", "계정이 삭제되었습니다");
-			
-			return "/common/logout";
+			session.invalidate();
+			return "/common/home";
 		} else {
 			rttr.addFlashAttribute("msg", "계정 삭제 실패");
 			return "redirect:/member/mypage?id=" + member.getId();
