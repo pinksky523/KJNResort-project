@@ -31,7 +31,7 @@ public class ReviewTests {
       
       try(Connection con = ds.getConnection(); 
             PreparedStatement pstmt = con.prepareStatement(query)) {
-    	  for(int k=0; k<99; k++) {
+    	  for(int k=0; k<3; k++) {
     		  pstmt.setString(1, "user"+k);
 	         for(int i=0; i<99; i++) {
 	            if(i<49) {
