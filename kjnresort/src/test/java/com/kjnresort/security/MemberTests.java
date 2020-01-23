@@ -18,14 +18,14 @@ import lombok.Setter;
                               "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 public class MemberTests {
    
-	
-	  @Setter(onMethod_ = @Autowired) 
-	  private PasswordEncoder pwencoder; 
-	  //PasswordEncoder를 구현한 CustomNoOpPasswordEncoder의 메소드를 이용할 수 있음
-	  
-	  @Setter(onMethod_ = @Autowired) 
-	  private DataSource ds;
+
+   @Setter(onMethod_ = @Autowired)
+   private PasswordEncoder pwencoder;
+   // PasswordEncoder를 구현한 CustomNoOpPasswordEncoder의 메소드를 이용할 수 있음
    
+   @Setter(onMethod_ = @Autowired)
+   private DataSource ds;
+
    @Test
    public void testA() {
       
@@ -119,7 +119,7 @@ public class MemberTests {
 	            if(i<49) {	//일반회원
 	               pstmt.setString(1, "user"+i);
 	               pstmt.setString(2, pwencoder.encode("1111"));
-	               pstmt.setString(3, "일반사용자"+i);
+	               pstmt.setString(3, "정지회원"+i);
 	               pstmt.setString(4, "0" + i + "-0000-0000");
 	               pstmt.setString(5, "2011-11-11");
 	               pstmt.setString(6, "test주소");
@@ -127,7 +127,7 @@ public class MemberTests {
 	            } else {	//정지회원
 	               pstmt.setString(1, "user"+i);
 	               pstmt.setString(2, pwencoder.encode("1111"));
-	               pstmt.setString(3, "일반사용자"+i);
+	               pstmt.setString(3, "일반회원"+i);
 	               pstmt.setString(4, "0" + i + "-0000-0000");
 	               pstmt.setString(5, "2011-11-11");
 	               pstmt.setString(6, "test주소");
@@ -140,6 +140,7 @@ public class MemberTests {
 	         e.printStackTrace();
 	      }
    }
+
    
 	 @Test
 	 public void testD() {
@@ -158,5 +159,6 @@ public class MemberTests {
 	          e.printStackTrace();
 	       }
  }
+
 }
    

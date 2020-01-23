@@ -79,7 +79,6 @@ p{padding-left:30px;}
 		</div>
 		
     </div>
-<button onclick="test()">test</button>
 </body>
 
 <script>

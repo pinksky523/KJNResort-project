@@ -127,10 +127,10 @@ public class CommonController {
 		}
 	}
 	
-	@GetMapping("/customLogout")
-	public void logoutGet(RedirectAttributes rttr){
+	@PostMapping("customLogout")
+	public void customLogout() {
+		
 	}
-	
 	
 	@GetMapping("customLoginError")
 	public String customLoginError(RedirectAttributes rttr) {

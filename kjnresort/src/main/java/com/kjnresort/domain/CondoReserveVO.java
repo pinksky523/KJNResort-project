@@ -18,5 +18,6 @@ public class CondoReserveVO { //콘도리절브브이오
 	public String id;
 	public int review;
 	
-	
+	public String phoneNumber;
+	public String name;
 }

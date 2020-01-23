@@ -58,6 +58,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                    
                     <c:forEach items="${list }" var="ticket">
                         <tr class="odd gradeX">
                             <td>${ticket.ticketNo }</td>
@@ -68,6 +69,7 @@
                             <td>${ticket.id}</td>
                         </tr>
                     </c:forEach>
+                        
                     </tbody>
                 </table><!-- END 게시물 출력 테이블 -->
                 

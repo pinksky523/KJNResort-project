@@ -30,21 +30,6 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired 
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-
-	@Override
-	public int getTotal(Criteria cri) {
-		return mapper.getTotalCount(cri);
-	}
-
-	@Override
-	public List<MemberVO> getList(Criteria cri) {
-
-		return mapper.getListWithPaging(cri);
-	}	
-	
-	//////////////////////////////////////////////////
-	
-	
 	//회원가입
 	@Transactional
 	@Override
@@ -161,6 +146,24 @@ public class MemberServiceImpl implements MemberService {
 		
 		return mapper.getTotalMyReview(id, cri);
 	}
+	
+	
+	//회원목록 페이징
+	@Transactional
+	@Override
+	public List<MemberVO> getMemberList(Criteria cri) {
+
+		return mapper.memberList(cri);
+	}	
+	
+	//전체 회원 수 가져오기
+	@Transactional
+	@Override
+	public int getTotalMember(Criteria cri) {
+		return mapper.totalMemberCount(cri);
+	}
+		
+		
 	
 	
 	//로그인
