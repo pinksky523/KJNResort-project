@@ -32,7 +32,7 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public NoticeVO get(Long noticeNo) {
 		log.info("게시글 조회 :" + noticeNo);
-		mapper.updateViewCnt(noticeNo);
+		mapper.updateViewCnt(noticeNo);							// 게시글을 조회할때 조회수 1증가
 		return mapper.read(noticeNo);
 	}
 
