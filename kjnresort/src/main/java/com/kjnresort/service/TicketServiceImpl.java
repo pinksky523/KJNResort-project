@@ -27,24 +27,28 @@ public class TicketServiceImpl implements TicketService{
 		log.info("getListWithPaging------------");
 		return mapper.getListWithPaging(cri);
 	}
-
-	@Override
-	public List<TicketBuyVO> getList() {
-		log.info("getList------------");
-		return mapper.getList();
-	}
 	
 	@Override
 	public int getTotalCount(Criteria cri) {
-		log.info("getList------------");
+		log.info("getTotalCount------------");
 		return mapper.getTotalCount(cri);
 	}
 	
-	
+	@Override
+	public List<TicketBuyVO> getListUser(String id) {
+		log.info("getListWithPagingUser------------");
+		return mapper.getListWithPagingUser(id);
+	}
+
+	@Override
+	public int getTotalCountUser(Criteria cri, String id) {
+		log.info("getTotalCountUser------------");
+		return mapper.getTotalCountUser(cri, id);
+	}
 
 	@Override
 	public boolean modify(TicketVO tPrice) {
-		log.info("modify------------");
+		log.info("modify price------------");
 		return mapper.updateL(tPrice) == 1;
 	}
 
@@ -83,9 +87,15 @@ public class TicketServiceImpl implements TicketService{
 	}
 
 	@Override
-	public boolean modifyStatus(TicketBuyVO ticket) {
-		log.info("modify------------");
-		return mapper.updateStatus(ticket) == 1;
+	public boolean modifyStatus(Long ticketNo) {
+		log.info("modify cancel------------");
+		return mapper.updateStatus(ticketNo) == 1;
+	}
+
+	@Override
+	public boolean modifyStatusUse(Long ticketNo) {
+		log.info("modify use------------");
+		return mapper.updateStatusUse(ticketNo) == 1;
 	}
 
 }

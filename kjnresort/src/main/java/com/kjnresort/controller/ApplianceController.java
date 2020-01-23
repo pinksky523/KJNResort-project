@@ -60,7 +60,7 @@ public class ApplianceController {
 		model.addAttribute("appliance", service.get(applianceNo));
 	}
 	
-	@GetMapping("/list")										// 전체 지원내역 리스트(관리자)
+	@GetMapping("/list")												// 전체 지원내역 리스트(관리자)
 	public void list(Criteria cri, Model model) {
 		log.info("list: " + cri);
 		model.addAttribute("list", service.getList(cri));
