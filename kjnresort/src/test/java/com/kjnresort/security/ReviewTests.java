@@ -22,50 +22,40 @@ public class ReviewTests {
    @Setter(onMethod_ = @Autowired)
    private DataSource ds;
    
-//   @Test
-   public void testInsertMember() {
+   @Test
+   public void testA() {
       
       String query = "insert into "
-            + "member(memberId, memberPw, memberName, memberAddress, memberPhoneFirst, "
-            + "memberPhoneSecond, memberPhoneThird, memberBirth, memberEmail, memberEmailSecond, memberRegDate) "
-            + "values(?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?, sysdate)";
+            + "t_review(reviewNo, id, title, content, category, grade, useno)"
+            + "values(seq_t_review.NEXTVAL, ?, ?, ?, ?, ?, ?)";
       
       try(Connection con = ds.getConnection(); 
             PreparedStatement pstmt = con.prepareStatement(query)) {
-         for(int i=0; i<100; i++) {
-            if(i<100) {
-               pstmt.setString(1, "member"+i);
-               pstmt.setString(3, "일반사용자"+i);
-               pstmt.setString(4, "test주소");
-               pstmt.setString(5, "010");
-               pstmt.setString(6, "4189");
-               pstmt.setString(7, "5485");
-               pstmt.setString(8, "ywc412");
-               pstmt.setString(9,"naver.com");
-            }
-            pstmt.executeUpdate();
-         }
+    	  for(int k=0; k<99; k++) {
+    		  pstmt.setString(1, "user"+k);
+	         for(int i=0; i<99; i++) {
+	            if(i<49) {
+	               
+	               pstmt.setString(2, "제목----"+i);
+	               pstmt.setString(3, "내용----"+i);
+	               pstmt.setString(4, "스키");
+	               pstmt.setInt(5, 5);
+	               pstmt.setInt(6, 0);
+	            } else {
+		        	pstmt.setString(1, "user"+i);
+		            pstmt.setString(2, "제목----"+i);
+		            pstmt.setString(3, "내용----"+i);
+		            pstmt.setString(4, "콘도");
+		            pstmt.setInt(5, 8);
+		            pstmt.setInt(6, 1);
+	            }
+	            pstmt.executeUpdate();
+	         }
+    	  }
       } catch(Exception e) {
          e.printStackTrace();
       }
    }
    
-//   @Test
-   public void testInsertAuth() {
-      String query = "insert into auth (memberid, memberauth) values(?, ?)";
-         
-         try(Connection con = ds.getConnection(); 
-               PreparedStatement pstmt = con.prepareStatement(query)) {
-            for(int i=0; i<100; i++) {
-               if(i<100) {
-                  pstmt.setString(1, "member"+i);
-                  pstmt.setString(2, "ROLE_MEMBER");
-               }
-               pstmt.executeUpdate();
-            }
-         } catch(Exception e) {
-            e.printStackTrace();
-         }
-   }
 }
    

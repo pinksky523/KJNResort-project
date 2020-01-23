@@ -98,6 +98,64 @@ public class MemberTests {
          } catch(Exception e) {
             e.printStackTrace();
          }
+   }//END TestB()
+   
+   
+   
+   //회원 목록조회를 위한 회원저장
+   @Test
+   public void testC() {
+   
+	      String query = "insert into "
+	            + "t_member(id, pw, name, phoneNumber, birth, address, status)"
+	            + "values(?, ?, ?, ?, ?, ?, ?)";
+	      
+	      
+	      
+	      try(Connection con = ds.getConnection(); 
+	            PreparedStatement pstmt = con.prepareStatement(query)) {
+	         for(int i=0; i<99; i++) {
+	            if(i<49) {	//일반회원
+	               pstmt.setString(1, "user"+i);
+	               pstmt.setString(2, pwencoder.encode("1111"));
+	               pstmt.setString(3, "일반사용자"+i);
+	               pstmt.setString(4, "0" + i + "-0000-0000");
+	               pstmt.setString(5, "2011-11-11");
+	               pstmt.setString(6, "test주소");
+	               pstmt.setInt(7, 1);
+	            } else {	//정지회원
+	               pstmt.setString(1, "user"+i);
+	               pstmt.setString(2, pwencoder.encode("1111"));
+	               pstmt.setString(3, "일반사용자"+i);
+	               pstmt.setString(4, "0" + i + "-0000-0000");
+	               pstmt.setString(5, "2011-11-11");
+	               pstmt.setString(6, "test주소");
+	               pstmt.setInt(7, 0);
+	            	
+	            }
+	            pstmt.executeUpdate();
+	         }
+	      } catch(Exception e) {
+	         e.printStackTrace();
+	      }
    }
+   
+	 @Test
+	 public void testD() {
+	    String query = "insert into t_member_auth(id, auth) values(?, ?)";
+	       
+	       try(Connection con = ds.getConnection(); 
+	             PreparedStatement pstmt = con.prepareStatement(query)) {
+	          for(int i=0; i<100; i++) {
+	             if(i<99) {
+	                pstmt.setString(1, "user"+i);
+	                pstmt.setString(2, "ROLE_MEMBER");
+	             }
+	             pstmt.executeUpdate();
+	          }
+	       } catch(Exception e) {
+	          e.printStackTrace();
+	       }
+ }
 }
    

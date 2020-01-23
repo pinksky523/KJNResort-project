@@ -23,31 +23,29 @@
                     <thead class="thead-light">
                         <tr>
                             <th>NO.</th>
+                            <th>카테고리</th>
                             <th>제목</th>
-                            <th>등록일</th>
-                            <th>상태</th>
+                            <th>ID</th>
+                            <th>작성일자</th>
+                            <th>조회수</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${list}" var="recruit">
+                    <c:forEach items="${list}" var="review">
                         <tr>
-                            <td>${recruit.recruitNo}</td>
-                            <td><a href='/recruit/get?recruitNo=${recruit.recruitNo}'>
-                            		${recruit.title}
+                            <td>${review.reviewNo}</td>
+                            <td>${review.category}</td>
+                            <td><a href='/member/myreview?reviewNo=${review.reviewNo}'>
+                            		${review.title}
                             	</a>
                             </td>
-                            <td><fmt:formatDate value="${recruit.regDate}" pattern="yy-MM-dd"/></td>
-                           	<td>${recruit.status}</td>
+                            <td>${review.id}</td>
+                            <td><fmt:formatDate value="${review.regdate}" pattern="yy-MM-dd"/></td>
+                           	<td>${review.viewCnt}</td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table><!-- END 게시물 출력 테이블 -->
-                <sec:authorize access="hasRole('ROLE_ADMIN')">
-	                <button id="regBtn" type="button" class="btn btn-primary pull-right">
-	          			글쓰기	
-	          		</button> 
-                </sec:authorize>
-   
             </div>
             <!-- /.panel-body -->
         </div>
