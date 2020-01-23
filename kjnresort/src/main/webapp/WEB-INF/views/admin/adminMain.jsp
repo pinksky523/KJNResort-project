@@ -47,8 +47,8 @@
 		</a>
 		<nav class="header-nav">
 			<ul class="main-menu">
-				<li><a href="index.html">리조트안내</a></li>
 				<li><a href="/notice/list">공지사항 관리</a></li>
+				<li><a href="/member/list">회원 관리</a></li>
 				<li><a href="#">콘도</a>
 					<ul class="sub-menu">
 						<li><a href="about-us.html">콘도 예약 관리</a></li>
@@ -57,19 +57,8 @@
 				</li>
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
-<<<<<<< HEAD
-
 						<li><a href="/ticket/modify">이용권 관리</a></li>
 						<li><a href="/ticket/buyTicketList">이용권 구매내역</a></li>
-
-=======
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
-						<li><a href="about-us.html">이용권 판매 관리</a></li>
-						<li><a href="loans.html">이용권 관리</a></li>
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 					</ul>
 				</li>
 				<li><a href="contact.html">이벤트 관리</a></li>

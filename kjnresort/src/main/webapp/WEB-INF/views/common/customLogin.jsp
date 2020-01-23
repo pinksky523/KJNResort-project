@@ -14,7 +14,7 @@
     <title>로그인</title>
 	<link rel="stylesheet" href="/resources/css/common.css"/>
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 </head>
 
@@ -51,6 +51,8 @@
 </div>
 </div>
 <script>
+
+
 	var msg = '<c:out value="${msg}"/>';	
 	
 	//result 값이 있는지 확인하는 함수 호출
@@ -92,7 +94,7 @@
 		} 
 	}
 	
-	
+
 	
 </script>
 </body>

@@ -81,9 +81,10 @@
 				<li>
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-					<form id="mypageForm" action="/member/mypage" method="get">
+					<form id="mypageForm" action="/member/mypage" method="post">
 						<button type="submit" class="btn btn-secondary" id="mypage">마이페이지</button>
 						<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					 </form>
 				</sec:authorize>
 				

@@ -11,10 +11,6 @@ import com.kjnresort.domain.ReviewVO;
 
 	
 public interface MemberService {
-	public int getTotal(Criteria cri);
-	public List<MemberVO> getList(Criteria cri);
-	
-	
 	public MemberVO get(String id);				//로그인
 	public void register(MemberVO member);		//회원가입
 	public void registerAuth(AuthVO auth);		//회원권한등록
@@ -27,5 +23,7 @@ public interface MemberService {
 	public boolean modifyMypage(MemberVO member);	//마이페이지 수정
 	public boolean remove(MemberVO member);			//회원탈퇴
 	public List<ReviewVO> myreviewList(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount);	//내가 쓴 리뷰 목록 페이징
-	public int getTotalMyReview(@Param("id") String id, Criteria cri);
+	public int getTotalMyReview(@Param("id") String id, Criteria cri);	//내가 쓴 리뷰 전체개수 가져오기
+	public List<MemberVO> getMemberList(Criteria cri);	//회원목록 페이징
+	public int getTotalMember(Criteria cri);		//전체 회원 수 가져오기
 }
