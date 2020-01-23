@@ -79,111 +79,70 @@ p{padding-left:30px;}
 		</div>
 		
     </div>
-<ul class="test"></ul>
+<button onclick="test()">test</button>
 </body>
 
 <script>
+
+function test(){
+	location.replace('payChargeResult');
+}
 var IMP = window.IMP; 
 IMP.init('imp39785834')
 
-function successPay(payAmount,payDate){
-	var pd=new Date(payDate);
+
+function successPay(payAmount){
+	var paidDate=new Date();
 	var login_ID=null;
 	
 	<sec:authorize access="isAuthenticated()">
 		login_ID='<sec:authentication property="principal.username"/>';
 	</sec:authorize>
 	
-	var csrfHeaderName='${_csrf.headerName}';
-	var csrfTokenValue='${_csrf.token}';//CSRF 토큰 관련 변수 추가
-	
-	var form = document.createElement("form");
-	form.setAttribute("charset", "UTF-8");
-	form.setAttribute("method", "Post"); // Get 또는 Post 입력
-	form.setAttribute("action", "/condoreserve/register");
-	
-	var hiddenField = document.createElement("input");
-	hiddenField.setAttribute("type", "hidden");
-	hiddenField.setAttribute("name", csrfHeaderName);
-	hiddenField.setAttribute("value", csrfTokenValue);
-	form.appendChild(hiddenField);
-	
 	//보내줘야 할거  2.결제날짜  4.체크인 5.체크아웃 6.방종류 7.숙박일
-	//1.아이디
-	var  inputId=document.createElement("input");
-	inputId.setAttribute("type", "text");
-	inputId.setAttribute("name", "id");
-	inputId.setAttribute("value",login_ID);
-	form.appendChild(inputId);
-	
-	//2.결제금액
-	var  price=document.createElement("input");
-	price.setAttribute("type", "number");
-	price.setAttribute("name","price");
-	price.setAttribute("value",payAmount);
-	form.appendChild(price);
-	
-	//3.결제날짜
-	var  paidDate=document.createElement("input");
-	paidDate.setAttribute("type", "date");
-	paidDate.setAttribute("name", "reservedate");
-	paidDate.setAttribute("value",pd);
-	form.appendChild(paidDate);
-	//여기까지
-	
-	//4.체크인
-	
-	
 	var InputDate = finalCheckIn; //입력된 날짜 받아오기
 	var dateSplit = InputDate.split("-"); //입력값을 '-'을 기준으로 나누어 배열에 저장해 주는 함수 split
-
 	year = dateSplit[0]; //첫번째 배열은 년
 	month = dateSplit[1]; //월
 	day = dateSplit[2]; //일
-	
 	var dateCheckIn=new Date(parseInt(year),parseInt(month)-1,parseInt(day));
-	var inputCheckIn=document.createElement("input");
-	inputCheckIn.setAttribute("type", "date");
-	inputCheckIn.setAttribute("name", "checkIn");
-	inputCheckIn.setAttribute("value",dateCheckIn);
-	form.appendChild(inputCheckIn);
-	
-	//5.체크아웃
-	
-	var InputDate = finalCheckOut; //입력된 날짜 받아오기
+    InputDate = finalCheckOut; //입력된 날짜 받아오기
 	var dateSplit = InputDate.split("-"); //입력값을 '-'을 기준으로 나누어 배열에 저장해 주는 함수 split
-
 	year = dateSplit[0]; //첫번째 배열은 년
 	month = dateSplit[1]; //월
 	day = dateSplit[2]; //일
-	
 	var dateCheckOut=new Date(parseInt(year),parseInt(month)-1,parseInt(day));
 	
-	var  inputCheckOut=document.createElement("input");
-	inputCheckOut.setAttribute("type", "date");
-	inputCheckOut.setAttribute("name", "checkOut");
-	inputCheckOut.setAttribute("value",dateCheckOut);
-	form.appendChild(inputCheckOut);
+	var reserveVO={
+			checkIn:dateCheckIn,
+			checkOut:dateCheckOut,
+			price:payAmount,
+			reserveDate:paidDate,
+			roomType:roomType,
+			nights:nights,
+			id:login_ID,
+	};
 	
-	//6.방종류
-	var  inputRoomType=document.createElement("input");
-	inputRoomType.setAttribute("type", "text");
-	inputRoomType.setAttribute("name", "roomType");
-	inputRoomType.setAttribute("value",roomType);
-	form.appendChild(inputRoomType);
-	
-	//7.숙박일
-	var  inputNights=document.createElement("input");
-	inputNights.setAttribute("type", "number");
-	inputNights.setAttribute("name", "nights");
-	inputNights.setAttribute("value",nights);
-	form.appendChild(inputNights);
-	
-	document.body.appendChild(form);
-	console.log("before submit");
-	form.submit();
-	console.log("after submit");
-	
+	$.ajax({
+		type:'post',
+		url:'/condoreserve/register',
+		data:JSON.stringify(reserveVO),
+		contentType:'application/json; charset=utf-8',
+		beforeSend : function(xhr)
+        {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+            xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+        },
+		success:function(data){
+			var rno=parseInt(data);
+			location.replace('payChargeResult/'+rno);
+		},
+		error:function(xhr,status,error){
+			if(error){
+				error(status+""+error);
+			}
+		}
+	});
+
 }
 
 $('#payCharge').on("click",function(){
@@ -201,8 +160,7 @@ $('#payCharge').on("click",function(){
 	       // var msg = '결제가 완료되었습니다.';
 	        //msg += '결제 금액 : ' + rsp.paid_amount;
 	       	//msg += '결제승인시각 : ' + rsp.paid_at;
-	    
-	       	successPay(rsp.paid_amount,rsp.paid_at);
+	       	successPay(rsp.paid_amount);
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
 	        msg += '에러내용 : ' + rsp.error_msg;
@@ -251,7 +209,7 @@ $('.reserve_ok').on("click",function(){
 	var li="";
 		li="<li><span class='reserveInfoLi'>체크인 : </span><span>"+finalCheckIn+"</span></li>";
 		li+="<li><span class='reserveInfoLi'>체크아웃 : </span><span>"+finalCheckOut+"</span></li>";
-		li+="<li><span class='reserveInfoLi'>숙박일 수 : </span><span>"+nights+"일</span></li>";
+		li+="<li><span class='reserveInfoLi'>숙박일 수 : </span><span>"+nights+"박</span></li>";
 		if(roomType=='P'){rType='프라임P'}
 		if(roomType=='D'){rType='디럭스D'}
 		if(roomType=='N'){rType='노블N'}
