@@ -19,25 +19,24 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler{
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		log.warn("CustomLoginSuccessHandler login success");
 		//사용자 권한을 리스트에 저장
 		List<String> roleList = new ArrayList<>();
 		authentication.getAuthorities().forEach(authority ->  {
 			roleList.add(authority.getAuthority());
 		});
 		
-		log.warn("ROLE_NAMES : " + roleList);
+		log.info("ROLE_NAMES : " + roleList);
 		
 		//ROLE_ADMIN이면 /admin/adminMain으로 리다이렉트
 		if(roleList.contains("ROLE_ADMIN")) {
-			log.info("관리자 권한으로 로그인");
+			log.info("관리자 권한으로 로그인 성공");
 			response.sendRedirect("/admin/adminMain");
 			return;
 		}
 		
 		//ROLE_MEMBER이면 /common/commonMain로 리다이렉트
 		if(roleList.contains("ROLE_MEMBER")) {
-			log.info("일반회원 권한으로 로그인");
+			log.info("일반회원 권한으로 로그인 성공");
 			response.sendRedirect("/common/home");
 			return;
 		}

@@ -1,21 +1,17 @@
-package com.kjnresort.controller;
+	package com.kjnresort.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kjnresort.domain.AuthVO;
-import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
 import com.kjnresort.service.MemberService;
 
@@ -132,8 +128,9 @@ public class CommonController {
 	}
 	
 	@GetMapping("/customLogout")
-	public void logoutGet(){
+	public void logoutGet(RedirectAttributes rttr){
 	}
+	
 	
 	@GetMapping("customLoginError")
 	public String customLoginError(RedirectAttributes rttr) {

@@ -5,17 +5,19 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ include file="../includes/header.jsp" %>
 
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">모집공고 게시판</h1>
+<div>
+    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
+        <h2>모집공고 게시판</h2>
     </div>
-    <!-- /.col-lg-12 -->
 </div>
-<!-- /.row -->
 
 <div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
+    <div class="col-lg-12" style="padding-bottom: 20px">
+        <div>
+            <div style="text-align: center;">
+                KJN리조트와 함께 할 패기 넘치는 인재를 기다립니다.
+            </div>
+            <hr style="width: 70%">
             <!-- /.panel-heading -->
             <div class="panel-body">
 		            <div class="form-group">
@@ -32,7 +34,7 @@
 		                value="${recruit.status }" readonly></div>
 		            <div class="form-group">
 		                <label>접수마감: </label>
-		                <input class="form-control" name="deadLine"
+		                <input class="form-control" name="deadLine" 
 		                value="${recruit.deadLine}" readonly></div>
 		            <div class="form-group">
 	                    <label>내용: </label>
@@ -48,9 +50,9 @@
 	                <button data-oper='list' class="btn btn-secondary pull-right">목록</button>
              	 <form action="/recruit/modify" method="get" id="operForm" >	
              		<input type="hidden" id="recruitNo" name="recruitNo" value='<c:out value="${recruit.recruitNo}"/>'>
-             		<input type="hidden" name="id" value="admin">
+             		<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
 	                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-             	</form>
+             	</form>          		
 				
             </div>	<!-- /.panel-body -->
         </div>		<!-- /.panel -->

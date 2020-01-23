@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
+
     <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <style>
-.reserveBox{background: #EAEAEA; width:900px; height:200px; align-self: center; margin:0 auto; }
-.dateBox{ align-self: center; margin:0 auto; text-align: center;}
+.reserveDiv{background: #EAEAEA; width:900px; height:200px; align-self: center; margin:0 auto; }
+.dateDiv{ align-self: center; margin:0 auto; text-align: center;}
+.roomTypeDiv{background: #EAEAEA; width:900px; display: none; }
 h1{text-align: center;}
 hr{text-align: center; width:1000px;}
 h2{padding-left: 30px; padding-top: 30px; }
@@ -18,22 +22,337 @@ p{padding-left:30px;}
         width:30%;
     }
 
-
+.roomTypeRadioDiv{padding-left:30px;}
+.radioUl{list-style:none; text-align: center; }
+.radioUl>li{display: inline-block; font-size:23px;   margin-right: 55px;}
+.roomInfoDiv{ width:900px;  align-self: center; margin:0 auto; display: none; }
+.condoImg{width:320px; height:210px; margin-right:50px; float:left; margin-left:200px;}
+.roomInfoUl{  margin-top:50px;}
+.roomInfoUl>li{margin-bottom: 10px; font-size: 18px; }
+.reserve_ok{display:block; align-self: center; margin:0 auto; margin-top:20px;}
+.reserveInfoUl{font-size:18px; padding-left:100px; margin-top:45px;}
+.reserveInfoUl>li{margin-bottom:15px;}
+.reserveInfoLi{font-weight: bold; font-size:20px;}
+.reserveInfoDiv{display:none;}
+.buttonsDiv{float: right; margin-top:75px;}
+.buttonsDiv>button{margin-left:15px;}
+.condo_reserve_body{height: 1300px;}
+.total{font-weight: bold; font-size: 32px; color: red;}
+.won{font-size: 28px; font-weight: bold;}
+.totalWonDiv{text-align: right; margin-right:25px;}
 </style>
-<body>
+<body class="condo_reserve_body">
 	<h1>콘도예약</h1>
 	<hr>
-	<div class="reserveBox">
-		<h2>Step1. 날짜 선택</h2>
-		<p>· 체크인/체크아웃 날짜를 선택하세요.</p>
-		<div class="dateBox">
+	<div class="reserveDiv">
+		<h2 >Step1. 날짜 선택</h2>
+		<p class="reserveP">· 체크인/체크아웃 날짜를 선택하세요.</p>
+		<div class="dateDiv">
 			<span>· 체크인 날짜</span> <input type="date" name="checkIn" id="checkIn" oninput="inputCheckIn()"> <span>· 체크아웃 날짜</span> <input type="date" name="checkOut" id="checkOut" oninput="inputCheckOut()"> <button class="btn btn-primary btn-sm" onclick="search()">검색</button>
 		</div>
+		<div class="roomTypeDiv">
+		<h2 >Step2. 객실 선택</h2>
+		<p class="reserveP">· 이용할 객실 종류를 선택하세요.</p>
+		<div class="roomTypeRadioDiv">
+			<ul class="radioUl">
+			</ul>
+		</div>
+		</div>
+		<div class="roomInfoDiv">
+		 	 <img class="condoImg" src="/resources/img/condo/prime.jpg">
+		  		<ul class="roomInfoUl">
+		  		</ul>
+		 		 <br><br>
+		  		<button class="btn btn-primary reserve_ok">예약하기</button>
+		</div>
+		<div class="reserveInfoDiv">
+			<h2 >Step3. 예약 정보 확인</h2>
+			<p class="reserveP">· 결제전 예약 정보를 확인하세요.</p>
+			<ul class="reserveInfoUl">
+			</ul>
+			<div class="totalWonDiv">
+				<span class="total">· 총 금액 : </span><span class="won"></span>
+			</div>
+			<div class="buttonsDiv">
+			<button class="btn btn-default btn-lg" id="reserve_cancle">취소</button><button class="btn btn-primary btn-lg" id="payCharge">결제하기</button>
+			</div>
+		</div>
+		
     </div>
-
+<ul class="test"></ul>
 </body>
+
 <script>
+var IMP = window.IMP; 
+IMP.init('imp39785834')
+
+function successPay(payAmount,payDate){
+	var pd=new Date(payDate);
+	var login_ID=null;
+	
+	<sec:authorize access="isAuthenticated()">
+		login_ID='<sec:authentication property="principal.username"/>';
+	</sec:authorize>
+	
+	var csrfHeaderName='${_csrf.headerName}';
+	var csrfTokenValue='${_csrf.token}';//CSRF 토큰 관련 변수 추가
+	
+	var form = document.createElement("form");
+	form.setAttribute("charset", "UTF-8");
+	form.setAttribute("method", "Post"); // Get 또는 Post 입력
+	form.setAttribute("action", "/condoreserve/register");
+	
+	var hiddenField = document.createElement("input");
+	hiddenField.setAttribute("type", "hidden");
+	hiddenField.setAttribute("name", csrfHeaderName);
+	hiddenField.setAttribute("value", csrfTokenValue);
+	form.appendChild(hiddenField);
+	
+	//보내줘야 할거  2.결제날짜  4.체크인 5.체크아웃 6.방종류 7.숙박일
+	//1.아이디
+	var  inputId=document.createElement("input");
+	inputId.setAttribute("type", "text");
+	inputId.setAttribute("name", "id");
+	inputId.setAttribute("value",login_ID);
+	form.appendChild(inputId);
+	
+	//2.결제금액
+	var  price=document.createElement("input");
+	price.setAttribute("type", "number");
+	price.setAttribute("name","price");
+	price.setAttribute("value",payAmount);
+	form.appendChild(price);
+	
+	//3.결제날짜
+	var  paidDate=document.createElement("input");
+	paidDate.setAttribute("type", "date");
+	paidDate.setAttribute("name", "reservedate");
+	paidDate.setAttribute("value",pd);
+	form.appendChild(paidDate);
+	//여기까지
+	
+	//4.체크인
+	
+	
+	var InputDate = finalCheckIn; //입력된 날짜 받아오기
+	var dateSplit = InputDate.split("-"); //입력값을 '-'을 기준으로 나누어 배열에 저장해 주는 함수 split
+
+	year = dateSplit[0]; //첫번째 배열은 년
+	month = dateSplit[1]; //월
+	day = dateSplit[2]; //일
+	
+	var dateCheckIn=new Date(parseInt(year),parseInt(month)-1,parseInt(day));
+	var inputCheckIn=document.createElement("input");
+	inputCheckIn.setAttribute("type", "date");
+	inputCheckIn.setAttribute("name", "checkIn");
+	inputCheckIn.setAttribute("value",dateCheckIn);
+	form.appendChild(inputCheckIn);
+	
+	//5.체크아웃
+	
+	var InputDate = finalCheckOut; //입력된 날짜 받아오기
+	var dateSplit = InputDate.split("-"); //입력값을 '-'을 기준으로 나누어 배열에 저장해 주는 함수 split
+
+	year = dateSplit[0]; //첫번째 배열은 년
+	month = dateSplit[1]; //월
+	day = dateSplit[2]; //일
+	
+	var dateCheckOut=new Date(parseInt(year),parseInt(month)-1,parseInt(day));
+	
+	var  inputCheckOut=document.createElement("input");
+	inputCheckOut.setAttribute("type", "date");
+	inputCheckOut.setAttribute("name", "checkOut");
+	inputCheckOut.setAttribute("value",dateCheckOut);
+	form.appendChild(inputCheckOut);
+	
+	//6.방종류
+	var  inputRoomType=document.createElement("input");
+	inputRoomType.setAttribute("type", "text");
+	inputRoomType.setAttribute("name", "roomType");
+	inputRoomType.setAttribute("value",roomType);
+	form.appendChild(inputRoomType);
+	
+	//7.숙박일
+	var  inputNights=document.createElement("input");
+	inputNights.setAttribute("type", "number");
+	inputNights.setAttribute("name", "nights");
+	inputNights.setAttribute("value",nights);
+	form.appendChild(inputNights);
+	
+	document.body.appendChild(form);
+	console.log("before submit");
+	form.submit();
+	console.log("after submit");
+	
+}
+
+$('#payCharge').on("click",function(){
+
+	IMP.request_pay({
+	    pg : 'kakaopay',
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : 'KJN 리조트 콘도',
+	    amount : charge,
+	    buyer_tel : '010-1111-1111',
+	    buyer_name : '구매자이름',
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	       // var msg = '결제가 완료되었습니다.';
+	        //msg += '결제 금액 : ' + rsp.paid_amount;
+	       	//msg += '결제승인시각 : ' + rsp.paid_at;
+	    
+	       	successPay(rsp.paid_amount,rsp.paid_at);
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        alert(msg);
+	    }
+
+	   
+	});
+	
+	
+});
+$('#reserve_cancle').on("click",function(){
+	if(confirm('예약을 취소하시겠습니까?')){
+		console.log('예약취소');
+		location.href = "/";
+	}
+});
+
+function getNights(checkIn,checkOut){
+	 console.log('숙박일수 함수입니다. 체크인:'+checkIn); 
+	 console.log('숙박일수 함수입니다. 체크아웃:'+checkOut); 
+	 var ar1 = checkIn.split('-');
+	 var ar2 = checkOut.split('-');
+	 var da1 = new Date(ar1[0], ar1[1]-1, ar1[2]);
+	 var da2 = new Date(ar2[0], ar2[1]-1, ar2[2]);
+	 var dif = da2 - da1;
+	 var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
+	   
+	 var difDay=parseInt(dif/cDay);
+	 console.log(difDay);
+	 return difDay;
+}
+var nights;
+var charge;
+var finalCheckIn;
+var finalCheckOut;
+
+$('.reserve_ok').on("click",function(){
+	if($('.reserveInfoUl li').length!=0){
+		$('.reserveInfoUl li').remove();
+	}
+	  finalCheckIn = document.getElementById("checkIn").value; 
+	  finalCheckOut = document.getElementById("checkOut").value;
+	 nights=getNights(finalCheckIn,finalCheckOut);
+	 var rType;
+	var li="";
+		li="<li><span class='reserveInfoLi'>체크인 : </span><span>"+finalCheckIn+"</span></li>";
+		li+="<li><span class='reserveInfoLi'>체크아웃 : </span><span>"+finalCheckOut+"</span></li>";
+		li+="<li><span class='reserveInfoLi'>숙박일 수 : </span><span>"+nights+"일</span></li>";
+		if(roomType=='P'){rType='프라임P'}
+		if(roomType=='D'){rType='디럭스D'}
+		if(roomType=='N'){rType='노블N'}
+		if(roomType=='R'){rType='로얄R'}
+		li+="<li><span class='reserveInfoLi'>객실종류 : </span><span>"+rType+"</span></li>";
+		
+		$('.reserveInfoUl').append(li);
+		$('.reserveInfoDiv').css('display','block');
+		$('.won').html(numberWithCommas(totalWon*nights)+' '+'&#8361');
+		$('.reserveDiv').css('height','1050px');
+		charge=numberWithCommas(totalWon*nights);
+		
+});
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+var roomType='not checking';
+var totalWon;
+function showRoomInfo(event){
+	//예약정보확인 안보이게
+	$('.reserveInfoDiv').css('display','none');
+	if($('.roomInfoLi').length==0){
+		$('.roomInfoDiv').css('display','block');	
+	}else{
+	$('.roomInfoLi').remove();
+	}
+	roomType=event.target.id; //전역변수에 할당
+	var location;
+	var building;
+	var accept;
+	var bed;
+	var price;
+	if(roomType=='P'){$('.condoImg').attr('src','/resources/img/condo/prime.jpg');}
+	if(roomType=='D'){$('.condoImg').attr('src','/resources/img/condo/deluxe.jpg');}
+	if(roomType=='N'){$('.condoImg').attr('src','/resources/img/condo/noble.jpg');}
+	if(roomType=='R'){$('.condoImg').attr('src','/resources/img/condo/royal.jpg');}
+	$.getJSON("/condomanage/"+roomType+".json",
+			function(data){
+		totalWon=data.price;
+			var li="";
+			li+="<li class='roomInfoLi'>가격(1박) :"+numberWithCommas(data.price)+"원</li>";
+			li+="<li class='roomInfoLi'>위치 : "+data.location+"</li>";
+			li+="<li class='roomInfoLi'>건물 : "+data.building+"</li>";
+			li+="<li class='roomInfoLi'>수용인원 : "+data.accept+"명</li>";
+			li+="<li class='roomInfoLi'>"+data.bed+"</li>";
+			$('.roomInfoUl').append(li);
+			
+			$('.reserveDiv').css('height','650px');
+		}).fail(function(xhr,status,err){
+			if(err){
+				console.log(err);
+			}
+		});
+	
+	
+}
+
+function showAvailableRoomType(data){
+	console.log(data);
+	
+	if(data.length==0){
+		alert("예약가능한 객실이 없습니다!");
+	}else{
+		var roomType;
+		//var radioUl=document.createElement('ul'); 
+		//radioUl.setAttribute('class', 'radioUl'); 
+		//$('.roomTypeRadioDiv').append(radioUl);
+		var li="";
+		for(d of data){
+			if(d=='P')
+				roomType='프라임P';
+			if(d=='D')
+				roomType='디럭스D';
+			if(d=='N')
+				roomType='노블N';
+			if(d=='R')
+				roomType='로얄R';
+			li+="<li class='radioLi'><input type='radio' id='"+d+"'name='roomType' value='"+d+"'><label class='clickLi' id='"+d+"' for='"+d+"'>"+roomType+"</label></li>";
+		}
+		$('.radioUl').append(li);
+		$('.roomTypeDiv').css('display','block'); //이용가능 객실 종류 출력
+		//$(".radioLi").off("click").on("click",function(e){alert('a');});
+		$(".clickLi").on("click",showRoomInfo);
+	}
+	
+}
+
+
+
 function search(){
+	//$(".clickLi").off("click"); //객체가 삭제될때 같이 삭제되므로 굳이 삭제해 줄 필요 없다.
+	//방정보 없애기
+		$('.roomInfoLi').remove();
+		$('.roomInfoDiv').css('display','none');
+		
+		//예약가능한 객실종류없애기
+	$(".radioLi").remove(); //이벤트도 같이 삭제됨
+	$('.roomTypeDiv').css('display','none');
+	
+	$('.reserveDiv').css('height','300px');
 	 var checkIn = document.getElementById("checkIn").value; 
 	 var checkOut = document.getElementById("checkOut").value;
 	 
@@ -53,14 +372,13 @@ function search(){
 			type:'post',
 			url:'/condoreserve/availableRoomType',
 			data:{checkIn:checkIn,checkOut:checkOut},
+			dataType:"json",
 			beforeSend : function(xhr)
             {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
                 xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
             },
-			success:function(roomList){
-			
-					console.log(roomList);
-				
+			success:function(data){
+				showAvailableRoomType(data);			
 			},
 			error:function(xhr,status,error){
 				if(error){
@@ -71,27 +389,33 @@ function search(){
 	 }
 	 
 }
+
+
+
 function inputCheckOut(){
+	//$(".clickLi").off("click");
+	
+	//방정보 없애기
+	$('.roomInfoLi').remove();
+	$('.roomInfoDiv').css('display','none');
+		
+		//예약가능한 객실종류없애기
+	$(".radioLi").remove();
+	$('.roomTypeDiv').css('display','none');
+	
+	//예약정보확인 없애기
+	$('.reserveInfoDiv').css('display','none');
+	$('.reserveDiv').css('height','200px');
 	 var today=new Date();
 	 var checkIn = document.getElementById("checkIn").value; 
 	 var checkOut = document.getElementById("checkOut").value;
-   
+     console.log("체크인"+checkIn+"체크아웃"+checkOut);
 		
-	var dateSplit = checkOut.split("-"); //입력값을 '-'을 기준으로 나누어 배열에 저장해 주는 함수 split
+	 var dateSplit = checkOut.split("-"); //입력값을 '-'을 기준으로 나누어 배열에 저장해 주는 함수 split
 
-	var outYear = dateSplit[0]; //첫번째 배열은 년
-	var outMonth = dateSplit[1]; //월
-	var outDay = dateSplit[2]; //일
-	 
-	 
-	 var ar1 = checkIn.split('-');
-	 var ar2 = checkOut.split('-');
-	 var da1 = new Date(ar1[0], ar1[1], ar1[2]);
-	 var da2 = new Date(ar2[0], ar2[1], ar2[2]);
-	 var dif = da2 - da1;
-	 var cDay = 24 * 60 * 60 * 1000;// 시 * 분 * 초 * 밀리세컨
-	   
-	 var difDay=parseInt(dif/cDay);
+		var outYear = dateSplit[0]; //첫번째 배열은 년
+		var outMonth = dateSplit[1]; //월
+		var outDay = dateSplit[2]; //일
 	 
 	 if(checkIn===""){
 		 alert("체크인 날짜를 입력하세요"); 
@@ -109,7 +433,7 @@ function inputCheckOut(){
 		 document.getElementById("checkOut").value="";
 		 return;
 	 }
-	 if(difDay>=5){
+	 if(getNights(checkIn,checkOut)>=5){
 		 alert("5일 이상 숙박할 수 없습니다.");
 		 document.getElementById("checkOut").value="";
 		 return;
@@ -118,8 +442,22 @@ function inputCheckOut(){
 }
 
 	function inputCheckIn() {
+	//	$(".clickLi").off("click");
 		
+		//방정보 없애기
+		$('.roomInfoLi').remove();
+		$('.roomInfoDiv').css('display','none');
 		
+		//예약가능한 객실종류없애기
+		$(".radioLi").remove();
+		$('.roomTypeDiv').css('display','none');
+		
+		//예약정보확인 안보이게
+		$('.reserveInfoDiv').css('display','none');
+		
+		//배경 줄이기
+		$('.reserveDiv').css('height','200px');
+		document.getElementById("checkOut").value="";
 		var today = new Date(); //today.getXX() ->숫자임
 		var checkInDate = document.getElementById("checkIn").value; //입력된 날짜 받아오기
 		var re=isDateBeforeToday(checkInDate); //입력한 값이 오늘보다 이전날인지 확인

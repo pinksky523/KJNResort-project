@@ -71,17 +71,7 @@
 				<li><a href="#">인재채용</a>
 					<ul class="sub-menu">
 						<li><a href="/recruit/list">모집공고</a></li>
-<<<<<<< HEAD
-
-						<li><a href="appliance/list">지원내역조회</a></li>
-
-=======
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
-						<li><a href="/appliance/list">지원내역조회</a></li>
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+						<li><a href="/appliance/myList">지원내역조회</a></li>
 					</ul>
 				</li>
 				
@@ -89,7 +79,10 @@
 				
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-					<button type="button" onclick="location.href='/member/mypage'" class="btn btn-secondary" id="mypage">마이페이지</button>
+					 <form id="mypageForm" action="/member/mypage" method="get">
+						<button type="submit" class="btn btn-secondary" id="mypage">마이페이지</button>
+						<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
+					 </form>
 				</sec:authorize>
 				
 				<!-- 로그인 안 한 경우 -->
@@ -161,14 +154,17 @@
 	<script src="/resources/js/main.js"></script>
 	
 		
-	 <script>
+<script>
+
+	 	//로그아웃버튼 클릭이벤트
     	$("#customLogout").on("click", function(e){
     		e.preventDefault();
     		alert('로그아웃 되었습니다.');
     		$("form").submit();
     	});
-    
-    </script>
+    	
+	 	
+</script>
     
 	</body>
 </html>

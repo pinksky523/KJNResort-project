@@ -4,6 +4,29 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kjnresort.mapper.MemberMapper">
 	
+	<!-- 마이페이지 회원탈퇴 -->
+	<delete id="delete">
+		DELETE FROM t_member WHERE id = #{id}
+	</delete>
+	
+	
+	 
+	<!-- 마이페이지 비밀번호 공백일경우 비밀번호만 제외하고 수정 -->
+	<update id="mypageUpdate2">
+		UPDATE t_member SET phoneNumber = #{phoneNumber}, address = #{address} WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 마이페이지 수정 -->
+	<update id="mypageUpdate">
+		UPDATE t_member SET pw = #{pw}, phoneNumber = #{phoneNumber}, address = #{address} WHERE id = #{id}
+	</update>
+	
+	<!-- 마이페이지 조회 -->
+	<select id="mypageRead" resultType="com.kjnresort.domain.MemberVO">
+		SELECT * FROM t_member WHERE id = #{id} 
+	</select>
+	
 	
 	<!-- 비밀번호 변경 -->
 	<update id="pwUpdate">
@@ -36,9 +59,14 @@
 	</insert>																																																																																																																																																																																																																															
 	
 	
-	<!-- 회원가입ID 중복체크 -->
+	<!-- 회원가입 ID중복체크 -->
 	<select id="idCheck" resultType="com.kjnresort.domain.MemberVO">
 		SELECT id FROM t_member WHERE id = #{id}
+	</select>
+	
+	<!-- 회원가입 핸드폰번호 중복체크 -->
+	<select id="phoneNumberCheck" resultType="com.kjnresort.domain.MemberVO">
+		SELECT phoneNumber FROM t_member WHERE phoneNumber = #{phoneNumber}
 	</select>
 	
 	
@@ -59,6 +87,7 @@
 		<result property="auth" column="auth"/>
 	</resultMap>
 	
+	<!-- 권한조회 -->
 	<select id="read" resultMap="memberMap">	
 		select t.id, pw, name, regdate, auth
 		from t_member t, t_member_auth a

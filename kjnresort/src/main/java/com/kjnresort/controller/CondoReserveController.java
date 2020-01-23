@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -42,17 +43,25 @@ public class CondoReserveController { //헐 이제 될거같아
 	//produces= {MediaType.TEXT_PLAIN_VALUE}
 	//consumes = "application/json"
 	@ResponseBody
-	@RequestMapping(value="/availableRoomType",method = RequestMethod.POST)
-	public ResponseEntity<Object> getAvailableRoomTypeList(@Param("checkIn") @DateTimeFormat(pattern="yyyy-MM-dd") Date checkIn,@Param("checkOut") @DateTimeFormat(pattern="yyyy-MM-dd") Date checkOut) {
+	@RequestMapping(value="/availableRoomType",method = RequestMethod.POST,produces= {MediaType.APPLICATION_XML_VALUE,
+			   MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<List<String>> getAvailableRoomTypeList(@Param("checkIn") @DateTimeFormat(pattern="yyyy-MM-dd") Date checkIn,@Param("checkOut") @DateTimeFormat(pattern="yyyy-MM-dd") Date checkOut) {
 		log.info("getAvailableRoomTypeList Controller 진입");
 		Calendar in=Calendar.getInstance();
-		
 		in.setTime(checkIn);
 		Calendar out=Calendar.getInstance();
 		out.setTime(checkOut);
 	
 		return new ResponseEntity<>(service.getAvailableRoomType(in, out),HttpStatus.OK);
 	}
+	
+	@PreAuthorize("isAuthenticated()")
+	@PostMapping("/register")
+	public String register(CondoReserveVO crVO,RedirectAttributes rttr) {
+		log.info("post /register 컨트롤러");
+		return "redirect:/condoreserve/payChargeResult";
+	}
+	
 	@GetMapping("/list")
 	public void list(Model model,Criteria cri,Principal principal) {
 		
@@ -80,10 +89,8 @@ public class CondoReserveController { //헐 이제 될거같아
 	public void register() {
 		
 	}
-	@PostMapping("/register")
-	public String register(CondoReserveVO crVO,RedirectAttributes rttr) {
-		return null;
-	}
+	
+	
 	
 
 	

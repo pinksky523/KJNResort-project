@@ -9,6 +9,6 @@ public interface CondoMapper {
 	public int update(CondoVO cmvo);
 	public List<Integer> getPriceList();
 	public int getPriceByRoomType(String roomType);
-	
+	public CondoVO get(String roomType);
 	
 }

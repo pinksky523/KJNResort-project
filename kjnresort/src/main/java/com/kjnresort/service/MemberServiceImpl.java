@@ -1,5 +1,9 @@
 package com.kjnresort.service;	//이 패키지를 스프링이 자동스캔하도록 root-context.xml 설정
 
+import java.lang.reflect.Member;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,24 +32,6 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired 
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	@Override
-	public MemberVO get(String id) {
-
-		return mapper.read(id);
-	}
-
-	@Override
-	public boolean modify(MemberVO member) {
-
-		return mapper.update(member) == 1;
-	}
-	
-
-	@Override
-	public boolean remove(String id) {
-
-		return mapper.delete(id) == 1;
-	}
 
 	@Override
 	public int getTotal(Criteria cri) {
@@ -67,6 +53,7 @@ public class MemberServiceImpl implements MemberService {
 	public void register(MemberVO member) {
 		log.info("회원가입 서비스임플 진입 : " + member);
 		member.setPw(bcryptPasswordEncoder.encode(member.getPw()));
+		
 		mapper.insert(member);
 		log.info("회원정보 DB저장 완료");
 	}
@@ -88,6 +75,16 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.idCheck(id);
 	}
 	
+	
+	//회원가입 아이디 중복확인
+	@Transactional
+	@Override
+	public MemberVO phoneNumberCheck(String phoneNumber) {
+		log.info("phoneNumber중복확인 서비스임플 진입");
+		return mapper.phoneNumberCheck(phoneNumber);
+	}
+		
+		
 	//아이디찾기
 	@Transactional
 	@Override
@@ -109,9 +106,51 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public boolean pwModify(MemberVO member) {
+		log.info("비밀번호 변경 서비스임플 진입");
 		member.setPw(bcryptPasswordEncoder.encode(member.getPw()));
 		return mapper.pwUpdate(member) == 1;
 	}
 	
+	//마이페이지 조회
+	@Transactional
+	@Override
+	public MemberVO mypageGet(MemberVO member) {
+		log.info("마이페이지 조회 서비스임플 진입");
+		
+		return mapper.mypageRead(member);
+	}
 	
+	//마이페이지 수정
+	@Transactional
+	@Override
+	public boolean modifyMypage(MemberVO member) {
+		
+		log.info("마이페이지 수정 서비스 임플 진입");
+		if(member.getPw() == "" || member.getPw() == null) {
+			return mapper.mypageUpdate2(member);
+		}
+		else {
+			member.setPw(bcryptPasswordEncoder.encode(member.getPw()));
+			return mapper.mypageUpdate(member);
+		}
+	}
+	
+	
+	//회원탈퇴
+	@Transactional
+	@Override
+	public boolean remove(MemberVO member) {
+		log.info("마이페이지 회원탈퇴 서비스임플 진입");
+			
+		return mapper.delete(member) == 1;
+	}
+	
+	
+	
+	//로그인
+	@Transactional
+	@Override
+	public MemberVO get(String id) {
+		return mapper.read(id);
+	}
 }

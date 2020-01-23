@@ -35,6 +35,7 @@ public class DataSourceTests {
 		}
 	}
 	
+//	@Test
 	public void testConnection() {
 		try(Connection con = dataSource.getConnection()){
 			log.info(con);

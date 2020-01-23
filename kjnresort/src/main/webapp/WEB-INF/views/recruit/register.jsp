@@ -5,17 +5,19 @@
 <%@ include file="../includes/header.jsp" %>
 
 <div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">모집공고 게시판 관리</h1>
+    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
+        <h2>모집공고 게시글 등록</h2>
     </div>
 </div>
 
 <div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                게시글 등록
-            </div> <!-- /.panel-heading -->
+    <div class="col-lg-12" style="padding-bottom: 20px">
+        <div>
+           <div style="text-align: center;">
+                KJN리조트와 함께 할 패기 넘치는 인재를 기다립니다.
+            </div>
+            <hr style="width: 70%">
+            <!-- /.panel-heading -->
             <div class="panel-body">
 				<form method="post" action="/recruit/register" name="frm">
 		            <div class="form-group">

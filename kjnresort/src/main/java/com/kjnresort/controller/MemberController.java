@@ -1,21 +1,26 @@
 package com.kjnresort.controller;
 
+
+import java.util.List;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
-import com.kjnresort.domain.PageDTO;
 import com.kjnresort.service.MemberService;
 
 import lombok.AllArgsConstructor;
@@ -29,106 +34,45 @@ public class MemberController {
 	private MemberService service;
 	
 	
-	
-		
-	   
-	/*
-	 * @GetMapping(value="/{id}", produces = {MediaType.APPLICATION_XML_VALUE,
-	 * MediaType.APPLICATION_JSON_UTF8_VALUE}) public ResponseEntity<MemberVO>
-	 * get(@PathVariable("id") String id){
-	 * 
-	 * return new ResponseEntity<>(service.idCheck(id), HttpStatus.OK); }
-	 */
-	
-	
-	
-	
-	@GetMapping("list")
-	public void memberList(Criteria cri, Model model) {
-
-		model.addAttribute("list", service.getList(cri));
-		
-		int total = service.getTotal(cri);
-		model.addAttribute("pageMaker", new PageDTO(cri, total));
-	}
-	
-
-	//2페이지의 게시글을 조회한 뒤 list 누르면 다시 2페이지로 가게 하기
-	//2페이지의 게시글을 조회하고 수정 화면에서 list 누르면 다시 2페이지로 가게 하기
-	//검색 후에도 마찬가지로 되게 하기
-	//pageNum, amount 추가	
-	//@RequestParam은 안써도 됨
-	//@ModelAttribute를 안쓰면 화면 전환될 때 에러 발생
-	@GetMapping({"get"})
-	public void get(String id, Model model, @ModelAttribute("cri") Criteria cri) {
-		model.addAttribute("member", service.get(id));
-	}
-	
-	
-	
-	
-	@GetMapping("mypage")
-	public String modify(MemberVO member, RedirectAttributes rttr) {
-		if(service.modify(member)) {
-			rttr.addFlashAttribute("result", "수정");
-		}
-		
-		return "redirect:/member/mypage";
-	}
-
-	
-	//2페이지의 게시글을 조회하고 수정 화면에서 remove 누르면 삭제 후 다시 2페이지로 가게 하기
-	//검색 후에도 마찬가지로 되게 하기
+	//마이페이지 회원탈퇴 버튼
 	@PostMapping("remove")
-	public String remove(@RequestParam("id") String id, RedirectAttributes rttr, 
-						@ModelAttribute("cri") Criteria cri) {
-	
+	public String remove(MemberVO member, RedirectAttributes rttr) {
 		
 		
-		if(service.remove(id)) {
+		if(service.remove(member)) {
+			rttr.addFlashAttribute("msg", "계정이 삭제되었습니다");
 			
-			
-			rttr.addFlashAttribute("result", "삭제");
+			return "redirect:/common/home";
+		} else {
+			rttr.addFlashAttribute("msg", "계정 삭제 실패");
+			return "redirect:/member/mypage?id=" + member.getId();
 		}
 		
-		//Criteria에서 getListLink()를 만들어주었기 때문에 아래 코드를 주석으로 처리함
-//		//redirect로 보내기 때문에 이것을 써줘야 함
-//		rttr.addAttribute("pageNum", cri.getPageNum());
-//		rttr.addAttribute("amount", cri.getAmount());
-//		
-//		//검색 후 다시 해당 페이지로 이동
-//		rttr.addAttribute("type", cri.getType());
-//		rttr.addAttribute("keyword", cri.getKeyword());
-//		
-//		return "redirect:/event/list";
+	}
+
+	//마이페이지 버튼
+	@GetMapping("mypage")
+	public void mypageGet(MemberVO member, Model model) {
+		log.info("마이페이지 창 진입");
 		
-		return "redirect:/member/list" + cri.getListlink();
+		
+		model.addAttribute("member", service.mypageGet(member));
 	}
 	
 	
-
-	//2페이지의 게시글을 조회하고 수정 화면에서 list 누르면 수정 후 다시 2페이지로 가게 하기
-	//검색 후에도 마찬가지로 되게 하기
-	
-	@PostMapping("modify")
-	public String modify(MemberVO member, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
-
-		if(service.modify(member)) {
-			rttr.addFlashAttribute("result", "수정");
+	//마이페이지 수정버튼
+	@PostMapping("mypageModify")
+	public String mypagePost(MemberVO member, RedirectAttributes rttr) {
+		String message;
+		
+		if(service.modifyMypage(member)) {
+			message = "정보가 수정되었습니다.";
+		} else {
+			message = "정보 수정 실패";
 		}
 		
-		//Criteria에서 getListLink()를 만들어주었기 때문에 아래 코드를 주석으로 처리함
-//		//redirect로 보내기 때문에 이것을 써줘야 함
-//		rttr.addAttribute("pageNum", cri.getPageNum());
-//		rttr.addAttribute("amount", cri.getAmount());
-//		
-//		//검색 후 다시 해당 페이지로 이동
-//		rttr.addAttribute("type", cri.getType());
-//		rttr.addAttribute("keyword", cri.getKeyword());
-//				
-//		return "redirect:/board/list";
 		
-		return "redirect:/member/list" + cri.getListlink();
+		rttr.addFlashAttribute("msg", message);
+		return "redirect:/member/mypage?id=" + member.getId();
 	}
-	
 }
