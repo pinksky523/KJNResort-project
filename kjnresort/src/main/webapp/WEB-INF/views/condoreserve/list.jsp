@@ -20,6 +20,19 @@ thead{background: #E7E7E7;}
 <hr>
 
 				<div class="container">
+				<form action="/condoreserve/list">
+                              <select style="float:right;" name="type" id="select">
+                            	<option value="">검색조건</option>
+                            	<option value="I" <c:out value="${pageMaker.cri.type=='I'?'selected':''}"/>
+                            		>아이디</option>
+                            	<option value="P"
+                            		<c:out value="${pageMaker.cri.type=='P'?'selected':''}"/>
+                            		>핸드폰번호</option>
+                            </select>
+            				<input name="keyword" id="keyword" style="float:right; width:30%;" type="text" class="form-control" placeholder="Text input"
+            				value="${pageMaker.cri.keyword}">
+            				<button id="searchBtn" style="float:right;" style="display:inline" class="btn btn-default">검색</button>
+            				</form>
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -42,12 +55,12 @@ thead{background: #E7E7E7;}
 								<c:forEach items="${list}" var="rvo">
 									<tr>
 										<td>${rvo.reserveNo}</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td></td>
+										<td>${rvo.reserveDate}</td>
+										<td>${rvo.status}</td>
+										<td>${rvo.id}</td>
+										<td>${rvo.phoneNumber}</td>
+										<td>${rvo.checkIn}</td>
+										<td>${rvo.checkOut}</td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -64,6 +77,8 @@ thead{background: #E7E7E7;}
   		<input type="hidden" name="keyword" value="<c:out value='${pageMaker.cri.keyword}'/>">
   	</form>
   <nav>
+  
+   <div style="text-align: center;">
   <ul class="pagination">
   <c:if test="${pageMaker.prev}">
     <li class="paginate_button previous">
@@ -88,7 +103,58 @@ thead{background: #E7E7E7;}
     </li>
     </c:if>
   </ul>
+  </div>
 </nav>
 		
 		
 </body>
+<<script>
+$('#searchBtn').on("click",function(e){
+	
+	var sel=$('#select option:selected').val();
+	var c=$('#keyword').val();
+	if(sel===''&&c.length==0){
+		alert("검색종류를 선택하고 검색어를 입력하세요.");
+		 e.preventDefault();
+		return;
+	}
+	
+	if(sel===''){
+		alert("검색종류를 선택하세요");
+		 e.preventDefault();
+		 return;
+	}
+	
+	if(c.length==0){
+		e.preventDefault();
+		alert('검색어를 입력하세요');
+		 e.preventDefault();
+		 return;
+	}
+ });
+var actionForm=$("#actionForm");
+/*$(".move").on("click",function(e){
+	 e.preventDefault();
+	 actionForm.append("<input type='hidden' name='no' value='"+$(this).attr("href")+"'>");
+	 actionForm.attr("action","/condoreserve/list");
+	 actionForm.submit();
+});*/
+$(".paginate_button previous").on("click",function(e){
+		 e.preventDefault();
+		 $('#pageNum').val($(this).attr('href'));
+		 actionForm.submit();
+});
+
+$(".paginate_button next").on("click",function(e){
+	 	e.preventDefault();
+		 $('#pageNum').val($(this).attr('href'));
+		 actionForm.submit();
+});
+$(".paginate_button a").on("click",function(e){
+		 e.preventDefault();
+	 	console.log('click');
+	 	//actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+	 	$('#pageNum').val($(this).attr('href'));
+	 actionForm.submit();
+});
+</script>

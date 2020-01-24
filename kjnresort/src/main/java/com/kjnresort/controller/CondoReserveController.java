@@ -30,6 +30,7 @@ import com.kjnresort.domain.Criteria;
 import com.kjnresort.service.CondoReserveService;
 import com.kjnresort.service.CondoReserveServiceImpl;
 
+import com.kjnresort.domain.PageDTO;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
@@ -79,9 +80,19 @@ public class CondoReserveController { //헐 이제 될거같아
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/list")
 	public void list(Model model,Criteria cri,Principal principal) {
-		
+		log.info(principal.getName());
+		if(principal.getName().equals("admin")) {
+			log.info("예약목록 리스트컨트롤러 관리자입니다.");
+			model.addAttribute("list",service.getListWithPaging(cri));
+		}else {
+			log.info("예약목록 리스트컨트롤러 "+principal.getName()+"입니다.");
+			int total=service.getTotalCountWithId(cri,principal.getName());
+			model.addAttribute("pageMaker", new PageDTO(cri,total));
+			model.addAttribute("list", service.getListWithId(cri,principal.getName()));
+		}
 	}
 	
 	

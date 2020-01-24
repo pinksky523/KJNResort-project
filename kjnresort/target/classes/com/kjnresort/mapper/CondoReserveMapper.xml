@@ -31,11 +31,65 @@ and roomno=#{roomNo} and roomtype=#{roomType}
 ]]>
 </select>
 
+<!-- 사용자 예약목록 -->
+<select id="getListWithId" resultType="com.kjnresort.domain.CondoReserveVO">
+<![CDATA[
+ select *
+from(select rownum rn,reserveno,reservedate,r.status rstatus,r.id as id,m.phoneNumber,checkIn,checkOut
+     from t_condo_reserve r,t_member m
+     where r.id=m.id and r.id=#{userId} and rownum<=#{cri.pageNum}*#{cri.amount}
+     order by reserveno desc) 
+where rn>(#{cri.pageNum}-1)*#{cri.amount}
+]]>
+</select>
 
-
+<!-- 관리자 예약목록 -->
+<select id="getListWithPaging" resultType="com.kjnresort.domain.CondoReserveVO">
+<![CDATA[
+  select *
+	from(select rownum rn,reserveno,reservedate,r.status rstatus,r.id as id,m.phoneNumber,checkIn,checkOut
+     from t_condo_reserve r,t_member m
+     where r.id=m.id and rownum<=#{pageNum}*#{amount} and ]]>
+  		<!-- 보관해 둔 쿼리 사용 -->
+	<include refid="criteria"></include>
+<![CDATA[  		
+  		order by reserveno desc) 
+where rn>(#{pageNum}-1)*#{amount}
+]]>
+</select>
+<!-- 쿼리 보관 -->
+<sql id="criteria">
+	<trim prefix="(" suffix=")" prefixOverrides="OR">
+		<foreach item="type" collection="typeArr">
+			<trim prefix="OR">
+				<choose>
+					<when test="type=='P'.toString()">
+						phoneNumber LIKE '%'||#{keyword}||'%'
+					</when>
+					<when test="type=='I'.toString()">
+						 r.id LIKE '%'||#{keyword}||'%'
+					</when>
+				</choose>
+			</trim>
+		</foreach>
+	</trim>
+</sql>
 <update id="update">
 update t_condo_reserve status=#{status} where reserveno=#{reserveNo}
 </update>
 
+<select id="getTotalCountWithId" resultType="int">
+<![CDATA[ select count(*)
+ from t_condo_reserve r,t_member m
+ where r.id=m.id and r.id=#{userId}
+]]>
+</select>
+
+<select id="getTotalCount" resultType="int">
+<![CDATA[ select count(*) 
+from t_condo_reserve r,t_member m 
+where r.id=m.id and 
+]]><include refid="criteria"></include>
+</select>
 
 </mapper>
