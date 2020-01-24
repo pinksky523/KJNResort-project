@@ -27,13 +27,13 @@
 			<foreach item='type2' collection="typeArr2">
 				<trim prefix="OR">
 					<choose>
-						<when test="type == 'I'.toString()">
+						<when test="type2 == 'I'.toString()">
 							id LIKE '%'||#{keyword}||'%'
 						</when>
-						<when test="type == 'N'.toString()">
+						<when test="type2 == 'N'.toString()">
 							name LIKE '%'||#{keyword}||'%'
 						</when>
-						<when test="type == 'P'.toString()">
+						<when test="type2 == 'P'.toString()">
 							phoneNumber LIKE '%'||#{keyword}||'%'
 						</when>
 					</choose>
@@ -41,6 +41,25 @@
 			</foreach>
 		</trim>
 	</sql>
+	
+	<!-- 회원 정지상태로 수정 -->
+	<update id="statusBlock">
+		UPDATE t_member SET status = 0 WHERE id = #{id}
+	</update>
+	
+	
+	<!-- 회원 일반상태로 수정 -->
+	<update id="statusNormal">
+		UPDATE t_member SET status = 1 WHERE id = #{id}
+	</update>
+	
+	
+	
+	<!-- 회원 상세조회(관리자) -->
+	<select id="readMember" resultType="com.kjnresort.domain.MemberVO">
+		SELECT * FROM t_member WHERE id = #{id}
+	</select>
+	
 	
 	
 	<!-- 전체 회원 수 가져오기 -->
@@ -103,7 +122,7 @@
 		FROM(
 			SELECT /*+INDEX_DESC(t_review SYS_C0011654)*/
 				ROWNUM rn, reviewNo, category, title, id, regdate, viewCnt
-			FROM t_member
+			FROM t_review
 			WHERE
 			ROWNUM <= #{pageNum} * #{amount}
 		)

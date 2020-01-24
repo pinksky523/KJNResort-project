@@ -127,9 +127,8 @@ public class CommonController {
 		}
 	}
 	
-	@PostMapping("customLogout")
+	@GetMapping("customLogout")
 	public void customLogout() {
-		
 	}
 	
 	@GetMapping("customLoginError")

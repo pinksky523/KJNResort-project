@@ -82,10 +82,7 @@
 				<li>
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-				<form method="post" action="/common/customLogout">
-					<button type="submit" class="btn btn-danger" id="customLogout">로그아웃</button>
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				</form>
+				<button type="button" onclick="location.href='/common/customLogout'" class="btn btn-danger" id="customLogout">로그아웃</button>
 				</sec:authorize>
 				
 				<!-- 로그인 안 한 경우 -->

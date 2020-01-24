@@ -3,12 +3,15 @@ package com.kjnresort.controller;
 
 
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -29,10 +32,47 @@ public class MemberController {
 	private MemberService service;
 	
 	
+	
+	//회원 상태수정(관리자)
+	@PostMapping("statusModify")
+	public String statusModify(MemberVO member, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
+		log.info("회원상태 수정 컨트롤러 진입");
+		log.info("회원 상태값체크(컨트롤러) : " + member.getStatus());
+		if(service.statusModify(member)) {
+			rttr.addFlashAttribute("msg", "수정이 완료되었습니다.");
+		}
+		
+		//Criteria에서 getListLink()를 만들어주었기 때문에 아래 코드를 주석으로 처리함
+//		//redirect로 보내기 때문에 이것을 써줘야 함
+//		rttr.addAttribute("pageNum", cri.getPageNum());
+//		rttr.addAttribute("amount", cri.getAmount());
+//		
+//		//검색 후 다시 해당 페이지로 이동
+//		rttr.addAttribute("type", cri.getType());
+//		rttr.addAttribute("keyword", cri.getKeyword());
+//				
+//		return "redirect:/board/list";
+		
+		return "redirect:/member/list" + cri.getListlink();
+	}
+	
+	
+	
+	
+	//회원 상세조회(관리자)
+	@GetMapping("get")
+	public void getMember(String id, Model model, @ModelAttribute("cri") Criteria cri) {
+		log.info("회원상세조회 창 진입(관리자)");
+		model.addAttribute("member", service.getMember(id));
+	}
+	
+	
+	
 	//회원 목록 창
 	@GetMapping("list")
 	public void memberList(Criteria cri, Model model) {
 		log.info("회원목록 창 진입");
+		log.info("type2 값 : " + cri.getType2());
 		model.addAttribute("list", service.getMemberList(cri));
 		
 		int total = service.getTotalMember(cri);
@@ -63,8 +103,7 @@ public class MemberController {
 		if(service.remove(member)) {
 			rttr.addFlashAttribute("msg", "계정이 삭제되었습니다");
 			
-			session.invalidate();
-			return "/common/logout";
+			return "/common/customLogout";
 		} else {
 			rttr.addFlashAttribute("msg", "계정 삭제 실패");
 			return "redirect:/member/mypage?id=" + member.getId();
@@ -73,11 +112,12 @@ public class MemberController {
 	}
 
 	//마이페이지 버튼
-	@PostMapping("mypage")
-	public void mypageGet(MemberVO member, Model model) {
+	@GetMapping("mypage")
+	public void mypageGet(MemberVO member, Model model, Principal principal) {
+		String userId = principal.getName();
+		member.setId(userId);
 		log.info("마이페이지 창 진입");
-		
-		
+		log.info(member);
 		model.addAttribute("member", service.mypageGet(member));
 	}
 	
@@ -93,8 +133,8 @@ public class MemberController {
 			message = "정보 수정 실패";
 		}
 		
-		
+		rttr.addFlashAttribute("member", member);
 		rttr.addFlashAttribute("msg", message);
-		return "redirect:/member/mypage?id=" + member.getId();
+		return "redirect:/member/mypage";
 	}
 }

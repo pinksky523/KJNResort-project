@@ -32,8 +32,8 @@
                     <tbody>
                     <c:forEach items="${list}" var="member" varStatus="status">
                         <tr>
-                            <td>${status.count}</td>
-                            <td><a href='/member/list?id=${member.id}'>
+                            <td>${member.rn}</td>
+                            <td><a href='/member/get?id=${member.id}'>
                             		${member.id}
                             	</a>
                             </td>
@@ -156,13 +156,15 @@ $(".paginate_button a").click(function(e){
 $(".move").click(function(e){
 	e.preventDefault();
 	
-	//폼의 hidden 속성에 있는 bno 파라미터의 값에 게시물 번호의 값 넣고
-	$("#actionForm").append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
+	//폼의 hidden 속성에 있는 id 파라미터의 값에 게시물 번호의 값 넣고
+	$("#actionForm").append("<input type='hidden' name='id' value='" + $(this).attr("href") + "'>");
 	
 	//list로 되어있는 폼의 action을 get으로 변경
-	$("#actionForm").attr("action", "/board/get");
+	$("#actionForm").attr("action", "/member/get");
 	//폼을 이용해 컨트롤러로 전달
 	$("#actionForm").submit();
+	
+	
 });
 </script>
 <%@ include file="../includes/footer.jsp" %>
