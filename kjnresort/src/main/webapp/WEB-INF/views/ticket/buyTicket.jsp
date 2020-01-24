@@ -8,7 +8,7 @@
         <h2>이용권 구매</h2>
     </div>
 	<hr>
-	<form id="buyForm" method="get" action="buyTicketKakao">
+	<!-- <form id="buyForm" method="get" action="buyTicketKakao"> -->
    <table width="100%" style="padding:5px 0 5px 0; ">
    	
       <tr>
@@ -56,22 +56,77 @@
          <td colspan="2" align="right">
          	<input type="hidden" name="id" value="user00">
          	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-		    <button type="submit" class="btn btn-primary" id="buyForm">다음</button>
+		    <button type="submit" class="btn btn-primary" id="payCharge">결제</button>
          </td>
        </tr>
     </table>
-</form>
+<!-- </form> -->
 <br><br><br><br>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
 <script>
 
+var IMP = window.IMP; // 생략가능
+IMP.init('imp00967940'); 
+
+//START 카카오결제	
+$('#payCharge').on("click",function(){
+	
+	IMP.request_pay({
+	    pg : 'kakao', 
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : 'kjnresort',
+	    amount : (${tPrice.price} * $("select[name=liftAmount]").val() + ${ttPrice.price} * $("select[name=toolAmount]").val()),
+	    email : 'iamport@siot.do',
+	    name : '남 구', //아이디값 받아서 넣어주기
+	    tel : '010-1234-5678',//전화번호
+	    addr : '서울특별시 마포구 월드컵북로',//주소
+	    postcode : '123-456'
+	}, function(rsp) {
+	    if ( rsp.success ) {
+	    	//[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+	    	jQuery.ajax({
+	    		url: "buyTicketResult", //cross-domain error가 발생하지 않도록 주의해주세요
+	    		type: 'POST',
+	    		dataType: 'json',
+	    		data: {
+		    		imp_uid : rsp.imp_uid
+	    		}
+	    	}).done(function(data) {
+	    		//[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+	    		if ( everythings_fine ) {
+	    			location.href = 'buyTicketResult.jsp';
+	    			/* var msg = '결제가 완료되었습니다.';
+	    			msg += '\n고유ID : ' + rsp.imp_uid;
+	    			msg += '\n상점 거래ID : ' + rsp.merchant_uid;
+	    			msg += '\결제 금액 : ' + rsp.paid_amount;
+	    			msg += '카드 승인번호 : ' + rsp.apply_num;
+	    			 
+	    			alert(msg); */
+	    			 
+	    			//db에 넣기
+	    		} else {
+	    			//[3] 아직 제대로 결제가 되지 않았습니다.
+	    			//[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+	    		}
+	    	});
+	    } else {
+	        var msg = '결제에 실패하였습니다.';
+	        msg += '에러내용 : ' + rsp.error_msg;
+	        
+	        alert(msg);
+	    }
+	});
+}); //END 카카오결제
+	
 $(function(){	
 	
-	
+	//총금액 표시
 	$("select[id=Amount]").change(function(obj){
  		var str = document.getElementById("text1");
  		var lift = ($("select[name=liftAmount]").val() * ${tPrice.price});
@@ -97,6 +152,7 @@ $(function(){
  			document.getElementById("text1").innerHTML = tool + "원";
  		}
 	});
+	
 	// 라디오버튼 클릭시 이벤트 발생
 	$("input:radio[name=lift]").click(function(){
 		 

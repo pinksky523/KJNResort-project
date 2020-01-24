@@ -53,16 +53,14 @@ public class CondoReserveServiceImpl implements CondoReserveService {
 	
 	@Override
 	public List<CondoReserveVO> getListWithPaging(Criteria cri) {
-		// TODO Auto-generated method stub
-		return null;
+		return condoReservemapper.getListWithPaging(cri);
 	}
 
 
 
 	@Override
-	public List<CondoReserveVO> getListWithId(Criteria cri, String id) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CondoReserveVO> getListWithId(Criteria cri, String userId) {
+		return condoReservemapper.getListWithId(cri, userId);
 	}
 
 
@@ -116,16 +114,14 @@ public class CondoReserveServiceImpl implements CondoReserveService {
 
 	@Override
 	public int getTotalCount(Criteria cri) {
-		// TODO Auto-generated method stub
-		return 0;
+		return condoReservemapper.getTotalCount(cri);
 	}
 
 
 
 	@Override
-	public int getTotalCountWithId(Criteria cri, String id) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getTotalCountWithId(Criteria cri, String userId) {
+	     return condoReservemapper.getTotalCountWithId(cri, userId);
 	}
 
 

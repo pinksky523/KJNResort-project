@@ -18,14 +18,14 @@ import lombok.Setter;
                               "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
 public class MemberTests {
    
-	
-	  @Setter(onMethod_ = @Autowired) 
-	  private PasswordEncoder pwencoder; 
-	  //PasswordEncoder를 구현한 CustomNoOpPasswordEncoder의 메소드를 이용할 수 있음
-	  
-	  @Setter(onMethod_ = @Autowired) 
-	  private DataSource ds;
+
+   @Setter(onMethod_ = @Autowired)
+   private PasswordEncoder pwencoder;
+   // PasswordEncoder를 구현한 CustomNoOpPasswordEncoder의 메소드를 이용할 수 있음
    
+   @Setter(onMethod_ = @Autowired)
+   private DataSource ds;
+
    @Test
    public void testA() {
       
@@ -140,6 +140,7 @@ public class MemberTests {
 	         e.printStackTrace();
 	      }
    }
+
    
 	 @Test
 	 public void testD() {
@@ -158,5 +159,6 @@ public class MemberTests {
 	          e.printStackTrace();
 	       }
  }
+
 }
    
