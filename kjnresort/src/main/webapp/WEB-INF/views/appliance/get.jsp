@@ -12,7 +12,7 @@
     
     <div class="panel-body">
     	<div class="form-group">
-    	지원일자 ${appliance.regDate }
+    	지원일자 	<fmt:formatDate value="${appliance.regDate }" pattern="yy-MM-dd"/>
     	</div>
     	<div class="form-group">
     	이름		${appliance.name }

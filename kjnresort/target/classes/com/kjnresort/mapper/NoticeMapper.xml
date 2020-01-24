@@ -72,5 +72,11 @@
 		SET title = #{title}, content = #{content}, topCheck = #{topCheck}
 		WHERE noticeNo = #{noticeNo}
 	</update>
+	
+	<update id="updateViewCnt">
+		UPDATE t_notice
+		SET viewCnt = viewCnt + 1
+		WHERE noticeNo = #{noticeNo}
+	</update>
 
 </mapper>

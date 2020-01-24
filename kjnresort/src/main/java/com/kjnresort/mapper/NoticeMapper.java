@@ -13,6 +13,7 @@ public interface NoticeMapper {
 	public int update(NoticeVO notice);						// 게시글 수정
 	public int delete(Long noticeNo);						// 게시글 삭제
 	public NoticeVO read(Long noticeNo);					// 게시글 조회
+	public void updateViewCnt(Long noticeNo);				// 조회수 증가
 
 }
 

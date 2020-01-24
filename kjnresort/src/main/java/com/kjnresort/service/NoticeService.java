@@ -9,8 +9,8 @@ public interface NoticeService {
 	public int getTotalCount(Criteria cri);
 	public List<NoticeVO> getList(Criteria cri);
 	
-	public boolean modify(NoticeVO notice);
-	public boolean remove(Long noticeNo);
-	public NoticeVO get(Long noticeNo);
-	public void register(NoticeVO notice);
+	public boolean modify(NoticeVO notice);					// 게시글 수정
+	public boolean remove(Long noticeNo);					// 게시글 삭제
+	public NoticeVO get(Long noticeNo);						// 게시글 조회
+	public void register(NoticeVO notice);					// 게시글 등록
 }
