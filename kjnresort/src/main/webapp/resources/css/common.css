@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 h2 { text-align: center; }
-hr { border: solid 2px lightgray; width: 60%;  }
+hr { border: solid 2px lightgray !important; width: 60% !important;  }
 th { text-align: center !important; }
 
 

@@ -5,18 +5,14 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
 <%@ include file="../includes/adminHeader.jsp" %>
 <link rel="stylesheet" href="/resources/css/table.css"/>
-<div>
-    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
         <h2>회원 관리</h2>
-    </div>
-</div>
 
 <div class="row">
     <div class="col-lg-12" style="padding-bottom: 20px">
         <div>
             <div style="text-align: center;">
             </div>
-            <hr style="width: 70%">
+            <hr style="border: solid 2px lightgray !important; width: 60% !important;">
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   

@@ -45,7 +45,6 @@
          </tr>
          
          <tr>
-         <tr>
          <th>주소</th>
          <td><input type="text" class="form-control" name="address" id="inputAddress" style="width: 150%"></td>
        </tr>

@@ -9,7 +9,7 @@
     	<form role="form" name="frm" method="post" action="/login">
 			<fieldset>
 				<h3>로그인</h3>
-				<hr style="width: 100%; border: solid 2px lightgray;">
+				<hr style="width: 100% !important;">
 				<div class="form-group">
                     <input type="text" name="username" id="inputId" class="form-control input-lg" placeholder="아이디" required autofocus>
 				</div>
@@ -18,7 +18,7 @@
 				</div>
 					<a href="/common/findId" class="btn btn-link pull-left">아이디 찾기</a>
 					<a href="findPw" class="btn btn-link pull-right">비밀번호 찾기</a>
-				<br><hr style="width: 100%">
+				<br><hr style="width: 100% !important;">
 				
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-md-6">

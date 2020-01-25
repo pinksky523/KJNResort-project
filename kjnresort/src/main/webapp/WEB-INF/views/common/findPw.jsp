@@ -9,7 +9,7 @@
     	<form role="form" method="post" action="/common/findPw">
 			<fieldset>
 				<h3>비밀번호 찾기</h3>
-				<hr style="width: 100%; border: solid 2px lightgray;">
+				<hr style="width: 100% !important;">
 				<div class="form-group">
                     <input type="text" name=id id="inputId" class="form-control input-lg" placeholder="아이디" required autofocus>
 				</div>
@@ -19,7 +19,7 @@
 				<div class="form-group">
                     <input type="text" name="phoneNumber" id="inputPhoneNumber" class="form-control input-lg" placeholder="핸드폰번호 (하이픈(-)포함 13자 이내)" required>
 				</div>
-				<br><hr style="width: 100%">
+				<br><hr style="width: 100% !important;">
 				
 				<div class="row">
 					<div class="col-xs-6 col-sm-6 col-md-6">

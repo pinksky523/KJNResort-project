@@ -26,6 +26,7 @@
 	<link rel="stylesheet" href="/resources/css/owl.carousel.min.css"/>
 	<link rel="stylesheet" href="/resources/css/flaticon.css"/>
 	<link rel="stylesheet" href="/resources/css/slicknav.min.css"/>
+	<link rel="stylesheet" href="/resources/css/common.css"/>
 	
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	
