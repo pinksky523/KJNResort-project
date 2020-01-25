@@ -101,11 +101,12 @@
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
 				<c:set var="loginId" value='<sec:authentication property="principal.username"/>'></c:set>
+				
 				<c:choose>
-				  <c:when test="${loginId eq 'admin'}">
-				  	<button type="button">test</button>
+				  <c:when test="${loginId eq 'admin'}">		<!-- 관리자로 로그인할 경우 아무버튼 없음 -->
+				  
  				 </c:when>
- 				 <c:otherwise>
+ 				 <c:otherwise>	<!-- 회원계정으로 로그인할 경우 마이페이지 버튼 표시 -->
  					  <form id="mypageForm" action="/member/mypage" method="get">
 						<button type="submit" class="btn btn-secondary" id="mypage">마이페이지</button>
 					 </form>
