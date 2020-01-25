@@ -33,7 +33,7 @@
                     <c:forEach items="${list}" var="member" varStatus="status">
                         <tr>
                             <td>${member.rn}</td>
-                            <td><a href='/member/get?id=${member.id}'>
+                            <td><a class="move" href='${member.id}'>
                             		${member.id}
                             	</a>
                             </td>
@@ -80,6 +80,8 @@
                             			</select>
                             			<!-- value="${pageMaker.cri.keyword}" 검색 키워드가 유지되게 하기 (페이지 이동 시에도) -->
                             			<input type="text" name="keyword" value="${pageMaker.cri.keyword}"/>
+                            			<input type="hidden" name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
+    									<input type="hidden" name='type2' value='<c:out value="${pageMaker.cri.type2}"/>'>
                             			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
                             			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
                             			<button class="btn btn-default">Search</button>
@@ -135,6 +137,28 @@
     
     
 <script>
+var msg = '<c:out value="${msg}"/>';	
+
+//result 값이 있는지 확인하는 함수 호출
+checkModal(msg);
+history.replaceState({}, null, null);
+
+
+//메세지가 존재하면 alert창 띄우기
+function checkModal(){
+	//값이 없으면 리턴시킴
+	if(msg === '' || history.state){
+		return;
+	}
+	
+	//값이 있으면 메시지 띄우기
+	if(msg !== ''){
+		alert(msg);
+	}
+	
+}
+
+
 //페이지 번호 누를 때마다 해당 pageNum(페이지 번호)의 목록 amount(출력 데이터 갯수)개 출력
 //클릭할때마다 테이블이 찌그러지는 문제가 있긴 함
 //그냥 a태그의 href에 써도 되긴 한데 책을 존중하여 javascript로 처리함
@@ -166,5 +190,21 @@ $(".move").click(function(e){
 	
 	
 });
+
+//검색 버튼 이벤트 처리
+var searchForm = $("#searchForm");
+
+$("#searchForm button").on("click", function(e){		
+		//검색 결과 페이지 번호가 1페이지가 되도록 처리
+		searchForm.find("input[name='pageNum']").val("1");
+
+		//검색 버튼을 클릭하면 폼 전송 막기
+		e.preventDefault();
+		
+		searchForm.submit();
+
+});
+
+
 </script>
 <%@ include file="../includes/footer.jsp" %>

@@ -82,7 +82,7 @@
             <tr><td>&nbsp</td></tr>
            <tr>
              <td colspan="3" align="center">
-		   	  <button type="button" class="btn btn-secondary" id="cancelBtn" onclick="location.href='/member/list'">목록</button>
+		   	  <button type="button" class="btn btn-secondary" id="cancelBtn" data-oper="list">목록</button>
 		      <!-- 1일 경우 정지 버튼 생성 /  0일경우 정지해제 버튼 생성 -->
 	       		<c:if test="${member.status eq 1}">
 	       			<button type="button" data-oper="stop" class="btn btn-danger" id="stopBtn">정지</button>
@@ -96,6 +96,14 @@
            </table>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
           </form>
+          <form action="/member/list" id="operForm">
+                	<input type="hidden" name="pageNum" value="${cri.pageNum}">
+                	<input type="hidden" name="amount" value="${cri.amount}">
+                	<!-- 검색 조건과 키워드 파라미터 추가 -->
+                	<input type="hidden" name="type" value="${cri.type}">
+                	<input type="hidden" name="type" value="${cri.type2}">
+                	<input type="hidden" name="keyword" value="${cri.keyword}">
+           </form>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/resources/js/joongBokCheck.js"></script>
@@ -140,9 +148,16 @@ $('button').click(function(e) {
 	} else if (oper === 'go') {
 		frm.attr('action', '/member/statusModify');
 		memberGo();
-	}
+	} 
 });
 
+var operForm = $("#operForm");
+
+//버튼 태그의 data-oper 속성에 list가 들어있으면 
+$("button[data-oper='list']").on("click", function(e){
+	operForm.attr("action", "/member/list")
+	operForm.submit();
+});
 
 //회원 정지버튼 클릭이벤트
 function memberStop() {

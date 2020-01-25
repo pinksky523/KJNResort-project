@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <style>
@@ -93,11 +95,23 @@
 				
 				<li>
 				
+           		
+           		
+           		
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-					 <form id="mypageForm" action="/member/mypage" method="get">
+				<c:set var="loginId" value='<sec:authentication property="principal.username"/>'></c:set>
+				<c:choose>
+				  <c:when test="${loginId eq 'admin'}">
+				  	<button type="button">test</button>
+ 				 </c:when>
+ 				 <c:otherwise>
+ 					  <form id="mypageForm" action="/member/mypage" method="get">
 						<button type="submit" class="btn btn-secondary" id="mypage">마이페이지</button>
 					 </form>
+  				</c:otherwise>
+  				
+				</c:choose>
 				</sec:authorize>
 				
 				<!-- 로그인 안 한 경우 -->
