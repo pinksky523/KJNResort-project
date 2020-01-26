@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -35,16 +37,52 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class EventController {
 	private EventService service;
-	@GetMapping("getAttachList")
+	
+	
+	
+	//이벤트 게시글 등록화면
+	@GetMapping("register")
+	@PreAuthorize("isAuthenticated()")
+	public void register() {
+		log.info("이벤트 게시글 등록화면 진입");
+	}
+	
+	
+	//이벤트 게시글 등록기능
+	@PostMapping("register")
+	@PreAuthorize("isAuthenticated()")
+	public String register(EventVO event, RedirectAttributes rttr, Principal principal) {
+		event.setId(principal.getName());		//현재 로그인한 id(admin)을 이벤트 게시글 작성자로 셋팅
+		
+		event.getAttachList().get(0).setFileName("thumb." + event.getAttachList().get(0).getFileName());	//썸네일용은 앞에 thumb.
+		if(event.getAttachList() != null) {
+			event.getAttachList().forEach(attach -> log.info(attach));
+		}
+		
+		service.register(event);
+		rttr.addFlashAttribute("result", event.getEventNo());
+		return "redirect:/event/list";
+	}
+	
+	
+	//첨부파일리스트 저장
+	@GetMapping(value= "getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	@ResponseBody
 	public ResponseEntity<List<EventAttachVO>> getAttachList(Long eventNo) {
-		
+		log.info("이벤트컨트롤러 getAttachList() eventNo 값 체크 : " + eventNo);	//그 게시물에 첨부된 애들
 		return new ResponseEntity<>(service.getAttachList(eventNo), HttpStatus.OK);
 	}
 	
+	
+	////////////////////////////////////////////////////////
+		
+		
+		
 	@GetMapping("list")
 	public void list(Criteria cri, Model model) {
 
+		cri = new Criteria(1,9);		//이벤트게시판은 9개씩
+		
 		model.addAttribute("list", service.getList(cri));
 		
 		int total = service.getTotal(cri);
@@ -157,32 +195,8 @@ public class EventController {
 //	}
 	
 	
-	@GetMapping("register")
-	@PreAuthorize("isAuthenticated()")
-	public void register() {
-		log.info("EventController register() - get");
-	}
 	
 	
-	
-	// /board/register POST 요청을 처리하는 register() 작성
-	// 파라미터는 등록된 게시물의 정보를 갖는 BoardVO 객체와
-	// /board/list로 리다이렉트하기 위한 RedirectAttributes 객체를 받음
-	// 기능 : 파라미터로 받은 BoardVO 객체를 tbl_board 테이블에 저장하고
-	//		등록된 게시물의 번호를 result 속성에 담아
-	//		/board/list로 리다이렉트
-	@PostMapping("register")
-	@PreAuthorize("isAuthenticated()")
-	public String register(EventVO event, RedirectAttributes rttr) {
-
-		if(event.getAttachList() != null) {
-			event.getAttachList().forEach(attach -> log.info(attach));
-		}
-		
-		service.register(event);
-		rttr.addFlashAttribute("result", event.getEventNo());
-		return "redirect:/event/list";
-	}
 	
 	// /board/list GET 요청을 처리하는 list() 작성
 	// 결과 뷰로 tbl_board 테이블의 전체 목록을 담아 가도록 처리

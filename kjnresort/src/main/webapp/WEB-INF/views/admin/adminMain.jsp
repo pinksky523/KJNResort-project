@@ -61,7 +61,7 @@
 						<li><a href="/ticket/buyTicketList">이용권 구매내역</a></li>
 					</ul>
 				</li>
-				<li><a href="contact.html">이벤트 관리</a></li>
+				<li><a href="/event/list">이벤트 관리</a></li>
 				<li><a href="contact.html">후기 관리</a></li>
 				<li><a href="#">1:1문의 관리</a></li>
 				<li><a href="#">인재채용</a>

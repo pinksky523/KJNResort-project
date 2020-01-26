@@ -3,6 +3,7 @@ package com.kjnresort.service;	//이 패키지를 스프링이 자동스캔하�
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.EventAttachVO;
@@ -24,11 +25,47 @@ public class EventServiceImpl implements EventService {
 	private EventMapper mapper;
 	private EventAttachMapper attachMapper;
 
+	
+	//이벤트 게시글 목록
+	@Override
+	public List<EventVO> getList(Criteria cri) {
+		log.info("이벤트 게시글 목록 서비스임플 진입");
+		return mapper.getListWithPaging(cri);
+	}
+	
+	//이벤트 게시글 전체개수 가져오기
+	@Override
+	public int getTotal(Criteria cri) {
+		log.info("이벤트 게시글 전체개수 가져오기 서비스임플 진입");
+		return mapper.getTotalCount(cri);
+	}
+	
+	//이벤트 게시글 등록
+	@Transactional
 	@Override
 	public void register(EventVO event) {
-
+		log.info("이벤트 게시글 등록 서비스임플 진입");
 		mapper.insert(event);
+		
+		//첨부파일이 없으면 중단(그냥 return)
+		if(event.getAttachList() == null || event.getAttachList().size() <= 0) {
+			return;
+		}
+		
+		//t_event에 게시물을 등록하면, eventNo를 가져와서 t_event_attach 테이블에도 넣음
+		event.getAttachList().forEach(attach -> {
+			
+			attach.setEventNo(event.getEventNo());
+			
+			attachMapper.insert(attach);
+		});
 	}
+	
+	
+//////////////////////////////////////////////////////
+	
+	
+	
 	
 	@Override
 	public EventVO get(Long eventNo) {
@@ -49,16 +86,6 @@ public class EventServiceImpl implements EventService {
 		return mapper.delete(eventNo) == 1;
 	}
 
-	@Override
-	public int getTotal(Criteria cri) {
-		return mapper.getTotalCount(cri);
-	}
-
-	@Override
-	public List<EventVO> getList(Criteria cri) {
-
-		return mapper.getListWithPaging(cri);
-	}	
 	
 	
 	@Override

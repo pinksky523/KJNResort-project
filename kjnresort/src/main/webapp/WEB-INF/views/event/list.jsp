@@ -5,11 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
 <%@ include file="../includes/header.jsp" %>
 <link rel="stylesheet" href="/resources/css/table.css"/>
-<div>
-    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
-        <h2>이벤트</h2>
-    </div>
-</div>
+<h2>이벤트</h2>
 
 <div class="row">
     <div class="col-lg-12" style="padding-bottom: 20px">
@@ -20,31 +16,25 @@
             <hr style="width: 70%">
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   
-                    <thead class="thead-light">
-                        <tr>
-                            <th>NO.</th>
-                            <th>제목</th>
-                            <th>등록일</th>
-                            <th>상태</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${list}" var="recruit">
-                        <tr>
-                            <td>${recruit.recruitNo}</td>
-                            <td><a href='/recruit/get?recruitNo=${recruit.recruitNo}'>
-                            		${recruit.title}
-                            	</a>
-                            </td>
-                            <td><fmt:formatDate value="${recruit.regDate}" pattern="yy-MM-dd"/></td>
-                           	<td>${recruit.status}</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table><!-- END 게시물 출력 테이블 -->
-                
-                
+                <table border="" style="width: 100%;">
+					<tbody>
+					<tr style="width: 100%;">
+						<td style="width: 33%;">1번 데이타 셀</td>
+						<td style="width: 33%;">2번 데이타 셀</td>
+						<td style="width: 33%;">3번 데이타 셀</td>
+					</tr>
+					<tr>
+						<td style="width: 33%;">4번 데이타 셀</td>
+						<td style="width: 33%;">5번 데이타 셀</td>
+						<td style="width: 33%;">6번 데이타 셀</td>
+					</tr>
+					<tr>
+						<td style="width: 33%;">7번 데이타 셀</td>
+						<td style="width: 33%;">8번 데이타 셀</td>
+						<td style="width: 33%;">9번 데이타 셀</td>
+					</tr>
+					</tbody>
+					</table>
                 
                 
                 
