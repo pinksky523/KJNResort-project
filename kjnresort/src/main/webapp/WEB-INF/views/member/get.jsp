@@ -3,10 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../includes/header.jsp" %>
-
-
-	<h2>마이페이지</h2>
+<%@ include file="../includes/adminHeader.jsp" %>
+	<h2>회원정보</h2>
 	<hr>
 	<form role="form" id="joinForm" name="frm" method="post" action="/member/mypageModify">
    <table width="100%" style="padding:5px 0 5px 0; table-layout: fixed;">
@@ -19,19 +17,9 @@
          <th> 이름</th>
          <td><input type="text" class="form-control" id="inputName" value="${member.name}" readonly></td>
       </tr>
-       <tr>
-         <th>비밀번호</th>
-         <td><input type="password" class="form-control" name="pw1" id="inputPassword" onkeyup="passwordCheck1()"></td>
-      	 <td class="chkMessage"><span id="pwChk1"></span></td>
-       </tr>
-       <tr>
-         <th>비밀번호 확인</th>
-         <td><input type="password" class="form-control" name="pw" id="inputPasswordChk" onkeyup="passwordCheck2()"></td>
-		 <td class="chkMessage"><span id="pwChk2"></span></td>
-       </tr>
         <tr>
          <th>핸드폰번호</th>
-         <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" value="${member.phoneNumber}" onkeyup="phoneCheck()"></td>
+         <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" value="${member.phoneNumber}" readonly></td>
        	 <td class="chkMessage"><span id="phoneChk"></span></td>
        </tr>
         <tr>
@@ -56,25 +44,55 @@
          <tr>
          <tr>
          <th>주소</th>
-         <td><input type="text" class="form-control" name="address" id="inputAddress" value="${member.address}" style="width: 150%"></td>
+         <td><input type="text" class="form-control" name="address" id="inputAddress" value="${member.address}" style="width: 150%" readonly></td>
        </tr>
        <tr>
          <th>가입일자</th>
          <td><input type="date" class="form-control" id="inputRegDate" value='<fmt:formatDate value="${member.regDate}" pattern="yyyy-MM-dd"/>' readonly>
        	 <span id="phoneChk"></span></td>
-       </tr><tr><td>&nbsp</td></tr>
+       </tr>
+       <tr>
+       <th>상태</th>
+       <td class="s">
+           		<!-- 1일경우 '일반' 0일경우 '정지' -->
+           		<c:if test="${member.status eq 1}">
+           			<input type="text" class="form-control" value="일반" style="color: green; font-weight: bold;" readonly>
+           			<input type="hidden" name="status" value="1">
+           		</c:if>
+           		<c:if test="${member.status eq 0}">
+           			<input type="text" class="form-control" value="정지" style="color: red; font-weight: bold;" readonly>
+           			<input type="hidden" name="status" value="0">
+           		</c:if>
+           		
+           		
+            </td>
+          </tr>  
+            
+            <tr><td>&nbsp</td></tr>
            <tr>
              <td colspan="3" align="center">
-		   	  <button type="button" class="btn btn-secondary" id="cancelBtn" onclick="location.href='/common/home'">메인화면으로</button>
-		      <button type="button" data-oper="review" class="btn btn-success" id="myReviewBtn" onclick="location.href='/member/myreview'">내가 쓴 후기</button>
-		      <button type="button" data-oper="remove" class="btn btn-danger" id="leaveBtn">회원탈퇴</button>
-		      <button type="button" data-oper="modify" class="btn btn-warning" id="modifyBtn">수정완료</button>
+		   	  <button type="button" class="btn btn-secondary" id="cancelBtn" data-oper="list">목록</button>
+		      <!-- 1일 경우 정지 버튼 생성 /  0일경우 정지해제 버튼 생성 -->
+	       		<c:if test="${member.status eq 1}">
+	       			<button type="button" data-oper="stop" class="btn btn-danger" id="stopBtn">정지</button>
+	       		</c:if>
+	       		<c:if test="${member.status eq 0}">
+	       			<button type="button" data-oper="go" class="btn btn-warning" id="goBtn">정지해제</button>
+	       		</c:if>
             </td>
            </tr>
            
            </table>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
           </form>
+          <form action="/member/list" id="operForm">
+                	<input type="hidden" name="pageNum" value="${cri.pageNum}">
+                	<input type="hidden" name="amount" value="${cri.amount}">
+                	<!-- 검색 조건과 키워드 파라미터 추가 -->
+                	<input type="hidden" name="type" value="${cri.type}">
+                	<input type="hidden" name="type" value="${cri.type2}">
+                	<input type="hidden" name="keyword" value="${cri.keyword}">
+           </form>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/resources/js/joongBokCheck.js"></script>
@@ -106,6 +124,44 @@ function checkModal(){
 	}
 	
 }
+
+
+
+$('button').click(function(e) {
+	e.preventDefault();
+	var oper = $(this).data('oper');
+	
+	if(oper === 'stop') {
+		frm.attr('action', '/member/statusModify');
+		memberStop();
+	} else if (oper === 'go') {
+		frm.attr('action', '/member/statusModify');
+		memberGo();
+	} 
+});
+
+var operForm = $("#operForm");
+
+//버튼 태그의 data-oper 속성에 list가 들어있으면 
+$("button[data-oper='list']").on("click", function(e){
+	operForm.attr("action", "/member/list")
+	operForm.submit();
+});
+
+//회원 정지버튼 클릭이벤트
+function memberStop() {
+	if(confirm("정말 해당회원을 정지시겠습니까?")) {
+			document.frm.submit();
+	} 
+}
+
+//회원 정지해제버튼 클릭이벤트
+function memberGo() {
+	if(confirm("정말 해당회원을 정지해제시겠습니까?")) {
+			document.frm.submit();
+	} 
+}
+
 
 
 //비밀번호 확인

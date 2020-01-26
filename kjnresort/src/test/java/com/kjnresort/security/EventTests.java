@@ -16,7 +16,7 @@ import lombok.Setter;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"file:src/main/webapp/WEB-INF/spring/root-context.xml",
                               "file:src/main/webapp/WEB-INF/spring/security-context.xml"})
-public class MemberTests {
+public class EventTests {
    
 
    @Setter(onMethod_ = @Autowired)

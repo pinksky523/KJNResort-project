@@ -1,5 +1,7 @@
 	package com.kjnresort.controller;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;
@@ -113,6 +115,7 @@ public class CommonController {
 
 	@GetMapping("/customLogin")
 	public void loginInput(String error, String logout, Model model) {
+		
 		log.info("error: " + error);
 		log.info("logout: " + logout);
 		
@@ -127,14 +130,15 @@ public class CommonController {
 		}
 	}
 	
-	@PostMapping("customLogout")
+	@GetMapping("customLogout")
 	public void customLogout() {
-		
 	}
 	
 	@GetMapping("customLoginError")
-	public String customLoginError(RedirectAttributes rttr) {
-		rttr.addFlashAttribute("msg", "아이디와 비밀번호를 다시 확인해주세요");
+	public String customLoginError(MemberVO member, String inputId, RedirectAttributes rttr) {
+		
+		rttr.addFlashAttribute("msg", "일치하는 회원정보가 없거나 정지된 회원입니다.");
+		
 		return "redirect:/common/customLogin";
 	}
 	

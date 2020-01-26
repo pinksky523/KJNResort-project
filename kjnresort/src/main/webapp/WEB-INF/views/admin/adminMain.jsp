@@ -42,7 +42,7 @@
 
 	<!-- Header Section -->
 	<header class="header-section">
-		<a href="index.html" class="site-logo">
+		<a href="/admin/adminMain" class="site-logo">
 			<img src="/resources/img/logo.png" alt="">
 		</a>
 		<nav class="header-nav">
@@ -92,7 +92,6 @@
 				
 				<!-- 로그인 안 한 경우 -->
 				<sec:authorize access="isAnonymous()">
-					<button type="button" onclick="location.href='/common/memberJoin'" class="btn btn-danger" id="register">회원가입</button>
 				</sec:authorize>
 				
 				</li>

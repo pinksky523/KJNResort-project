@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <style>
@@ -93,13 +95,24 @@
 				
 				<li>
 				
+           		
+           		
+           		
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-					 <form id="mypageForm" action="/member/mypage" method="post">
+				<c:set var="loginId" value='<sec:authentication property="principal.username"/>'></c:set>
+				
+				<c:choose>
+				  <c:when test="${loginId eq 'admin'}">		<!-- 관리자로 로그인할 경우 아무버튼 없음 -->
+				  
+ 				 </c:when>
+ 				 <c:otherwise>	<!-- 회원계정으로 로그인할 경우 마이페이지 버튼 표시 -->
+ 					  <form id="mypageForm" action="/member/mypage" method="get">
 						<button type="submit" class="btn btn-secondary" id="mypage">마이페이지</button>
-						<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					 </form>
+  				</c:otherwise>
+  				
+				</c:choose>
 				</sec:authorize>
 				
 				<!-- 로그인 안 한 경우 -->
@@ -111,10 +124,7 @@
 				<li>
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-				<form method="post" action="/common/customLogout">
-					<button type="submit" class="btn btn-danger" id="customLogout">로그아웃</button>
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				</form>
+					<button type="button" onclick="location.href='/common/customLogout'" class="btn btn-danger" id="customLogout">로그아웃</button>
 				</sec:authorize>
 				
 				<!-- 로그인 안 한 경우 -->

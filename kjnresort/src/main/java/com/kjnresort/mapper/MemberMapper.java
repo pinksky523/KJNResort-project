@@ -26,4 +26,7 @@ public interface MemberMapper {
 	public int getTotalMyReview(@Param("id") String id, Criteria cri);		//내 리뷰 전체 개수 가져오기
 	public List<MemberVO> memberList(Criteria cri);	//전체회원목록
 	public int totalMemberCount(Criteria cri);		//전체회원 수 가져오기
+	public MemberVO readMember(String id);			//회원 상세조회(관리자)
+	public boolean statusNormal(MemberVO member);	//회원 일반상태로 수정
+	public boolean statusBlock(MemberVO member);	//회원 정지상태로 수정
 }

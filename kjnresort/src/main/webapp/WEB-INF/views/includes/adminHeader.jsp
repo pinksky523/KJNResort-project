@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
 	<title>KJN RESORT</title>
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 	<meta charset="UTF-8">
 	<meta name="description" content="loans HTML Template">
 	<meta name="keywords" content="loans, html">
@@ -22,6 +26,7 @@
 	<link rel="stylesheet" href="/resources/css/owl.carousel.min.css"/>
 	<link rel="stylesheet" href="/resources/css/flaticon.css"/>
 	<link rel="stylesheet" href="/resources/css/slicknav.min.css"/>
+	<link rel="stylesheet" href="/resources/css/common.css"/>
 	
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	
@@ -35,7 +40,7 @@
 	<![endif]-->
 
 </head>
-<body>
+<body class="contents">
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -82,16 +87,9 @@
 				<li>
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-				<form method="post" action="/common/customLogout">
-					<button type="submit" class="btn btn-danger" id="customLogout">로그아웃</button>
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				</form>
+				<button type="button" onclick="location.href='/common/customLogout'" class="btn btn-danger" id="customLogout">로그아웃</button>
 				</sec:authorize>
 				
-				<!-- 로그인 안 한 경우 -->
-				<sec:authorize access="isAnonymous()">
-					<button type="button" onclick="location.href='/common/memberJoin'" class="btn btn-danger" id="register">회원가입</button>
-				</sec:authorize>
 				</li>
 			
 			</ul>
