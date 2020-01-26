@@ -52,7 +52,7 @@
 				<li><a href="/member/list">회원 관리</a></li>
 				<li><a href="#">콘도</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">콘도 예약 관리</a></li>
+						<li><a href="/condoreserve/list">콘도 예약 관리</a></li>
 						<li><a href="loans.html">콘도 관리</a></li>
 					</ul>
 				</li>

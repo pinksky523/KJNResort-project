@@ -58,7 +58,16 @@ public class CondoReserveController { //헐 이제 될거같아
 		return new ResponseEntity<>(service.getAvailableRoomType(in, out),HttpStatus.OK);
 	}
 	
-	
+	@ResponseBody
+	@PreAuthorize("principal.username==#id||principal.username=='admin'")
+	@PostMapping(value="/cancel",produces= {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> reserveCancel(Long reserveNo,String id) {
+		log.info("condoreserve/cancel Controller........ reserveNo:"+reserveNo);
+		log.info("condoreserve/cancel Controller........ id:"+id);
+		return service.modify(reserveNo, -1)==true?new ResponseEntity<>("success",HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			
+	}
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping(value="/register",consumes="application/json",produces= {MediaType.TEXT_PLAIN_VALUE})
 	@Transactional
@@ -80,12 +89,16 @@ public class CondoReserveController { //헐 이제 될거같아
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	
+	
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/list")
 	public void list(Model model,Criteria cri,Principal principal) {
 		log.info(principal.getName());
 		if(principal.getName().equals("admin")) {
 			log.info("예약목록 리스트컨트롤러 관리자입니다.");
+			int total=service.getTotalCount(cri);
+			model.addAttribute("pageMaker", new PageDTO(cri,total));
 			model.addAttribute("list",service.getListWithPaging(cri));
 		}else {
 			log.info("예약목록 리스트컨트롤러 "+principal.getName()+"입니다.");
@@ -97,25 +110,27 @@ public class CondoReserveController { //헐 이제 될거같아
 	
 	
 	@GetMapping("/get")
-	public CondoReserveVO get(Long rno,Model model,Criteria cri) {
-		return null;
+	public void get(Long rno,Model model,Criteria cri) {
+		log.info("Condoreserve Controller Get.....");
+		model.addAttribute("reserve", service.get(rno));
+		model.addAttribute("cri", cri);
 	}
 	
 	
-	@PostMapping("/confirm")
-	public void reserveConfirm(CondoReserveVO crvo,Model model,RedirectAttributes rttr,Criteria cri) {
-		
-	}
-	
-	
-	@PostMapping("/cancel")
-	public void reserveCancel(CondoReserveVO crvo,Model model,RedirectAttributes rttr,Criteria cri) {
-		
+	@ResponseBody
+	@PreAuthorize("principal.username==#id||principal.username=='admin'")
+	@PostMapping(value="/confirm",produces= {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> reserveConfirm(Long reserveNo,String id) {
+		log.info("condoreserve/confirm Controller........ reserveNo:"+reserveNo);
+		log.info("condoreserve/confirm Controller........ id:"+id);
+		return service.modify(reserveNo,1)==true?new ResponseEntity<>("success",HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			
 	}
 	
 	@GetMapping("/register")
 	public void register() {
-		
+	
 	}
 	
 	

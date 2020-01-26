@@ -12,7 +12,7 @@ public interface CondoReserveService {
 	 public List<CondoReserveVO> getListWithId(Criteria cri,String userId);
 	 public int register(CondoReserveVO reserve);
 	 public long getMaxReserveNo();
-	 public boolean modify(CondoReserveVO reserve);
+	 public boolean modify(Long reserveNo,int status);
 	 public CondoReserveVO get(Long reserveNo);
 	 public int getTotalCount(Criteria cri);
 	 public int getTotalCountWithId(Criteria cri,String id);

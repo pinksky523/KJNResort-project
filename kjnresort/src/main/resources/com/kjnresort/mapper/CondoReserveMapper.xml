@@ -3,13 +3,31 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kjnresort.mapper.CondoReserveMapper">
-
+<!-- 쿼리 보관 -->
+<sql id="criteria">
+	<trim prefix="AND (" suffix=")" prefixOverrides="OR">
+		<foreach item="type" collection="typeArr">
+			<trim prefix="OR">
+				<choose>
+					<when test="type=='P'.toString()">
+						phonenumber LIKE '%'||#{keyword}||'%'
+					</when>
+					<when test="type=='I'.toString()">
+						 r.id LIKE '%'||#{keyword}||'%'
+					</when>
+				</choose>
+			</trim>
+		</foreach>
+	</trim>
+</sql>
 <insert id="insert">
 insert into t_condo_reserve values(seq_t_condo_reserve.nextval,#{id},#{roomType},#{reserveDate},0,#{roomNo},#{checkIn},#{checkOut},#{nights},#{price},0)
 </insert>
 
 <select id="read" resultType="com.kjnresort.domain.CondoReserveVO">
-select * from t_condo_reserve where reserveno=#{reserveNo}
+select reserveno,reservedate,r.id as id,name,phonenumber,review,roomtype,roomno,r.status as status,checkin,checkout,nights,price 
+from t_condo_reserve r,t_member t
+where r.id=t.id and reserveno=#{reserveNo}
 </select>
 
 <select id="getMaxRoomNoByRoomType" resultType="int">
@@ -35,47 +53,38 @@ and roomno=#{roomNo} and roomtype=#{roomType}
 <select id="getListWithId" resultType="com.kjnresort.domain.CondoReserveVO">
 <![CDATA[
  select *
-from(select rownum rn,reserveno,reservedate,r.status rstatus,r.id as id,m.phoneNumber,checkIn,checkOut
+from(select  rownum rn,reserveno,reservedate,status,id,phoneNumber,checkIn,checkOut
+from(select reserveno,reservedate,status,id,phoneNumber,checkIn,checkOut
+	from(select reserveno,reservedate,r.status as status,r.id as id,m.phoneNumber,checkIn,checkOut
      from t_condo_reserve r,t_member m
-     where r.id=m.id and r.id=#{userId} and rownum<=#{cri.pageNum}*#{cri.amount}
-     order by reserveno desc) 
-where rn>(#{cri.pageNum}-1)*#{cri.amount}
+     where r.id=m.id and r.id=#{userId}
+     order by reserveno desc))
+where rownum<=(#{cri.pageNum})*(#{cri.amount}))
+where rn>(#{cri.pageNum}-1)*(#{cri.amount})
 ]]>
 </select>
-
 <!-- 관리자 예약목록 -->
 <select id="getListWithPaging" resultType="com.kjnresort.domain.CondoReserveVO">
 <![CDATA[
-  select *
-	from(select rownum rn,reserveno,reservedate,r.status rstatus,r.id as id,m.phoneNumber,checkIn,checkOut
+ select *
+from(select  rownum rn,reserveno,reservedate,status,id,phoneNumber,checkIn,checkOut
+from(select reserveno,reservedate,status,id,phoneNumber,checkIn,checkOut
+	from(select reserveno,reservedate,r.status as status,r.id as id,m.phoneNumber,checkIn,checkOut
      from t_condo_reserve r,t_member m
-     where r.id=m.id and rownum<=#{pageNum}*#{amount} and ]]>
-  		<!-- 보관해 둔 쿼리 사용 -->
+     where r.id=m.id ]]>
+     <!-- 보관해 둔 쿼리 사용 -->
 	<include refid="criteria"></include>
-<![CDATA[  		
-  		order by reserveno desc) 
+<![CDATA[     
+     order by reserveno desc))
+where rownum<=#{pageNum}*#{amount})
 where rn>(#{pageNum}-1)*#{amount}
 ]]>
 </select>
-<!-- 쿼리 보관 -->
-<sql id="criteria">
-	<trim prefix="(" suffix=")" prefixOverrides="OR">
-		<foreach item="type" collection="typeArr">
-			<trim prefix="OR">
-				<choose>
-					<when test="type=='P'.toString()">
-						phoneNumber LIKE '%'||#{keyword}||'%'
-					</when>
-					<when test="type=='I'.toString()">
-						 r.id LIKE '%'||#{keyword}||'%'
-					</when>
-				</choose>
-			</trim>
-		</foreach>
-	</trim>
-</sql>
+
+
+
 <update id="update">
-update t_condo_reserve status=#{status} where reserveno=#{reserveNo}
+update t_condo_reserve set status=#{status} where reserveno=#{reserveNo}
 </update>
 
 <select id="getTotalCountWithId" resultType="int">
@@ -88,7 +97,7 @@ update t_condo_reserve status=#{status} where reserveno=#{reserveNo}
 <select id="getTotalCount" resultType="int">
 <![CDATA[ select count(*) 
 from t_condo_reserve r,t_member m 
-where r.id=m.id and 
+where r.id=m.id 
 ]]><include refid="criteria"></include>
 </select>
 
