@@ -20,10 +20,6 @@
 		DELETE FROM tbl_board WHERE bno = #{bno}
 	</delete>
 
-	<select id="read" resultType="com.kjnresort.domain.EventVO">
-		SELECT * FROM tbl_board WHERE bno = #{bno}
-	</select>
-
 	<update id="updateReplyCnt">
 		UPDATE tbl_board SET replycnt = replycnt + #{amount} WHERE bno = #{bno}
 	</update>
@@ -46,7 +42,7 @@
 		<![CDATA[
 		SELECT *
 		FROM(
-			SELECT /*+INDEX_DESC(t_event SYS_C0011827)*/
+			SELECT /*+INDEX_DESC(t_event idx_event_eventno)*/
 				ROWNUM rn, eventNo, id, title, eventStart, eventEnd, viewCnt
 			FROM t_event
 			WHERE
@@ -56,6 +52,8 @@
 		]]>
 	</select>
 	
+	
+	<!-- 이벤트 게시글 등록 -->
 	<insert id="insert">
 		<selectKey keyProperty="eventNo" order="BEFORE" resultType="long">	<!-- insert 하기 전에 할 것이니까 BEFORE, bno의 타입이 long -->
 			SELECT seq_t_event.NEXTVAL FROM dual
@@ -63,8 +61,13 @@
 		
 		
 		INSERT INTO t_event(eventNo, id, title, eventStart, eventEnd)
-		VALUES(#{eventNo}, #{id}, #{eventTitle}, #{eventStart}, #{eventEnd})
+		VALUES(#{eventNo}, #{id}, #{title}, #{eventStart}, #{eventEnd})
 	</insert>
+	
+	<!-- 이벤트 게시글 상세조회 -->
+	<select id="read" resultType="com.kjnresort.domain.EventVO">
+		SELECT * FROM t_event WHERE eventNo = #{eventNo}
+	</select>
 	
 	
 </mapper>

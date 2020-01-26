@@ -81,7 +81,7 @@
 		<![CDATA[
 		SELECT *
 		FROM(
-			SELECT /*+INDEX_DESC(t_member SYS_C0011840)*/
+			SELECT /*+INDEX_DESC(t_member idx_member_id)*/
 				ROWNUM rn, id, name, phoneNumber, status
 			FROM t_member
 			WHERE

@@ -62,17 +62,16 @@ public class EventServiceImpl implements EventService {
 	}
 	
 	
-//////////////////////////////////////////////////////
-	
-	
-	
-	
+	//이벤트 게시글 상세조회
 	@Override
 	public EventVO get(Long eventNo) {
 
 		return mapper.read(eventNo);
 	}
-
+	
+//////////////////////////////////////////////////////
+	
+	
 	
 	@Override
 	public boolean modify(EventVO event) {

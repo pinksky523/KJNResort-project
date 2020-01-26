@@ -65,19 +65,9 @@ public class EventController {
 	}
 	
 	
-	//첨부파일리스트 저장
-	@GetMapping(value= "getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	@ResponseBody
-	public ResponseEntity<List<EventAttachVO>> getAttachList(Long eventNo) {
-		log.info("이벤트컨트롤러 getAttachList() eventNo 값 체크 : " + eventNo);	//그 게시물에 첨부된 애들
-		return new ResponseEntity<>(service.getAttachList(eventNo), HttpStatus.OK);
-	}
 	
 	
-	////////////////////////////////////////////////////////
-		
-		
-		
+	//이벤트 게시글 목록
 	@GetMapping("list")
 	public void list(Criteria cri, Model model) {
 
@@ -89,19 +79,25 @@ public class EventController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 	
-
-	//2페이지의 게시글을 조회한 뒤 list 누르면 다시 2페이지로 가게 하기
-	//2페이지의 게시글을 조회하고 수정 화면에서 list 누르면 다시 2페이지로 가게 하기
-	//검색 후에도 마찬가지로 되게 하기
-	//pageNum, amount 추가	
-	//@RequestParam은 안써도 됨
-	//@ModelAttribute를 안쓰면 화면 전환될 때 에러 발생
+	
+	//이벤트 게시글 상세조회/수정 (get)
 	@GetMapping({"get", "modify"})
 	public void get(Long eventNo, Model model, @ModelAttribute("cri") Criteria cri) {
+//		cri = new Criteria(1,9);		//이벤트게시판은 9개씩
+		
 		model.addAttribute("event", service.get(eventNo));
 	}
 	
-	
+	////////////////////////////////////////////////////////
+		
+		
+	//첨부파일리스트 저장
+		@GetMapping(value= "getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+		@ResponseBody
+		public ResponseEntity<List<EventAttachVO>> getAttachList(Long eventNo) {
+			log.info("이벤트컨트롤러 getAttachList() eventNo 값 체크 : " + eventNo);	//그 게시물에 첨부된 애들
+			return new ResponseEntity<>(service.getAttachList(eventNo), HttpStatus.OK);
+		}
 
 	
 	//2페이지의 게시글을 조회하고 수정 화면에서 remove 누르면 삭제 후 다시 2페이지로 가게 하기

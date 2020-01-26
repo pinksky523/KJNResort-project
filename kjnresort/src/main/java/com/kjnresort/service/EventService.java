@@ -13,13 +13,13 @@ public interface EventService {
 	
 	public boolean remove(Long eventNo);
 	
-	public EventVO get(Long eventNo);
+	public List<EventAttachVO> getAttachList(Long eventNo);	//첨부파일 리스트
 	
-	public List<EventAttachVO> getAttachList(Long eventNo);
 	
 	///////////////////////////////////////
 	
 	public List<EventVO> getList(Criteria cri);		//게시글 목록
 	public int getTotal(Criteria cri);				//게시글 전체개수 가져오기
 	public void register(EventVO event);			//게시글 등록
+	public EventVO get(Long eventNo);				//게시글 상세조회
 }

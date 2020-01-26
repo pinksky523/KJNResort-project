@@ -20,6 +20,6 @@ th { text-align: center !important; }
 .chkMessage {
 	text-align: center;	
 }
-#eventRegister, #eventCancel {
+#eventRegister, #eventCancel, #eventList, #eventModify {
 	margin-right: 5%; width: 10%; height: 35px;
 }

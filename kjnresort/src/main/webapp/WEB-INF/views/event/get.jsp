@@ -20,7 +20,7 @@
       
        <tr>
          <th>제목</th>
-         <td><input type="text" name="title" class="form-control" id="inputTitle"></td>
+         <td><input type="text" name="title" class="form-control" id="inputTitle" value="${event.title}" readonly></td>
          <td></td>
        </tr>
        <tr><td>&nbsp</td></tr>
@@ -28,9 +28,9 @@
          <th>기간</th>
          <td colspan="2" align="center">
          <div style="display: inline;">
-         <input type="date" class="form-control" name="eventStart" id="inputEventStart">
+         <input type="date" class="form-control" name="eventStart" id="inputEventStart" value="${event.eventStart}" readonly>
         ~
-         <input type="date" class="form-control" name="eventEnd" id="inputEventEnd">
+         <input type="date" class="form-control" name="eventEnd" id="inputEventEnd" value="${event.eventEnd}" readonly>
          </div>
          </td>
        </tr>
@@ -94,12 +94,114 @@
      </div>
 </div>
 <div style="text-align: center;">
-	<button type="button" class="btn btn-secondary" id="eventCancel" onclick="location.href='/event/list'">취소</button>
-	<button type="submit" data-oper="register" class="btn btn-primary" id="eventRegister">등록</button>
+	<button type="button" class="btn btn-secondary" id="eventList" onclick="location.href='/event/list'">목록</button>
+	
+	 <!-- 로그인한 사용자가 작성한 글에만 수정 버튼 표시 -->
+	            <sec:authentication property="principal" var="pinfo"/>
+	            <sec:authorize access="isAuthenticated()">	<!-- 로그인을 했나? -->
+	            <c:if test="${pinfo.username eq event.id}">	<!-- 내가 작성한 글인가?  -->
+	            	<button data-oper='modify' class="btn btn-warning" id="eventModify">Modify</button>
+	            </c:if>
+	            </sec:authorize>
+	   			        
+	            
 </div>		      
 </form>
+<form action="/event/modify" id="operForm">
+	<input type="hidden" id="eventNo" name="eventNo" value="${event.eventNo}">
+	<input type="hidden" name="pageNum" value="${cri.pageNum}">
+	<input type="hidden" name="amount" value="${cri.amount}">
+</form> 
 <script>
 $(function(e){
+	//게시물 하나에 대한 첨부파일 목록 가져오기
+	$.getJSON("/event/getAttachList", {eventNo : <c:out value="${event.eventNo}"/>},
+			function(result){
+				console.log("attach list.........");
+				console.log(result);	//console.log("attach list........." + result); 이런 식으로 쓰면 콘솔에 object라고 뜸
+				
+				//업로드된 결과를 화면에 섬네일 등을 만들어서 처리
+					if(!result || result.length == 0){return;}
+					
+					var li = "";
+					
+					$(result).each(function(index, aFileDTO){	//jquery에서는 for문 대신 each 쓸 수 있음
+//						$('.uploadResult ul').append('<li>' + aFileDTO.fileName + '</li>');
+						//이미지가 아니면 attach.png 표시
+						//클릭하면 다운로드
+//						if(aFileDTO.image == false){
+						if(aFileDTO.fileType == false){
+							var filePath = encodeURIComponent(aFileDTO.uploadPath + "/" + aFileDTO.uuid + "_" + aFileDTO.fileName);
+							var fileLink = filePath.replace(new RegExp(/\\/g), "/");
+							
+							li += "<li data-path='" + aFileDTO.uploadPath + "'"
+								+ "data-uuid='" + aFileDTO.uuid + "' data-filename='" + aFileDTO.fileName 
+								+ "' data-type='" + aFileDTO.fileType + "'><div>"
+								+ "<span>" + aFileDTO.fileName + "</span>"
+								+ "<img src='/resources/img/attach.png'>"
+								+ "</div></li>";
+							
+						}else{	
+							var filePath = encodeURIComponent(aFileDTO.uploadPath + "/s_" + aFileDTO.uuid + "_" + aFileDTO.fileName);
+
+							li += "<li data-path='" + aFileDTO.uploadPath + "'"
+								+ "data-uuid='" + aFileDTO.uuid + "' data-filename='" + aFileDTO.fileName 
+								+ "' data-type='" + aFileDTO.fileType + "'><div>"
+								+ "<span>" + aFileDTO.fileName + "</span>"
+								+ "<img src='/display?fileName=" + filePath + "'>"
+								+ "</div></li>";
+							
+							//섬네일 클릭 시 showImage() 호출
+//							var originPath = aFileDTO.uploadPath + "\\" + aFileDTO.uuid + "_" + aFileDTO.fileName;
+//							originPath = originPath.replace(new RegExp(/\\/g), "/");	//역슬래시를 슬래시로 바꾸는 처리
+						}
+					});
+					$(".uploadResult ul").append(li);
+				
+			}).fail(function(xhr, status, err){
+				console.log(err);
+			});
+	
+	
+	
+	//첨부파일 클릭 시 다운로드
+	$(".uploadResult").on("click", "li", function(e){
+		var liObj = $(this);
+		var path = encodeURIComponent(liObj.data("path") + "/" + liObj.data("uuid") + "_" + liObj.data("filename"));
+		
+		//이미지라면 클릭 시 크게 보이기
+		if(liObj.data("type")){
+			showImage(path.replace(new RegExp(/\\/g), "/"));
+		//이미지가 아니라면 다운로드
+		}else{
+			self.location="/download?fileName=" + path
+		}
+	});
+	
+	//이미지 클릭 시 크게 보이기
+	function showImage(filePath){
+		$(".bigPictureWrapper").css("display", "flex").show();
+		$(".bigPicture").html("<img src='/display?fileName=" + filePath + "'>").animate({width: '100%', height: '100%'}, 1000);
+	}
+	
+	//크게 보인 이미지 다시 클릭 시 창 닫기
+	//(섬네일 이미지 원본을 보여준 다음,) 다시 한 번 클릭하면 사라지도록 처리
+	$(".bigPictureWrapper").on("click", function(e){
+		$(".bigPicture").animate({width: '0%', height: '0%'}, 300);
+		setTimeout(() => {$(this).hide()}, 300);
+	});
+	
+	
+	
+////////////////////////////////	
+//get에 추가된것	
+	
+	
+	
+	
+	
+	
+	
 	var formObj = $("form[role='form']");
 	
 	$("button[type='submit']").click(function(e){
@@ -292,7 +394,7 @@ $(function(e){
 		
 	});	//END $("#uploadBtn").click
 	
-	//업로드된 결과를 화면에 섬네일 등을 만들어서 처리
+	//업로드된 결과를 화면에 썸네일 등을 만들어서 처리
 	function showUploadedResult2(result){
 		if(!result || result.length == 0){return;}
 		
