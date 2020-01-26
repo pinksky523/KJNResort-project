@@ -78,7 +78,7 @@
 						</li>
 					</ul>
 				</li>
-				<li><a href="contact.html">이벤트</a></li>
+				<li><a href="/event/list">이벤트</a></li>
 				<li><a href="contact.html">후기</a></li>
 				<li><a href="#">1:1문의</a>
 					<ul class="sub-menu">

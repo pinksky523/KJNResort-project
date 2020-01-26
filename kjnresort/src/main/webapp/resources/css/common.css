@@ -5,7 +5,6 @@ hr { border: solid 2px lightgray !important; width: 60% !important;  }
 th { text-align: center !important; }
 
 
-
 .contents {
 	margin-top : 170px !important;
 	height: 80% !important;
@@ -20,4 +19,7 @@ th { text-align: center !important; }
 }
 .chkMessage {
 	text-align: center;	
+}
+#eventRegister, #eventCancel, #eventList, #eventModify {
+	margin-right: 5%; width: 10%; height: 35px;
 }
