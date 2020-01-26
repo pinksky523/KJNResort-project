@@ -17,7 +17,7 @@ public interface CondoReserveMapper {
    public List<CondoReserveVO> getListWithPaging(Criteria cri);
    public List<CondoReserveVO> getListWithId(@Param("cri") Criteria cri,@Param("userId") String userId);
    public int insert(CondoReserveVO reserve);
-   public int update(CondoReserveVO reserve);
+   public int update(@Param("reserveNo") Long reserveNo,@Param("status")int status);
    public CondoReserveVO read(Long reserveNo);
    public long getMaxReserveNo();
  

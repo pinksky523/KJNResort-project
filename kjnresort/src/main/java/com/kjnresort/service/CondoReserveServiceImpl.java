@@ -96,11 +96,7 @@ public class CondoReserveServiceImpl implements CondoReserveService {
 
 
 
-	@Override
-	public boolean modify(CondoReserveVO reserve) {
-		return condoReservemapper.update(reserve)==1;
 	
-	}
 
 
 
@@ -128,6 +124,12 @@ public class CondoReserveServiceImpl implements CondoReserveService {
 	@Override
 	public long getMaxReserveNo() {
 		return condoReservemapper.getMaxReserveNo();
+	}
+
+
+	@Override
+	public boolean modify(Long reserveNo, int status) {
+		return condoReservemapper.update(reserveNo,status)==1;
 	}
 
 
