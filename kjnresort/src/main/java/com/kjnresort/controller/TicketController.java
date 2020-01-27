@@ -30,18 +30,18 @@ import lombok.extern.log4j.Log4j;
 public class TicketController {
 	private TicketService service;
 	
-	//이용권 외부 결제 폼으로 이동 (사용자) //현재필ㅇ요없음
-	@GetMapping("buyTicketKakao")
-	//@PreAuthorize("isAuthenticated()")
-	public void buyTicketKakao(Model model, HttpServletRequest request) {
-		 int liftAmount = Integer.parseInt(request.getParameter("liftAmount")); 
-		 int toolAmount = Integer.parseInt(request.getParameter("toolAmount"));
-		 request.setAttribute("liftAmount", liftAmount);
-		 request.setAttribute("toolAmount", toolAmount); 
-		 model.addAttribute("tPrice", service.getPrice());
-		 model.addAttribute("ttPrice", service.getPriceT());
-		log.info("TicketController buyTicketKakao() - get!!");
-	}
+	//이용권 외부 결제 폼으로 이동 (사용자) 현재필요없음
+//	@GetMapping("buyTicketKakao")
+//	p@PreAuthorize("isAuthenticated()")
+//	public void buyTicketKakao(Model model, HttpServletRequest request) {
+//		 int liftAmount = Integer.parseInt(request.getParameter("liftAmount")); 
+//		 int toolAmount = Integer.parseInt(request.getParameter("toolAmount"));
+//		 request.setAttribute("liftAmount", liftAmount);
+//		 request.setAttribute("toolAmount", toolAmount); 
+//		 model.addAttribute("tPrice", service.getPrice());
+//		 model.addAttribute("ttPrice", service.getPriceT());
+//		log.info("TicketController buyTicketKakao() - get!!");
+//	}
 	
 	//이용권 외부 결제에서 결제완료 버튼 눌렀을때 (사용자)
 	@PostMapping("buyTicketKakao")
