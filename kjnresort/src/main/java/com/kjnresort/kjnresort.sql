@@ -75,7 +75,7 @@ CREATE TABLE t_event
 	eventStart varchar2(20) NOT NULL,
 	eventEnd varchar2(20) NOT NULL,
 	viewCnt number DEFAULT 0,
-	PRIMARY KEY (eventNo)
+	CONSTRAINT idx_event_eventno PRIMARY KEY(eventno)
 );
 
 
@@ -99,7 +99,7 @@ CREATE TABLE t_member
 	address varchar2(200) NOT NULL,
 	status number(1) DEFAULT 1 NOT NULL,
 	regDate date DEFAULT SYSDATE,
-	PRIMARY KEY (id)
+	CONSTRAINT idx_member_id PRIMARY KEY(id)
 );
 
 
@@ -347,6 +347,7 @@ ALTER TABLE t_qna DROP PRIMARY KEY;
 alter table t_qna add constraint pk_qna primary key(qnano);
 
 --수경부분 끝 
+
 
 -- 재웅 시작
 
