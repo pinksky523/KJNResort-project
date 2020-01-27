@@ -10,7 +10,7 @@ public interface ReviewMapper {
 	public List<ReviewVO> getListWithPaging(Criteria cri);
 
 //	@Select("SELECT * FROM tbl_board WHERE bno > 0")
-							
+	
 	public void insert(ReviewVO review);
 	public int update(ReviewVO review);
 	public int delete(Long reviewNo);

@@ -35,66 +35,66 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class ReviewController {
 	private ReviewService service;
-	//test//test//test//test//test//test//test//test//test//test//test//test//test//test//test//test//test//test
- 	//후기 삭제
-	@PreAuthorize("principal.username == #writer")						// 작성자 확인
-	@PostMapping("remove")
-	public String remove(@RequestParam("reviewNo") Long reviewNo, RedirectAttributes rttr, 
-			 @ModelAttribute("cri") Criteria cri, String writer) {
-		log.info("reviewController remove() " + reviewNo);
-		
-		List<ReviewAttachVO> attachList = service.getAttachList(reviewNo);
-//		if(service.remove(reviewNo)) {
-//			// 첨부파일이 있는 경우 파일 삭제 메서드 호출
-//			if(attachList != null || attachList.size() > 0) {
-//				deleteFiles(attachList);
+	
+// 	//후기 삭제
+//	@PreAuthorize("principal.username == #writer")						// 작성자 확인
+//	@PostMapping("remove")
+//	public String remove(@RequestParam("reviewNo") Long reviewNo, RedirectAttributes rttr, 
+//			 @ModelAttribute("cri") Criteria cri, String writer) {
+//		log.info("reviewController remove() " + reviewNo);
+//		
+//		List<ReviewAttachVO> attachList = service.getAttachList(reviewNo);
+////		if(service.remove(reviewNo)) {
+////			// 첨부파일이 있는 경우 파일 삭제 메서드 호출
+////			if(attachList != null || attachList.size() > 0) {
+////				deleteFiles(attachList);
+////			}
+////			rttr.addFlashAttribute("result", "success");
+////		}
+//		return "redirect:/review/list" + cri.getListlink();
+//	}
+//	
+//	//	첨부파일 삭제
+//	private void deleteFiles(List<ReviewAttachVO> attachList) {
+//		log.info("delete files!");
+//		attachList.forEach(avo -> {
+//			try {
+//				Path file = Paths.get("C:\\upload\\"+ 
+//								avo.getUploadPath() +"\\" +
+//								avo.getUuid() + "_" +
+//								avo.getFileName());
+//				Files.deleteIfExists(file);								// 원본 파일 삭제
+//				if(Files.probeContentType(file).startsWith("image")) {	// 이미지의 경우
+//					Path thumbnail = Paths.get("C:\\upload\\"+ 
+//									avo.getUploadPath() +"\\s_" +
+//									avo.getUuid() + "_" +
+//									avo.getFileName());
+//					Files.deleteIfExists(thumbnail);					// 썸네일 삭제
+//				}
+//			} catch (IOException e) {
+//				e.printStackTrace();
 //			}
+//		});
+//	}
+//	
+//	//후기 수정
+//	@PreAuthorize("principal.username == #board.writer")				// 작성자 확인
+//	@PostMapping("modify")
+//	public String modify(ReviewVO review, RedirectAttributes rttr, 
+//		    			 @ModelAttribute("cri") Criteria cri) {
+//		log.info("ReviewController modify()" + review);
+//		if(service.modify(review)) {
 //			rttr.addFlashAttribute("result", "success");
 //		}
-		return "redirect:/review/list" + cri.getListlink();
-	}
-	
-	//	첨부파일 삭제
-	private void deleteFiles(List<ReviewAttachVO> attachList) {
-		log.info("delete files!");
-		attachList.forEach(avo -> {
-			try {
-				Path file = Paths.get("C:\\upload\\"+ 
-								avo.getUploadPath() +"\\" +
-								avo.getUuid() + "_" +
-								avo.getFileName());
-				Files.deleteIfExists(file);								// 원본 파일 삭제
-				if(Files.probeContentType(file).startsWith("image")) {	// 이미지의 경우
-					Path thumbnail = Paths.get("C:\\upload\\"+ 
-									avo.getUploadPath() +"\\s_" +
-									avo.getUuid() + "_" +
-									avo.getFileName());
-					Files.deleteIfExists(thumbnail);					// 썸네일 삭제
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		});
-	}
-	
-	//후기 수정
-	@PreAuthorize("principal.username == #board.writer")				// 작성자 확인
-	@PostMapping("modify")
-	public String modify(ReviewVO review, RedirectAttributes rttr, 
-		    			 @ModelAttribute("cri") Criteria cri) {
-		log.info("ReviewController modify()" + review);
-		if(service.modify(review)) {
-			rttr.addFlashAttribute("result", "success");
-		}
-		return "redirect:/board/list" + cri.getListlink();
-	}
+//		return "redirect:/board/list" + cri.getListlink();
+//	}
 	
 	//후기 상세보기
 	@GetMapping({"get", "modify"})
 	public void get(Long reviewNo, Model model, 
 				    @ModelAttribute("cri") Criteria cri) {
 		log.info("ReviewController get() or modify()");
-		model.addAttribute("board", service.get(reviewNo));
+		model.addAttribute("review", service.get(reviewNo));
 	}
 	
 	//후기 리스트

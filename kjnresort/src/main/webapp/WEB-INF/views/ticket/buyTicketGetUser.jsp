@@ -55,7 +55,8 @@ button { margin-right: 5px;}
 	            <div class="form-group">
 	                <label>결제금액</label>
 	                <input class="form-control" name="writer"
-	                	   value="${(tPrice.price * ticket.liftAmount) + (ttPrice.price * ticket.toolAmount)}" readonly></div>    	       	       	   
+	                	   value="${ticket.totalPrice}" readonly></div> 
+	                	   <%-- value="${(tPrice.price * ticket.liftAmount) + (ttPrice.price * ticket.toolAmount)}" readonly></div> --%>    	       	       	   
                 <c:if test="${ticket.status == 2}">             
                	<button data-oper='review' class="btn btn-primary pull-right">후기등록</button>
                	</c:if>
@@ -65,7 +66,7 @@ button { margin-right: 5px;}
                	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
                	
                 <form method="post" action="/ticket/cancel" id="operForm">
-                	
+                	<input type="hidden" id="ticketNo" name="ticketNo" value="${ticket.ticketNo}">
                 	<input type="hidden" id="ticketNo" name="id" value="${ticket.id}">
                 	<input type="hidden" name="pageNum" value="${cri.pageNum}">
                 	<input type="hidden" name="amount" value="${cri.amount}">

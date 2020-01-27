@@ -64,11 +64,6 @@ public class TicketServiceImpl implements TicketService{
 	}
 
 	@Override
-	public void register(TicketBuyVO ticket) {
-		
-	}
-
-	@Override
 	public TicketVO getPrice() {
 		log.info("getPrice--------------------");
 		return mapper.readPrice();
@@ -96,6 +91,18 @@ public class TicketServiceImpl implements TicketService{
 	public boolean modifyStatusUse(Long ticketNo) {
 		log.info("modify use------------");
 		return mapper.updateStatusUse(ticketNo) == 1;
+	}
+
+	@Override
+	public int register(TicketBuyVO ticket) {
+		log.info("register -------------");
+		
+		return mapper.insert(ticket);
+	}
+
+	@Override
+	public long getMaxTicketNo() {
+		return mapper.getMaxTicketNo();
 	}
 
 }

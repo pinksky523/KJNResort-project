@@ -1,5 +1,7 @@
 package com.kjnresort.controller;
 
+import java.security.Principal;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,11 +49,11 @@ public class ApplianceController {
 		return null;
 	}
 	
-	@PreAuthorize("principal.username == #appliance.id")
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/myList")												// 나의 지원내역 리스트(사용자)
-	public void list(Model model) {
+	public void list(Model model, Principal principal) {
 		log.info("나의 지원내역 조회");
-		model.addAttribute("list", service.getList());
+		model.addAttribute("list", service.getList(principal.getName()));
 	}
 	
 	@GetMapping("/get")													// 지원서 상세조회(관리자)

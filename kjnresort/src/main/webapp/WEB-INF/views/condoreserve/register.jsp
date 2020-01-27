@@ -89,7 +89,6 @@ function test(){
 var IMP = window.IMP; 
 IMP.init('imp39785834')
 
-
 function successPay(payAmount){
 	var paidDate=new Date();
 	var login_ID=null;

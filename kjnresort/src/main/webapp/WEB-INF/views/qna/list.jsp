@@ -20,7 +20,7 @@ hr{text-align: center; width:1000px;}
 thead{background: #E7E7E7;}
 </style>
 <body>
-<h1>콘도 예약 내역</h1>
+<h1>1:1문의 내역</h1>
 <hr>
 
 	<div class="container">
@@ -28,17 +28,23 @@ thead{background: #E7E7E7;}
 			<sec:authentication property="principal" var="pinfo" />
 			<sec:authorize access="isAuthenticated()">
 				<c:if test="${'admin'==pinfo.username}">
-					<form action="/condoreserve/list">
+					<form action="/qna/list">
 						<select name="type" id="select">
-							<option value="IP">조건 전체</option>
-							<option value="I"
-								<c:out value="${pageMaker.cri.type=='I'?'selected':''}"/>>아이디</option>
-							<option value="P"
-								<c:out value="${pageMaker.cri.type=='P'?'selected':''}"/>>핸드폰번호(-포함)</option>
-						</select> <input name="keyword" id="keyword"
-							style="display: inline; width: 30%;" type="text"
-							class="form-control" placeholder="Text input"
-							value="${pageMaker.cri.keyword}">
+							<option value="CSE">카테고리전체</option>
+							<option value="C"
+								<c:out value="${pageMaker.cri.type=='C'?'selected':''}"/>>콘도</option>
+							<option value="S"
+								<c:out value="${pageMaker.cri.type=='S'?'selected':''}"/>>스키</option>
+							<option value="E"
+								<c:out value="${pageMaker.cri.type=='S'?'selected':''}"/>>기타</option>	
+						</select>
+						<select name="keyword" id="keyword">
+							<option value="">답변여부</option>
+							<option value="Y"
+								<c:out value="${pageMaker.cri.keyword=='Y'?'selected':''}"/>>답변</option>
+							<option value="N"
+								<c:out value="${pageMaker.cri.keyword=='N'?'selected':''}"/>>미답변</option>
+						</select>
 						<button id="searchBtn" style="display: inline;"
 							"class="btn btn-default">검색</button>
 					</form>
@@ -47,49 +53,44 @@ thead{background: #E7E7E7;}
 			</sec:authorize>
 
 
-
 		</div>
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>예약번호</th>
-					<th>예약일시</th>
-					<th>상태</th>
-					<th>아이디</th>
-					<th>핸드폰번호</th>
-					<th>체크인</th>
-					<th>체크아웃</th>
+					<th>문의번호</th>
+					<th>카테고리</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>작성일</th>
+					<th>답변여부</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:if test="${empty list }">
 					<tr>
-						<td colspan="7">예약 내역이 없습니다.</td>
+						<td colspan="6">문의 내역이 없습니다.</td>
 					</tr>
 				</c:if>
 				<c:if test="${!empty list }">
-					<c:forEach items="${list}" var="rvo">
+					<c:forEach items="${list}" var="qvo">
 						<tr>
-							<td><a class="move" href="${rvo.reserveNo}">${rvo.reserveNo}</a></td>
-							<td><fmt:formatDate value="${rvo.reserveDate}"
-									pattern="yyyy-MM-dd HH:mm:ss"></fmt:formatDate></td>
+							<td>${qvo.qnaNo}</td>
 							<c:choose>
-								<c:when test="${0==rvo.status}">
-									<td>예약</td>
+								<c:when test="${qvo.category=='C'}">
+									<td>콘도</td>
 								</c:when>
-								<c:when test="${1==rvo.status}">
-									<td>이용</td>
+								<c:when test="${qvo.category=='S'}">
+									<td>스키</td>
 								</c:when>
-								<c:when test="${-1==rvo.status}">
-									<td>취소</td>
+								<c:when test="${qvo.category=='E'}">
+									<td>기타</td>
 								</c:when>
 							</c:choose>
-							<td>${rvo.id}</td>
-							<td>${rvo.phoneNumber}</td>
-							<td><fmt:formatDate value="${rvo.checkIn}"
-									pattern="yyyy-MM-dd(E)"></fmt:formatDate></td>
-							<td><fmt:formatDate value="${rvo.checkOut}"
-									pattern="yyyy-MM-dd(E)"></fmt:formatDate></td>
+							<td><a class="move" href="${qvo.qnaNo}">${qvo.title}</a></td>
+							<td>${qvo.id}</td>
+							<td><fmt:formatDate value="${qvo.regDate}"
+									pattern="yyyy-MM-dd"></fmt:formatDate></td>
+							<td>${qvo.isAnswered }</td>
 						</tr>
 					</c:forEach>
 				</c:if>
@@ -98,7 +99,7 @@ thead{background: #E7E7E7;}
 	</div>
 
 	<!-- 페이징 -->
-				 <form id="actionForm" action="/condoreserve/list">
+				 <form id="actionForm" action="/qna/list">
   		<input type="hidden" id="pageNum" name="pageNum" value="${pageMaker.cri.pageNum}">
   		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
   		<input type="hidden" name="type" value="<c:out value="${pageMaker.cri.type}"/>">
@@ -134,15 +135,15 @@ thead{background: #E7E7E7;}
   </div>
 </nav>
 		
-		
 </body>
+
 <script>
 
 var actionForm=$("#actionForm");
 $(".move").on("click",function(e){
 	 e.preventDefault();
-	 actionForm.append("<input type='hidden' name='rno' value='"+$(this).attr("href")+"'>");
-	 actionForm.attr("action","/condoreserve/get");
+	 actionForm.append("<input type='hidden' name='qno' value='"+$(this).attr("href")+"'>");
+	 actionForm.attr("action","/qna/get");
 	 actionForm.submit();
 });
 $(".paginate_button previous").on("click",function(e){
@@ -162,5 +163,25 @@ $(".paginate_button a").on("click",function(e){
 	 	//actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 	 	$('#pageNum').val($(this).attr('href'));
 	 actionForm.submit();
+});
+
+
+$(function(){
+	var result='${result}';
+	
+	if(result===''||history.state){
+			return;
+		}
+	
+	if(result=='modiSuccess'){
+		alert("수정이 완료되었습니다.");
+	}
+	if(result=='regiSuccess'){
+		alert("글이 등록되었습니다.");
+	}
+	if(result=='delSuccess'){
+		alert("글이 삭제되었습니다.");
+	}
+	
 });
 </script>

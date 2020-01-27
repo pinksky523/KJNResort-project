@@ -79,11 +79,11 @@
 					</ul>
 				</li>
 				<li><a href="/event/list">이벤트</a></li>
-				<li><a href="contact.html">후기</a></li>
+				<li><a href="/review/list">후기</a></li>
 				<li><a href="#">1:1문의</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">문의하기</a></li>
-						<li><a href="loans.html">문의내역</a></li>
+						<li><a href="/qna/register">문의하기</a></li>
+						<li><a href="/qna/list">문의내역</a></li>
 					</ul>
 				</li>
 				<li><a href="#">인재채용</a>

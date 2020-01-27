@@ -108,7 +108,7 @@ public class CondoReserveController { //헐 이제 될거같아
 		}
 	}
 	
-	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/get")
 	public void get(Long rno,Model model,Criteria cri) {
 		log.info("Condoreserve Controller Get.....");
@@ -118,7 +118,7 @@ public class CondoReserveController { //헐 이제 될거같아
 	
 	
 	@ResponseBody
-	@PreAuthorize("principal.username==#id||principal.username=='admin'")
+	@PreAuthorize("principal.username=='admin'")
 	@PostMapping(value="/confirm",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> reserveConfirm(Long reserveNo,String id) {
 		log.info("condoreserve/confirm Controller........ reserveNo:"+reserveNo);
