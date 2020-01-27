@@ -78,13 +78,8 @@
 						</li>
 					</ul>
 				</li>
-<<<<<<< HEAD
-				<li><a href="contact.html">이벤트</a></li>
-				<li><a href="/review/list">후기</a></li>
-=======
 				<li><a href="/event/list">이벤트</a></li>
-				<li><a href="contact.html">후기</a></li>
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+				<li><a href="/review/list">후기</a></li>
 				<li><a href="#">1:1문의</a>
 					<ul class="sub-menu">
 						<li><a href="/qna/register">문의하기</a></li>
