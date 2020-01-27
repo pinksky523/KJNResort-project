@@ -152,7 +152,7 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	@Override
 	public List<MemberVO> getMemberList(Criteria cri) {
-
+		log.info("회원 목록 서비스임플 진입");
 		return mapper.memberList(cri);
 	}	
 	
@@ -164,7 +164,27 @@ public class MemberServiceImpl implements MemberService {
 	}
 		
 		
+	//회원 상세조회(관리자)
+	@Transactional
+	@Override
+	public MemberVO getMember(String id) {
+		log.info("회원 상세조회 서비스임플 진입");
+		return mapper.readMember(id);
+	}
 	
+	//회원 상태수정(관리자)
+	@Transactional
+	@Override
+	public boolean statusModify(MemberVO member) {
+		log.info("회원 상태수정 서비스임플 진입");
+		log.info("회원 상태 값 체크 : " + member.getStatus());
+		
+		if(member.getStatus() == 0) {
+			return mapper.statusNormal(member);
+		} else {
+			return mapper.statusBlock(member);
+		}
+	}
 	
 	//로그인
 	@Transactional

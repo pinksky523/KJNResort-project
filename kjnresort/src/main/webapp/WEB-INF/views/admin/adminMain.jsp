@@ -42,7 +42,7 @@
 
 	<!-- Header Section -->
 	<header class="header-section">
-		<a href="index.html" class="site-logo">
+		<a href="/admin/adminMain" class="site-logo">
 			<img src="/resources/img/logo.png" alt="">
 		</a>
 		<nav class="header-nav">
@@ -51,32 +51,19 @@
 				<li><a href="/member/list">회원 관리</a></li>
 				<li><a href="#">콘도</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">콘도 예약 관리</a></li>
+						<li><a href="/condoreserve/list">콘도 예약 관리</a></li>
 						<li><a href="loans.html">콘도 관리</a></li>
 					</ul>
 				</li>
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
-<<<<<<< HEAD
-
-
-=======
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 						<li><a href="/ticket/modify">이용권 관리</a></li>
 						<li><a href="/ticket/buyTicketList">이용권 구매내역</a></li>
-<<<<<<< HEAD
-
-
-						<li><a href="about-us.html">이용권 판매 관리</a></li>
-						<li><a href="loans.html">이용권 관리</a></li>
-
-=======
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 					</ul>
 				</li>
-				<li><a href="contact.html">이벤트 관리</a></li>
+				<li><a href="/event/list">이벤트 관리</a></li>
 				<li><a href="contact.html">후기 관리</a></li>
-				<li><a href="#">1:1문의 관리</a></li>
+				<li><a href="/qna/list">1:1문의 관리</a></li>
 				<li><a href="#">인재채용</a>
 					<ul class="sub-menu">
 						<li><a href="/recruit/list">모집공고 관리</a></li>
@@ -105,7 +92,6 @@
 				
 				<!-- 로그인 안 한 경우 -->
 				<sec:authorize access="isAnonymous()">
-					<button type="button" onclick="location.href='/common/memberJoin'" class="btn btn-danger" id="register">회원가입</button>
 				</sec:authorize>
 				
 				</li>

@@ -17,6 +17,7 @@ public class MemberVO {
 	private String address;			//주소
 	private int status;			//정지상태인지 일반상태인지
 	private Date regDate;
+	private int rn;
 	private List<AuthVO> authList;	
 	
 }

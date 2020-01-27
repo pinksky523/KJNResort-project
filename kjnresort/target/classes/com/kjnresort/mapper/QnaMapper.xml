@@ -3,9 +3,28 @@
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kjnresort.mapper.QnaMapper">
-
-<insert id="register">
-insert into t_qna values(seq_t_qna.nextval,#{id},#{title},#{content},sysdate,#{answer},#{answerRegDate})
+<!-- 쿼리 보관 -->
+<sql id="criteria">
+	<trim prefix="(" suffix=") AND" prefixOverrides="OR">
+		<foreach item="type" collection="typeArr">
+			<trim prefix="OR">
+				<choose>
+					<when test="type=='C'.toString()">
+						category LIKE 'C' and isanswered LIKE '%'||#{keyword}||'%'
+					</when>
+					<when test="type=='S'.toString()">
+						category LIKE 'S' and isanswered LIKE '%'||#{keyword}||'%'
+					</when>
+					<when test="type=='E'.toString()">
+						category LIKE 'E' and isanswered LIKE '%'||#{keyword}||'%'
+					</when>
+				</choose>
+			</trim>
+		</foreach>
+	</trim>
+</sql>
+<insert id="insert">
+insert into t_qna values(seq_t_qna.nextval,#{category},#{id},#{title},#{content},sysdate,'','','N')
 </insert>
 
 <select id="read" resultType="com.kjnresort.domain.QnaVO">
@@ -13,7 +32,7 @@ select * from t_qna where qnano=#{qnaNo}
 </select>
 
 <update id="update">
-update t_qna set title=#{title},content=#{content} where qnano=#{qnaNo}
+update t_qna set category=#{category},title=#{title},content=#{content} where qnano=#{qnaNo}
 </update>
 
 <delete id="delete">
@@ -28,5 +47,36 @@ update t_qna set answer=#{answer} and answerregdate=#{answerRegDate}
 update t_qna set answer='' and answerregdate='' where qnano=#{qnaNo}
 </update>
 
+<select id="getListWithPaging" resultType="com.kjnresort.domain.QnaVO">
+<![CDATA[
+select *
+from(select /*+INDEX_DESC(t_qna pk_qna)*/
+       rownum rn,qnano,category,id,title,regdate,isanswered
+        from t_qna
+        where rownum<=#{pageNum}*#{amount} and]]> <include refid="criteria"></include><![CDATA[ qnano>0)
+      where rn>(#{pageNum}-1)*#{amount}]]>
+</select>
+
+<select id="getListWithId" resultType="com.kjnresort.domain.QnaVO">
+<![CDATA[
+select *
+from(select /*+INDEX_DESC(t_qna pk_qna)*/
+      rownum rn,qnano,category,id,title,regdate,isanswered
+     from t_qna
+     where rownum<=#{cri.pageNum}*#{cri.amount} and id=#{userId})
+     where rn>(#{cri.pageNum}-1)*#{cri.amount}
+]]>
+</select>
+<select id="getTotalCountWithId" resultType="int">
+<![CDATA[ select count(*) from t_qna where id=#{userId}
+]]>
+</select>
+
+<select id="getTotalCount" resultType="int">
+<![CDATA[ select count(*) from t_qna where
+]]><include refid="criteria"></include>
+<![CDATA[ qnano>0
+]]>
+</select>
 
 </mapper>

@@ -3,19 +3,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>마이페이지</title>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" href="/resources/css/common.css"/>
+<%@ include file="../includes/header.jsp" %>
 
 
-</head>
-<body class="contents">
-	<h1>마이페이지</h1>
+	<h2>마이페이지</h2>
 	<hr>
 	<form role="form" id="joinForm" name="frm" method="post" action="/member/mypageModify">
    <table width="100%" style="padding:5px 0 5px 0; table-layout: fixed;">
@@ -236,5 +227,4 @@ function modify() {
 }
 
 </script>
-</body>
-</html>
+<%@ include file="../includes/footer.jsp" %>

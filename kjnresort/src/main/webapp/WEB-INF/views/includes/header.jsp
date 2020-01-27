@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
@@ -37,7 +40,7 @@
 	<![endif]-->
 
 </head>
-<body class="contents">
+<body class="contents" style="height: 100%;">
 	<!-- Page Preloder -->
 	<div id="preloder">
 		<div class="loader"></div>
@@ -64,12 +67,12 @@
 						<li><a href="loans.html">이용권 구매내역</a></li>
 					</ul>
 				</li>
-				<li><a href="contact.html">이벤트</a></li>
+				<li><a href="/event/list">이벤트</a></li>
 				<li><a href="contact.html">후기</a></li>
 				<li><a href="#">1:1문의</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">문의하기</a></li>
-						<li><a href="loans.html">문의내역</a></li>
+						<li><a href="/qna/register">문의하기</a></li>
+						<li><a href="/qna/list">문의내역</a></li>
 					</ul>
 				</li>
 				<li><a href="#">인재채용</a>
@@ -81,10 +84,8 @@
 				<li>
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-					<form id="mypageForm" action="/member/mypage" method="post">
+					<form id="mypageForm" action="/member/mypage" method="get">
 						<button type="submit" class="btn btn-secondary" id="mypage">마이페이지</button>
-						<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					 </form>
 				</sec:authorize>
 				
@@ -97,10 +98,7 @@
 				<li>
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-				<form method="post" action="/common/customLogout">
-					<button type="submit" class="btn btn-danger" id="customLogout">로그아웃</button>
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				</form>
+				<button type="button" onclick="location.href='/common/customLogout'" class="btn btn-danger" id="customLogout">로그아웃</button>
 				</sec:authorize>
 				
 				<!-- 로그인 안 한 경우 -->
