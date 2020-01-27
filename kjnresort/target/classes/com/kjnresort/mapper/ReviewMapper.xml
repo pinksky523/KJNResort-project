@@ -5,4 +5,77 @@
   
 <mapper namespace="com.kjnresort.mapper.ReviewMapper">
 
+	 <!-- 쿼리 보관 -->
+  <sql id="criteria">
+  	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach collection="typeArr" item='type'>
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title 	LIKE '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							content	LIKE '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							writer 	LIKE '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>		
+		</trim>
+  </sql>
+   
+  <select id="getListWithPaging" resultType="com.kjnresort.domain.ReviewVO">
+   <![CDATA[
+    SELECT  * 
+    FROM 	( SELECT /*+INDEX_DESC(t_review reviewNo) */ 
+    				 rownum rn, reviewNo, id, title, content, 
+    				 regdate, viewCnt, category, grade, useNo
+    		  FROM   t_review
+    		  WHERE  
+   ]]>
+		<!-- 보관해 둔 쿼리 사용 -->
+		<include refid="criteria"></include>
+   <![CDATA[ 		  
+    		  rownum <= #{pageNum} * #{amount} )
+    WHERE   rn > (#{pageNum} -1) * #{amount}
+   ]]> 		  
+  </select>
+  
+  <select id="getTotalCount" resultType="int">
+   <![CDATA[
+    SELECT COUNT(*) FROM t_review
+    WHERE 
+   ]]> 	<!-- 보관해 둔 쿼리 사용 -->
+		<include refid="criteria"></include>
+   <![CDATA[  reviewNo > 0
+   ]]>
+  </select>
+ 
+  <update id="update">
+    UPDATE 	t_review
+    SET		title = #{title}, 	content = #{content},
+    		regdate = sysdate, 
+    WHERE 	reviewNo = #{reviewNo}
+  </update>
+  
+  <delete id="delete">
+    DELETE t_review WHERE reviewNo = #{reviewNo}
+  </delete>
+  
+  <select id="read" resultType="com.kjnresort.domain.ReviewVO">
+    SELECT * FROM t_review WHERE reviewNo = #{reviewNo}
+  </select>
+    
+  <insert id="insert">
+  	INSERT INTO t_review(reviewNo, title, content, regdate, category, grade, useNo)
+	VALUES(seq_t_review.NEXTVAL, #{title}, #{content}, sysdate, #{category}, #{grade}, #{useNo})
+  </insert>
+
+  <select id="getList" resultType="com.kjnresort.domain.ReviewVO">
+  <![CDATA[
+    SELECT * FROM tbl_board WHERE reviewNo > 0
+  ]]>
+  </select>
 </mapper>

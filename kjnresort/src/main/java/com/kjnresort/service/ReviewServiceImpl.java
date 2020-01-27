@@ -29,14 +29,14 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public int getTotalCount(Criteria cri) {
-		// TODO Auto-generated method stub
-		return 0;
+		log.info("getTotalCount------------");
+		return mapper.getTotalCount(cri);
 	}
 
 	@Override
 	public List<ReviewVO> getList(Criteria cri) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("getListWithPaging------------");
+		return mapper.getListWithPaging(cri);
 	}
 
 	@Override
@@ -53,8 +53,8 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public ReviewVO get(Long reviewNo) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("get------------");
+		return mapper.read(reviewNo);
 	}
 
 	@Override

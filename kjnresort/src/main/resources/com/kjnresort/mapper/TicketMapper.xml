@@ -83,8 +83,12 @@
 	
 	<insert id="insert">
 		insert into t_ticket_buy
-	    values (SEQ_T_TICKET_BUY.nextval, 'user00', 'lift', sysdate, 1, 1, 0, 0)
+	    values (SEQ_T_TICKET_BUY.nextval, #{id}, #{type}, sysdate, #{liftAmount}, #{toolAmount}, 0, 0,  #{totalPrice})
 	</insert>
+	
+	<select id="getMaxTicketNo" resultType="long">
+		select max(ticketno) from t_ticket_buy
+	</select>
 	
 	<select id="read" resultType="com.kjnresort.domain.TicketBuyVO">
 		<![CDATA[
