@@ -12,7 +12,7 @@ public interface QnaService {
 	public boolean remove(Long qno);
 	public QnaVO get(Long qno);
 	public void register(QnaVO qvo);
-	public boolean modifyAnswer(QnaVO qvo);
+	public boolean registerAnswer(Long qnaNo,String answer);
 	public boolean deleteAnswer(Long qno);
 	public int getTotalCount(Criteria cri);
 	public int getTotalCountWithId(Criteria cri,String id);

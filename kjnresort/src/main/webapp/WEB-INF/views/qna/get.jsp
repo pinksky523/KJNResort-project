@@ -36,22 +36,21 @@ hr{text-align: center; width:1000px;}
 <sec:authentication property="principal" var="pinfo" />
 	<sec:authorize access="isAuthenticated()">
 		<c:if test="${'admin'!=pinfo.username}">
-			<button id="list">목록</button><button id="modifyBtn">수정</button><button id="delBtn">삭제</button>
+			<button id="modifyBtn">수정</button><button id="delBtn">삭제</button>
 		</c:if>
-	</sec:authorize>
+	</sec:authorize><button id="list">목록</button>
 			<sec:authorize access="isAuthenticated()">
 				<c:if test="${'admin'==pinfo.username}">
 					<c:if test="${qna.isAnswered=='Y' }">
 						<span>답변</span>
-					 		<textarea rows="10" readonly="readonly">${qna.answer}</textarea>
+					 		<p>${qna.answer}</p>
 					 		<span>답변일</span><span><fmt:formatDate value="${qna.answerRegDate}" pattern="yyyy-MM-dd"></fmt:formatDate></span>
-					 		<button>삭제</button>
+					 		<button id="delAnsBtn">삭제</button>
 					</c:if>
+					
 					<c:if test="${qna.isAnswered=='N' }">
-						<form action="/qna/registerAnswer">
-							<textarea rows="10" maxlength="2000"></textarea>
-							<button>등록</button>
-						</form>	
+							<textarea rows="10" maxlength="2000" id="answer" name="answer"></textarea>
+							<button id="answerBtn">등록</button>
 					</c:if>
 				</c:if>
 			</sec:authorize>
@@ -68,6 +67,75 @@ hr{text-align: center; width:1000px;}
 </body> 
 
 <script>
+$('#delAnsBtn').on("click",function(){
+	if(confirm('답변을 삭제하시겠습니까?')){
+		var login_Id=null;
+		<sec:authorize access="isAuthenticated()">
+			login_Id='<sec:authentication property="principal.username"/>';
+		</sec:authorize>
+		
+		var qno="${qna.qnaNo}";
+		
+		$.ajax({
+			type:'post',
+			url:'/qna/deleteAnswer',
+			data:{qno:qno,id:login_Id},
+			beforeSend : function(xhr)
+	        {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+	            xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+	        },
+			success:function(data){
+				alert("답변이 삭제되었습니다");
+				window.location.reload();
+			},
+			error:function(xhr,status,error){
+				if(error){
+					console.log(status+"/"+error);
+				}
+			}
+		});
+	}
+});
+
+
+
+$('#answerBtn').on("click",function(){
+	var answer=$('#answer').val();
+	if(answer.length==0){
+		alert('답변을 입력하세요.');
+		return;
+	}else{
+	
+		if(confirm('답변을 등록하시겠습니까?')){
+			var login_Id=null;
+			<sec:authorize access="isAuthenticated()">
+				login_Id='<sec:authentication property="principal.username"/>';
+			</sec:authorize>
+			
+			var qno="${qna.qnaNo}";
+			
+			$.ajax({
+				type:'post',
+				url:'/qna/registerAnswer',
+				data:{qno:qno,answer:answer,id:login_Id},
+				beforeSend : function(xhr)
+		        {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
+		            xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
+		        },
+				success:function(data){
+					alert("답변이 등록되었습니다.");
+					window.location.reload();
+				},
+				error:function(xhr,status,error){
+					if(error){
+						console.log(status+"/"+error);
+					}
+				}
+			});
+		}
+	}
+});
+
 $('#delBtn').on("click",function(){
 	if(confirm('글을 삭제하시겠습니까?')){
 	var formObj=$('#operForm');
@@ -89,6 +157,8 @@ $('#list').on("click",function(){
 	var formObj=$('#operForm');
 	formObj.attr("action","/qna/list");
 	formObj.find("#qno").remove(); 
+	formObj.find("#id").remove(); 
+	formObj.find("#csrf").remove(); 
 	formObj.submit();
 });
 </script>

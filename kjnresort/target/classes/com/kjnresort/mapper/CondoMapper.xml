@@ -4,12 +4,16 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kjnresort.mapper.CondoMapper">
 
-<select id="getPriceByRoomType" resultType="int">
-select price from t_condo where roomtype=#{roomType} <!-- 꼭 대문자로 넣어줘야함 -->
+<select id="getCondoList" resultType="com.kjnresort.domain.CondoVO">
+select * from t_condo
 </select>
 
 <select id="get" resultType="com.kjnresort.domain.CondoVO">
 select * from t_condo where roomtype=#{roomType}
 </select>
+
+<update id="update">
+update t_condo set price=#{price} where roomType=#{roomType}
+</update>
 
 </mapper>

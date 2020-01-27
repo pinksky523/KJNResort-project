@@ -22,16 +22,16 @@ public class CondoSerivceImpl implements CondoService {
 		}
 
 		@Override
-		public int modify(CondoVO cmvo) {
-			// TODO Auto-generated method stub
-			return 0;
+		public boolean modify(String roomType,int price) {
+			return mapper.update(roomType, price)==1;
 		}
 
 		@Override
-		public List<Integer> getPriceList() {
-			// TODO Auto-generated method stub
-			return null;
+		public List<CondoVO> getCondoList() {
+			return mapper.getCondoList();
 		}
+
+		
 		
 		
 }
