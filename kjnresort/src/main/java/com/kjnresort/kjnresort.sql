@@ -17,10 +17,7 @@ DROP TABLE t_ticket_buy CASCADE CONSTRAINTS;
 DROP TABLE t_member CASCADE CONSTRAINTS;
 DROP TABLE t_ticket CASCADE CONSTRAINTS;
 
-/ * Drop Sequence */
 
-DROP SERUENCE seq_t_condo_reserve;
-DROP SERUENCE seq_t_qna;
 
 
 /* Create Tables */
@@ -31,7 +28,7 @@ CREATE TABLE t_appliance
 	id varchar2(20) NOT NULL,
 	recruitNo number NOT NULL,
 	name varchar2(20) NOT NULL,
-	phoneNumber varchar2(15) NOT NULL,
+	phoneNumber varchar2(20) NOT NULL,
 	address varchar2(200) NOT NULL,
 	career varchar2(800) NOT NULL,
 	introduction varchar2(2000) NOT NULL,
@@ -75,8 +72,8 @@ CREATE TABLE t_event
 	eventNo number NOT NULL,
 	id varchar2(20) NOT NULL,
 	title varchar2(100) NOT NULL,
-	eventStart date NOT NULL,
-	eventEnd date NOT NULL,
+	eventStart varchar2(20) NOT NULL,
+	eventEnd varchar2(20) NOT NULL,
 	viewCnt number DEFAULT 0,
 	PRIMARY KEY (eventNo)
 );
@@ -96,7 +93,7 @@ CREATE TABLE t_member
 	id varchar2(20) NOT NULL,
 	pw varchar2(100) NOT NULL,
 	name varchar2(20) NOT NULL,
-	phoneNumber varchar2(15) NOT NULL UNIQUE,
+	phoneNumber varchar2(20) NOT NULL UNIQUE,
 	birth varchar2(20) NOT NULL,
 	gender char(1) DEFAULT 'M' NOT NULL,
 	address varchar2(200) NOT NULL,
@@ -147,7 +144,7 @@ CREATE TABLE t_recruit
 	content varchar2(4000) NOT NULL,
 	regDate date DEFAULT sysdate,
 	status varchar2(20) NOT NULL,
-	deadLine varchar2(20) NOT NULL,
+	deadLine date NOT NULL,
 	PRIMARY KEY (recruitno)
 );
 
