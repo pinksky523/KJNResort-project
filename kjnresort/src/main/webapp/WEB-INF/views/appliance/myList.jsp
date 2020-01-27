@@ -31,6 +31,11 @@
 	                        </tr>
 	                    </thead>
 	                    <tbody>
+	                    <c:if test="${empty list }">
+							<tr>
+								<td colspan="6">지원 내역이 없습니다.</td>
+							</tr>
+						</c:if>
 		                    <c:forEach items="${list}" var="appliance">
 			                   	 <c:if test="${pinfo.username eq appliance.id }">
 			                        <tr>

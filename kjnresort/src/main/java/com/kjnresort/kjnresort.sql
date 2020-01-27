@@ -126,6 +126,7 @@ CREATE TABLE t_notice
 CREATE TABLE t_qna
 (
 	qnaNo number NOT NULL,
+	category varchar2(1), 
 	id varchar2(20) NOT NULL,
 	title varchar2(100) NOT NULL,
 	content varchar2(4000) NOT NULL,
@@ -308,6 +309,39 @@ ALTER TABLE t_ticket_buy
 ;
 
 
+--수경부분시작
+DROP SEQUENCE seq_t_condo_reserve;
+CREATE SEQUENCE seq_t_condo_reserve
+INCREMENT BY 1
+START WITH 1;
+
+insert into t_condo values('P','E/W 빌리지','SG 빌딩 1층','더블1 싱글1',3,100000);
+insert into t_condo values('D','E/W 빌리지','SG 빌딩 2층','더블1 싱글3',5,150000);
+insert into t_condo values('N','E/W 빌리지','SG 빌딩 3층','더블2 싱글3',7,200000);
+insert into t_condo values('R','E/W 빌리지','SG 빌딩 4층','더블3 싱글3',9,250000);
+
+drop view view_condo_reserve;
+create or replace view view_condo_reserve as
+select roomtype,roomno,checkin,checkout
+from t_condo_reserve
+where status=0
+order by roomno,checkin;
+
+drop sequence seq_t_qna;
+create sequence seq_t_qna
+INCREMENT BY 1
+start with 1;
+
+
+ALTER TABLE t_condo_reserve DROP PRIMARY KEY;
+alter table t_condo_reserve add constraint pk_condo_reserve primary key(reserveno);
+
+
+
+ALTER TABLE t_qna DROP PRIMARY KEY;
+alter table t_qna add constraint pk_qna primary key(qnano);
+
+--수경부분 끝 
 
 /* Comments */
 

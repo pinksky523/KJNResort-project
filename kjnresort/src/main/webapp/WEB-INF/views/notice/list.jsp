@@ -47,6 +47,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${empty list }">
+						<tr>
+							<td colspan="6">공지사항이 없습니다.</td>
+						</tr>
+					</c:if>
                     <c:forEach items="${list}" var="notice">
                         <tr>
                         	<td>${notice.noticeNo}</td>
