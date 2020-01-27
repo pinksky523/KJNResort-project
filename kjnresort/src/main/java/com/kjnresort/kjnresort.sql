@@ -222,6 +222,7 @@ ALTER TABLE t_condo_reserve
 ALTER TABLE t_event_attach
 	ADD FOREIGN KEY (eventNo)
 	REFERENCES t_event (eventNo)
+	ON DELETE CASCADE
 ;
 
 
@@ -246,6 +247,7 @@ ALTER TABLE t_event
 ALTER TABLE t_member_auth
 	ADD FOREIGN KEY (id)
 	REFERENCES t_member (id)
+	ON DELETE CASCADE
 ;
 
 
@@ -308,6 +310,9 @@ ALTER TABLE t_ticket_buy
 	REFERENCES t_ticket (type)
 ;
 
+/* Comments */
+COMMENT ON COLUMN t_review.useNo IS '예약 | 이용권';
+
 
 --수경부분시작
 DROP SEQUENCE seq_t_condo_reserve;
@@ -343,9 +348,27 @@ alter table t_qna add constraint pk_qna primary key(qnano);
 
 --수경부분 끝 
 
-/* Comments */
+-- 재웅 시작
 
-COMMENT ON COLUMN t_review.useNo IS '예약 | 이용권';
+--이벤트 시퀀스
+DROP SEQUENCE seq_t_event;
+CREATE SEQUENCE seq_t_event
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 9999999999999
+MINVALUE 1;
+
+--내가 쓴 리뷰 시퀀스
+DROP SEQUENCE seq_t_review;
+CREATE SEQUENCE seq_t_review
+INCREMENT BY 1
+START WITH 1
+MAXVALUE 9999999999999
+MINVALUE 1;
+
+-- 재웅 끝
+
+
 
 
 
