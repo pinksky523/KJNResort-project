@@ -88,16 +88,20 @@ public class EventController {
 		model.addAttribute("event", service.get(eventNo));
 	}
 	
+	
+	//첨부파일리스트
+	@GetMapping(value= "getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public ResponseEntity<List<EventAttachVO>> getAttachList(Long eventNo) {
+		log.info("첨부파일 목록화면 진입");
+		return new ResponseEntity<>(service.getAttachList(eventNo), HttpStatus.OK);
+	}
+			
+			
 	////////////////////////////////////////////////////////
 		
 		
-	//첨부파일리스트 저장
-		@GetMapping(value= "getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-		@ResponseBody
-		public ResponseEntity<List<EventAttachVO>> getAttachList(Long eventNo) {
-			log.info("이벤트컨트롤러 getAttachList() eventNo 값 체크 : " + eventNo);	//그 게시물에 첨부된 애들
-			return new ResponseEntity<>(service.getAttachList(eventNo), HttpStatus.OK);
-		}
+	
 
 	
 	//2페이지의 게시글을 조회하고 수정 화면에서 remove 누르면 삭제 후 다시 2페이지로 가게 하기
