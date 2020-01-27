@@ -79,7 +79,7 @@
 					</ul>
 				</li>
 				<li><a href="/event/list">이벤트</a></li>
-				<li><a href="contact.html">후기</a></li>
+				<li><a href="/review/list">후기</a></li>
 				<li><a href="#">1:1문의</a>
 					<ul class="sub-menu">
 						<li><a href="/qna/register">문의하기</a></li>
@@ -94,25 +94,17 @@
 				</li>
 				
 				<li>
-				
-           		
            		
            		
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-				<c:set var="loginId" value='<sec:authentication property="principal.username"/>'></c:set>
+				<sec:authentication property="principal" var="pinfo"/>'>
 				
-				<c:choose>
-				  <c:when test="${loginId eq 'admin'}">		<!-- 관리자로 로그인할 경우 아무버튼 없음 -->
-				  
- 				 </c:when>
- 				 <c:otherwise>	<!-- 회원계정으로 로그인할 경우 마이페이지 버튼 표시 -->
- 					  <form id="mypageForm" action="/member/mypage" method="get">
+				  <c:if test="${pinfo.username ne 'admin'}">		<!-- 관리자로 로그인할 경우 아무버튼 없음 -->
+				  	<form id="mypageForm" action="/member/mypage" method="get">
 						<button type="submit" class="btn btn-secondary" id="mypage">마이페이지</button>
 					 </form>
-  				</c:otherwise>
-  				
-				</c:choose>
+ 				 </c:if>
 				</sec:authorize>
 				
 				<!-- 로그인 안 한 경우 -->

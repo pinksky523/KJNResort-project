@@ -69,6 +69,13 @@ public class EventServiceImpl implements EventService {
 		return mapper.read(eventNo);
 	}
 	
+	//첨부파일 리스트
+	@Override
+	public List<EventAttachVO> getAttachList(Long eventNo) {
+		
+		return attachMapper.findByEventNo(eventNo);
+	}
+	
 //////////////////////////////////////////////////////
 	
 	
@@ -83,14 +90,6 @@ public class EventServiceImpl implements EventService {
 	public boolean remove(Long eventNo) {
 
 		return mapper.delete(eventNo) == 1;
-	}
-
-	
-	
-	@Override
-	public List<EventAttachVO> getAttachList(Long eventNo) {
-		
-		return attachMapper.findByEventNo(eventNo);
 	}
 	
 	
