@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zxx">
 <style>
@@ -59,7 +61,7 @@
 				<li><a href="#">콘도</a>
 					<ul class="sub-menu">
 						<li><a href="/condoreserve/register">콘도 예약</a></li>
-						<li><a href="loans.html">콘도 예약내역</a></li>
+						<li><a href="/condoreserve/list">콘도 예약내역</a></li>
 					</ul>
 				</li>
 				<li><a href="#">이용권</a>
@@ -76,12 +78,17 @@
 						</li>
 					</ul>
 				</li>
+<<<<<<< HEAD
 				<li><a href="contact.html">이벤트</a></li>
 				<li><a href="/review/list">후기</a></li>
+=======
+				<li><a href="/event/list">이벤트</a></li>
+				<li><a href="contact.html">후기</a></li>
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 				<li><a href="#">1:1문의</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">문의하기</a></li>
-						<li><a href="loans.html">문의내역</a></li>
+						<li><a href="/qna/register">문의하기</a></li>
+						<li><a href="/qna/list">문의내역</a></li>
 					</ul>
 				</li>
 				<li><a href="#">인재채용</a>
@@ -93,13 +100,24 @@
 				
 				<li>
 				
+           		
+           		
+           		
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-					 <form id="mypageForm" action="/member/mypage" method="post">
+				<c:set var="loginId" value='<sec:authentication property="principal.username"/>'></c:set>
+				
+				<c:choose>
+				  <c:when test="${loginId eq 'admin'}">		<!-- 관리자로 로그인할 경우 아무버튼 없음 -->
+				  
+ 				 </c:when>
+ 				 <c:otherwise>	<!-- 회원계정으로 로그인할 경우 마이페이지 버튼 표시 -->
+ 					  <form id="mypageForm" action="/member/mypage" method="get">
 						<button type="submit" class="btn btn-secondary" id="mypage">마이페이지</button>
-						<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					 </form>
+  				</c:otherwise>
+  				
+				</c:choose>
 				</sec:authorize>
 				
 				<!-- 로그인 안 한 경우 -->
@@ -111,10 +129,7 @@
 				<li>
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-				<form method="post" action="/common/customLogout">
-					<button type="submit" class="btn btn-danger" id="customLogout">로그아웃</button>
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-				</form>
+					<button type="button" onclick="location.href='/common/customLogout'" class="btn btn-danger" id="customLogout">로그아웃</button>
 				</sec:authorize>
 				
 				<!-- 로그인 안 한 경우 -->

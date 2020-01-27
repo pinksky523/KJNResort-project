@@ -41,8 +41,8 @@
 	                    <textarea class="form-control" rows="8" name="content"
 	                     readonly>${notice.content}</textarea></div>
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
+							<button data-oper='remove' class="btn btn-danger pull-right">삭제</button>
 							<button data-oper='modify' class="btn btn-warning pull-right">수정</button>
-		                	<button data-oper='remove' class="btn btn-danger pull-right">삭제</button>
 		             	<form action="/notice/modify" method="get" id="operForm" >	
 		             		<input type="hidden" id="noticeNo" name="noticeNo" value='<c:out value="${notice.noticeNo}"/>'>
 		             		<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>

@@ -9,14 +9,12 @@
    <script src="/resources/js/vendor/jquery-1.12.4.min.js"></script>
 </head>
 <body>
-      <script>
-         alert("로그아웃되었습니다.");
-      </script>
 
    <%
       session.invalidate();
    %>
    <script>
+   	alert("로그아웃되었습니다.");
       location.href="/";
    </script>
 </body>

@@ -5,18 +5,14 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
 <%@ include file="../includes/adminHeader.jsp" %>
 <link rel="stylesheet" href="/resources/css/table.css"/>
-<div>
-    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
         <h2>회원 관리</h2>
-    </div>
-</div>
 
 <div class="row">
     <div class="col-lg-12" style="padding-bottom: 20px">
         <div>
             <div style="text-align: center;">
             </div>
-            <hr style="width: 70%">
+            <hr style="border: solid 2px lightgray !important; width: 60% !important;">
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   
@@ -26,45 +22,62 @@
                             <th>아이디</th>
                             <th>이름</th>
                             <th>핸드폰번호</th>
-                            <th>상태</th>
+                            <th>회원구분</th>
                         </tr>
                     </thead>
                     <tbody>
-                    <c:forEach items="${list}" var="review">
+                    <c:forEach items="${list}" var="member" varStatus="status">
                         <tr>
-                            <td>${review.reviewNo}</td>
-                            <td>${review.category}</td>
-                            <td><a href='/member/myreview?reviewNo=${review.reviewNo}'>
-                            		${review.title}
+                            <td>${member.rn}</td>
+                            <td><a class="move" href='${member.id}'>
+                            		${member.id}
                             	</a>
                             </td>
-                            <td>${review.id}</td>
-                            <td><fmt:formatDate value="${review.regdate}" pattern="yy-MM-dd"/></td>
-                           	<td>${review.viewCnt}</td>
+                            <td>${member.name}</td>
+                           	<td>${member.phoneNumber}</td>
+                           	<td>
+                           	
+                           	<!-- 1일 경우 '일반회원' 0일경우 '정지회원' -->
+			           		<c:if test="${member.status eq 1}">
+			           			<c:set var="status" value="일반회원"></c:set>
+			           		</c:if>
+			           		<c:if test="${member.status eq 0}">
+			           			<c:set var="status" value="정지회원"></c:set>
+			           		</c:if>
+                           	<c:out value="${status}"></c:out>
+                           	</td>
                         </tr>
                     </c:forEach>
                     </tbody>
                 </table><!-- END 게시물 출력 테이블 -->
-                
+                <br>
                 
                  <!-- 검색 조건 및 키워드 입력 부분 -->
-                            <div class='row'>
+                            <div class="pull-center" style="text-align: center;">
                             	<div class="col-lg-12">
-                            		<form id='searchForm' action="/board/list" method="get">
-                            			<select name= 'type'>
+                            		<form id='searchForm' action="/member/list" method="get">
+                            		<select name= 'type'>
                             				<!-- <c:out value="${pageMaker.cri.type == null? 'selected':''}"/> 선택된 값이 유지되게 하기 (페이지 이동 시에도) -->
                             				<!-- <c:set var="type" value="${pageMaker.cri.type}"/> 변수를 지정해서 쓰면 약간 더 편함 -->
                             				<c:set var="type" value="${pageMaker.cri.type}"/>
-                            				<option value = "" <c:out value="${type == null? 'selected':''}"/>>검색 조건 지정</option>
-                            					<option value="T" <c:out value="${type eq 'T'? 'selected':''}"/>>제목</option>
-                            					<option value="C" <c:out value="${type eq'C'? 'selected':''}"/>>내용</option>
-                            					<option value="W" <c:out value="${type eq 'W'? 'selected':''}"/>>작성자</option>
-                            					<option value="TC" <c:out value="${type eq 'TC'? 'selected':''}"/>>제목 or 내용</option>
-                            					<option value="TW" <c:out value="${type eq 'TW'? 'selected':''}"/>>제목 or 작성자</option>
-                            					<option value="TWC" <c:out value="${type eq 'TWC'? 'selected':''}"/>>제목 or 내용 or 작성자</option>
+                            				<option value = "OX" <c:out value="${type eq 'OX'? 'selected':''}"/>>전체</option>
+                            					<option value="O" <c:out value="${type eq 'O'? 'selected':''}"/>>일반</option>
+                            					<option value="X" <c:out value="${type eq 'X'? 'selected':''}"/>>정지</option>
+                            			</select>
+                            			
+                            			<select name= 'type2'>
+                            				<!-- <c:out value="${pageMaker.cri.type == null? 'selected':''}"/> 선택된 값이 유지되게 하기 (페이지 이동 시에도) -->
+                            				<!-- <c:set var="type" value="${pageMaker.cri.type}"/> 변수를 지정해서 쓰면 약간 더 편함 -->
+                            				<c:set var="type2" value="${pageMaker.cri.type2}"/>
+                            				<option value = "" <c:out value="${type2 == null? 'selected':''}"/>>검색 조건 지정</option>
+                            					<option value="I" <c:out value="${type2 eq 'I'? 'selected':''}"/>>아이디</option>
+                            					<option value="N" <c:out value="${type2 eq 'N'? 'selected':''}"/>>이름</option>
+                            					<option value="P" <c:out value="${type2 eq 'P'? 'selected':''}"/>>핸드폰번호</option>
                             			</select>
                             			<!-- value="${pageMaker.cri.keyword}" 검색 키워드가 유지되게 하기 (페이지 이동 시에도) -->
                             			<input type="text" name="keyword" value="${pageMaker.cri.keyword}"/>
+                            			<input type="hidden" name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
+    									<input type="hidden" name='type2' value='<c:out value="${pageMaker.cri.type2}"/>'>
                             			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
                             			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
                             			<button class="btn btn-default">Search</button>
@@ -109,16 +122,39 @@
 
 
 <!-- 페이지 번호 누를 때마다 해당 pageNum(페이지 번호)의 목록 amount(출력 데이터 갯수)개 출력하기 위해 컨트롤러(list)로 파라미터(눌린 숫자에 해당하는 데이터) 전달 -->
-    <form id="actionForm" action="/member/myreview" method="post">
+    <form id="actionForm" action="/member/list" method="get">
     	<input type="hidden" id="pageNum" name="pageNum" value="${pageMaker.cri.pageNum}">
     	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-    	
-    	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-    	<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
+    	<!-- 검색 이후 페이지를 이동해도 검색 결과가 동일하게 유지되도록 하기 -->
+    	<input type="hidden" name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
+    	<input type="hidden" name='type2' value='<c:out value="${pageMaker.cri.type2}"/>'>
+    	<input type="hidden" name='keyword' value='<c:out value="${pageMaker.cri.keyword}"/>'>
     </form>
     
     
 <script>
+var msg = '<c:out value="${msg}"/>';	
+
+//result 값이 있는지 확인하는 함수 호출
+checkModal(msg);
+history.replaceState({}, null, null);
+
+
+//메세지가 존재하면 alert창 띄우기
+function checkModal(){
+	//값이 없으면 리턴시킴
+	if(msg === '' || history.state){
+		return;
+	}
+	
+	//값이 있으면 메시지 띄우기
+	if(msg !== ''){
+		alert(msg);
+	}
+	
+}
+
+
 //페이지 번호 누를 때마다 해당 pageNum(페이지 번호)의 목록 amount(출력 데이터 갯수)개 출력
 //클릭할때마다 테이블이 찌그러지는 문제가 있긴 함
 //그냥 a태그의 href에 써도 되긴 한데 책을 존중하여 javascript로 처리함
@@ -140,13 +176,31 @@ $(".paginate_button a").click(function(e){
 $(".move").click(function(e){
 	e.preventDefault();
 	
-	//폼의 hidden 속성에 있는 bno 파라미터의 값에 게시물 번호의 값 넣고
-	$("#actionForm").append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
+	//폼의 hidden 속성에 있는 id 파라미터의 값에 게시물 번호의 값 넣고
+	$("#actionForm").append("<input type='hidden' name='id' value='" + $(this).attr("href") + "'>");
 	
 	//list로 되어있는 폼의 action을 get으로 변경
-	$("#actionForm").attr("action", "/board/get");
+	$("#actionForm").attr("action", "/member/get");
 	//폼을 이용해 컨트롤러로 전달
 	$("#actionForm").submit();
+	
+	
 });
+
+//검색 버튼 이벤트 처리
+var searchForm = $("#searchForm");
+
+$("#searchForm button").on("click", function(e){		
+		//검색 결과 페이지 번호가 1페이지가 되도록 처리
+		searchForm.find("input[name='pageNum']").val("1");
+
+		//검색 버튼을 클릭하면 폼 전송 막기
+		e.preventDefault();
+		
+		searchForm.submit();
+
+});
+
+
 </script>
 <%@ include file="../includes/footer.jsp" %>

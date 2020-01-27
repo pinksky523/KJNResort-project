@@ -5,14 +5,9 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
 <%@ include file="../includes/header.jsp" %>
 <link rel="stylesheet" href="/resources/css/table.css"/>
-<div>
-    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
-        <h2>내가 쓴 후기</h2>
-    </div>
-</div>
-
+<h2>내가 쓴 후기</h2>
 <div class="row">
-    <div class="col-lg-12" style="padding-bottom: 20px">
+    <div class="col-lg-12">
         <div>
             <div style="text-align: center;">
             </div>
@@ -79,7 +74,6 @@
     <!-- /.col-lg-6 -->
 </div>
 <!-- /.row -->
-
 
 <!-- 페이지 번호 누를 때마다 해당 pageNum(페이지 번호)의 목록 amount(출력 데이터 갯수)개 출력하기 위해 컨트롤러(list)로 파라미터(눌린 숫자에 해당하는 데이터) 전달 -->
     <form id="actionForm" action="/member/myreview" method="post">

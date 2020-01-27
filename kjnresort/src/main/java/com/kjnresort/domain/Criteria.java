@@ -13,6 +13,7 @@ public class Criteria {
 	private int pageNum;
 	private int amount;
 	private String type;
+	private String type2;
 	private String keyword;
     
 	public Criteria( ) {
@@ -31,12 +32,17 @@ public class Criteria {
 							  .queryParam("pageNum", pageNum)
 							  .queryParam("amount", amount)
 							  .queryParam("type", type)
+							  .queryParam("type2", type2)
 							  .queryParam("keyword", keyword);
 		return builder.toUriString();
 	}
 	
 	public String[] getTypeArr() {
 		return type == null ? new String[] {} : type.split("");
+	}
+	
+	public String[] getTypeArr2() {
+		return type2 == null ? new String[] {} : type2.split("");
 	}
 }
 
