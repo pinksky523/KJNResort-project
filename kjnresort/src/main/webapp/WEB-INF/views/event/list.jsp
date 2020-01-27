@@ -30,7 +30,7 @@
                     <c:forEach items="${list}" var="event" varStatus="status">
                         <tr>
                             <td>${status.count}</td>
-                            <td>이미지 넣을곳</td>
+                            <td><div id="thumbResult"><ul></ul></div>이미지 표시</td>
                             <td><a class="move" href='${event.eventNo}'>
                             		${event.title}
                             	</a>

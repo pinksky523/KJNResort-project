@@ -9,8 +9,9 @@ public interface EventAttachMapper {
 	
 	
 	public void delete(String uuid);
-	public List<EventAttachVO> findByEventNo(Long eventNo);
+	
 	public List<EventAttachVO> getOldFiles();
 	/////////////////////////////////////
 	public void insert(EventAttachVO evo);		//첨부파일리스트 등록
+	public List<EventAttachVO> findByEventNo(Long eventNo);		//첨부파일리스트 목록
 }

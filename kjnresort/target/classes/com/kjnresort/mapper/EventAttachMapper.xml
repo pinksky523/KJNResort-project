@@ -13,14 +13,17 @@
 		DELETE FROM tbl_attach WHERE uuid = #{uuid}
 	</delete>
 
-	<select id="findByBno" resultType="com.kjnresort.domain.EventAttachVO">
-		SELECT * FROM tbl_attach WHERE bno = #{bno}
+	<select id="findByEventNo" resultType="com.kjnresort.domain.EventAttachVO">
+		SELECT * FROM t_event_attach WHERE eventNo = #{eventNo}
 	</select>
+	
+	
+	
 	
 	
 	<!-- 첨부파일리스트 저장(게시글 등록) -->
 	<insert id="insert">
-		INSERT INTO t_event_attach(uuid, uploadpath, filename, eventNo)
+		INSERT INTO t_event_attach(uuid, uploadPath, fileName, eventNo)
 		VALUES(#{uuid}, #{uploadPath}, #{fileName}, #{eventNo})
 	</insert>
 </mapper>
