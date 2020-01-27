@@ -62,7 +62,11 @@
 	</select>
 
 	<select id="getList" resultType="com.kjnresort.domain.ApplianceVO">
-		SELECT * FROM t_appliance
+		SELECT * 
+		FROM ( SELECT /*+INDEX_DESC(t_appliance pk_applianceNo) */ 
+	    				 rownum rn, applianceNo, id, name, phoneNumber, status, regDate
+	    		  FROM   t_appliance )
+	    WHERE id = #{id}
 	</select>
 	
 	<insert id="insert">
