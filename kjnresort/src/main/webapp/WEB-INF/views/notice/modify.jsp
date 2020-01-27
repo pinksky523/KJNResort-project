@@ -30,7 +30,7 @@
 		            <div class="form-group">
 	                    <label>내용: </label>
 	                    <textarea class="form-control" rows="8" name="content" id="inputContent">${notice.content }</textarea></div>
-	                    <input type="hidden" name="id" value="admin">
+	                    <input type="hidden" name="noticeNo" value="${notice.noticeNo }">
 	                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	                <button type="button" onclick="modify()" class="btn btn-warning pull-right">수정</button>
 	                <button type="button" onclick="list()" class="btn btn-secondary pull-right">취소</button>

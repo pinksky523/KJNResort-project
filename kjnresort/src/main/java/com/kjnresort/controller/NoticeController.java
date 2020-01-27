@@ -48,9 +48,7 @@ public class NoticeController {
 	}
 	
 	@GetMapping({"/get","/modify"})
-	public void get(@RequestParam("noticeNo") Long noticeNo, 
-					Model model, 
-					@ModelAttribute("cri") Criteria cri) {
+	public void get( Long noticeNo, Model model, @ModelAttribute("cri") Criteria cri) {
 		log.info("NoticeController get()");
 		model.addAttribute("notice", service.get(noticeNo));
 	}
