@@ -132,6 +132,7 @@ CREATE TABLE t_qna
 	regdate date DEFAULT sysdate,
 	answer varchar2(4000),
 	answerRegDate date,
+	isAnswered char(2),
 	PRIMARY KEY (qnaNo)
 );
 
@@ -203,6 +204,7 @@ CREATE TABLE t_ticket_buy
 	toolAmount number NOT NULL,
 	status number(1) DEFAULT 0,
 	review number(1) DEFAULT 0,
+	totalPrice number NOT NULL,
 	PRIMARY KEY (ticketNo)
 );
 
