@@ -94,7 +94,7 @@
 		<![CDATA[
 			ROWNUM <= #{pageNum} * #{amount}
 		)
-		WHERE rn > (#{pageNum}-1) * #{amount}
+		WHERE rn > (#{pageNum}-1) * #{amount} 
 		]]>
 	</select>
 	

@@ -3,7 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
-<%@ include file="../includes/adminHeader.jsp" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
+<sec:authentication property="principal" var="pinfo"/>
+<c:choose>
+	<c:when test="${pinfo.username eq 'admin'}">
+		<%@ include file="../includes/adminHeader.jsp" %>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="../includes/header.jsp" %>
+	</c:otherwise>
+</c:choose>
 <link rel="stylesheet" href="/resources/css/table.css"/>
         <h2>회원 관리</h2>
 
@@ -13,6 +22,46 @@
             <div style="text-align: center;">
             </div>
             <hr style="border: solid 2px lightgray !important; width: 60% !important;">
+            
+            
+            
+            <!-- 검색 조건 및 키워드 입력 부분 -->
+                            <div class="pull-center" style="text-align: center;">
+                            	<div class="col-lg-12">
+                            		<form id='searchForm' action="/member/list" method="get">
+                            		<select name= 'type'>
+                            				<!-- <c:out value="${pageMaker.cri.type == null? 'selected':''}"/> 선택된 값이 유지되게 하기 (페이지 이동 시에도) -->
+                            				<!-- <c:set var="type" value="${pageMaker.cri.type}"/> 변수를 지정해서 쓰면 약간 더 편함 -->
+                            				<c:set var="type" value="${pageMaker.cri.type}"/>
+                            				<option value = "OX" <c:out value="${type eq 'OX'? 'selected':''}"/>>전체</option>
+                            					<option value="O" <c:out value="${type eq 'O'? 'selected':''}"/>>일반</option>
+                            					<option value="X" <c:out value="${type eq 'X'? 'selected':''}"/>>정지</option>
+                            			</select>
+                            			
+                            			<select name= 'type2'>
+                            				<!-- <c:out value="${pageMaker.cri.type == null? 'selected':''}"/> 선택된 값이 유지되게 하기 (페이지 이동 시에도) -->
+                            				<!-- <c:set var="type" value="${pageMaker.cri.type}"/> 변수를 지정해서 쓰면 약간 더 편함 -->
+                            				<c:set var="type2" value="${pageMaker.cri.type2}"/>
+                            				<option value = "" <c:out value="${type2 == null? 'selected':''}"/>>검색 조건 지정</option>
+                            					<option value="I" <c:out value="${type2 eq 'I'? 'selected':''}"/>>아이디</option>
+                            					<option value="N" <c:out value="${type2 eq 'N'? 'selected':''}"/>>이름</option>
+                            					<option value="P" <c:out value="${type2 eq 'P'? 'selected':''}"/>>핸드폰번호</option>
+                            			</select>
+                            			<!-- value="${pageMaker.cri.keyword}" 검색 키워드가 유지되게 하기 (페이지 이동 시에도) -->
+                            			<input type="text" name="keyword" value="${pageMaker.cri.keyword}"/>
+                            			<input type="hidden" name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
+    									<input type="hidden" name='type2' value='<c:out value="${pageMaker.cri.type2}"/>'>
+                            			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+                            			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+                            			<button class="btn btn-default">Search</button>
+                            		</form>
+                            	</div>
+                            </div>
+            
+            
+            
+            
+            
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   
@@ -52,38 +101,7 @@
                 </table><!-- END 게시물 출력 테이블 -->
                 <br>
                 
-                 <!-- 검색 조건 및 키워드 입력 부분 -->
-                            <div class="pull-center" style="text-align: center;">
-                            	<div class="col-lg-12">
-                            		<form id='searchForm' action="/member/list" method="get">
-                            		<select name= 'type'>
-                            				<!-- <c:out value="${pageMaker.cri.type == null? 'selected':''}"/> 선택된 값이 유지되게 하기 (페이지 이동 시에도) -->
-                            				<!-- <c:set var="type" value="${pageMaker.cri.type}"/> 변수를 지정해서 쓰면 약간 더 편함 -->
-                            				<c:set var="type" value="${pageMaker.cri.type}"/>
-                            				<option value = "OX" <c:out value="${type eq 'OX'? 'selected':''}"/>>전체</option>
-                            					<option value="O" <c:out value="${type eq 'O'? 'selected':''}"/>>일반</option>
-                            					<option value="X" <c:out value="${type eq 'X'? 'selected':''}"/>>정지</option>
-                            			</select>
-                            			
-                            			<select name= 'type2'>
-                            				<!-- <c:out value="${pageMaker.cri.type == null? 'selected':''}"/> 선택된 값이 유지되게 하기 (페이지 이동 시에도) -->
-                            				<!-- <c:set var="type" value="${pageMaker.cri.type}"/> 변수를 지정해서 쓰면 약간 더 편함 -->
-                            				<c:set var="type2" value="${pageMaker.cri.type2}"/>
-                            				<option value = "" <c:out value="${type2 == null? 'selected':''}"/>>검색 조건 지정</option>
-                            					<option value="I" <c:out value="${type2 eq 'I'? 'selected':''}"/>>아이디</option>
-                            					<option value="N" <c:out value="${type2 eq 'N'? 'selected':''}"/>>이름</option>
-                            					<option value="P" <c:out value="${type2 eq 'P'? 'selected':''}"/>>핸드폰번호</option>
-                            			</select>
-                            			<!-- value="${pageMaker.cri.keyword}" 검색 키워드가 유지되게 하기 (페이지 이동 시에도) -->
-                            			<input type="text" name="keyword" value="${pageMaker.cri.keyword}"/>
-                            			<input type="hidden" name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
-    									<input type="hidden" name='type2' value='<c:out value="${pageMaker.cri.type2}"/>'>
-                            			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-                            			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-                            			<button class="btn btn-default">Search</button>
-                            		</form>
-                            	</div>
-                            </div>
+                 
                             
                             
                             

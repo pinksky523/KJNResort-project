@@ -3,9 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kjnresort.mapper.EventAttachMapper">
-	<delete id="deleteAll">
-		DELETE FROM tbl_attach WHERE bno = #{bno}
-	</delete>
+	
 
 	
 
@@ -20,6 +18,10 @@
 	
 	
 	
+	
+	<delete id="deleteAll">
+		DELETE FROM t_event_attach WHERE eventNo = #{eventNo}
+	</delete>
 	
 	<!-- 첨부파일리스트 저장(게시글 등록) -->
 	<insert id="insert">

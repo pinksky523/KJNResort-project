@@ -56,7 +56,7 @@
 		</a>
 		<nav class="header-nav">
 			<ul class="main-menu">
-				<li><a href="index.html">리조트안내</a></li>
+				<li><a href="/common/resortInfo">리조트안내</a></li>
 				<li><a href="/notice/list">공지사항</a></li>
 				<li><a href="#">콘도</a>
 					<ul class="sub-menu">
@@ -78,15 +78,24 @@
 						</li>
 					</ul>
 				</li>
+<<<<<<< HEAD
 
 
 				<li><a href="contact.html">이벤트</a></li>
 				<li><a href="/review/list">후기</a></li>
 
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 				<li><a href="/event/list">이벤트</a></li>
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 				<li><a href="/review/list">후기</a></li>
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 				<li><a href="#">1:1문의</a>
 					<ul class="sub-menu">
 						<li><a href="/qna/register">문의하기</a></li>
@@ -107,18 +116,23 @@
 				<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal" var="pinfo"/>'>
 				
+<<<<<<< HEAD
 
 				<c:choose>
 				  <c:when test="${loginId eq 'admin'}">		<!-- 관리자로 로그인할 경우 아무버튼 없음 -->
  				 </c:when>
  				 <c:otherwise>	<!-- 회원계정으로 로그인할 경우 마이페이지 버튼 표시 -->
  					  <form id="mypageForm" action="/member/mypage" method="get">
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 				  <c:if test="${pinfo.username ne 'admin'}">		<!-- 관리자로 로그인할 경우 아무버튼 없음 -->
 				  	<form id="mypageForm" action="/member/mypage" method="get">
 						<button type="submit" class="btn btn-secondary" id="mypage">마이페이지</button>
 					 </form>
  				 </c:if>
-				</sec:authorize>
+	 					  
+  				
+			</sec:authorize>
 				
 				<!-- 로그인 안 한 경우 -->
 				<sec:authorize access="isAnonymous()">

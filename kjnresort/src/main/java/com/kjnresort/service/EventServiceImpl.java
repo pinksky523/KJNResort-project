@@ -65,32 +65,57 @@ public class EventServiceImpl implements EventService {
 	//이벤트 게시글 상세조회
 	@Override
 	public EventVO get(Long eventNo) {
-
+		log.info("이벤트 게시글 상세조회 서비스임플 진입");
 		return mapper.read(eventNo);
 	}
 	
 	//첨부파일 리스트
 	@Override
 	public List<EventAttachVO> getAttachList(Long eventNo) {
-		
+		log.info("이벤트 게시글 첨부파일목록 서비스임플 진입");
 		return attachMapper.findByEventNo(eventNo);
 	}
 	
-//////////////////////////////////////////////////////
 	
-	
-	
+	//이벤트 게시글 수정
 	@Override
 	public boolean modify(EventVO event) {
-
-		return mapper.update(event) == 1;
+		log.info("이벤트 게시글 수정 서비스임플 진입");
+		
+		attachMapper.deleteAll(event.getEventNo());
+		boolean modifyResult = mapper.update(event) == 1;
+		
+		if(modifyResult && event.getAttachList() != null && event.getAttachList().size() > 0) {
+			event.getAttachList().forEach(attach -> {
+				attach.setEventNo(event.getEventNo());
+				attachMapper.insert(attach);
+			});
+		}
+		
+		return modifyResult;
+		
+		
 	}
-
+	
+	
+	//이벤트 게시글 삭제
+	@Transactional
 	@Override
 	public boolean remove(Long eventNo) {
-
+		log.info("이벤트 게시글 삭제 서비스임플 진입");
+		attachMapper.deleteAll(eventNo);
+		
 		return mapper.delete(eventNo) == 1;
 	}
 	
-	
+	//이벤트 게시글 조회수 업데이트
+	@Transactional
+	@Override
+	public boolean updateViewCnt(Long eventNo) {
+		log.info("조회수 업데이트 서비스임플 진입");
+		
+		return mapper.updateViewCnt(eventNo) == 1;
+	}
+		
+		
 }

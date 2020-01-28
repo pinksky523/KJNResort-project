@@ -41,6 +41,5 @@ encoding//src/main/webapp/WEB-INF/views/includes/footer.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/ticket/buyTicketKakao.jsp=UTF-8
 encoding//src/test/java/com/kjnresort/mapper/CondoReserveMapperTests.java=UTF-8
 encoding//src/test/java/com/kjnresort/mapper/MemberMapperTests.java=UTF-8
-encoding//src/test/java/com/kjnresort/security/EventTests.java=UTF-8
 encoding//src/test/java/com/kjnresort/security/MemberTests.java=UTF-8
 encoding//src/test/java/com/kjnresort/security/ReviewTests.java=UTF-8
