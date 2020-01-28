@@ -26,5 +26,10 @@
 		SET title = #{title}, content = #{content}, status = #{status}, deadLine = #{deadLine}
 		WHERE recruitNo = #{recruitNo}
 	</update>
+	
+	<!-- 지원 내역 중복체크 -->
+	<select id="idCheck" resultType="com.kjnresort.domain.ApplianceVO">
+		SELECT id FROM t_appliance WHERE id = #{id}
+	</select>
 
 </mapper>
