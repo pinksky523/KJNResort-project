@@ -10,7 +10,7 @@
 	</select>
 	<!-- 지원서 정보 조회 -->
 	<select id="recruitRead" resultType="com.kjnresort.domain.RecruitVO">
-		SELECT * FROM t_recruit
+		SELECT * FROM t_recruit	WHERE recruitNo = #{recruitNo}
 	</select>
 
 	<!-- 쿼리 보관 -->

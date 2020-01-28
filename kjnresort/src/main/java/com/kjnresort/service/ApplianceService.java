@@ -16,5 +16,5 @@ public interface ApplianceService {
 	public void register(ApplianceVO appliance);					// 게시글 등록
 	public boolean modify(ApplianceVO appliance);					// 게시글 수정(임시저장)
 	public MemberVO memberGet(MemberVO member);						// 회원 정보
-	public RecruitVO recruitGet(Long recruitNo);					// 지원서 정보
+	public RecruitVO recruitGet(RecruitVO recruit);					// 지원서 정보
 }
