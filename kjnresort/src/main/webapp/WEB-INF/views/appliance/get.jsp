@@ -41,8 +41,8 @@
     </div>				<!-- /.col-lg-6 -->
 </div>					<!-- /.row -->
     
-	<button data-oper='print' class="btn btn-primary pull-right">출력</button>
 	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
+	
 </div>
 
 
