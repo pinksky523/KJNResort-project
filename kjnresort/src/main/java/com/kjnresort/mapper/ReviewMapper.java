@@ -2,14 +2,14 @@ package com.kjnresort.mapper;
 
 import java.util.List;
 
-import com.kjnresort.domain.ReviewVO;
+
 import com.kjnresort.domain.Criteria;
+import com.kjnresort.domain.ReviewReplyVO;
+import com.kjnresort.domain.ReviewVO;
 
 public interface ReviewMapper {
 	public int getTotalCount(Criteria cri); 
 	public List<ReviewVO> getListWithPaging(Criteria cri);
-
-//	@Select("SELECT * FROM tbl_board WHERE bno > 0")
 	
 	public void insert(ReviewVO review);
 	public int update(ReviewVO review);

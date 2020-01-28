@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import org.springframework.web.util.UriComponentsBuilder;
 
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.PageDTO;
@@ -75,6 +75,7 @@ public class QnaController {//큐엔에이컨트롤러
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping({"/get","/modify"})
 	public void get(Long qno,Model model,Criteria cri) {
+		log.info(qno.getClass());
 		log.info("QnaController GetMapping-get/modify");
 		model.addAttribute("qna", service.get(qno));
 		model.addAttribute("cri", cri);
@@ -102,5 +103,26 @@ public class QnaController {//큐엔에이컨트롤러
 			rttr.addFlashAttribute("result", "delSuccess");
 		}
 		return "redirect:/qna/list"+cri.getListlink();
+	}
+	
+	@ResponseBody
+	@PreAuthorize("principal.username==#id") 
+	@PostMapping(value="/registerAnswer",produces= {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> registerAnswer(long qno,String answer,String id) {
+		log.info("qna controller......registerAnswer"+answer);
+		log.info("qna controller......registerAnswer"+qno);
+		log.info("qna controller......registerAnswer"+id);
+		return service.registerAnswer(qno,answer)==true?new ResponseEntity<>("success",HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@ResponseBody
+	@PreAuthorize("principal.username==#id") 
+	@PostMapping(value="/deleteAnswer",produces= {MediaType.TEXT_PLAIN_VALUE})
+	public ResponseEntity<String> deleteAnswer(long qno,String id) {
+		log.info("qna controller......deleteAnswer"+qno);
+		log.info("qna controller......deleteAnswer"+id);
+		return service.deleteAnswer(qno)==true?new ResponseEntity<>("success",HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }

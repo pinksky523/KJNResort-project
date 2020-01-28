@@ -31,22 +31,22 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Transactional
 	@Override
-	public int remove(Long rno) {
-		log.info("ReplyServiceImpl remove() rno : " + rno);
-		ReviewReplyVO rvo = mapper.read(rno);
-		return mapper.delete(rno);
+	public int remove(Long replyNo) {
+		log.info("ReplyServiceImpl remove() replyNo : " + replyNo);
+		ReviewReplyVO rvo = mapper.read(replyNo);
+		return mapper.delete(replyNo);
 	}
 
 	@Override
-	public ReplyPageDTO getListPage(Criteria cri, Long bno) {		
-		return new ReplyPageDTO(mapper.getCountByBno(bno), 
-								mapper.getListWithPaging(cri, bno));
+	public ReplyPageDTO getListPage(Criteria cri, Long reviewNo) {		
+		return new ReplyPageDTO(mapper.getCountByReviewNo(reviewNo), 
+								mapper.getListWithPaging(cri, reviewNo));
 	}
 	
 	@Override
-	public List<ReviewReplyVO> getList(Criteria cri, Long bno) {
-		log.info("ReplyServiceImpl getList() bno : " + bno);
-		return mapper.getListWithPaging(cri, bno);
+	public List<ReviewReplyVO> getList(Criteria cri, Long reviewNo) {
+		log.info("ReplyServiceImpl getList() reviewNo : " + reviewNo);
+		return mapper.getListWithPaging(cri, reviewNo);
 	}
 
 	@Override
@@ -56,8 +56,8 @@ public class ReplyServiceImpl implements ReplyService {
 	}
 
 	@Override
-	public ReviewReplyVO get(Long rno) {
-		log.info("ReplyServiceImpl get() rno : " + rno);
-		return mapper.read(rno);
+	public ReviewReplyVO get(Long replyNo) {
+		log.info("ReplyServiceImpl get() replyNo : " + replyNo);
+		return mapper.read(replyNo);
 	}
 }

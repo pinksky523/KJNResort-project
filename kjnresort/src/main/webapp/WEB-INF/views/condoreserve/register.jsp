@@ -7,13 +7,14 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <!-- 합쳐지고 최소화된 최신 CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
 <style>
 .reserveDiv{background: #EAEAEA; width:900px; height:200px; align-self: center; margin:0 auto; }
 .dateDiv{ align-self: center; margin:0 auto; text-align: center;}
 .roomTypeDiv{background: #EAEAEA; width:900px; display: none; }
-h1{text-align: center;}
 hr{text-align: center; width:1000px;}
-h2{padding-left: 30px; padding-top: 30px; }
+h2{text-align: center !important;}
+h3{padding-left: 30px; padding-top: 30px;  text-align: left !important; margin-bottom:10px !important;}
 p{padding-left:30px;}
      table
     {
@@ -29,29 +30,34 @@ p{padding-left:30px;}
 .condoImg{width:320px; height:210px; margin-right:50px; float:left; margin-left:200px;}
 .roomInfoUl{  margin-top:50px;}
 .roomInfoUl>li{margin-bottom: 10px; font-size: 18px; }
-.reserve_ok{display:block; align-self: center; margin:0 auto; margin-top:20px;}
+.reserve_ok{display:block !important; align-self: center !important; margin:0 auto !important; margin-top:20px !important;}
 .reserveInfoUl{font-size:18px; padding-left:100px; margin-top:45px;}
 .reserveInfoUl>li{margin-bottom:15px;}
 .reserveInfoLi{font-weight: bold; font-size:20px;}
 .reserveInfoDiv{display:none;}
 .buttonsDiv{float: right; margin-top:75px;}
 .buttonsDiv>button{margin-left:15px;}
-.condo_reserve_body{height: 1300px;}
+.condo_reserve_body{ margin-bottom:200px !important;}
 .total{font-weight: bold; font-size: 32px; color: red;}
 .won{font-size: 28px; font-weight: bold;}
 .totalWonDiv{text-align: right; margin-right:25px;}
+.reserveP{color:black;}
+footer{margin-top:200px; position: relative; top:30%;}
+.condo_reserve_body{height: 1000px important!}
 </style>
-<body class="condo_reserve_body">
-	<h1>콘도예약</h1>
+<%@include file="../includes/header.jsp"%>
+<section class="condo_reserve_body">
+<!-- <body class="condo_reserve_body contents">-->
+	<h2>콘도예약</h2>
 	<hr>
 	<div class="reserveDiv">
-		<h2 >Step1. 날짜 선택</h2>
+		<h3>Step1. 날짜 선택</h3>
 		<p class="reserveP">· 체크인/체크아웃 날짜를 선택하세요.</p>
 		<div class="dateDiv">
 			<span>· 체크인 날짜</span> <input type="date" name="checkIn" id="checkIn" oninput="inputCheckIn()"> <span>· 체크아웃 날짜</span> <input type="date" name="checkOut" id="checkOut" oninput="inputCheckOut()"> <button class="btn btn-primary btn-sm" onclick="search()">검색</button>
 		</div>
 		<div class="roomTypeDiv">
-		<h2 >Step2. 객실 선택</h2>
+		<h3>Step2. 객실 선택</h3>
 		<p class="reserveP">· 이용할 객실 종류를 선택하세요.</p>
 		<div class="roomTypeRadioDiv">
 			<ul class="radioUl">
@@ -66,7 +72,7 @@ p{padding-left:30px;}
 		  		<button class="btn btn-primary reserve_ok">예약하기</button>
 		</div>
 		<div class="reserveInfoDiv">
-			<h2 >Step3. 예약 정보 확인</h2>
+			<h3>Step3. 예약 정보 확인</h3>
 			<p class="reserveP">· 결제전 예약 정보를 확인하세요.</p>
 			<ul class="reserveInfoUl">
 			</ul>
@@ -79,7 +85,8 @@ p{padding-left:30px;}
 		</div>
 		
     </div>
-</body>
+</section>
+<%@include file="../includes/footer.jsp"%>
 
 <script>
 
@@ -87,7 +94,7 @@ function test(){
 	location.replace('payChargeResult');
 }
 var IMP = window.IMP; 
-IMP.init('imp39785834')
+IMP.init('imp39785834');
 
 function successPay(payAmount){
 	var paidDate=new Date();

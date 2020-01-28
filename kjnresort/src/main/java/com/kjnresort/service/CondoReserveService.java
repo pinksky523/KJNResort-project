@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.kjnresort.domain.CondoReserveVO;
+import com.kjnresort.domain.CondoVO;
 import com.kjnresort.domain.Criteria;
 
 public interface CondoReserveService {

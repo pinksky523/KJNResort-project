@@ -36,24 +36,24 @@ import lombok.extern.log4j.Log4j;
 public class ReviewController {
 	private ReviewService service;
 	
-// 	//후기 삭제
-//	@PreAuthorize("principal.username == #writer")						// 작성자 확인
-//	@PostMapping("remove")
-//	public String remove(@RequestParam("reviewNo") Long reviewNo, RedirectAttributes rttr, 
-//			 @ModelAttribute("cri") Criteria cri, String writer) {
-//		log.info("reviewController remove() " + reviewNo);
-//		
+ 	//후기 삭제
+	@PreAuthorize("principal.username == #id")						// 작성자 확인
+	@PostMapping("remove")
+	public String remove(@RequestParam("reviewNo") Long reviewNo, RedirectAttributes rttr, 
+			 @ModelAttribute("cri") Criteria cri, String writer) {
+		log.info("reviewController remove() " + reviewNo);
+		service.remove(reviewNo);
 //		List<ReviewAttachVO> attachList = service.getAttachList(reviewNo);
-////		if(service.remove(reviewNo)) {
-////			// 첨부파일이 있는 경우 파일 삭제 메서드 호출
-////			if(attachList != null || attachList.size() > 0) {
-////				deleteFiles(attachList);
-////			}
-////			rttr.addFlashAttribute("result", "success");
-////		}
-//		return "redirect:/review/list" + cri.getListlink();
-//	}
-//	
+//		if(service.remove(reviewNo)) {
+//			// 첨부파일이 있는 경우 파일 삭제 메서드 호출
+//			if(attachList != null || attachList.size() > 0) {
+//				deleteFiles(attachList);
+//			}
+//			rttr.addFlashAttribute("result", "success");
+//		}
+		return "redirect:/review/list" + cri.getListlink();
+	}
+	
 //	//	첨부파일 삭제
 //	private void deleteFiles(List<ReviewAttachVO> attachList) {
 //		log.info("delete files!");
@@ -77,17 +77,15 @@ public class ReviewController {
 //		});
 //	}
 //	
-//	//후기 수정
-//	@PreAuthorize("principal.username == #board.writer")				// 작성자 확인
-//	@PostMapping("modify")
-//	public String modify(ReviewVO review, RedirectAttributes rttr, 
-//		    			 @ModelAttribute("cri") Criteria cri) {
-//		log.info("ReviewController modify()" + review);
-//		if(service.modify(review)) {
-//			rttr.addFlashAttribute("result", "success");
-//		}
-//		return "redirect:/board/list" + cri.getListlink();
-//	}
+	//후기 수정
+	@PreAuthorize("principal.username == #review.id")				// 작성자 확인
+	@PostMapping("modify")
+	public String modify(ReviewVO review, RedirectAttributes rttr, 
+		    			 @ModelAttribute("cri") Criteria cri) {
+		log.info("ReviewController modify()" + review);
+		service.modify(review);
+		return "redirect:/review/list" + cri.getListlink();
+	}
 	
 	//후기 상세보기
 	@GetMapping({"get", "modify"})

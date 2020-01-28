@@ -28,14 +28,13 @@ import lombok.extern.log4j.Log4j;
 public class ReviewReplyController {
 	private ReplyService service;
 	
-	@GetMapping(value = "pages/{bno}/{page}")
-	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("bno") Long bno,
+	@GetMapping(value = "pages/{reviewNo}/{page}")
+	public ResponseEntity<ReplyPageDTO> getList(@PathVariable("reviewNo") Long reviewNo,
 										  		 @PathVariable("page") int page) {
-		log.info("ReplyController getList() bno : " + bno);
+		log.info("ReplyController getList() reviewNo : " + reviewNo);
 		log.info("ReplyController getList() page : " + page);
 		Criteria cri = new Criteria(page, 10);
-//		return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
-		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
+		return new ResponseEntity<>(service.getListPage(cri, reviewNo), HttpStatus.OK);
 	}	
 	
 	@PreAuthorize("isAuthenticated()")
@@ -43,37 +42,36 @@ public class ReviewReplyController {
 				 consumes = "application/json",
 				 produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> register(@RequestBody ReviewReplyVO rvo) {
-		log.info("ReplyVO : " + rvo);
+		log.info("ReviewReplyVO : " + rvo);
 		return service.register(rvo) == 1 
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}	
 	
-	@GetMapping(value = "{rno}")
-	public ResponseEntity<ReviewReplyVO> get(@PathVariable("rno") Long rno) {
-		log.info("ReplyController get() rno : " + rno);
-		return new ResponseEntity<>(service.get(rno), HttpStatus.OK);
+	@GetMapping(value = "{replyNo}")
+	public ResponseEntity<ReviewReplyVO> get(@PathVariable("replyNo") Long replyNo) {
+		log.info("ReplyController get() replyNo : " + replyNo);
+		return new ResponseEntity<>(service.get(replyNo), HttpStatus.OK);
 	}	
 	
-	@PreAuthorize("principal.username == #rvo.replyer")
+	@PreAuthorize("principal.username == #rvo.id")
 	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH},
-				   	value = "{rno}",
+				   	value = "{replyNo}",
 				   	produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> modify(@PathVariable("rno") Long rno,
+	public ResponseEntity<String> modify(@PathVariable("replyNo") Long replyNo,
 										 @RequestBody ReviewReplyVO rvo) {
-		log.info("ReplyController modify() rno : " + rno);
+		log.info("ReplyController modify() replyNo : " + replyNo);
 		log.info("ReplyController modify() rvo : " + rvo);
-//		rvo.setRno(rno);
 		return service.modify(rvo) == 1 
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}	
 	
-	@PreAuthorize("principal.username == #rvo.replyer")
-	@DeleteMapping(value = "{rno}", produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> remove(@RequestBody ReviewReplyVO rvo, @PathVariable("rno") Long rno) {
-		log.info("ReplyController remove() rno : " + rno);
-		return service.remove(rno) == 1 
+	@PreAuthorize("principal.username == #rvo.id")
+	@DeleteMapping(value = "{replyNo}", produces = MediaType.TEXT_PLAIN_VALUE)
+	public ResponseEntity<String> remove(@RequestBody ReviewReplyVO rvo, @PathVariable("replyNo") Long replyNo) {
+		log.info("ReplyController remove() replyNo : " + replyNo);
+		return service.remove(replyNo) == 1 
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}	
