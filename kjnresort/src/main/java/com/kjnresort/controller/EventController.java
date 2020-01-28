@@ -71,7 +71,7 @@ public class EventController {
 	@GetMapping("list")
 	public void list(Criteria cri, Model model) {
 
-		cri = new Criteria(1,9);		//이벤트게시판은 9개씩
+		cri = new Criteria(cri.getPageNum(),9);		//이벤트게시판은 9개씩
 		
 		model.addAttribute("list", service.getList(cri));
 		
@@ -80,13 +80,21 @@ public class EventController {
 	}
 	
 	
-	//이벤트 게시글 상세조회/수정 (get)
-	@GetMapping({"get", "modify"})
+	//이벤트 게시글 상세조회
+	@GetMapping("get")
 	public void get(Long eventNo, Model model, @ModelAttribute("cri") Criteria cri) {
-//		cri = new Criteria(1,9);		//이벤트게시판은 9개씩
+		service.updateViewCnt(eventNo);
 		
 		model.addAttribute("event", service.get(eventNo));
 	}
+	
+	//이벤트 게시글 수정 창
+	@GetMapping("modify")
+	public void modify(Long eventNo, Model model, @ModelAttribute("cri") Criteria cri) {
+		
+		model.addAttribute("event", service.get(eventNo));
+	}
+		
 	
 	
 	//첨부파일리스트
@@ -97,45 +105,38 @@ public class EventController {
 		return new ResponseEntity<>(service.getAttachList(eventNo), HttpStatus.OK);
 	}
 			
-			
-	////////////////////////////////////////////////////////
 		
+	//이벤트 게시글 수정	
+	@PreAuthorize("principal.username == #event.id")
+	@PostMapping("modify")
+	public String modify(EventVO event, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
+		event.getAttachList().get(0).setFileName("thumb." + event.getAttachList().get(0).getFileName());	//썸네일용은 앞에 thumb.
+		if(service.modify(event)) {
+			rttr.addFlashAttribute("msg", "수정이 완료되었습니다");
+		}
 		
+		return "redirect:/event/list" + cri.getListlink();
+	}
 	
-
-	
-	//2페이지의 게시글을 조회하고 수정 화면에서 remove 누르면 삭제 후 다시 2페이지로 가게 하기
-	//검색 후에도 마찬가지로 되게 하기
-	@PreAuthorize("principal.username == #writer")
+	//이벤트 게시글 삭제
+	@PreAuthorize("principal.username == #id")
 	@PostMapping("remove")
-	public String remove(@RequestParam("eventNo") Long eventNo, RedirectAttributes rttr, 
-						@ModelAttribute("cri") Criteria cri, String writer) {
+	public String remove(@RequestParam("eventNo") Long eventNo, String id, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
 		
 		List<EventAttachVO> attachList = service.getAttachList(eventNo);
 		
-		
 		if(service.remove(eventNo)) {
-			//첨부파일이 있는 경우 파일 삭제 메서드 호출
+			//첨부 파일이 있는 경우 파일 삭제 메서드 호출
 			if(attachList != null || attachList.size() > 0) {
 				deleteFiles(attachList);
 			}
 			
-			rttr.addFlashAttribute("result", "삭제");
+			rttr.addFlashAttribute("msg", "게시글이 삭제되었습니다");
 		}
-		
-		//Criteria에서 getListLink()를 만들어주었기 때문에 아래 코드를 주석으로 처리함
-//		//redirect로 보내기 때문에 이것을 써줘야 함
-//		rttr.addAttribute("pageNum", cri.getPageNum());
-//		rttr.addAttribute("amount", cri.getAmount());
-//		
-//		//검색 후 다시 해당 페이지로 이동
-//		rttr.addAttribute("type", cri.getType());
-//		rttr.addAttribute("keyword", cri.getKeyword());
-//		
-//		return "redirect:/event/list";
 		
 		return "redirect:/event/list" + cri.getListlink();
 	}
+	
 	
 	//첨부파일 삭제
 	private void deleteFiles(List<EventAttachVO> attachList) {
@@ -163,46 +164,5 @@ public class EventController {
 		});
 	}
 	
-
-	//2페이지의 게시글을 조회하고 수정 화면에서 list 누르면 수정 후 다시 2페이지로 가게 하기
-	//검색 후에도 마찬가지로 되게 하기
-	@PreAuthorize("principal.username == #event.writer")
-	@PostMapping("modify")
-	public String modify(EventVO event, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
-
-		if(service.modify(event)) {
-			rttr.addFlashAttribute("result", "수정");
-		}
-		
-		//Criteria에서 getListLink()를 만들어주었기 때문에 아래 코드를 주석으로 처리함
-//		//redirect로 보내기 때문에 이것을 써줘야 함
-//		rttr.addAttribute("pageNum", cri.getPageNum());
-//		rttr.addAttribute("amount", cri.getAmount());
-//		
-//		//검색 후 다시 해당 페이지로 이동
-//		rttr.addAttribute("type", cri.getType());
-//		rttr.addAttribute("keyword", cri.getKeyword());
-//				
-//		return "redirect:/board/list";
-		
-		return "redirect:/event/list" + cri.getListlink();
-	}
 	
-//	@GetMapping("get")
-//	public void get(@RequestParam("bno") Long bno, Model model) {
-//		log.info("BoardController get()");
-//		model.addAttribute("board", service.get(bno));
-//	}
-	
-	
-	
-	
-	
-	// /board/list GET 요청을 처리하는 list() 작성
-	// 결과 뷰로 tbl_board 테이블의 전체 목록을 담아 가도록 처리
-//	@GetMapping("list")
-//	public void list(Model model) {
-//		log.info("BoardController list()");
-//		model.addAttribute("list", service.getList());
-//	}
 }

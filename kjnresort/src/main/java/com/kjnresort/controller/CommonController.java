@@ -27,6 +27,12 @@ import lombok.extern.log4j.Log4j;
 public class CommonController {
 	private MemberService service;
 	
+	
+	@GetMapping("resortInfo")
+	public void resortInfo() {
+		log.info("리조트 안내 페이지 진입");
+	}
+	
 	@GetMapping("memberJoin")
 	public void register() {
 		log.info("회원가입 창 진입");

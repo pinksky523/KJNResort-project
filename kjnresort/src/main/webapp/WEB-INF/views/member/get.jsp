@@ -3,7 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ include file="../includes/adminHeader.jsp" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
+<sec:authentication property="principal" var="pinfo"/>
+<c:choose>
+	<c:when test="${pinfo.username eq 'admin'}">
+		<%@ include file="../includes/adminHeader.jsp" %>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="../includes/header.jsp" %>
+	</c:otherwise>
+</c:choose>
 	<h2>회원정보</h2>
 	<hr>
 	<form role="form" id="joinForm" name="frm" method="post" action="/member/mypageModify">

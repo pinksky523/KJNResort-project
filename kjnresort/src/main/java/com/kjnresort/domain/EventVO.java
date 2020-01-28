@@ -14,5 +14,5 @@ public class EventVO {
 	private String eventEnd;				//이벤트 종료일자
 	private Long viewCnt;					//이벤트 게시물 조회수
 	private List<EventAttachVO> attachList;	//이벤트 이미지파일 리스트
-	
+	private int rn;
 }
