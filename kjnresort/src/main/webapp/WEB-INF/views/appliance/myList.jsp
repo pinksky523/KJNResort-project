@@ -52,9 +52,12 @@
              			<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
 	               		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
              		</form> 
-            			<button id="regBtn" type="button" class="btn btn-primary pull-right">
-		          			지원서 작성	
-		          		</button>
+             			<!-- 지원상태가 제출완료가 아닌 경우만 버튼이 보인다. -->
+		           		<c:forEach items="${list}" var="appliance">
+			           		<c:if test="${'제출완료' ne appliance.status}">
+			           			<button id="regBtn" type="button" class="btn btn-primary pull-right">지원서 작성</button>
+			           		</c:if>
+		           		</c:forEach>
    				</sec:authorize>
             </div>
             <!-- /.panel-body -->
