@@ -26,7 +26,7 @@
 	   <![CDATA[
 	    SELECT  * 
 	    FROM 	( SELECT /*+INDEX_DESC(t_notice pk_noticeNo) */ 
-	    				 rownum rn, noticeNo, title, regDate, viewCnt
+	    				 rownum rn, noticeNo, title, regDate, viewCnt, topCheck
 	    		  FROM   t_notice
 	    		  WHERE  
 	   ]]>
@@ -34,8 +34,8 @@
 		<include refid="criteria"></include>
 	   <![CDATA[ 		  
 	    		  rownum <= #{pageNum} * #{amount} )
-	    		  WHERE   rn > (#{pageNum} -1) * #{amount}
-	  	ORDER BY noticeNo DESC
+	    WHERE   rn > (#{pageNum} -1) * #{amount}
+	  	ORDER BY topCheck DESC, noticeNo DESC
 	   ]]>  		  
 	</select>
 	
@@ -51,7 +51,7 @@
 	</select>
 	
 	<select id="getList" resultType="com.kjnresort.domain.NoticeVO">
-		SELECT * FROM t_notice ORDER BY noticeNo DESC
+		SELECT * FROM t_notice
 	</select>
 	
 	<insert id="insert">
