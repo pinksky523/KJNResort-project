@@ -73,7 +73,7 @@ $(document).ready(function(){
 		//아이디 중복확인
 	    idCheckService.getId(id, function(result){
 	       if(id == result.id){
-	    	   alert('이미 지원서를 작성한 회원입니다.');
+	    	   	alert('이미 지원서를 작성한 회원입니다.');
 				idChk = false;	
 	       } else{
 				idChk = true;
