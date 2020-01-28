@@ -41,14 +41,14 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public boolean modify(ReviewVO review) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = mapper.update(review) == 1;	//업데이트 처리
+		return result;
 	}
 
 	@Override
 	public boolean remove(Long reviewNo) {
-		// TODO Auto-generated method stub
-		return false;
+		log.info("remove....... : " + reviewNo);
+		return mapper.delete(reviewNo) == 1;
 	}
 
 	@Override
