@@ -14,7 +14,7 @@ public interface QnaMapper {
 	   public int update(QnaVO qvo);
 	   public int delete(Long qnaNo);
 	   public QnaVO read(Long qnaNo);
-	   public int updateAnswer(QnaVO qvo);//답변 등록
+	   public int registerAnswer(@Param("qnaNo") Long qnaNo,@Param("answer") String answer);//답변 등록
 	   public int deleteAnswer(Long qnaNo);
 	   public int getTotalCount(Criteria cri);
 	   public int getTotalCountWithId(@Param("cri")Criteria cri,@Param("userId")String userId);

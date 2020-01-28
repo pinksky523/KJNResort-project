@@ -37,9 +37,7 @@ public class QnaServiceImpl implements QnaService {
 	public void register(QnaVO qvo) {
 		qnaMapper.insert(qvo);
 	}
-	public boolean modifyAnswer(QnaVO qvo) {
-		return qnaMapper.updateAnswer(qvo)==1;
-	}
+	
 	public boolean deleteAnswer(Long qno) {
 		return qnaMapper.deleteAnswer(qno)==1;
 	}
@@ -49,6 +47,11 @@ public class QnaServiceImpl implements QnaService {
 	
 	public int getTotalCountWithId(Criteria cri,String id) {
 		return qnaMapper.getTotalCountWithId(cri, id);
+	}
+
+	@Override
+	public boolean registerAnswer(Long qnaNo, String answer) {
+		return qnaMapper.registerAnswer(qnaNo, answer)==1;
 	}
 
 	

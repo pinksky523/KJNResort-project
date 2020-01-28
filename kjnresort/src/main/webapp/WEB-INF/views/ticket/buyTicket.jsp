@@ -88,11 +88,11 @@ $('#payCharge').on("click",function(){
 	    buyer_tel : '010-1111-1111',
 	    buyer_name : '구매자이름',
 	}, function(rsp) {
-	    if ( rsp.success ) {
+	    if ( 1 ) {//rsp.success
 	       // var msg = '결제가 완료되었습니다.';
 	        //msg += '결제 금액 : ' + rsp.paid_amount;
 	       	//msg += '결제승인시각 : ' + rsp.paid_at;
-	       	alert("성공");
+	       	alert("결제에 성공하였습니다.");
 	       	successPay(rsp.paid_amount);
 	    } else {
 	        var msg = '결제에 실패하였습니다.';
@@ -163,42 +163,41 @@ $(function(){
 
 function successPay(payAmount){
 	var paidDate=new Date();
-	var id=null;
-	
-	<sec:authorize access="isAuthenticated()">
-		id='<sec:authentication property="principal.username"/>';
-	</sec:authorize>
-	//6.buyDate, status, review ticketNo는 sql 에서 보내기 
+	var login_ID=null;
+ 	<sec:authorize access="isAuthenticated()">
+ 		login_ID='<sec:authentication property="principal.username"/>';
+	</sec:authorize> 
+	//6.buyDate, status, review ticketNo는 쿼리문 에서 보내기 
 	//보내줘야 할거  1.id, 2.type, 3.liftAmount, 4.toolAmount, 
 	
-	var TicketBuyVO={
+	var ticket={
 			id:login_ID,
 			type:'both',
 			liftAmount:$("select[name=liftAmount]").val(),
 			toolAmount:$("select[name=toolAmount]").val(),
-			totalPrice:payAmount
+			totalPrice:${tPrice.price} * $("select[name=liftAmount]").val() + ${ttPrice.price} * $("select[name=toolAmount]").val()
 	};
-	
 	$.ajax({
 		type:'post',
-		url:'/ticket/register',
-		data:JSON.stringify(TicketBuyVO),
+		url:'/ticket/buyTicket',
+		data:JSON.stringify(ticket),
 		contentType:'application/json; charset=utf-8',
 		beforeSend : function(xhr)
         {   /*데이터를 전송하기 전에 헤더에 csrf값을 설정한다*/
             xhr.setRequestHeader("${_csrf.headerName}", "${_csrf.token}");
         },
 		success:function(data){
-			var ticketNo=parseInt(data);
-			location.replace('buyTicketResult/'+ticketNo);
+			var ticketNo = parseInt(data);
+			location.replace('buyTicketResult/'+ ticketNo);
+			console.log("카카오결제 success check : " + ticketNo);
 		},
 		error:function(xhr,status,error){
 			if(error){
 				error(status+""+error);
+				console.log("카카오결제 error check : " + error);
 			}
 		}
 	});
-
 };
 
 </script>

@@ -39,7 +39,7 @@ button { margin-right: 5px;}
             <div class="panel-body">
 	            <div class="form-group">
 	                <label>Title</label>
-	                <input class="form-control" name="reviewNo"
+	                <input class="form-control" name="title"
 	                	   value="${review.title }" readonly></div>
 	            <div class="form-group">
 	                <label>카테고리</label>
@@ -55,37 +55,37 @@ button { margin-right: 5px;}
 	                	   value="${review.viewCnt }" readonly></div>    	   	                	   	                	   
 	            <div class="form-group">
                     <label>작성일시</label>
-                    <textarea class="form-control" rows="3" name="regdate"
+                    <textarea class="form-control" rows="1" name="regdate"
 	                	      readonly><fmt:formatDate value="${review.regdate}"
                             					pattern="yyyy-MM-dd"/></textarea></div>
 	            <div class="form-group">
                     <label>평점</label>
-                    <textarea class="form-control" rows="3" name="grade"
-	                	      readonly>${review.grade }</textarea></div>
+                    <input class="form-control" name="grade" value="${review.grade }"
+	                	      readonly></div>
 	            <div class="form-group">
                     <label>내용</label>
-                    <textarea class="form-control" content="3" name="content"
-	                	      readonly>${review.regdate }</textarea></div>     	          	      
+                    <textarea class="form-control" rows="3" name="content"
+	                	      readonly>${review.content }</textarea></div>     	          	      
 
 	            
                	<button data-oper='reply' name="reply" class="btn btn-primary pull-right">댓글등록</button>
-               	<button data-oper='use' name="use" class="btn btn-success pull-right">수정</button>
-               	<button data-oper='cancel' name="cancel" class="btn btn-danger pull-right">삭제</button>
-               	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
-<%-- 	            <!-- 로그인한 사용자가 작성한 글에만 수정 버튼 표시 -->
+            	<!-- 로그인한 사용자가 작성한 글에만 수정 버튼 표시 -->
 	            <sec:authentication property="principal" var="pinfo"/>
 	            <sec:authorize access="isAuthenticated()">
 	            	<c:if test="${pinfo.username == review.id }">
-			            <button data-oper='modify' class="btn btn-default">
-			            	Modify</button>
+			            <button data-oper='modify' name="modify" class="btn btn-warning pull-right">수정</button>
 	            	</c:if>
-	            </sec:authorize> --%>
+	            </sec:authorize> 
+               	<button data-oper='remove' name="remove" class="btn btn-danger pull-right">삭제</button>
+               	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
+
 	            
          
                 <form action="/review/modify" id="operForm">
                 	<input type="hidden" id="reviewNo" name="reviewNo" value="${review.reviewNo }">
                 	<input type="hidden" name="pageNum" value="${cri.pageNum}">
                 	<input type="hidden" name="amount" value="${cri.amount}">
+                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                 	<!-- 검색 조건과 키워드 파라미터 추가 -->
                 	<input type="hidden" name="type" value="${cri.type}">
                 	<input type="hidden" name="keyword" value="${cri.keyword}">
@@ -122,7 +122,7 @@ button { margin-right: 5px;}
     </div>			<!-- /.col-lg-6 -->
 </div>				<!-- /.row -->
 <!-- END 첨부파일  -->	 
-	  
+--%>	  
 <!-- 댓글 목록 -->
 <div class='row'>
   <div class='col-lg-12'>
@@ -140,7 +140,7 @@ button { margin-right: 5px;}
         <div class="panel-body">
            <ul class="chat">
            	  <!-- START reply list -->
-              <li class="left clearfix" data-rno='12'>
+              <li class="left clearfix" data-replyNo='12'>
               	<div>
                    <div class="header">
                        <strong class="primary-font">user00</strong>
@@ -183,9 +183,9 @@ button { margin-right: 5px;}
 			            <input class="form-control" id="reply"
 			            	   name="reply" value="New Reply!!"></div>
 	                <div class="form-group">
-	                	<label>Replyer</label>
-	                	<input class="form-control" id="replyer" readonly
-			            	   name="replyer" value="replyer"></div>
+	                	<label>Id</label>
+	                	<input class="form-control" id="id" readonly
+			            	   name="id" value="id"></div>
 	                <div class="form-group">
 	                	<label>Reply Date</label>
 	                	<input class="form-control" id="replyDate"
@@ -202,19 +202,30 @@ button { margin-right: 5px;}
 	    </div>		<!-- /.modal-dialog -->
 	</div>			<!-- /.modal -->
 <!-- END 댓글 모달 창 -->
- --%>
+ 
 
 <script>
 $(function(){
 	var frm = $('#operForm');
 	
+	$("button[data-oper='remove']").click(function(e){
+		var answer;
+		answer = confirm("삭제 하시겠습니까?");
+		if (answer == true) {
+			frm.attr("method", "post");
+			frm.attr("action", "/review/remove").submit();
+		} else {
+			e.preventDefault();
+		}
+		
+	});
+	
 	$("button[data-oper='modify']").click(function(e){
-		frm.attr("action", "/board/modify").submit();
+			frm.attr("action", "/review/modify").submit();	
 	});
 	
 	$("button[data-oper='list']").click(function(e){
-		frm.find("#bno").remove();
-		frm.attr("action", "/board/list").submit();
+		frm.attr("action", "/review/list").submit();
 	});
 });
 </script>
@@ -222,7 +233,7 @@ $(function(){
 <script src="/resources/js/reply.js"></script>
 <script>
 //즉시 실행함수 
-(function(){
+/* (function(){
 	
 	//첨부파일 목록 가져오기
 	$.getJSON("/board/getAttachList", 
@@ -266,7 +277,7 @@ $(function(){
 		console.log(err);
 	}); //END 첨부파일 목록 가져오기
 })(); //END 즉시 실행함수 
-
+ */
 //첨부 파일 클릭 이벤트 처리
 $('.uploadResult').on('click', 'li', function(){
 	var li = $(this);
@@ -301,7 +312,7 @@ function showImage(filePath){
 }// END 섬네일 이미지 원본 표시
 
 $(function(){
-	var boardNo = '${board.bno}';
+	var reviewNo = '${review.reviewNo}';
 	var replyUL = $('.chat');
 	
 	//댓글 목록 출력 함수 호출 - page 번호는 1로 지정
@@ -310,7 +321,7 @@ $(function(){
 	//댓글 목록 <li> 구성
 	function showList(page){
 		replyService.getList(	//댓글 목록
-			{ bno:boardNo, page:page || 1 },	//page 번호가 없을 경우 1로 설정
+			{ reviewNo:reviewNo, page:page || 1 },	//page 번호가 없을 경우 1로 설정
 //			function(result){ 
 			function(replyCnt, list){ 
 				//page 번호가 -1인 경우 - 마지막 페이지 표시
@@ -328,11 +339,11 @@ $(function(){
 				var li = '';
 				for (rvo of list) {
 					//댓글 목록을 replyUL에 <li>로 추가
-					li += "<li class='left clearfix' data-rno='" + rvo.rno + "'>" +
+					li += "<li class='left clearfix' data-replyNo='" + rvo.replyNo + "'>" +
 						  "  <div><div class='header'>" +
-						  "         <strong class='primary-font'>" + rvo.replyer + "</strong>" +
+						  "         <strong class='primary-font'>" + rvo.id + "</strong>" +
 						  "         <small class='pull-right text-muted'>" + 
-						  				replyService.displayTime(rvo.replyDate) +  																
+						  				rvo.replyDate +  																
 						  "         </small></div>" +
 						  "		 <p>" + rvo.reply + "</p></div></li>"
 				}  
@@ -393,16 +404,16 @@ $(function(){
 	//모달 창 관련 처리--------------------------------------
 	var modal = $('.modal');
 	var modalInputReply = $('#reply');
-	var modalInputReplyer = $('#replyer');
+	var modalInputId = $('#id');
 	var modalInputReplyDate = $('#replyDate');
 	
 	var modalModBtn = $('#modalModBtn');
 	var modalRemoveBtn = $('#modalRemoveBtn');
 	var modalRegisterBtn = $('#modalRegisterBtn');
 	
-	var replyer = null;  //로그인한 아이디
+	var id = null;  //로그인한 아이디
     <sec:authorize access="isAuthenticated()">
-        replyer = '<sec:authentication property="principal.username"/>';
+        id = '<sec:authentication property="principal.username"/>';
     </sec:authorize>
     
 	var csrfHeaderName = '${_csrf.headerName}';	//CSRF 토큰 관련 변수 추가
@@ -415,14 +426,14 @@ $(function(){
 	
 	//댓글 삭제 버튼 이벤트 처리
 	modalRemoveBtn.click(function(){
-		if(replyer == null) { //로그인하지 않은 경우 삭제 불가
+		if(id == null) { //로그인하지 않은 경우 삭제 불가
 			alert('로그인 후 삭제 가능합니다!!!');
 			modal.modal('hide');
 			return;
 		}
 		
 		//자신이 작성한 댓글이 아닌 경우 삭제 불가
-		if(replyer != modalInputReplyer.val()){
+		if(id != modalInputId.val()){
 			alert('자신이 작성한 댓글만 삭제 가능합니다!!!');
 			modal.modal('hide');
 			return;
@@ -430,8 +441,8 @@ $(function(){
 		
 		//댓글 삭제
 		replyService.remove(
-			modal.data('rno'),
-			modalInputReplyer.val(), //댓글 작성자 전송 추가
+			modal.data('replyNo'),
+			modalInputId.val(), //댓글 작성자 전송 추가
 			function(result){
 				alert(result);
 				modal.modal('hide');
@@ -446,22 +457,22 @@ $(function(){
 	
 	//댓글 수정 버튼 이벤트 처리
 	modalModBtn.click(function(){
-		if(replyer == null) { 					//로그인하지 않은 경우 수정 불가
+		if(id == null) { 					//로그인하지 않은 경우 수정 불가
 			alert('로그인 후 수정 가능합니다!!!');
 			modal.modal('hide');
 			return;
 		}
 		
-		if(replyer != modalInputReplyer.val()){	//자신이 작성한 댓글이 아닌 경우 수정 불가
+		if(id != modalInputId.val()){	//자신이 작성한 댓글이 아닌 경우 수정 불가
 			alert('자신이 작성한 댓글만 수정 가능합니다!!!');
 			modal.modal('hide');
 			return;
 		}
  
 		replyService.update(					//댓글 수정
-			{ rno:modal.data('rno'), 
+			{ replyNo:modal.data('replyNo'), 
 			  reply:modalInputReply.val(),
-			  replyer:modalInputReplyer.val() }, //댓글 작성자 전송 추가
+			  Id:modalInputId.val() }, //댓글 작성자 전송 추가
 			function(result){
 				alert(result);
 				modal.modal('hide');
@@ -478,14 +489,14 @@ $(function(){
 	replyUL.on('click', 'li', function(e){
 		//댓글 조회
 		replyService.get(
-			$(this).data('rno'),
+			$(this).data('replyNo'),
 			function(result){
 				modalInputReply.val(result.reply);
-				modalInputReplyer.val(result.replyer);
+				modalInputId.val(result.id);
 				modalInputReplyDate.val(replyService.displayTime(result.replyDate))
 								   .attr('readonly', 'readonly');
 				
-				modal.data('rno', result.rno);
+				modal.data('replyNo', result.replyNo);
 				
 				modal.find("button[id != 'modalCloseBtn']").hide();
 				modalModBtn.show();
@@ -502,9 +513,9 @@ $(function(){
 	modalRegisterBtn.click(function(){
 		//댓글 추가
 		replyService.add(
-			{ bno:boardNo, 
+			{ reviewNo:reviewNo, 
 			  reply : modalInputReply.val(), 	 //'댓글 테스트',
-			  replyer: modalInputReplyer.val() },//'tester'
+			  id: modalInputId.val() },//'tester'
 			function(result){
 					alert(result);
 				modal.find('input').val('');
@@ -519,7 +530,7 @@ $(function(){
 	//New Reply 버튼 이벤트 처리
 	$('#addReplyBtn').click(function(){
 		modal.find('input').val('');
-		modal.find("input[name='replyer']").val(replyer); //replyer를 폼에 추가
+		modal.find("input[name='id']").val(id); //id를 폼에 추가
 		modalInputReplyDate.closest('div').hide();
 		modal.find("button[id != 'modalCloseBtn']").hide();
 		modalRegisterBtn.show();

@@ -3,7 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
-<%@ include file="../includes/header.jsp" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
+<sec:authentication property="principal" var="pinfo"/>
+<c:choose>
+	<c:when test="${pinfo.username eq 'admin'}">
+		<%@ include file="../includes/adminHeader.jsp" %>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="../includes/header.jsp" %>
+	</c:otherwise>
+</c:choose>
 <link rel="stylesheet" href="/resources/css/table.css"/>
 <h2>내가 쓴 후기</h2>
 <div class="row">
@@ -30,7 +39,7 @@
                         <tr>
                             <td>${review.reviewNo}</td>
                             <td>${review.category}</td>
-                            <td><a href='/member/myreview?reviewNo=${review.reviewNo}'>
+                            <td><a href='/member/myreviewGet?reviewNo=${review.reviewNo}'>
                             		${review.title}
                             	</a>
                             </td>

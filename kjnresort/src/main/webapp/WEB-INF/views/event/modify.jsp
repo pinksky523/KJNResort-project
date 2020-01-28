@@ -14,7 +14,7 @@
 </c:choose>
 
         <h2>이벤트 등록</h2>
-<form role="form" id="joinForm" name="frm" method="post" action="/event/register">
+<form role="form" id="joinForm" name="frm" method="post" action="/event/modify">
 <div class="row">
     <div class="col-lg-12" style="padding-bottom: 20px">
         <div>
@@ -25,40 +25,40 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
 		
-   		<table style="padding:5px 0 5px 0; table-layout: fixed; width: 100%;">
+   		<table style="padding:5px 0 5px 0; table-layout: fixed;">
       
        <tr>
          <th>제목</th>
-         <td colspan="2"><input type="text" name="title" class="form-control" id="inputTitle" style="width: 150%;"></td>
-         <td>&nbsp</td>
+         <td><input type="text" name="title" class="form-control" id="inputTitle" value="${event.title}"></td>
+         <td></td>
        </tr>
        <tr><td>&nbsp</td></tr>
         <tr>
          <th>기간</th>
-         <td colspan="3">
-         <div style=" width: 100%;">
-         <input type="date" class="form-control" name="eventStart" id="inputEventStart" style="width: 30%; float: left;">
-         <label style="width: 5%; float: left; text-align: center;">~</label>
-         <input type="date" class="form-control" name="eventEnd" id="inputEventEnd" style="width: 30%;">
+         <td colspan="2" align="center">
+         <div style="display: inline;">
+         <input type="date" class="form-control" name="eventStart" id="inputEventStart" value="${event.eventStart}">
+        ~
+         <input type="date" class="form-control" name="eventEnd" id="inputEventEnd" value="${event.eventEnd}">
          </div>
          </td>
-         <td>&nbsp</td>
        </tr>
        <tr><td>&nbsp</td></tr>
         <tr>
          <th>이미지파일 (썸네일용)</th>
-         <td><input type="file" class="form-control" name="uploadFile" id="uploadThumb" style=" width: 150%;"></td>
-          <td>&nbsp</td>
+         <td><input type="file" class="form-control" name="uploadFile" id="uploadThumb"></td>
+          <td></td>
        </tr>	
        <tr><td>&nbsp</td></tr>														
        <tr>
          <th>이미지파일 (상세정보용)</th>
-         <td><input type="file" class="form-control" name="uploadFile" id="uploadDetail" style=" width: 150%;"></td>
-          <td>&nbsp</td>
+         <td><input type="file" class="form-control" name="uploadFile" id="uploadDetail"></td>
+          <td></td>
        </tr><tr><td>&nbsp</td></tr>
            
            </table>
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			<input type="hidden" name="eventNo" value="${event.eventNo}"/>
           
             </div>	<!-- /.panel-body -->
         </div>		<!-- /.panel -->
@@ -105,12 +105,12 @@
 </div>
 <div style="text-align: center;">
 	<button type="button" class="btn btn-secondary" id="eventCancel" onclick="location.href='/event/list'">취소</button>
-	<button type="submit" data-oper="register" class="btn btn-primary" id="eventRegister">등록</button>
+	<button type="submit" data-oper="modify" class="btn btn-warning" id="eventModify">수정완료</button>
 </div>		      
 </form>
 <script>
 $(function(e){
-	var formObj = $("form[role='form']");
+var formObj = $("form[role='form']");
 	
 	$("button[type='submit']").click(function(e){
 		e.preventDefault();
@@ -214,6 +214,133 @@ $(function(e){
 		});	//END $.ajax
 		
 	});	//END $("#uploadBtn").click
+	
+	
+	
+	
+	
+	
+	
+	
+	//게시물 하나에 대한 첨부파일 목록 가져오기
+	$.getJSON("/event/getAttachList", {eventNo : <c:out value="${event.eventNo}"/>},
+			function(result){
+				console.log("attach list.........");
+				console.log(result);	//console.log("attach list........." + result); 이런 식으로 쓰면 콘솔에 object라고 뜸
+				
+				//업로드된 결과를 화면에 섬네일 등을 만들어서 처리
+					if(!result || result.length == 0){return;}
+					
+					var li = "";
+					
+					$(result.slice(0,1)).each(function(index, aFileDTO){	//첨부파일 array중 인덱스0번째(썸네일용)만 골라내기
+//						$('.uploadResult ul').append('<li>' + aFileDTO.fileName + '</li>');
+						//이미지가 아니면 attach.png 표시
+						//클릭하면 다운로드
+						aFileDTO.fileName = aFileDTO.fileName.substring(aFileDTO.fileName.indexOf(".")+1, aFileDTO.fileName.length);
+						if(aFileDTO.fileType == false){
+							var filePath = encodeURIComponent(aFileDTO.uploadPath + "/" + aFileDTO.uuid + "_" + aFileDTO.fileName);
+							var fileLink = filePath.replace(new RegExp(/\\/g), "/");
+							
+							li += "<li data-path='" + aFileDTO.uploadPath + "'"
+							+ "data-uuid='" + aFileDTO.uuid + "' data-filename='" + aFileDTO.fileName 
+							+ "' data-type='" + aFileDTO.image + "'><div>"
+							+ "<span>" + aFileDTO.fileName + "</span>"
+							+ "<button type='button' data-file=\'" + filePath + "\' data-type = 'file'"
+							+ "class='btn btn-warning btn-circle'><i class = 'fa fa-times'></i></button><br>"	//i태그: 동그란 X 스타일
+							//+ "<img src='/resources/img/attach.png'>"
+							+ "<img src='/display?fileName=" + filePath + "'>"
+							+ "</div></li>";
+						
+					}else{	
+						var filePath = encodeURIComponent(aFileDTO.uploadPath + "/s_" + aFileDTO.uuid + "_" + aFileDTO.fileName);
+
+						li += "<li data-path='" + aFileDTO.uploadPath + "'"
+							+ "data-uuid='" + aFileDTO.uuid + "' data-filename='" + aFileDTO.fileName 
+							+ "' data-type='" + aFileDTO.image + "'><div>"
+							+ "<span>" + aFileDTO.fileName + "</span>"
+							+ "<button type='button' data-file=\'" + filePath + "\' data-type = 'image'"
+							+ "class='btn btn-warning btn-circle'><i class = 'fa fa-times'></i></button><br>"
+							+ "<img src='/display?fileName=" + filePath + "'>"
+							+ "</div></li>";
+							
+							//섬네일 클릭 시 showImage() 호출
+//							var originPath = aFileDTO.uploadPath + "\\" + aFileDTO.uuid + "_" + aFileDTO.fileName;
+//							originPath = originPath.replace(new RegExp(/\\/g), "/");	//역슬래시를 슬래시로 바꾸는 처리
+						}
+					});
+					$("#thumbResult ul").append(li);
+				
+			}).fail(function(xhr, status, err){
+				console.log(err);
+			});
+	
+	
+	
+	
+	
+	//게시물 하나에 대한 첨부파일 목록 가져오기
+	$.getJSON("/event/getAttachList", {eventNo : <c:out value="${event.eventNo}"/>},
+			function(result){
+				console.log("attach list.........");
+				console.log(result);	//console.log("attach list........." + result); 이런 식으로 쓰면 콘솔에 object라고 뜸
+				
+				//업로드된 결과를 화면에 섬네일 등을 만들어서 처리
+					if(!result || result.length == 0){return;}
+					
+					var li = "";
+					
+					$(result.slice(1,2)).each(function(index, aFileDTO){	//첨부파일 array중 인덱스1번째(상세정보용)만 골라내기
+						//$('.uploadResult ul').append('<li>' + aFileDTO.fileName + '</li>');
+						//이미지가 아니면 attach.png 표시
+						//클릭하면 다운로드
+						//if(aFileDTO.image == false){
+						if(aFileDTO.fileType == false){
+							var filePath = encodeURIComponent(aFileDTO.uploadPath + "/" + aFileDTO.uuid + "_" + aFileDTO.fileName);
+							var fileLink = filePath.replace(new RegExp(/\\/g), "/");
+							
+							li += "<li data-path='" + aFileDTO.uploadPath + "'"
+							+ "data-uuid='" + aFileDTO.uuid + "' data-filename='" + aFileDTO.fileName 
+							+ "' data-type='" + aFileDTO.image + "'><div>"
+							+ "<span>" + aFileDTO.fileName + "</span>"
+							+ "<button type='button' data-file=\'" + filePath + "\' data-type = 'file'"
+							+ "class='btn btn-warning btn-circle'><i class = 'fa fa-times'></i></button><br>"	//i태그: 동그란 X 스타일
+							//+ "<img src='/resources/img/attach.png'>"
+							+ "<img src='/display?fileName=" + filePath + "'>"
+							+ "</div></li>";
+						
+					}else{	
+						var filePath = encodeURIComponent(aFileDTO.uploadPath + "/s_" + aFileDTO.uuid + "_" + aFileDTO.fileName);
+
+						li += "<li data-path='" + aFileDTO.uploadPath + "'"
+							+ "data-uuid='" + aFileDTO.uuid + "' data-filename='" + aFileDTO.fileName 
+							+ "' data-type='" + aFileDTO.image + "'><div>"
+							+ "<span>" + aFileDTO.fileName + "</span>"
+							+ "<button type='button' data-file=\'" + filePath + "\' data-type = 'image'"
+							+ "class='btn btn-warning btn-circle'><i class = 'fa fa-times'></i></button><br>"
+							+ "<img src='/display?fileName=" + filePath + "'>"
+							+ "</div></li>";
+							
+							//섬네일 클릭 시 showImage() 호출
+							//var originPath = aFileDTO.uploadPath + "\\" + aFileDTO.uuid + "_" + aFileDTO.fileName;
+							//originPath = originPath.replace(new RegExp(/\\/g), "/");	//역슬래시를 슬래시로 바꾸는 처리
+						}
+					});
+					$("#detailResult ul").append(li);
+				
+			}).fail(function(xhr, status, err){
+				console.log(err);
+			});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	//업로드된 결과를 화면에 섬네일 등을 만들어서 처리
 	function showUploadedResult(result){

@@ -16,14 +16,14 @@
 	
 	<div class="form-group">
 		<label>구매일자</label>
-		<%-- <input class="form-control" name="buyDate" readonly="readonly" value="${ticket.buyDate}"> --%>
+		<input class="form-control" name="buyDate" readonly="readonly" value="${ticket.buyDate}">
 	</div>
 	
 	<div class="form-group">
 		<label>결제금액</label>
-		<%-- <input class="form-control" name="totalPrice" readonly="readonly" value="${ticket.liftAmount * type.liftPrice} + ${ticket.toolAmount * type.toolPrice}"> --%>
+		<input class="form-control" name="totalPrice" readonly="readonly" value="${ticket.totalPrice}">
 	</div>
-	
+	<button onclick="location.href=''">예약내역확인</button><button onclick="location.href='/'">메인으로 가기</button>
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 
 <script>

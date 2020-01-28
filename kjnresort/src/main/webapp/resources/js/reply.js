@@ -3,14 +3,18 @@ console.log("Reply Module......");
 var replyService = (function(){ 
 	
 	function getList(param, callback, error){			//댓글 목록
-		var url = "/replies/pages/" + param.bno + "/" + param.page + ".json";
+		var url = "/replies/pages/" + param.reviewNo + "/" + param.page + ".json";
+		console.log("getList reply-------1");
 		$.getJSON(url, function(result){
 			if(callback) {
+				console.log("getList reply-------2");
 			//	callback(result);
 				callback(result.replyCnt, result.list);
+				console.log("getList reply-------3");
 			}
 		}).fail(function(xhr, status, err){
 			if(error)	{
+				console.log("getList reply-------4");
 				error(err);
 			}
 		});
@@ -34,12 +38,12 @@ var replyService = (function(){
 		})//END ajax()
 	}//END add()
 	
-	function remove(rno, replyer, callback, error){		//댓글 삭제
+	function remove(replyNo, id, callback, error){		//댓글 삭제
 		console.log("reply remove....");
 		$.ajax({
 			type 	: 'delete', 
-			url 	: '/replies/' + rno,
-			data	: JSON.stringify({rno:rno, replyer:replyer}),
+			url 	: '/replies/' + replyNo,
+			data	: JSON.stringify({replyNo:replyNo, id:id}),
 			contentType	: 'application/json; charset=utf-8',
 			success	: function(result, status, xhr){
 				callback(result);
@@ -56,7 +60,7 @@ var replyService = (function(){
 		console.log("reply update....");
 		$.ajax({
 			type 	: 'put', 
-			url 	: '/replies/' + reply.rno,
+			url 	: '/replies/' + reply.replyNo,
 			data	: JSON.stringify(reply),
 			contentType	: 'application/json; charset=utf-8',
 			success	: function(result, status, xhr){
@@ -70,8 +74,8 @@ var replyService = (function(){
 		})//END ajax()
 	}//END update()
 
-	function get(rno, callback, error){			//댓글 조회
-		var url = "/replies/" + rno + ".json";
+	function get(replyNo, callback, error){			//댓글 조회
+		var url = "/replies/" + replyNo + ".json";
 		$.getJSON(url, function(result){
 			if(callback) {
 				callback(result);
