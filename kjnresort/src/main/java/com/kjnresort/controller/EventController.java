@@ -77,6 +77,7 @@ public class EventController {
 		
 		int total = service.getTotal(cri);
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
+		
 	}
 	
 	

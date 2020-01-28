@@ -43,6 +43,38 @@
    ]]> 		  
   </select>
   
+  
+  <!-- 내가 쓴 후기 목록 -->
+  <select id="getMyListWithPaging" resultType="com.kjnresort.domain.ReviewVO">
+   <![CDATA[
+    SELECT  * 
+    FROM 	( SELECT /*+INDEX_DESC(t_review SYS_C0012802) */ 
+    				 ROWNUM rn, reviewNo, category, title, id, regdate, viewCnt
+    		  FROM   t_review
+    		  WHERE  
+   ]]>
+		(id 	LIKE '%'||#{id}||'%') AND
+   <![CDATA[ 		  
+    		  rownum <= #{pageNum} * #{amount} )
+    WHERE   rn > (#{pageNum} -1) * #{amount}
+   ]]> 		  
+  </select>
+  
+  
+  <!-- 내가 쓴 후기 전체개수 -->
+  <select id="getMyTotalCount" resultType="int">
+   <![CDATA[
+    SELECT COUNT(*) FROM t_review
+    WHERE 
+   ]]> 	
+		(id 	LIKE '%'||#{id}||'%') AND
+   <![CDATA[  reviewNo > 0
+   ]]>
+  </select>
+  
+  
+  
+  
   <select id="getTotalCount" resultType="int">
    <![CDATA[
     SELECT COUNT(*) FROM t_review

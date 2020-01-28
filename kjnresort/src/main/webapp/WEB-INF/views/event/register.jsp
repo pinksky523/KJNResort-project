@@ -25,35 +25,36 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
 		
-   		<table style="padding:5px 0 5px 0; table-layout: fixed;">
+   		<table style="padding:5px 0 5px 0; table-layout: fixed; width: 100%;">
       
        <tr>
          <th>제목</th>
-         <td><input type="text" name="title" class="form-control" id="inputTitle"></td>
-         <td></td>
+         <td colspan="2"><input type="text" name="title" class="form-control" id="inputTitle" style="width: 150%;"></td>
+         <td>&nbsp</td>
        </tr>
        <tr><td>&nbsp</td></tr>
         <tr>
          <th>기간</th>
-         <td colspan="2" align="center">
-         <div style="display: inline;">
-         <input type="date" class="form-control" name="eventStart" id="inputEventStart">
-        ~
-         <input type="date" class="form-control" name="eventEnd" id="inputEventEnd">
+         <td colspan="3">
+         <div style=" width: 100%;">
+         <input type="date" class="form-control" name="eventStart" id="inputEventStart" style="width: 30%; float: left;">
+         <label style="width: 5%; float: left; text-align: center;">~</label>
+         <input type="date" class="form-control" name="eventEnd" id="inputEventEnd" style="width: 30%;">
          </div>
          </td>
+         <td>&nbsp</td>
        </tr>
        <tr><td>&nbsp</td></tr>
         <tr>
          <th>이미지파일 (썸네일용)</th>
-         <td><input type="file" class="form-control" name="uploadFile" id="uploadThumb"></td>
-          <td></td>
+         <td><input type="file" class="form-control" name="uploadFile" id="uploadThumb" style=" width: 150%;"></td>
+          <td>&nbsp</td>
        </tr>	
        <tr><td>&nbsp</td></tr>														
        <tr>
          <th>이미지파일 (상세정보용)</th>
-         <td><input type="file" class="form-control" name="uploadFile" id="uploadDetail"></td>
-          <td></td>
+         <td><input type="file" class="form-control" name="uploadFile" id="uploadDetail" style=" width: 150%;"></td>
+          <td>&nbsp</td>
        </tr><tr><td>&nbsp</td></tr>
            
            </table>

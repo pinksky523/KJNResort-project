@@ -39,7 +39,7 @@
                         <tr>
                             <td>${review.reviewNo}</td>
                             <td>${review.category}</td>
-                            <td><a href='/member/myreview?reviewNo=${review.reviewNo}'>
+                            <td><a href='/member/myreviewGet?reviewNo=${review.reviewNo}'>
                             		${review.title}
                             	</a>
                             </td>

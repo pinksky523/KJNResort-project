@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -102,6 +103,19 @@ public class ReviewController {
 		model.addAttribute("list", service.getList(cri));
 		model.addAttribute("pageMaker", 
 							new PageDTO(cri, service.getTotalCount(cri)));
+	}
+	
+	
+	//내가 쓴 후기 리스트
+	@PostMapping("myreviewList")
+	public String myreviewList(@Param("id") String id, Criteria cri, Model model) {
+		int pageNum = cri.getPageNum();
+		int amount = cri.getAmount();
+		model.addAttribute("list", service.getMyList(id, pageNum, amount));
+		model.addAttribute("pageMaker", 
+							new PageDTO(cri, service.getMyTotalCount(id, pageNum, amount)));
+		
+		return "redirect:/review/list";
 	}
 	
 	//후기 등록 폼으로 가는 버튼 클릭

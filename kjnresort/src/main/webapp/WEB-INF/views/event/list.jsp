@@ -44,8 +44,8 @@
                     <c:forEach items="${list}" var="event" varStatus="status">
                         <tr>
                             <td>${status.count}</td>
-                            <td id="imgTd">
-                            <input type="hidden" id="hiddenEventNo" value="${event.eventNo}">
+                            <td>
+                            
                             <div id="thumbResult"><ul style="list-style: none;"></ul></div></td>
                             <td><a class="move" href='${event.eventNo}'>
                             		${event.title}
@@ -116,8 +116,7 @@
 
 <script>
 $(function(){	
-	var hiddenEventNo = $("#imgTd").find("#hiddenEventNo").val();
-	
+	var hiddenEventNo = $("#hiddenEventNo").val();
 	
 	//게시물 하나에 대한 첨부파일 목록 가져오기
 	$.getJSON("/event/getAttachList", {eventNo : <c:out value='hiddenEventNo'/>},

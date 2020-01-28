@@ -86,14 +86,14 @@
                            	<td>${member.phoneNumber}</td>
                            	<td>
                            	
+                           	
                            	<!-- 1일 경우 '일반회원' 0일경우 '정지회원' -->
 			           		<c:if test="${member.status eq 1}">
-			           			<c:set var="status" value="일반회원"></c:set>
+			           			<input type="text" value="일반회원" style="color: green; font-weight: bold; border: 0; text-align: center;" readonly>
 			           		</c:if>
 			           		<c:if test="${member.status eq 0}">
-			           			<c:set var="status" value="정지회원"></c:set>
+			           			<input type="text" value="정지회원" style="color: red; font-weight: bold; border: 0; text-align: center;" readonly>
 			           		</c:if>
-                           	<c:out value="${status}"></c:out>
                            	</td>
                         </tr>
                     </c:forEach>
