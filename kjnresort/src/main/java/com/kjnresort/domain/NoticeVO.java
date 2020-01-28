@@ -12,6 +12,6 @@ public class NoticeVO {
 	private String	content;			// 내용
 	private Date	regDate;			// 작성일시
 	private Long 	viewCnt;			// 조회수
-	private Long	topCheck;			// 게시글 Top check
+	private int		topCheck;			// 게시글 Top check
 }
 

@@ -40,8 +40,10 @@ public class NoticeController {
 	
 	@PostMapping("/modify")
 	public String modify(NoticeVO notice, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		log.info("공지사항 게시글 수정 완료");
+		log.info("공지사항 게시글 수정 컨트롤러 진입");
+		log.info("topCheck의 값 : " + notice.getTopCheck());
 		if(service.modify(notice)) {
+			log.info("공지사항 게시글 수정 완료");
 			rttr.addFlashAttribute("result", "success");
 		}
 		return "redirect:/notice/list" + cri.getListlink();

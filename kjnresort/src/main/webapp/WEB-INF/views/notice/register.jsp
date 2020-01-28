@@ -26,7 +26,7 @@
 		            <div class="form-group">
 		                <label>Top 체크: </label>
 		                <input type="checkbox" name="topCheck" >
-		                <input type='hidden' value='0' name="topCheck"></div>
+		                <input type='hidden' name="topCheck" value='0'></div>
 		            <div class="form-group">
 	                    <label>내용: </label>
 	                    <textarea class="form-control" rows="8" name="content" id="inputContent"></textarea></div>
