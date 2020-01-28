@@ -13,11 +13,12 @@
 h1{text-align: center;}
 hr{text-align: center; width:1000px;}
 
-.container{margin-top:100px; height: 400px; margin-bottom:300px; font-size:2rem;}
+.container{margin-top:100px; height: 400px; margin-bottom:200px; font-size:2rem;}
 .table{width:150% !important;text-align:center; } 
 .pagination{justify-content: center; }
 .text-center{font-size:2rem;}
 thead{background: #E7E7E7;}
+.pagination{position: relative; bottom: 50px;}
 </style>
 <body>
 <h1>콘도 예약 내역</h1>

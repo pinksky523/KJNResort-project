@@ -39,12 +39,12 @@ update t_qna set category=#{category},title=#{title},content=#{content} where qn
 delete t_qna where qnano=#{qnaNo} 
 </delete>
 
-<update id="updateAnswer">
-update t_qna set answer=#{answer} and answerregdate=#{answerRegDate}
+<update id="registerAnswer">
+update t_qna set answer=#{answer},answerregdate=SYSDATE,isanswered='Y' where qnano=#{qnaNo}
 </update>
 
 <update id="deleteAnswer">
-update t_qna set answer='' and answerregdate='' where qnano=#{qnaNo}
+update t_qna set answer='',answerregdate='',isanswered='N' where qnano=#{qnaNo}
 </update>
 
 <select id="getListWithPaging" resultType="com.kjnresort.domain.QnaVO">

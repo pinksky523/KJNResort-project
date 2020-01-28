@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 
 import com.kjnresort.domain.CondoReserveVO;
+import com.kjnresort.domain.CondoVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.mapper.CondoReserveMapper;
 
@@ -131,7 +132,6 @@ public class CondoReserveServiceImpl implements CondoReserveService {
 	public boolean modify(Long reserveNo, int status) {
 		return condoReservemapper.update(reserveNo,status)==1;
 	}
-
 
 
 	

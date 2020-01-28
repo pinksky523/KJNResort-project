@@ -47,7 +47,7 @@
 						<button data-oper='modify' class="btn btn-warning pull-right">수정</button>
 	                	<button data-oper='remove' class="btn btn-danger pull-right">삭제</button>
 					</sec:authorize>
-	                <button data-oper='list' class="btn btn-secondary pull-right">목록</button>
+	                	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
              	 <form action="/recruit/modify" method="get" id="operForm" >	
              		<input type="hidden" id="recruitNo" name="recruitNo" value='<c:out value="${recruit.recruitNo}"/>'>
              		<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>

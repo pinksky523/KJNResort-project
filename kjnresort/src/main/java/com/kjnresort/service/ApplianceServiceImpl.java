@@ -31,9 +31,9 @@ public class ApplianceServiceImpl implements ApplianceService {
 	}
 	
 	@Override
-	public List<ApplianceVO> getList() {
+	public List<ApplianceVO> getList(String id) {
 		log.info("나의 지원내역 조회");
-		return mapper.getList();
+		return mapper.getList(id);
 	}
 
 	@Override
