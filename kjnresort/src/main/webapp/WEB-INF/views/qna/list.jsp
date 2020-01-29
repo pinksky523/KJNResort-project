@@ -40,7 +40,7 @@ body{height:900px !important;}
 				<c:if test="${'admin'==pinfo.username}">
 					<form action="/qna/list">
 						<select name="type" id="select">
-							<option value="CSE">카테고리전체</option>
+							<option value="CSE">카테고리</option>
 							<option value="C"
 								<c:out value="${pageMaker.cri.type=='C'?'selected':''}"/>>콘도</option>
 							<option value="S"

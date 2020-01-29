@@ -169,13 +169,12 @@
 <script>
 $(function(e){
     var modal = document.getElementById('myModall');
-    var btn = document.getElementById("eventApply");
     var span = document.getElementsByClassName("closee")[0];                                          
 
     //응모하기 버튼 클릭이벤트
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
+    $("#eventApply").click(function() {
+    	modal.style.display = "block";
+    });
 
     //X표시 클릭이벤트
     span.onclick = function() {

@@ -4,19 +4,31 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<sec:authentication property="principal" var="pinfo"/>
-<c:choose>
-	<c:when test="${pinfo.username eq 'admin'}">
-		<%@ include file="../includes/adminHeader.jsp" %>
-	</c:when>
-	<c:otherwise>
+
+
+<sec:authorize access="isAnonymous()">
 		<%@ include file="../includes/header.jsp" %>
-	</c:otherwise>
-</c:choose>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="pinfo"/>
+	<c:choose>
+	
+		<c:when test="${pinfo.username eq 'admin'}">
+			<%@ include file="../includes/adminHeader.jsp" %>
+		</c:when>
+		
+		<c:otherwise>
+			<%@ include file="../includes/header.jsp" %>
+		</c:otherwise>
+	</c:choose>
+</sec:authorize>
+
+
 <style>
-	.thumbImg { margin-left: 100px; width: 330px; height: 300px;}
+	.thumbImg { margin-left: 150px; width: 200px; height: 170px;}
 	#imgDiv { float: left; top: 50%; left: 50%; margin-left: 100px; margin-right: 100px;}
-	.titleTerm {margin-left: 100px; margin-bottom: 100px; font-size: large;}
+	.titleTerm {margin-left: 150px; margin-bottom: 80px; font-size: larger;}
 </style>
 
 

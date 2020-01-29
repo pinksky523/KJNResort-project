@@ -68,7 +68,8 @@ public class CondoReserveController { //헐 이제 될거같아
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			
 	}
-	@PreAuthorize("isAuthenticated()")
+	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@PostMapping(value="/register",consumes="application/json",produces= {MediaType.TEXT_PLAIN_VALUE})
 	@Transactional
 	public ResponseEntity<String> register(@RequestBody CondoReserveVO crVO) {
@@ -128,13 +129,13 @@ public class CondoReserveController { //헐 이제 될거같아
 			
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/register")
 	public void register() {
 	
 	}
 	
-	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/payChargeResult/{rno}")
 	public String chargeResult(@PathVariable long rno,Model model) {
 		model.addAttribute("reserve",service.get(rno));
