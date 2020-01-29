@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kjnresort.mapper.ReviewAttachMapper">
+  <select id="getOldFiles" 
+          resultType="com.kjnresort.domain.ReviewAttachVO">
+    SELECT * 
+    FROM   t_review_attach 
+    WHERE  uploadPath = TO_CHAR(SYSDATE - 1, 'yyyy\mm\dd')
+  </select>
+  
+  <delete id="deleteAll">
+    DELETE t_review_attach WHERE reviewNo = #{reviewNo}
+  </delete>
+  
+  <select id="findByReviewNo" resultType="com.kjnresort.domain.ReviewAttachVO">
+    SELECT * FROM t_review_attach WHERE reviewNo = #{reviewNo}
+  </select>
+  
+  <delete id="delete">
+    DELETE t_review_attach WHERE uuid = #{uuid}
+  </delete>
+  
+  <insert id="insert">
+	INSERT INTO t_review_attach 
+	VALUES(#{reviewNo}, #{uuid}, #{uploadPath}, #{fileName}  )
+  </insert>
+</mapper>	
+
+
+
+
+
+
+
+
+
+

@@ -51,7 +51,6 @@ public class EventController {
 	
 	//이벤트 게시글 등록기능
 	@PostMapping("register")
-	@PreAuthorize("isAuthenticated()")
 	public String register(EventVO event, RedirectAttributes rttr, Principal principal) {
 		event.setId(principal.getName());		//현재 로그인한 id(admin)을 이벤트 게시글 작성자로 셋팅
 		
@@ -64,7 +63,6 @@ public class EventController {
 		rttr.addFlashAttribute("result", event.getEventNo());
 		return "redirect:/event/list";
 	}
-	
 	
 	
 	
@@ -113,7 +111,6 @@ public class EventController {
 			
 		
 	//이벤트 게시글 수정	
-	@PreAuthorize("principal.username == #event.id")
 	@PostMapping("modify")
 	public String modify(EventVO event, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
 		event.getAttachList().get(0).setFileName("thumb." + event.getAttachList().get(0).getFileName());	//썸네일용은 앞에 thumb.
@@ -125,7 +122,6 @@ public class EventController {
 	}
 	
 	//이벤트 게시글 삭제
-	@PreAuthorize("principal.username == #id")
 	@PostMapping("remove")
 	public String remove(@RequestParam("eventNo") Long eventNo, String id, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
 		

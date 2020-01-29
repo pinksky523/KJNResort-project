@@ -29,6 +29,7 @@ import lombok.extern.log4j.Log4j;
 public class ApplianceController {
 	private ApplianceService service;
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void register(MemberVO member, RecruitVO recruit, Model model) {
 		log.info("지원서 등록창 진입");

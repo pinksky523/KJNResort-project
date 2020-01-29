@@ -55,29 +55,29 @@ public class ReviewController {
 		return "redirect:/review/list" + cri.getListlink();
 	}
 	
-//	//	첨부파일 삭제
-//	private void deleteFiles(List<ReviewAttachVO> attachList) {
-//		log.info("delete files!");
-//		attachList.forEach(avo -> {
-//			try {
-//				Path file = Paths.get("C:\\upload\\"+ 
-//								avo.getUploadPath() +"\\" +
-//								avo.getUuid() + "_" +
-//								avo.getFileName());
-//				Files.deleteIfExists(file);								// 원본 파일 삭제
-//				if(Files.probeContentType(file).startsWith("image")) {	// 이미지의 경우
-//					Path thumbnail = Paths.get("C:\\upload\\"+ 
-//									avo.getUploadPath() +"\\s_" +
-//									avo.getUuid() + "_" +
-//									avo.getFileName());
-//					Files.deleteIfExists(thumbnail);					// 썸네일 삭제
-//				}
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		});
-//	}
-//	
+	//	첨부파일 삭제
+	private void deleteFiles(List<ReviewAttachVO> attachList) {
+		log.info("delete files!");
+		attachList.forEach(avo -> {
+			try {
+				Path file = Paths.get("C:\\upload\\"+ 
+								avo.getUploadPath() +"\\" +
+								avo.getUuid() + "_" +
+								avo.getFileName());
+				Files.deleteIfExists(file);								// 원본 파일 삭제
+				if(Files.probeContentType(file).startsWith("image")) {	// 이미지의 경우
+					Path thumbnail = Paths.get("C:\\upload\\"+ 
+									avo.getUploadPath() +"\\s_" +
+									avo.getUuid() + "_" +
+									avo.getFileName());
+					Files.deleteIfExists(thumbnail);					// 썸네일 삭제
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		});
+	}
+	
 	//후기 수정
 	@PreAuthorize("principal.username == #review.id")				// 작성자 확인
 	@PostMapping("modify")
@@ -121,30 +121,35 @@ public class ReviewController {
 	//후기 등록 폼으로 가는 버튼 클릭
 	@GetMapping("register")
 	@PreAuthorize("isAuthenticated()")
-	public void register() {
+	public void register(Long ticketNo ,Model model) {
 		log.info("ReviewController register() - get");
+		log.info("ticketNo : " + ticketNo);
+		model.addAttribute("useNo", ticketNo);
 	}
 	
 	//후기 등록 버튼 클릭
 	@PostMapping("register")
 	@PreAuthorize("isAuthenticated()")
-	public String register(ReviewVO review, RedirectAttributes rttr) {
+	public String register(ReviewVO review, Long ticketNo, RedirectAttributes rttr, Model model) {
 		log.info("ReviewController register()");
 		log.info("register:" + review);
 		if(review.getAttachList() != null) {
 			review.getAttachList().forEach(attach -> log.info(attach));
 		}
 		log.info("===============================");
+		log.info("modifyTReview ticketNo : " + ticketNo);
 		service.register(review);
+		service.modifyTReview(ticketNo);
 		rttr.addFlashAttribute("result", review.getReviewNo());
 		return "redirect:/review/list";
 	}
 	
-	//첨부파일 리스트 
-	@GetMapping(value = "getAttachList", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	//첨부파일 리스트  , produces = MediaType.APPLICATION_JSON_UTF8_VALUE
+	@GetMapping("getAttachList")
 	@ResponseBody
 	public ResponseEntity<List<ReviewAttachVO>> getAttachList(Long reviewNo){
-		log.info("getAttachList:" + reviewNo);
+		log.info("-----------------------------------------------");
+		log.info("getAttachList : " + reviewNo);
 		return new ResponseEntity<>(service.getAttachList(reviewNo), HttpStatus.OK);
 		
 	}

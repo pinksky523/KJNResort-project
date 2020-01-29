@@ -15,8 +15,10 @@ public interface ReviewMapper {
 	
 	public void insert(ReviewVO review);
 	public int update(ReviewVO review);
+	public int updateTReview(Long ticketNo);
 	public int delete(Long reviewNo);
 	public ReviewVO read(Long reviewNo);
+	public void updateViewCnt(Long reviewNo);
 	
 	//내가 쓴 후기 전체개수
 	public int getMyTotalCount(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount); 

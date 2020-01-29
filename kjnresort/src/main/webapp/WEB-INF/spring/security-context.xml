@@ -15,14 +15,17 @@
 <security:http>
 <!-- <security:http auto-config="true" use-expressions="true"> -->
 
-	
 	<security:intercept-url pattern="/common/**" access="permitAll"/>
 	<security:intercept-url pattern="/member/**" access="hasRole('ROLE_MEMBER')"/>
 	<security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+<<<<<<< HEAD
 	
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 	<!-- 권한 줄거 있으면 이 위에다가 추가하시오. permitALL밑에 추가 금지(밑에하면 써도 안먹힘) -->
-	
+
 	<security:intercept-url pattern="/**" access="permitAll"/>
+	
 	<!-- 로그인 처리 -->
 	<!-- 로그인 성공 핸들러 지정 -->
 	 <!-- <security:form-login/> --> 

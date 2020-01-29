@@ -27,7 +27,7 @@
 	<link rel="stylesheet" href="/resources/css/flaticon.css"/>
 	<link rel="stylesheet" href="/resources/css/slicknav.min.css"/>
 	<link rel="stylesheet" href="/resources/css/common.css"/>
-	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 	
 	<!-- Main Stylesheets -->
@@ -63,12 +63,12 @@
 				</li>
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">이용권 판매 관리</a></li>
-						<li><a href="loans.html">이용권 관리</a></li>
+						<li><a href="/ticket/modify">이용권 판매 관리</a></li>
+						<li><a href="/ticket/buyTicketList">이용권 관리</a></li>
 					</ul>
 				</li>
 				<li><a href="/event/list">이벤트 관리</a></li>
-				<li><a href="contact.html">후기 관리</a></li>
+				<li><a href="/review/list">후기 관리</a></li>
 				<li><a href="/qna/list">1:1문의 관리</a></li>
 				<li><a href="#">인재채용</a>
 					<ul class="sub-menu">
@@ -100,5 +100,4 @@
 	
 	<!-- JQuery -->
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

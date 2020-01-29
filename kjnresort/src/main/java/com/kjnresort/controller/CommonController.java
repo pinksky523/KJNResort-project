@@ -1,7 +1,5 @@
 	package com.kjnresort.controller;
 
-import java.security.Principal;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.annotations.Param;

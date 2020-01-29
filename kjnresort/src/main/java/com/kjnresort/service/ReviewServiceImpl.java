@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.domain.Criteria;
@@ -25,8 +26,8 @@ public class ReviewServiceImpl implements ReviewService{
 	
 	@Override
 	public List<ReviewAttachVO> getAttachList(Long reviewNo) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("getAttachList revieNo : " + reviewNo);
+		return attachMapper.findByReviewNo(reviewNo);
 	}
 
 	@Override
@@ -56,13 +57,34 @@ public class ReviewServiceImpl implements ReviewService{
 	@Override
 	public ReviewVO get(Long reviewNo) {
 		log.info("get------------");
+		mapper.updateViewCnt(reviewNo);
 		return mapper.read(reviewNo);
+	}
+	
+	@Transactional
+	@Override
+	public void register(ReviewVO review) {
+		log.info("register-----------");
+		mapper.insert(review);
+		
+		List<ReviewAttachVO> attachList = review.getAttachList();
+		
+		if(attachList == null || attachList.size() <= 0 ) {
+			return; 	//첨부 파일이 없으면 중단
+		}
+		
+		//첨부 파일이 있으면 tbl_attach에 insert
+		attachList.forEach(avo -> {
+			avo.setReviewNo(review.getReviewNo());
+			attachMapper.insert(avo);
+		});
 	}
 
 	@Override
-	public void register(ReviewVO review) {
-		// TODO Auto-generated method stub
-		
+	public boolean modifyTReview(Long ticketNo) {
+		log.info("modifyTReview-----------");
+		mapper.updateTReview(ticketNo);
+		return false;
 	}
 	
 	

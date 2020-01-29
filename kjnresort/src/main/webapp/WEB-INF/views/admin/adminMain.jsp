@@ -62,7 +62,7 @@
 					</ul>
 				</li>
 				<li><a href="/event/list">이벤트 관리</a></li>
-				<li><a href="contact.html">후기 관리</a></li>
+				<li><a href="/review/list">후기 관리</a></li>
 				<li><a href="/qna/list">1:1문의 관리</a></li>
 				<li><a href="#">인재채용</a>
 					<ul class="sub-menu">

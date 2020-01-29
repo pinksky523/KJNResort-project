@@ -3,6 +3,7 @@ package com.kjnresort.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,6 +58,7 @@ public class RecruitController {
 		return "redirect:/recruit/list";
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping({"/get","/modify"})
 	public void get(@RequestParam("recruitNo") Long recruitNo, Model model) {
 		log.info("RecruitController get()");
@@ -69,7 +71,7 @@ public class RecruitController {
 		model.addAttribute("list", service.getList());
 	}
 	
-	//아이디 중복체크
+	// 지원서 제출 체크
 	 @GetMapping(value="/idCheck/{id}", produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_UTF8_VALUE}) 
 	 public ResponseEntity<ApplianceVO> getId(@PathVariable("id") String id){
 		 log.info("idCheckController 진입");
