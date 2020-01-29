@@ -3,15 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
-<sec:authentication property="principal" var="pinfo"/>
-<c:choose>
-	<c:when test="${pinfo.username eq 'admin'}">
-		<%@ include file="../includes/adminHeader.jsp" %>
-	</c:when>
-	<c:otherwise>
-		<%@ include file="../includes/header.jsp" %>
-	</c:otherwise>
-</c:choose>
+<%@ include file="../includes/header.jsp" %>
+
 <h2>KJN리조트 소개</h2>
 <div class="row">
     <div class="col-lg-12" style="padding-bottom: 20px">
