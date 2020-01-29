@@ -62,7 +62,7 @@ footer{position:relative; top:100px;}
 		</c:if>
 	</sec:authorize></div>
 			
-				
+				<sec:authorize access="isAuthenticated()">
 					<c:if test="${qna.isAnswered=='Y' }">
 							<span style="color:gray; font-size:15px;">답변</span>
 					 		<div class="showAnaswer">
@@ -72,7 +72,8 @@ footer{position:relative; top:100px;}
 					 			<c:if test="${'admin'==pinfo.username}"><div style="float: right; margin-top:10px;"><button id="delAnsBtn" class="btn btn-danger">삭제</button></div></c:if>
 					 		
 					</c:if>
-				
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
 					<c:if test="${qna.isAnswered=='N' }">
 						<c:if test="${'admin'==pinfo.username}">
 							<span style="color:gray; font-size:15px;">답변등록</span>
@@ -80,7 +81,7 @@ footer{position:relative; top:100px;}
 							<button id="answerBtn" class="btn btn-primary" style="margin-top:10px; float: right;">등록</button>
 						</c:if>
 					</c:if>
-			
+				</sec:authorize>
 			<form action="/qna/modify" id="operForm">
 				<input type="hidden" id="qno" name="qno" value="${qna.qnaNo}">
 				<input type="hidden" id="id" name="id" value="<sec:authentication property="principal.username"/>">
