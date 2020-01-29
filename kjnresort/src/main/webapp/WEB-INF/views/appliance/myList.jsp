@@ -49,8 +49,11 @@
 	                    </tbody>
 	                </table><!-- END 게시물 출력 테이블 -->
 	                <form method="get" id="operForm" >	
-             			<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
-	               		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+             				<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
+	               		<c:forEach items="${list}" var="appliance">
+	               			<input type="hidden" id="recruitNo" name="recruitNo" value="${appliance.recruitNo }">	
+	               		</c:forEach>
+	               			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
              		</form> 
              			<!-- 지원상태가 제출완료가 아닌 경우만 버튼이 보인다. -->
 		           		<c:forEach items="${list}" var="appliance">
@@ -73,7 +76,7 @@ $(function(){
 	var operForm = $("#operForm");
 	
 	$('#regBtn').on("click",function(){
-		operForm.attr("action","/appliance/register").submit();
+		operForm.attr("action","/appliance/update").submit();
 	});
 });
 </script>
