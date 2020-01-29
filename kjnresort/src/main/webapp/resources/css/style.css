@@ -9,6 +9,14 @@
 /* Template default CSS
 /*----------------------------------------*/
 
+#ticketBtn  { background-color: transparent !important;
+    		  background-image: none !important;
+    		  border-color: transparent;
+    		  border: none;
+    		  color: black;
+    		  font-weight: bold; 
+    		  font-size: 15px;}
+
 html,
 body {
 	height: 100%;

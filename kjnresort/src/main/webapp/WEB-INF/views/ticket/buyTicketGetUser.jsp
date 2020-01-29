@@ -57,7 +57,7 @@ button { margin-right: 5px;}
 	                <input class="form-control" name="writer"
 	                	   value="${ticket.totalPrice}" readonly></div> 
 	                	   <%-- value="${(tPrice.price * ticket.liftAmount) + (ttPrice.price * ticket.toolAmount)}" readonly></div> --%>    	       	       	   
-                <c:if test="${ticket.status == 2}">             
+                <c:if test="${ticket.status == 2 && ticket.review == 0}">             
                	<button data-oper='review' class="btn btn-primary pull-right">후기등록</button>
                	</c:if>
                	<c:if test="${ticket.status == 0}">
@@ -67,7 +67,7 @@ button { margin-right: 5px;}
                	
                 <form method="post" action="/ticket/cancel" id="operForm">
                 	<input type="hidden" id="ticketNo" name="ticketNo" value="${ticket.ticketNo}">
-                	<input type="hidden" id="ticketNo" name="id" value="${ticket.id}">
+                	<input type="hidden" id="ticketId" name="id" value="${ticket.id}">
                 	<input type="hidden" name="pageNum" value="${cri.pageNum}">
                 	<input type="hidden" name="amount" value="${cri.amount}">
                 	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -83,6 +83,11 @@ button { margin-right: 5px;}
 <script>
 $(function(){
 	var frm = $('#operForm');
+	
+	$("button[data-oper='review']").click(function(e){
+		frm.attr("method", "get");
+		frm.attr("action", "/review/register").submit();
+	});
 	
 	$("button[data-oper='list']").click(function(e){
 		frm.attr("action", "/ticket/buyTicketListUser").submit();

@@ -8,7 +8,8 @@
 <html lang="zxx">
 <head>
 	<title>KJN RESORT</title>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<meta charset="UTF-8">
 	<meta name="description" content="loans HTML Template">
 	<meta name="keywords" content="loans, html">
@@ -19,17 +20,16 @@
 
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
- 
-	<!-- Stylesheets -->
+ 	
+	<!--   Stylesheets -->
 	<link rel="stylesheet" href="/resources/css/bootstrap.min.css"/>
 	<link rel="stylesheet" href="/resources/css/font-awesome.min.css"/>
 	<link rel="stylesheet" href="/resources/css/owl.carousel.min.css"/>
 	<link rel="stylesheet" href="/resources/css/flaticon.css"/>
 	<link rel="stylesheet" href="/resources/css/slicknav.min.css"/>
 	<link rel="stylesheet" href="/resources/css/common.css"/>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-	
+	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
 	<!-- Main Stylesheets -->
 	<link rel="stylesheet" href="/resources/css/style.css"/>
 
@@ -63,12 +63,18 @@
 				</li>
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">이용권 구매</a></li>
-						<li><a href="loans.html">이용권 구매내역</a></li>
+						<li><a href="/ticket/buyTicket">이용권 구매</a></li>
+						<sec:authorize access="isAuthenticated()">
+							<form id="buyTicketListUser" action="/ticket/buyTicketListUser" method="post">
+								<input type="submit" id="ticketBtn" value="   이용권 구매내역">
+								<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					 		</form>
+					 		</sec:authorize>
 					</ul>
 				</li>
 				<li><a href="/event/list">이벤트</a></li>
-				<li><a href="contact.html">후기</a></li>
+				<li><a href="/review/list">후기</a></li>
 				<li><a href="#">1:1문의</a>
 					<ul class="sub-menu">
 						<li><a href="/qna/register">문의하기</a></li>
@@ -120,4 +126,4 @@
 	<!-- JQuery -->
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	

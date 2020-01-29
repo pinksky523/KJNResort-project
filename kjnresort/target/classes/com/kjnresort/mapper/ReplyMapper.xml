@@ -33,7 +33,7 @@
   
   <update id="update">
     UPDATE 	t_review_reply
-    SET		reply = #{reply}, updateDate = sysdate
+    SET		reply = #{reply}, replyDate = sysdate
     WHERE 	replyNo = #{replyNo}
   </update>
   
@@ -43,7 +43,7 @@
   
   <insert id="insert">
 	INSERT INTO t_review_reply(replyNo, reviewNo, reply, id)
-	VALUES(seq_reply.NEXTVAL, #{reviewNo}, #{reply}, #{id})
+	VALUES(seq_t_review_reply.NEXTVAL, #{reviewNo}, #{reply}, #{id})
   </insert>
 </mapper>
 

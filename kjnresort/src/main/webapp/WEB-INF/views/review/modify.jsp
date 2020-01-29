@@ -50,8 +50,10 @@
 	                	   value="${review.title }" ></div>
 	            <div class="form-group">
 	                <label>카테고리</label>
-	                <input class="form-control" name="category"
-	                	   value="${review.category }"></div>
+	                 <select name="category" class="form-control" id="category"  style="width: 70%">
+        				<option value="스키">스키 </option>
+        				<option value="콘도">콘도 </option>
+			        	<option value="기타">기타 </option> </select></div>
 	            <div>
                     <label>작성자</label>
                     <input class="form-control" name="id" readonly value="${review.id }"></div>
@@ -65,9 +67,13 @@
 	                	      readonly><fmt:formatDate value="${review.regdate}"
                             					pattern="yyyy-MM-dd"/></textarea></div>
 	            <div class="form-group">
-                    <label>평점</label>
-                    <input class="form-control" name="grade" value="${review.grade }"
-	                	      ></div>
+	                <label>평점</label>
+	                 <select name="grade" class="form-control" id="grade"  style="width: 70%">
+        				<option value="1">1 </option>
+        				<option value="2">2 </option>
+        				<option value="3">3 </option>
+        				<option value="4">4 </option>
+			        	<option value="5">5 </option> </select></div>
 	            <div class="form-group">
                     <label>내용</label>
                     <textarea class="form-control" rows="3" name="content"
@@ -155,7 +161,7 @@ $(function(){
 			frm.submit();
 		}else if(oper === 'modify'){	//수정 버튼
 			var tags = "";
-			/* $('.uploadResult ul li').each(function(i, obj){
+			 $('.uploadResult ul li').each(function(i, obj){
 				var o = $(obj);
 				tags += "<input type='hidden' name='attachList[" + i + "].fileName' " +
 						"       value='" + o.data('filename') + "'>";
@@ -163,9 +169,7 @@ $(function(){
 						"       value='" + o.data('uuid') + "'>";
 				tags += "<input type='hidden' name='attachList[" + i + "].uploadPath' " +
 						"       value='" + o.data('path') + "'>";
-				tags += "<input type='hidden' name='attachList[" + i + "].fileType' " +
-						"       value='" + o.data('type') + "'>";
-			});//END each() */
+			});//END each() 
 			frm.submit();
 			//frm.submit();
 		}
@@ -217,32 +221,45 @@ $(function(){
 		});//END .ajax()
 	});//END 첨부 파일 클릭 이벤트 처리 
 	
+	//즉시 실행함수 
+	 (function(){
+		//첨부파일 목록 가져오기
+		$.getJSON("/review/getAttachList", { reviewNo : ${review.reviewNo} }, function(result){
+			console.log('attach list----------------');
+			console.log(result);
+			var li = '';
+
+			$(result).each(function(index, obj){
+					var filePath = encodeURIComponent(obj.uploadPath + "/s_" +
+													  obj.uuid + "_" + 
+													  obj.fileName);
+					var originPath = obj.uploadPath + "\\" + 
+									 obj.uuid + "_" + 
+									 obj.fileName;
+					originPath = originPath.replace(new RegExp(/\\/g), "/");
+
+					li += "<li data-path='" + obj.uploadPath + "' " + 
+						  "    data-uuid='" + obj.uuid + "' "+
+						  "    data-filename='" + obj.fileName + "' >" +
+						  "    <button type='button' " +
+						  "            class='btn btn-warning btn-circle'" +
+						  "            data-file='" + filePath +"' " +
+						  "	           data-type='file'>" + 
+						  "		<i class='fa fa-times'></i></button><br>" +
+						  "    <img src='/display?fileName=" + filePath + "'></div></li>";   			
+				});//END each()
+				$('.uploadResult ul').append(li);
+		}).fail(function(xhr, status, err){
+			console.log(err);
+		}); //END 첨부파일 목록 가져오기
+	})(); //END 즉시 실행함수 
+	
 	//업로드 결과 출력
 	function showUploadedFile(result){
 		var li = '';
-
 		$(result).each(function(index, obj){
-			if(obj.image == false){	//이미지가 아니면 attach.png 표시
-				var filePath = encodeURIComponent(
-									obj.uploadPath + "/" + 
-									obj.uuid + "_" +
-									obj.fileName);
-				li += "<li data-path='" + obj.uploadPath + "' " + 
-					  "    data-uuid='" + obj.uuid + "' "+
-					  "    data-filename='" + obj.fileName + "' " +
-					  "    data-type='" + obj.image + "'>" +
-				      "    <div><span>" + obj.fileName + "</span>" +
-					  "    <button type='button' " +
-					  "            class='btn btn-warning btn-circle'" +
-					  "            data-file='" + filePath +"' " +
-					  "	           data-type='file'>" + 
-					  "        <i class='fa fa-times'></i></button><br>" +
-				  	  "    <img src='/resources/img/attach.png'></div></li>";
-			} else { //이미지이면 섬네일 표시
-				var filePath = encodeURIComponent(obj.uploadPath + "/s_" +
-												  obj.uuid + "_" + obj.fileName);
-				var originPath = obj.uploadPath + "\\" + 
-								 obj.uuid + "_" + obj.fileName;
+			var filePath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid + "_" + obj.fileName);
+	        var originPath = obj.uploadPath + "\\" + obj.uuid + "_" + obj.fileName;
 				originPath = originPath.replace(new RegExp(/\\/g), "/");
 
 				li += "<li data-path='" + obj.uploadPath + "' " + 
@@ -255,7 +272,7 @@ $(function(){
 				      "            data-file='" + filePath +"' " +
 					  "	           data-type='image'>" +
 				      "        <i class='fa fa-times'></i></button><br>" + 
-					  "    <img src='/display?fileName=" + filePath + "'></div></li>";   			}
+					  "    <img src='/display?fileName=" + filePath + "'></div></li>";   	
 		});
 		$('.uploadResult ul').append(li);
 	}//END showUploadedFile() 업로드 결과 출력

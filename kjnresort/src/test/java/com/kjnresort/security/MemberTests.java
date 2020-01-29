@@ -36,42 +36,42 @@ public class MemberTests {
       try(Connection con = ds.getConnection(); 
             PreparedStatement pstmt = con.prepareStatement(query)) {
         
-    	   //관리자계정 기본생성
-    	   pstmt.setString(1, "admin");
-           pstmt.setString(2, pwencoder.encode("1111"));
-           pstmt.setString(3, "관리자");
-           pstmt.setString(4, "000-0000-0000");
-           pstmt.setString(5, "2000-11-11");
-           pstmt.setString(6, "서울특별시 마포구 월드컵북로 21 풍성빌딩 4층");
-           pstmt.setInt(7, 1);
-           pstmt.executeUpdate();
-           
+//    	   //관리자계정 기본생성
+//    	   pstmt.setString(1, "admin");
+//           pstmt.setString(2, pwencoder.encode("1111"));
+//           pstmt.setString(3, "관리자");
+//           pstmt.setString(4, "000-0000-0000");
+//           pstmt.setString(5, "2000-11-11");
+//           pstmt.setString(6, "서울특별시 마포구 월드컵북로 21 풍성빌딩 4층");
+//           pstmt.setInt(7, 1);
+//           pstmt.executeUpdate();
+//           
            //일반회원 기본생성
-           pstmt.setString(1, "user00");
+           pstmt.setString(1, "user02");
            pstmt.setString(2, pwencoder.encode("1111"));
            pstmt.setString(3, "일반회원");
-           pstmt.setString(4, "111-1111-1111");
-           pstmt.setString(5, "2011-11-11");
-           pstmt.setString(6, "서울특별시 마포구 월드컵북로 21 풍성빌딩 4층");
+           pstmt.setString(4, "010-2222-22222");
+           pstmt.setString(5, "2020-01-02");
+           pstmt.setString(6, "인천광역시 서구");
            pstmt.setInt(7, 1);
            pstmt.executeUpdate();
-           	
-           //정지회원 기본생성
-           pstmt.setString(1, "user01");
-           pstmt.setString(2, pwencoder.encode("1111"));
-           pstmt.setString(3, "정지회원");
-           pstmt.setString(4, "222-2222-2222");
-           pstmt.setString(5, "2012-11-11");
-           pstmt.setString(6, "서울특별시 마포구 월드컵북로 21 풍성빌딩 4층");
-           pstmt.setInt(7, 0);
-           pstmt.executeUpdate();
+//           	
+//           //정지회원 기본생성
+//           pstmt.setString(1, "user01");
+//           pstmt.setString(2, pwencoder.encode("1111"));
+//           pstmt.setString(3, "정지회원");
+//           pstmt.setString(4, "222-2222-2222");
+//           pstmt.setString(5, "2012-11-11");
+//           pstmt.setString(6, "서울특별시 마포구 월드컵북로 21 풍성빌딩 4층");
+//           pstmt.setInt(7, 0);
+//           pstmt.executeUpdate();
            
       } catch(Exception e) {
          e.printStackTrace();
       }
    }
    
-   @Test
+   //@Test
    public void testB() {
       String query = "insert into t_member_auth (id, auth) values(?, ?)";
          
@@ -104,7 +104,7 @@ public class MemberTests {
    
    
    //회원 목록조회를 위한 회원저장
-   @Test
+   //@Test
    public void testC() {
    
 	      String query = "insert into "
@@ -142,7 +142,7 @@ public class MemberTests {
    }
 
    
-	 @Test
+	// @Test
 	 public void testD() {
 	    String query = "insert into t_member_auth(id, auth) values(?, ?)";
 	       

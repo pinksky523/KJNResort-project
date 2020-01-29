@@ -5,14 +5,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zxx">
-<style>
-#ticketBtn  { background-color: transparent !important;
-    		  background-image: none !important;
-    		  border-color: transparent;
-    		  border: none;
-    		  color: black;
-    		  font-weight: bold; }
-</style>
 <head>
 	<title>KJN RESORT</title>
 	<meta charset="UTF-8">
@@ -78,24 +70,17 @@
 						</li>
 					</ul>
 				</li>
-<<<<<<< HEAD
+
 
 
 				<li><a href="contact.html">이벤트</a></li>
 				<li><a href="/review/list">후기</a></li>
 
-=======
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+
 				<li><a href="/event/list">이벤트</a></li>
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 				<li><a href="/review/list">후기</a></li>
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 				<li><a href="#">1:1문의</a>
 					<ul class="sub-menu">
 						<li><a href="/qna/register">문의하기</a></li>
@@ -116,15 +101,6 @@
 				<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal" var="pinfo"/>'>
 				
-<<<<<<< HEAD
-
-				<c:choose>
-				  <c:when test="${loginId eq 'admin'}">		<!-- 관리자로 로그인할 경우 아무버튼 없음 -->
- 				 </c:when>
- 				 <c:otherwise>	<!-- 회원계정으로 로그인할 경우 마이페이지 버튼 표시 -->
- 					  <form id="mypageForm" action="/member/mypage" method="get">
-=======
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 				  <c:if test="${pinfo.username ne 'admin'}">		<!-- 관리자로 로그인할 경우 아무버튼 없음 -->
 				  	<form id="mypageForm" action="/member/mypage" method="get">
 						<button type="submit" class="btn btn-secondary" id="mypage">마이페이지</button>
