@@ -184,7 +184,6 @@ function checkModal(){
 	
 }
 
-
 //페이지 번호 누를 때마다 해당 pageNum(페이지 번호)의 목록 amount(출력 데이터 갯수)개 출력
 //클릭할때마다 테이블이 찌그러지는 문제가 있긴 함
 //그냥 a태그의 href에 써도 되긴 한데 책을 존중하여 javascript로 처리함

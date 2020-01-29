@@ -8,6 +8,7 @@ import java.security.Principal;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,6 +37,7 @@ public class MemberController {
 	
 	
 	//회원 상태수정(관리자)
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("statusModify")
 	public String statusModify(MemberVO member, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
 		log.info("회원상태 수정 컨트롤러 진입");
@@ -57,6 +59,7 @@ public class MemberController {
 	
 	
 	//회원 상세조회(관리자)
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("get")
 	public void getMember(String id, Model model, @ModelAttribute("cri") Criteria cri) {
 		log.info("회원상세조회 창 진입(관리자)");
@@ -67,6 +70,7 @@ public class MemberController {
 	
 	
 	//회원 목록 창
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("list")
 	public void memberList(Criteria cri, Model model) {
 		log.info("회원목록 창 진입");
@@ -81,6 +85,7 @@ public class MemberController {
 	
 	
 	//내가 쓴 후기 버튼
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("myreview")
 	public void myReviewList(@Param("id") String id, Criteria cri, Model model) {
 		log.info("내가 쓴 후기 창 진입");
@@ -102,6 +107,7 @@ public class MemberController {
 		
 		
 	//마이페이지 회원탈퇴 버튼
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("remove")
 	public String remove(MemberVO member, RedirectAttributes rttr, HttpSession session) {
 		
@@ -118,6 +124,7 @@ public class MemberController {
 	}
 
 	//마이페이지 버튼
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("mypage")
 	public void mypageGet(MemberVO member, Model model, Principal principal) {
 		String userId = principal.getName();
@@ -129,6 +136,7 @@ public class MemberController {
 	
 	
 	//마이페이지 수정버튼
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping("mypageModify")
 	public String mypagePost(MemberVO member, RedirectAttributes rttr) {
 		String message;
