@@ -2,9 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="../includes/header.jsp" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
+<sec:authentication property="principal" var="pinfo"/>
+<c:choose>
+	<c:when test="${pinfo.username eq 'admin'}">
+		<%@ include file="../includes/adminHeader.jsp" %>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="../includes/header.jsp" %>
+	</c:otherwise>
+</c:choose>
 
-        <h2>이벤트 등록</h2>
+        <h2>이벤트</h2>
 <div class="row">
     <div class="col-lg-12" style="padding-bottom: 20px">
         <div>
@@ -15,29 +24,27 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
 		
+		
    		<table style="padding:5px 0 5px 0; table-layout: fixed; width: 100%;">
       
        <tr>
-         <th>제목</th>
-         <td style="width: 33%"><input type="text" name="title" class="form-control" id="inputTitle" value="${event.title}" readonly></td>
+         <th>&nbsp</th>
+         <td style="width: 33%"><input style="font-weight: bold;" type="text" name="title" class="form-control" id="inputTitle" value="${event.title}" readonly></td>
          <td></td>
        </tr>
        <tr><td>&nbsp</td></tr>
         <tr>
-         <th>기간</th>
+         <th>&nbsp</th>
          <td>
-         <div style="display: inline;">
-         <input type="text" class="form-control" name="eventStart" id="inputEventStart" value="${event.eventStart}" readonly>
-        ~
-         <input type="text" class="form-control" name="eventEnd" id="inputEventEnd" value="${event.eventEnd}" readonly>
-         </div>
+         <label>기간 : &nbsp</label>${event.eventStart} ~ ${event.eventEnd}
+         <label style="float: right;">조회수 : &nbsp ${event.viewCnt}</label>
+        
          </td>
        </tr>
        <tr><td>&nbsp</td></tr>
       												
            
            </table>
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
           
             </div>	<!-- /.panel-body -->
         </div>		<!-- /.panel -->
@@ -63,20 +70,19 @@
 	
 	 <!-- 로그인한 사용자가 작성한 글에만 수정 버튼 표시 -->
 	            <sec:authentication property="principal" var="pinfo"/>
-	            <sec:authorize access="isAuthenticated()">	<!-- 로그인을 했나? -->
-	            <c:if test="${pinfo.username eq event.id}">	<!-- 내가 작성한 글인가?  -->
-	            	<button data-oper='modify' class="btn btn-warning" id="eventModify">수정</button>
+	            <c:if test="${pinfo.username eq 'admin'}">	<!-- 내가 작성한 글인가?  -->
+	            	<button data-oper="modify" class="btn btn-warning" id="eventModify">수정</button>
 	            </c:if>
-	            </sec:authorize>
 	            
+	            
+	            <sec:authorize access="isAuthenticated()">	<!-- 로그인을 했나? -->
 	            <sec:authentication property="principal" var="pinfo"/>
-	            <sec:authorize access="isAuthenticated()">	<!-- 로그인을 했나? -->
-	            <c:if test="${pinfo.username eq event.id}">	<!-- 내가 작성한 글인가?  -->
-	            	<button data-oper='delete' class="btn btn-danger" id="eventDelete">삭제</button>
+	            <c:if test="${pinfo.username eq 'admin'}">	<!-- 내가 작성한 글인가?  -->
+	            
+	            	<button data-oper="delete" class="btn btn-danger" id="eventDelete">삭제</button>
+	            	
 	            </c:if>
-	            </sec:authorize>
-	            
-	            
+	             </sec:authorize>
 	            
 	            <sec:authorize access="isAuthenticated()">	<!-- 로그인을 했나? -->
 	            <c:if test="${pinfo.username ne 'admin'}">	<!-- 내가 작성한 글인가?  -->
@@ -84,7 +90,14 @@
 	            </c:if>
 	            </sec:authorize>
 	   			                   
-</div>		      
+</div>		
+<form method="post" name="frm" id="deleteForm" action="/event/remove">
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	<input type="hidden" name="eventNo" value="${event.eventNo}">
+	<input type="hidden" name="pageNum" value="${cri.pageNum}">
+	<input type="hidden" name="amount" value="${cri.amount}">
+</form>
+      
 <form action="/event/modify" id="operForm">
 	<input type="hidden" id="eventNo" name="eventNo" value="${event.eventNo}">
 	<input type="hidden" name="pageNum" value="${cri.pageNum}">
@@ -92,6 +105,25 @@
 </form> 
 <script>
 $(function(e){
+	
+	var operForm = $("#operForm");
+	
+	//수정버튼 클릭이벤트
+	$("button[data-oper='modify']").on("click", function(e){
+		operForm.submit();
+	});
+	
+	//삭제버튼 클릭이벤트
+	$("button[data-oper='delete']").on("click", function(e){
+		if(confirm("정말 삭제하시겠습니까?")) {
+			$("#deleteForm").submit();
+		}
+	});
+
+	
+	
+	
+	
 	//게시물 하나에 대한 첨부파일 목록 가져오기
 	$.getJSON("/event/getAttachList", {eventNo : <c:out value="${event.eventNo}"/>},
 			function(result){

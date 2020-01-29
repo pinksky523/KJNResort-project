@@ -53,7 +53,7 @@
 		</a>
 		<nav class="header-nav">
 			<ul class="main-menu">
-				<li><a href="index.html">리조트안내</a></li>
+				<li><a href="/common/resortInfo">리조트안내</a></li>
 				<li><a href="/notice/list">공지사항</a></li>
 				<li><a href="#">콘도</a>
 					<ul class="sub-menu">

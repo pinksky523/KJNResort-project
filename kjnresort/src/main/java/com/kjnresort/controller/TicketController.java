@@ -1,13 +1,19 @@
  package com.kjnresort.controller;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,12 +50,24 @@ public class TicketController {
 //	}
 	
 	//이용권 외부 결제에서 결제완료 버튼 눌렀을때 (사용자)
-	@PostMapping("buyTicketKakao")
-	//@PreAuthorize("isAuthenticated()")
-	public String buyTicketKakao(TicketBuyVO ticket, RedirectAttributes rttr, 
+	@PostMapping(value="buyTicket",consumes="application/json",produces= {MediaType.TEXT_PLAIN_VALUE})
+	@PreAuthorize("isAuthenticated()")
+	@Transactional
+	public ResponseEntity<String> buyTicket(@RequestBody TicketBuyVO ticket, RedirectAttributes rttr, 
 			 @ModelAttribute("cri") Criteria cri) {
-		log.info("TicketController buyTicketKakao() - post" + ticket);
-		return "redirect:/ticket/buyTicket";
+		log.info("TicketController buyTicket() - post : " + ticket);
+		log.info(ticket.getTicketNo());
+		log.info(ticket.getToolAmount());
+		log.info(ticket.getLiftAmount());
+		log.info(ticket.getTotalPrice());
+		int insertCount = service.register(ticket);
+		long ticketNo = -1;
+		if(insertCount == 1) {
+			ticketNo = service.getMaxTicketNo();
+		}
+		
+		return insertCount==1?new ResponseEntity<>(""+ticketNo,HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	 
 	//이용권 구매 폼으로 이동 (사용자)
@@ -61,21 +79,22 @@ public class TicketController {
 		model.addAttribute("ttPrice", service.getPriceT());
 		log.info("getPrice()--------------");
 	}
-	
-	//이용권 구매에서 다음 버튼 눌렀을때 (사용자)
-	@PostMapping("buyTicket")
-	//@PreAuthorize("isAuthenticated()")
-	public String buyTicket(TicketBuyVO ticket, Model model, RedirectAttributes rttr) {
-		log.info("TicketController buyTicket() - Post" + ticket);
-		return "redirect:/ticket/buyTicketResult";
-	}
-	
+
+//	
+//	  //이용권 구매에서 다음 버튼 눌렀을때 (사용자)
+//	  
+//	  @PostMapping("buyTicket") //@PreAuthorize("isAuthenticated()") public String
+//	  buyTicket(TicketBuyVO ticket, Model model, RedirectAttributes rttr) {
+//	  log.info("TicketController buyTicket() - Post" + ticket); return
+//	  "redirect:/ticket/buyTicketResult"; }
+//	 
 	//이용권 구매 결과 페이지 (사용자)
-	@GetMapping("buyTicketResult")
+	@GetMapping("buyTicketResult/{ticketNo}")
 	//@PreAuthorize("isAuthenticated()")
-	public void buyTicketResult(Long ticketNo, Model model) {
+	public String buyTicketResult(@PathVariable Long ticketNo, Model model) {
 		log.info("TicketController result() - get");
-		//model.addAttribute("ticket", service.get(ticketNo));
+		model.addAttribute("ticket", service.get(service.getMaxTicketNo()));
+		return "ticket/buyTicketResult";
 	}
 	
 	//이용권 상태변경 구매취소 (관리자)

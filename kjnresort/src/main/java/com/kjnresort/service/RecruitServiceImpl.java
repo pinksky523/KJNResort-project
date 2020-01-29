@@ -3,6 +3,10 @@ package com.kjnresort.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.kjnresort.domain.ApplianceVO;
+import com.kjnresort.domain.MemberVO;
 import com.kjnresort.domain.RecruitVO;
 import com.kjnresort.mapper.RecruitMapper;
 
@@ -44,6 +48,14 @@ public class RecruitServiceImpl implements RecruitService {
 		log.info("register........ : " + recruit);
 		mapper.insert(recruit);
 	}
+	
+	@Transactional
+	@Override
+	public ApplianceVO idCheck(String id) {
+		log.info("지원내역 중복 확인 서비스임플 진입");
+		return mapper.idCheck(id);
+	}
+	
 
 }
 

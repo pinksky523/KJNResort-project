@@ -16,7 +16,7 @@ public interface ApplianceMapper {
 	public int update(ApplianceVO appliance);						// 게시글 수정(사용자)
 	public ApplianceVO read(Long applianceNo);						// 게시글 조회(관리자)
 	public MemberVO memberRead(MemberVO member);					// 회원 정보
-	public RecruitVO recruitRead(Long recruitNo);					// 지원서 정보
+	public RecruitVO recruitRead(RecruitVO recruit);				// 지원서 정보
 	
 }
 

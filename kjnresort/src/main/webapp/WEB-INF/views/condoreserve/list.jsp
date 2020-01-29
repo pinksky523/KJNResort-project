@@ -144,8 +144,13 @@ footer{height: 300px;}
 </nav>
 		
 		
+<<<<<<< HEAD
 <%@include file="../includes/footer.jsp"%>
 <script>
+=======
+</body>
+<script>
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 
 var actionForm=$("#actionForm");
 $(".move").on("click",function(e){

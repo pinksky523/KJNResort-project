@@ -22,9 +22,10 @@
 </style>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">
-        	Board Modify Page	
-        </h1>
+        <h2 class="page-header">
+        	후기 수정
+        </h2>
+        <hr>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -32,12 +33,9 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                Board Modify Page	
-            </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-			<form method="post" action="/board/modify" role="form">
+			<form method="post" action="/review/modify" role="form">
 				<input type="hidden" name="${_csrf.parameterName }"
 	 					             value="${_csrf.token }">
                	<input type="hidden" name="pageNum" value="${cri.pageNum}">
@@ -45,44 +43,53 @@
                	<!-- 검색 조건과 키워드 파라미터 추가 -->
                	<input type="hidden" name="type" value="${cri.type}">
                	<input type="hidden" name="keyword" value="${cri.keyword}">
-               	
-	            <div class="form-group">
-	                <label>Bno</label>
-	                <input class="form-control" name="bno" readonly
-	                	   value="${board.bno }" ></div>
+               	<input type="hidden" name="reviewNo" value="${review.reviewNo}">
 	            <div class="form-group">
 	                <label>Title</label>
 	                <input class="form-control" name="title"
-	                	   value="${board.title }" ></div>
+	                	   value="${review.title }" ></div>
 	            <div class="form-group">
-                    <label>Text area</label>
+	                <label>카테고리</label>
+	                <input class="form-control" name="category"
+	                	   value="${review.category }"></div>
+	            <div>
+                    <label>작성자</label>
+                    <input class="form-control" name="id" readonly value="${review.id }"></div>
+	            <div>
+	                <label>조회수</label>
+	                <input class="form-control" name="veiwCnt" readonly 
+	                	   value="${review.viewCnt }"></div>
+	           <div>
+                    <label>작성일시</label>
+                    <textarea class="form-control" rows="1" 	
+	                	      readonly><fmt:formatDate value="${review.regdate}"
+                            					pattern="yyyy-MM-dd"/></textarea></div>
+	            <div class="form-group">
+                    <label>평점</label>
+                    <input class="form-control" name="grade" value="${review.grade }"
+	                	      ></div>
+	            <div class="form-group">
+                    <label>내용</label>
                     <textarea class="form-control" rows="3" name="content"
-	                	      >${board.content }</textarea></div>
-	            <div class="form-group">
-	                <label>Writer</label>
-	                <input class="form-control" name="writer" readonly 
-	                	   value="${board.writer }"></div>
-	                	   
-	            
+	                	      >${review.content }</textarea></div>     	   
+	                	  
 	            <!-- 로그인한 사용자가 작성한 글에만 수정/삭제 버튼 표시 -->
 	            <sec:authentication property="principal" var="pinfo"/>
 	            <sec:authorize access="isAuthenticated()">
-	            	<c:if test="${pinfo.username == board.writer }">
-			            <button data-oper='modify' class="btn btn-default">
-			            	Modify</button>
-			            <button data-oper='remove' class="btn btn-danger">
-			            	Remove</button>
+	            	<c:if test="${pinfo.username == review.id }">
+			            <button data-oper='modify' class="btn btn-warning pull-right">
+			            	수정</button>
 	            	</c:if>
 	            </sec:authorize>    	   
-                <button data-oper='list' class="btn btn-info">
-                	List</button>
+				<button data-oper='list' class="btn btn-secondary pull-right">취소</button>
 			</form>
             </div>	<!-- /.panel-body -->
         </div>		<!-- /.panel -->
     </div>			<!-- /.col-lg-6 -->
 </div>				<!-- /.row -->
 
-<!-- 첨부파일  -->
+ 
+<!-- START 첨부파일  -->
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default">
@@ -104,69 +111,16 @@
 					</div>
 				</div>
 				<!-- END 섬네일 원본 이미지 출력 -->
-            </div>	<!-- /.panel-body -->
-        </div>		<!-- /.panel -->
-    </div>			<!-- /.col-lg-6 -->
-</div>				<!-- /.row -->
-<!-- END 첨부파일  -->	 
+            </div>	
+        </div>		
+    </div>			
+</div>				
+<!-- END 첨부파일 --> 	 
+
 
 <script>
 //즉시 실행함수 
-(function(){
-	
-	//첨부파일 목록 가져오기
-	$.getJSON("/board/getAttachList", 
-			  { bno : ${board.bno} }, 
-			  function(result){
-		console.log('attach list----------------');
-		console.log(result);
-		var li = '';
 
-		var li = '';
-
-		$(result).each(function(index, obj){
-			if(obj.fileType == false){	//이미지가 아니면 attach.png 표시
-				var filePath = encodeURIComponent(
-									obj.uploadPath + "/" + 
-									obj.uuid + "_" +
-									obj.fileName);
-				li += "<li data-path='" + obj.uploadPath + "' " + 
-					  "    data-uuid='" + obj.uuid + "' "+
-					  "    data-filename='" + obj.fileName + "' " +
-					  "    data-type='" + obj.fileType + "'>" +
-				      "    <div><span>" + obj.fileName + "</span>" +
-				      "    <button type='button' " + 
-				      "            class='btn btn-warning btn-circle'" +
-				      "            data-file='" + filePath +"' " +
-					  "	           data-type='image'>" +
-				      "        <i class='fa fa-times'></i></button><br>" + 
-				  	  "    <img src='/resources/img/attach.png'></div></li>";
-			} else { //이미지이면 섬네일 표시
-				var filePath = encodeURIComponent(obj.uploadPath + "/s_" +
-												  obj.uuid + "_" + 
-												  obj.fileName);
-				var originPath = obj.uploadPath + "\\" + 
-								 obj.uuid + "_" + 
-								 obj.fileName;
-				originPath = originPath.replace(new RegExp(/\\/g), "/");
-
-				li += "<li data-path='" + obj.uploadPath + "' " + 
-					  "    data-uuid='" + obj.uuid + "' "+
-					  "    data-filename='" + obj.fileName + "' " +
-					  "    data-type='" + obj.fileType + "'>" +
-				      "    <div><span>" + obj.fileName + "</span>" +
-					  "    <button type='button' " +
-					  "            class='btn btn-warning btn-circle'" +
-					  "            data-file='" + filePath +"' " +
-					  "	           data-type='file'>" + 
-					  "        <i class='fa fa-times'></i></button><br>" +
-					  "    <img src='/display?fileName=" + filePath + "'></div></li>";   			}
-			});//END each()
-			$('.uploadResult ul').append(li);
-	}).fail(function(xhr, status, err){
-		console.log(err);
-	}); //END 첨부파일 목록 가져오기
-})(); //END 즉시 실행함수 
 
 //X 표시 버튼 클릭 이벤트 처리
 $('.uploadResult').on('click', 'button', function(e){
@@ -185,13 +139,13 @@ $(function(){
 		var oper = $(this).data('oper');
 		
 		if(oper === 'remove') {			//삭제 버튼
-			frm.attr('action', '/board/remove');
+			frm.attr('action', '/review/remove');
 			frm.submit();
 		}else if(oper === 'list'){		//목록 버튼
 			var pageNumTag = $("input[name='pageNum']").clone();
 			var typeTag = $("input[name='type']").clone();
 			var keywordTag = $("input[name='keyword']").clone();
-			frm.attr('action', '/board/list').attr('method', 'get').empty();
+			frm.attr('action', '/review/list').attr('method', 'get').empty();
 			
 			frm.append(pageNumTag)
 			   .append("<input type='hidden' name='amount' value='" +
@@ -201,7 +155,7 @@ $(function(){
 			frm.submit();
 		}else if(oper === 'modify'){	//수정 버튼
 			var tags = "";
-			$('.uploadResult ul li').each(function(i, obj){
+			/* $('.uploadResult ul li').each(function(i, obj){
 				var o = $(obj);
 				tags += "<input type='hidden' name='attachList[" + i + "].fileName' " +
 						"       value='" + o.data('filename') + "'>";
@@ -211,9 +165,8 @@ $(function(){
 						"       value='" + o.data('path') + "'>";
 				tags += "<input type='hidden' name='attachList[" + i + "].fileType' " +
 						"       value='" + o.data('type') + "'>";
-			});//END each()
-			console.log(tags);
-			frm.append(tags).submit();
+			});//END each() */
+			frm.submit();
 			//frm.submit();
 		}
 	});//END 버튼 클릭 이벤트 처리

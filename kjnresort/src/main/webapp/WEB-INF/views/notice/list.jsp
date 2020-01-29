@@ -37,7 +37,7 @@
 		     </div>
 		     
             <div class="panel-body">
-                <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   
+                <table class="table table-bordered table-hover" style="width: 70%; margin: auto;" id="table">	   
                     <thead class="thead-light">
                         <tr>
                             <th>No.</th>
@@ -47,9 +47,23 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${empty list }">
+						<tr>
+							<td colspan="6">공지사항이 없습니다.</td>
+						</tr>
+					</c:if>
                     <c:forEach items="${list}" var="notice">
                         <tr>
-                        	<td>${notice.noticeNo}</td>
+                        	<td> 
+	                        	<!-- 1일 경우 'TOP', 0일 경우 '공지사항 번호' -->
+				           		<c:if test="${notice.topCheck eq 1}">
+				           			<c:set var="status" value="TOP"></c:set>
+				           		</c:if>
+				           		<c:if test="${notice.topCheck eq 0}">
+				           			<c:set var="status" value="${notice.noticeNo}"></c:set>
+				           		</c:if>
+				           		<c:out value="${status}"></c:out>
+			           		</td>
                             <td><a class="move" href="<c:out value="${notice.noticeNo}"/>">
                             <c:out value="${notice.title}"/></a></td>
                            	<td><fmt:formatDate value="${notice.regDate}" pattern="yy-MM-dd"/></td>
@@ -131,7 +145,7 @@ $(function(){
 		
 		$("#searchForm button").on("click", function(e){
 			 if(!searchForm.find("option:selected").val()){
-				 alert("검색종류를 선택하세요.");							//검색 조건을 지정하지 않은 경우
+				 alert("카테고리를 선택하세요.");							//검색 조건을 지정하지 않은 경우
 				 return false;
 			 }
 			 if(!searchForm.find("input[name='keyword']").val()){			//검색어를 입력하지 않은 경우

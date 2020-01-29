@@ -50,7 +50,7 @@
 	                	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
              	 <form action="/recruit/modify" method="get" id="operForm" >	
              		<input type="hidden" id="recruitNo" name="recruitNo" value='<c:out value="${recruit.recruitNo}"/>'>
-             		<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
+             		<input type="hidden" name="id" id="userId" value='<sec:authentication property="principal.username"/>'>
 	                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
              	</form>          		
 				
@@ -59,14 +59,28 @@
     </div>			<!-- /.col-lg-6 -->
 </div>				<!-- /.row -->
 
+<script type="text/javascript" src="/resources/js/registerCheck.js"></script>
+
 <script>
+var idChk = false;
 
 $(document).ready(function(){
 	
+	var id = document.getElementById('userId').value;
 	var operForm = $("#operForm");
 	
 	$("button[data-oper='register']").on("click", function(e){
-		operForm.attr("action","/appliance/register").submit();
+		//아이디 중복확인
+	    idCheckService.getId(id, function(result){
+	       if(id == result.id){
+	    	   	alert('이미 지원서를 작성한 회원입니다.');
+				idChk = false;	
+	       } else{
+				idChk = true;
+				operForm.attr("action","/appliance/register").submit();
+	       }
+	    });
+		
 	});
 	
 	$("button[data-oper='modify']").on("click", function(e){

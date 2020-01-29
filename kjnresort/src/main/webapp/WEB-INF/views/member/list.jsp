@@ -3,7 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
-<%@ include file="../includes/adminHeader.jsp" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
+<sec:authentication property="principal" var="pinfo"/>
+<c:choose>
+	<c:when test="${pinfo.username eq 'admin'}">
+		<%@ include file="../includes/adminHeader.jsp" %>
+	</c:when>
+	<c:otherwise>
+		<%@ include file="../includes/header.jsp" %>
+	</c:otherwise>
+</c:choose>
 <link rel="stylesheet" href="/resources/css/table.css"/>
         <h2>회원 관리</h2>
 
@@ -13,46 +22,10 @@
             <div style="text-align: center;">
             </div>
             <hr style="border: solid 2px lightgray !important; width: 60% !important;">
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   
-                    <thead class="thead-light">
-                        <tr>
-                            <th>NO.</th>
-                            <th>아이디</th>
-                            <th>이름</th>
-                            <th>핸드폰번호</th>
-                            <th>회원구분</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <c:forEach items="${list}" var="member" varStatus="status">
-                        <tr>
-                            <td>${member.rn}</td>
-                            <td><a class="move" href='${member.id}'>
-                            		${member.id}
-                            	</a>
-                            </td>
-                            <td>${member.name}</td>
-                           	<td>${member.phoneNumber}</td>
-                           	<td>
-                           	
-                           	<!-- 1일 경우 '일반회원' 0일경우 '정지회원' -->
-			           		<c:if test="${member.status eq 1}">
-			           			<c:set var="status" value="일반회원"></c:set>
-			           		</c:if>
-			           		<c:if test="${member.status eq 0}">
-			           			<c:set var="status" value="정지회원"></c:set>
-			           		</c:if>
-                           	<c:out value="${status}"></c:out>
-                           	</td>
-                        </tr>
-                    </c:forEach>
-                    </tbody>
-                </table><!-- END 게시물 출력 테이블 -->
-                <br>
-                
-                 <!-- 검색 조건 및 키워드 입력 부분 -->
+            
+            
+            
+            <!-- 검색 조건 및 키워드 입력 부분 -->
                             <div class="pull-center" style="text-align: center;">
                             	<div class="col-lg-12">
                             		<form id='searchForm' action="/member/list" method="get">
@@ -84,6 +57,51 @@
                             		</form>
                             	</div>
                             </div>
+            
+            
+            
+            
+            
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   
+                    <thead class="thead-light">
+                        <tr>
+                            <th>NO.</th>
+                            <th>아이디</th>
+                            <th>이름</th>
+                            <th>핸드폰번호</th>
+                            <th>회원구분</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${list}" var="member" varStatus="status">
+                        <tr>
+                            <td>${member.rn}</td>
+                            <td><a class="move" href='${member.id}'>
+                            		${member.id}
+                            	</a>
+                            </td>
+                            <td>${member.name}</td>
+                           	<td>${member.phoneNumber}</td>
+                           	<td>
+                           	
+                           	
+                           	<!-- 1일 경우 '일반회원' 0일경우 '정지회원' -->
+			           		<c:if test="${member.status eq 1}">
+			           			<input type="text" value="일반회원" style="color: green; font-weight: bold; border: 0; text-align: center;" readonly>
+			           		</c:if>
+			           		<c:if test="${member.status eq 0}">
+			           			<input type="text" value="정지회원" style="color: red; font-weight: bold; border: 0; text-align: center;" readonly>
+			           		</c:if>
+                           	</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table><!-- END 게시물 출력 테이블 -->
+                <br>
+                
+                 
                             
                             
                             

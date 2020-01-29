@@ -16,6 +16,7 @@ import com.kjnresort.domain.ApplianceVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
 import com.kjnresort.domain.PageDTO;
+import com.kjnresort.domain.RecruitVO;
 import com.kjnresort.service.ApplianceService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -29,10 +30,10 @@ public class ApplianceController {
 	private ApplianceService service;
 	
 	@GetMapping("/register")
-	public void register(MemberVO member, Long recruitNo, Model model) {
+	public void register(MemberVO member, RecruitVO recruit, Model model) {
 		log.info("지원서 등록창 진입");
 		model.addAttribute("member", service.memberGet(member));
-		model.addAttribute("recruit", service.recruitGet(recruitNo));
+		model.addAttribute("recruit", service.recruitGet(recruit));
 	}
 	
 	@PostMapping("/register")

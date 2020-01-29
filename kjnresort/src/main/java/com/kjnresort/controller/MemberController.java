@@ -20,6 +20,7 @@ import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
 import com.kjnresort.domain.PageDTO;
 import com.kjnresort.service.MemberService;
+import com.kjnresort.service.ReviewService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -30,6 +31,7 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class MemberController {
 	private MemberService service;
+	private ReviewService reviewService;
 	
 	
 	
@@ -90,7 +92,15 @@ public class MemberController {
 		model.addAttribute("pageMaker", new PageDTO(cri, total));
 	}
 	
-	
+	//내가 쓴 후기 상세보기
+	@GetMapping("myreviewGet")
+	public void get(Long reviewNo, Model model, 
+				    @ModelAttribute("cri") Criteria cri) {
+		log.info("내가 쓴 후기 상세보기 창 진입");
+		model.addAttribute("review", reviewService.get(reviewNo));
+	}
+		
+		
 	//마이페이지 회원탈퇴 버튼
 	@PostMapping("remove")
 	public String remove(MemberVO member, RedirectAttributes rttr, HttpSession session) {

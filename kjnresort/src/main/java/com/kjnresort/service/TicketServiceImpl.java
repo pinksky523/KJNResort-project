@@ -95,7 +95,7 @@ public class TicketServiceImpl implements TicketService{
 
 	@Override
 	public int register(TicketBuyVO ticket) {
-		log.info("register -------------");
+		log.info("register ------------- : " + ticket);
 		
 		return mapper.insert(ticket);
 	}

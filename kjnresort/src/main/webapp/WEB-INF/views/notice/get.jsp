@@ -30,11 +30,11 @@
 		                value="${notice.noticeNo }" readonly></div>
 		            <div class="form-group">
 		                <label>작성일시 : </label>
-		                <input class="form-control" name="status"
+		                <input class="form-control" name="regDate"
 		                value='<fmt:formatDate value="${notice.regDate }" pattern="yy-MM-dd"/>'  readonly></div>
 		            <div class="form-group">
 		                <label>조회수 : </label>
-		                <input class="form-control" name="deadLine" 
+		                <input class="form-control" name="viewCnt" 
 		                value="${notice.viewCnt}" readonly></div>
 		            <div class="form-group">
 	                    <label>내용 : </label>

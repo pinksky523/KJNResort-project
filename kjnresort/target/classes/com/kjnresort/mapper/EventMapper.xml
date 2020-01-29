@@ -6,30 +6,12 @@
 <mapper namespace="com.kjnresort.mapper.EventMapper">
 
 	
-
-	<update id="update">
-		UPDATE tbl_board
-		SET title = #{title}, 
-		content = #{content}, 
-		writer = #{writer}, 
-		updateDate = sysdate
-		WHERE bno = #{bno}
-	</update>
-
-	<delete id="delete">
-		DELETE FROM tbl_board WHERE bno = #{bno}
-	</delete>
-
-	<update id="updateReplyCnt">
-		UPDATE tbl_board SET replycnt = replycnt + #{amount} WHERE bno = #{bno}
+	<!-- 조회수 업데이트 -->
+	<update id="updateViewCnt">
+		UPDATE t_EVENT SET viewCnt = viewCnt + 1 WHERE eventNo = #{eventNo}
 	</update>
 	
-	
-	
-	
-	<!-- ///////////////////////////////////////// -->
-	
-	
+
 	<!-- 이벤트 게시글 전체개수 가져오기 -->
 	<select id="getTotalCount" resultType="int">
 		SELECT COUNT(*) FROM t_event
@@ -69,5 +51,21 @@
 		SELECT * FROM t_event WHERE eventNo = #{eventNo}
 	</select>
 	
+	
+	<!-- 이벤트 게시글 수정 -->
+	<update id="update">
+		UPDATE t_event
+		SET title = #{title}, 
+		eventStart = #{eventStart}, 
+		eventEnd = #{eventEnd}
+		WHERE eventNo = #{eventNo}
+	</update>
+	
+	
+	
+	<!-- 이벤트 게시글 삭제 -->
+	<delete id="delete">
+		DELETE FROM t_event WHERE eventNo = #{eventNo}
+	</delete>
 	
 </mapper>

@@ -60,8 +60,8 @@ public class ApplianceServiceImpl implements ApplianceService {
 	}
 
 	@Override
-	public RecruitVO recruitGet(Long recruitNo) {
-		return mapper.recruitRead(recruitNo);
+	public RecruitVO recruitGet(RecruitVO recruit) {
+		return mapper.recruitRead(recruit);
 	}
 
 
