@@ -17,6 +17,7 @@ hr{text-align: center; width:1000px;}
 .reserveInfoUl>li{margin-left:150px; font-size: 26px; margin-bottom:25px;}
 .reserveInfoUl>li>span{font-size: 28px; font-weight:bold;  margin-right: 15px;}
 .buttons{text-align: right; margin-top:30px;}
+footer{margin-top:400px !important;}
 </style>
 <sec:authentication property="principal" var="pinfo" />
 <c:if test="${'admin'!=pinfo.username}">
@@ -131,7 +132,7 @@ $('#cancelBtn').on("click",function(){ //취소버튼 클릭
 		alert("취소는 4일전 까지만 가능합니다.");
 	}
 	else{
-		if(confirm("정말 취소하시겠습니까?")){
+		if(confirm("예약 취소하시겠습니까?")){
 			var reserveNo="${reserve.reserveNo}";
 			var id="${reserve.id}";
 			console.log(typeof reserveNo);

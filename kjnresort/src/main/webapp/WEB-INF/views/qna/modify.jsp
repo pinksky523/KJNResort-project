@@ -12,7 +12,7 @@
 h2,p{text-align: center;} 
 hr{text-align: center; width:1000px;}
 .center_div{text-align: center; width:1000px;  margin:0 auto;}
-
+footer{position: relative !important; top:350px !important;}
 </style>
 <%@include file="../includes/header.jsp"%>
 <h2>1:1문의 수정</h2>
