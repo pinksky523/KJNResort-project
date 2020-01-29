@@ -13,10 +13,11 @@ hr{width:1000px;}
 .center_div{width:1000px; background: #EAEAEA; align-self: center; margin:0 auto; height: 1100px; }
 .condoImg{width:320px; height:210px; margin-right:50px; float:left; margin-left:150px;}
 .contents_div{width:900px;  align-self: center; margin:0 auto; padding:20px;}
-.roomType{font-size: 25px;}
+.roomType{font-size: 23px;}
 .roomInfoUl{}
 .roomInfoUl>li{margin-bottom: 10px; font-size: 15px; }
 .roomInfoDiv{margin-bottom:30px; margin-top:20px;}
+footer{margin-top:300px !important;}
 </style>
 <%@include file="../includes/adminHeader.jsp"%>
 <h2>콘도 관리</h2>
@@ -62,10 +63,15 @@ hr{width:1000px;}
 
 $('.modifyBtn').click(function(){
 	var roomType=$(this).data('room');
+	
 	var price=$(this).siblings('input').val();
 	
 	if(price.length==0){
 		alert('가격을 입력하세요');
+		return;
+	}
+	if(isNaN(price)){
+		alert('숫자만 입력할 수 있습니다');
 		return;
 	}
 	if(price.length>=7){
@@ -73,11 +79,6 @@ $('.modifyBtn').click(function(){
 		return;
 	}
 	
-	var temp=price.split(',');
-	var t1=temp[0];
-	var t2=temp[1];
-	price=t1+""+t2;
-	price=parseInt(price);
 	
 	if(confirm('가격을 수정하시겠습니까?')){
 	$.ajax({

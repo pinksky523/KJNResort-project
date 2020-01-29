@@ -59,7 +59,8 @@ public class CondoReserveController { //헐 이제 될거같아
 	}
 	
 	@ResponseBody
-	@PreAuthorize("principal.username==#id||principal.username=='admin'")
+	@PreAuthorize("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+	//@PreAuthorize("principal.username==#id||principal.username=='admin'")
 	@PostMapping(value="/cancel",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> reserveCancel(Long reserveNo,String id) {
 		log.info("condoreserve/cancel Controller........ reserveNo:"+reserveNo);
@@ -119,7 +120,7 @@ public class CondoReserveController { //헐 이제 될거같아
 	
 	
 	@ResponseBody
-	@PreAuthorize("principal.username==#id")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping(value="/confirm",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> reserveConfirm(Long reserveNo,String id) {
 		log.info("condoreserve/confirm Controller........ reserveNo:"+reserveNo);
