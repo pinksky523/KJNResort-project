@@ -40,9 +40,9 @@
 	                    <label>내용: </label>
 	                    <textarea class="form-control" rows="8" name="content"
 	                     readonly>${recruit.content}</textarea></div>
-					<sec:authorize access="hasRole('ROLE_MEMBER')">
-	                	<button data-oper='register' class="btn btn-primary pull-right">지원하기</button>
-	                </sec:authorize>
+					<c:if test="${pinfo.username ne 'admin'}">
+						<button data-oper='register' class="btn btn-primary pull-right">지원하기</button>
+					</c:if>
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<button data-oper='modify' class="btn btn-warning pull-right">수정</button>
 	                	<button data-oper='remove' class="btn btn-danger pull-right">삭제</button>
