@@ -10,21 +10,30 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
 <link rel="stylesheet" href="/resources/css/table.css"/>
 <style>
-h1{text-align: center;}
+h2{text-align: center;}
 hr{text-align: center; width:1000px;}
 
-.container{margin-top:100px; height: 400px; margin-bottom:200px; font-size:2rem;}
+.container{height: 400px; margin-bottom:200px; font-size:2rem; width:1000px !important;}
 .table{width:150% !important;text-align:center; } 
 .pagination{justify-content: center; }
 .text-center{font-size:2rem;}
 thead{background: #E7E7E7;}
-.pagination{position: relative; bottom:50px;}
+.pagination{position: relative; bottom:30px;}
+body{height:900px !important;}
+.qnatable{width:400px;}
 </style>
-<body>
-<h1>1:1문의 내역</h1>
+<sec:authentication property="principal" var="pinfo" />
+<c:if test="${'admin'!=pinfo.username}">
+	 <%@include file="../includes/header.jsp"%>
+</c:if>
+<c:if test="${'admin'==pinfo.username}">
+	 <%@include file="../includes/adminHeader.jsp"%>
+</c:if>
+<h2>1:1문의</h2>
 <hr>
 
 	<div class="container">
+		
 		<div style="text-align: right">
 			<sec:authentication property="principal" var="pinfo" />
 			<sec:authorize access="isAuthenticated()">
@@ -55,7 +64,7 @@ thead{background: #E7E7E7;}
 
 
 		</div>
-		<table class="table table-hover">
+		<table class="table table-hover qnatable">
 			<thead>
 				<tr>
 					<th>문의번호</th>
@@ -136,7 +145,7 @@ thead{background: #E7E7E7;}
   </div>
 </nav>
 		
-</body>
+<%@include file="../includes/footer.jsp"%>
 
 <script>
 

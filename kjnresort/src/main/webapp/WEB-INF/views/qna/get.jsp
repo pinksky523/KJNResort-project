@@ -9,51 +9,78 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
 <style>
-h1{text-align: center;}
+h2{text-align: center;}
 hr{text-align: center; width:1000px;}
-.center_div{background: red; width:1000px; margin:0 auto;}
+.center_div{ width:1000px; margin:0 auto;}
+.cate{font-size: 30px; font-weight: bold;}
+.title_div{background: #BDBDBD; width:1000px; font-size:25px;}
+.writer,.regDate,.isans{font-size:20px;}
+.regDate,.isans{margin-left:120px;}
+.qna_content>p{color:black;  margin-top:10px; border-top: 1px solid; border-top-color:gray; border-bottom: 1px solid; border-bottom-color:gray;}
+.user_buttons{text-align: right; margin-top:5px;}
+.qna_info{margin-top:10px;}
+footer{position:relative; top:100px;}
+.ansArea{width:1000px; margin-top:7px;}
+.showAnaswer{margin-top:10px; border-top: 1px solid; border-top-color:gray; border-bottom: 1px solid; border-bottom-color:gray; }
+.showAnaswer>p{color:black;}
 </style>
-<body>
-<h1>1:1문의 조회</h1>
+<sec:authentication property="principal" var="pinfo" />
+<c:if test="${'admin'!=pinfo.username}">
+	 <%@include file="../includes/header.jsp"%>
+</c:if>
+<c:if test="${'admin'==pinfo.username}">
+	 <%@include file="../includes/adminHeader.jsp"%>
+</c:if>
+<h2>1:1문의 조회</h2>
 <hr>
 <div class="center_div">
-<span>문의번호</span><span>${qna.qnaNo}</span>
-<span>카테고리</span><c:choose>
+<div class="title_div">
+			<c:choose>
 				<c:when test="${qna.category=='C'}">
-					<span>콘도</span>
+					<span class="cate"> [콘도] </span>
 				</c:when>
 				<c:when test="${qna.category=='S'}">
-						<span>스키</span>
+					<span class="cate"> [스키] </span>
 				</c:when>
 				<c:when test="${qna.category=='E'}">
-						<span>기타</span>
+					<span class="cate"> [기타] </span>
 				</c:when>
 			</c:choose>
-<span>작성일</span><span><fmt:formatDate value="${qna.regDate}" pattern="yyyy-MM-dd"></fmt:formatDate></span>
-<p>${qna.title }</p>
-<span>${qna.content }</span>
-
+			<span class="title">${qna.title }</span>
+</div>
+<div class="qna_info">
+<span class="writer">작성자 | ${qna.id}</span><span class="regDate">작성일 | <fmt:formatDate value="${qna.regDate}" pattern="yyyy-MM-dd"></fmt:formatDate></span><span class="isans">답변 여부 | ${qna.isAnswered}</span>
+</div>
+<div class="qna_content">
+<p>${qna.content }</p>
+</div>
+<div class="user_buttons"><button id="list" class="btn btn-default">목록</button>
 <sec:authentication property="principal" var="pinfo" />
 	<sec:authorize access="isAuthenticated()">
 		<c:if test="${'admin'!=pinfo.username}">
-			<button id="modifyBtn">수정</button><button id="delBtn">삭제</button>
+			<button id="modifyBtn" class="btn btn-warning">수정</button> <button id="delBtn" class="btn btn-danger">삭제</button>
 		</c:if>
-	</sec:authorize><button id="list">목록</button>
-			<sec:authorize access="isAuthenticated()">
-				<c:if test="${'admin'==pinfo.username}">
+	</sec:authorize></div>
+			
+				
 					<c:if test="${qna.isAnswered=='Y' }">
-						<span>답변</span>
-					 		<p>${qna.answer}</p>
-					 		<span>답변일</span><span><fmt:formatDate value="${qna.answerRegDate}" pattern="yyyy-MM-dd"></fmt:formatDate></span>
-					 		<button id="delAnsBtn">삭제</button>
+							<span style="color:gray; font-size:15px;">답변</span>
+					 		<div class="showAnaswer">
+					 			<p>${qna.answer}</p>
+					 		</div>
+					 			<span style="margin-top:5px;">답변일<fmt:formatDate value="${qna.answerRegDate}" pattern="yyyy-MM-dd"></fmt:formatDate></span>
+					 			<c:if test="${'admin'==pinfo.username}"><div style="float: right; margin-top:10px;"><button id="delAnsBtn" class="btn btn-danger">삭제</button></div></c:if>
+					 		
 					</c:if>
-					
+				
 					<c:if test="${qna.isAnswered=='N' }">
-							<textarea rows="10" maxlength="2000" id="answer" name="answer"></textarea>
-							<button id="answerBtn">등록</button>
+						<c:if test="${'admin'==pinfo.username}">
+							<span style="color:gray; font-size:15px;">답변등록</span>
+							<textarea rows="10" maxlength="2000" id="answer" name="answer" class="ansArea"></textarea>
+							<button id="answerBtn" class="btn btn-primary" style="margin-top:10px; float: right;">등록</button>
+						</c:if>
 					</c:if>
-				</c:if>
-			</sec:authorize>
+			
 			<form action="/qna/modify" id="operForm">
 				<input type="hidden" id="qno" name="qno" value="${qna.qnaNo}">
 				<input type="hidden" id="id" name="id" value="<sec:authentication property="principal.username"/>">
@@ -64,7 +91,7 @@ hr{text-align: center; width:1000px;}
 			<input type="hidden" id="csrf" name="${_csrf.parameterName}" value="${_csrf.token}">
 			</form>
 </div>
-</body> 
+<%@include file="../includes/footer.jsp"%>
 
 <script>
 $('#delAnsBtn').on("click",function(){

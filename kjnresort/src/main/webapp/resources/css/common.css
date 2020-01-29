@@ -1,12 +1,12 @@
 @charset "UTF-8";
 
 h2 { text-align: center; }
-hr { border: solid 2px lightgray !important; width: 60% !important;  }
+hr { border: solid 1px lightgray !important; width: 1000px !important;  }
 th { text-align: center !important; }
 
 
 .contents {
-	margin-top : 170px !important;
+	margin-top : 150px !important;
 	height: 80% !important;
 }
 #joinForm {

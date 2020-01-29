@@ -10,29 +10,37 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
 <style>
 hr{width:1000px;}
+.center_div{width:1000px; background: #EAEAEA; align-self: center; margin:0 auto; height: 1100px; }
+.condoImg{width:320px; height:210px; margin-right:50px; float:left; margin-left:150px;}
+.contents_div{width:900px;  align-self: center; margin:0 auto; padding:20px;}
+.roomType{font-size: 25px;}
+.roomInfoUl{}
+.roomInfoUl>li{margin-bottom: 10px; font-size: 15px; }
+.roomInfoDiv{margin-bottom:30px; margin-top:20px;}
 </style>
 <%@include file="../includes/adminHeader.jsp"%>
 <h2>콘도 관리</h2>
 <hr>
 <div class="center_div">
+	<div class="contents_div">
 	<c:if test="${!empty list }">
 		<c:forEach items="${list}" var="condo">
 			<div class="roomInfoDiv">
 				<c:choose>
 					<c:when test="${condo.roomType=='P'}">
-						<span>·프라임P</span>
+						<br><span class="roomType">·프라임P</span>
 						<img class="condoImg" src="/resources/img/condo/prime.jpg">
 					</c:when>
 					<c:when test="${condo.roomType=='D'}">
-						<span>·디럭스D</span>
+						<span class="roomType">·디럭스D</span>
 						<img class="condoImg" src="/resources/img/condo/deluxe.jpg">
 					</c:when>
 					<c:when test="${condo.roomType=='N'}">
-						<span>·노블N</span>
+						<span class="roomType">·노블N</span>
 						<img class="condoImg" src="/resources/img/condo/noble.jpg">
 					</c:when>
 					<c:when test="${condo.roomType=='R'}">
-						<span>·로얄R</span>
+						<span class="roomType">·로얄R</span>
 						<img class="condoImg" src="/resources/img/condo/royal.jpg">
 					</c:when>
 				</c:choose>
@@ -43,9 +51,10 @@ hr{width:1000px;}
 					<li>${condo.accept}명</li>
 					<li>${condo.bed}</li>
 				</ul>
-			</div>
+			</div><br>
 		</c:forEach>
 	</c:if>
+	</div>
 </div>
 <%@include file="../includes/footer.jsp"%>
 
