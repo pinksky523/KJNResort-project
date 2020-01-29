@@ -133,7 +133,7 @@ CREATE TABLE t_qna
 	regdate date DEFAULT sysdate,
 	answer varchar2(4000),
 	answerRegDate date,
-	isAnswered char(2),
+	isAnswered char(1),
 	PRIMARY KEY (qnaNo)
 );
 
