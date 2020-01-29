@@ -176,6 +176,7 @@ $('#delBtn').on("click",function(){
 $('#modifyBtn').on("click",function(){
 	
 	$('#operForm').find('#id').remove();
+	$('#operForm').find('#csrf').remove();
 	$('#operForm').submit();
 	
 });

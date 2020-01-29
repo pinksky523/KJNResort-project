@@ -12,7 +12,7 @@
 h2,p{text-align: center; color:black !important;} 
 hr{text-align: center; width:1000px;}
 .center_div{text-align: center; width:1000px;  margin:0 auto;}
-.b{margin:10px;}
+.b{margin:5px;}
 </style>
 <%@include file="../includes/header.jsp"%>
 <h2>1:1문의 하기</h2>
@@ -32,9 +32,9 @@ hr{text-align: center; width:1000px;}
 
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 <input name="id" type="hidden" value="<sec:authentication property="principal.username"/>">
-<input id="title" name="title" type="text" maxlength="2000" placeholder="제목을 입력해주세요" style="width:500px; height: 35px;"><br>
-<textarea id="content" name="content" rows="10" maxlength="2000" style="margin-top:20px; width:620px; height:450px;" ></textarea><br>
-
+<input id="title" name="title" type="text" maxlength="2000" placeholder="제목을 입력해주세요" style="width:625px; height: 35px;"><br>
+<textarea id="content" name="content" rows="10" maxlength="2000" style="margin-top:20px; width:750px; height:650px;" ></textarea><br>
+<br>
 <button  class="btn btn-default b" id="cancel">취소</button><button class="btn btn-primary b" id="regBtn">등록</button>
 </form>
 </div>
