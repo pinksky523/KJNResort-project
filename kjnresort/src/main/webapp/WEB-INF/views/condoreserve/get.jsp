@@ -10,16 +10,22 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
 <link rel="stylesheet" href="/resources/css/table.css"/>
 <style>
-h1{text-align: center;}
+h2{text-align: center;}
 hr{text-align: center; width:1000px;}
-.info_div{ align-self: center;  width:1000px; margin:0 auto; margin-top:110px; background: #EAEAEA; padding:40px;}
+.info_div{ align-self: center;  width:1000px; margin:0 auto; margin-top:30px; background: #EAEAEA; padding:40px;}
 .reserveInfoUl{list-style: none; }
-.reserveInfoUl>li{margin-left:150px; font-size: 26px; margin-bottom:10px;}
-.reserveInfoUl>li>span{font-size: 28px; font-weight: bold; margin-right: 15px;}
-.buttons{text-align: right; margin-top:20px;}
+.reserveInfoUl>li{margin-left:150px; font-size: 26px; margin-bottom:25px;}
+.reserveInfoUl>li>span{font-size: 28px; font-weight:bold;  margin-right: 15px;}
+.buttons{text-align: right; margin-top:30px;}
 </style>
-<body>
-	<h1>예약 조회</h1>
+<sec:authentication property="principal" var="pinfo" />
+<c:if test="${'admin'!=pinfo.username}">
+	 <%@include file="../includes/header.jsp"%>
+</c:if>
+<c:if test="${'admin'==pinfo.username}">
+	 <%@include file="../includes/adminHeader.jsp"%>
+</c:if>
+	<h2>예약 조회</h2>
 	<hr>
 	<div class="info_div">
 		<ul class="reserveInfoUl">
@@ -34,13 +40,13 @@ hr{text-align: center; width:1000px;}
 
 			<c:choose>
 				<c:when test="${0==reserve.status}">
-					<li><span>상태</span>예약</li>
+					<li><span>상태<span style="color:#41FF3A; margin-left:8px;">예약</span></li>
 				</c:when>
 				<c:when test="${1==reserve.status}">
-					<li><span>상태</span>이용</li>
+					<li><span>상태</span><span style="color:#2478FF; margin-left:8px;">이용</span></li>
 				</c:when>
 				<c:when test="${-1==reserve.status}">
-					<li><span>상태</span>취소</li>
+					<li><span>상태</span><span style="color:#FF3636; margin-left:8px;">취소</span></li>
 				</c:when>
 			</c:choose>
 			<c:choose>
@@ -91,7 +97,7 @@ hr{text-align: center; width:1000px;}
 			name="type" value="<c:out value="${cri.type}"/>"> <input
 			type="hidden" name="keyword" value="<c:out value='${cri.keyword}'/>">
 	</form>
-</body>
+<%@include file="../includes/footer.jsp"%>
 
 <script>
 $('#listBtn').on("click",function(){ //목록으로 이동
