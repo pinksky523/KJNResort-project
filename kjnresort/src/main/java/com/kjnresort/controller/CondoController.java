@@ -33,6 +33,7 @@ import lombok.extern.log4j.Log4j;
 public class CondoController {//콘도 매니지컨트롤러
 	private CondoService service;
 	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@ResponseBody
 	@GetMapping(value="/{roomType}",
 			produces= {MediaType.APPLICATION_XML_VALUE,
@@ -43,14 +44,14 @@ public class CondoController {//콘도 매니지컨트롤러
 		return new ResponseEntity<>(service.get(roomType),HttpStatus.OK);
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/list")
 	public void list(Model model) {
 		log.info("condo controller.........list()");
 		model.addAttribute("list", service.getCondoList());
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@ResponseBody
 	@PostMapping(value="/modify",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> modify(String roomType,int price) {
