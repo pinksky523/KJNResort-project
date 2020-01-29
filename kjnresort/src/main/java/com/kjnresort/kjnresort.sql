@@ -30,8 +30,8 @@ CREATE TABLE t_appliance
 	name varchar2(20) NOT NULL,
 	phoneNumber varchar2(20) NOT NULL,
 	address varchar2(200) NOT NULL,
-	career varchar2(800) NOT NULL,
-	introduction varchar2(2000) NOT NULL,
+	career varchar2(800) ,
+	introduction varchar2(2000) ,
 	status varchar2(20) NOT NULL,
 	regDate date,
 	PRIMARY KEY (applianceNo)
@@ -369,7 +369,30 @@ MINVALUE 1;
 
 -- 재웅 끝
 
+-- 태현 부분 시작
+DROP SEQUENCE seq_t_appliance;
+CREATE SEQUENCE seq_t_appliance
+INCREMENT BY 1
+START WITH 1;
 
+DROP SEQUENCE seq_t_notice;
+CREATE SEQUENCE seq_t_notice
+INCREMENT BY 1
+START WITH 1;
+
+DROP SEQUENCE seq_t_recruit;
+CREATE SEQUENCE seq_t_recruit
+INCREMENT BY 1
+START WITH 1;
+
+ALTER TABLE t_appliance DROP PRIMARY KEY;
+alter table t_appliance add constraint pk_applianceNo primary key(applianceno);
+ALTER TABLE t_notice DROP PRIMARY KEY;
+alter table t_notice add constraint pk_noticeNo primary key(noticeno);
+ALTER TABLE t_recruit DROP PRIMARY KEY;
+alter table t_recruit add constraint pk_recruitNo primary key(recruitno);
+
+-- 태현 부분 끝
 
 
 
