@@ -416,3 +416,5 @@ alter table t_review add constraint pk_reviewNo primary key(reviewNo);
 
 ALTER TABLE t_ticket_buy DROP PRIMARY KEY;
 alter table t_ticket_buy add constraint pk_ticketNo primary key(ticketNo);
+
+-- 남구 부분 끝
