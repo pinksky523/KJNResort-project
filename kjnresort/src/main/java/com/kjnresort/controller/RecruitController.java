@@ -30,7 +30,7 @@ public class RecruitController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/register")
 	public void register() {
-		
+		log.info("지원공고 등록창 진입");
 	}
 	
 	@PostMapping("/register")									// 게시글 등록
@@ -41,6 +41,7 @@ public class RecruitController {
 		return "redirect:/recruit/list";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/remove")										// 게시글 삭제
 	public String remove(@RequestParam("recruitNo") Long recruitNo, RedirectAttributes rttr) {
 		log.info("RecruitController remove()... " + recruitNo);
@@ -50,6 +51,7 @@ public class RecruitController {
 		return "redirect:/recruit/list";
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/modify")										// 게시글 수정
 	public String modify(RecruitVO recruit, RedirectAttributes rttr) {
 		log.info("RecruitController modify()");
