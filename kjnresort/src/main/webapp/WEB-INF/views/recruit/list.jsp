@@ -30,6 +30,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <c:if test="${empty list }">
+						<tr>
+							<td colspan="6">모집공고가 없습니다.</td>
+						</tr>
+					</c:if>
                     <c:forEach items="${list}" var="recruit">
                         <tr>
                             <td>${recruit.recruitNo}</td>

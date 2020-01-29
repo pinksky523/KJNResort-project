@@ -16,8 +16,7 @@ public class MemberVO {
 	private char gender;			//성별
 	private String address;			//주소
 	private int status;			//정지상태인지 일반상태인지
-	private Date regDate;
-	private int rn;
-	private List<AuthVO> authList;	
-	
+	private Date regDate;		//가입일자
+	private int rn;				//테이블 행번호
+	private List<AuthVO> authList;	//첨부파일목록
 }

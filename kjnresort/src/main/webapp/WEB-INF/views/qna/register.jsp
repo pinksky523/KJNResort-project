@@ -9,13 +9,13 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
 <style>
-h1,p{text-align: center;} 
+h2,p{text-align: center; color:black !important;} 
 hr{text-align: center; width:1000px;}
 .center_div{text-align: center; width:1000px;  margin:0 auto;}
-
+.b{margin:5px;}
 </style>
-<body>
-<h1>1:1문의 하기</h1>
+<%@include file="../includes/header.jsp"%>
+<h2>1:1문의 하기</h2>
 <p>고객님의 말씀을 귀기울여 듣는 KJN리조트에 문의하세요
 <hr>
 <div class="center_div">
@@ -32,14 +32,22 @@ hr{text-align: center; width:1000px;}
 
 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
 <input name="id" type="hidden" value="<sec:authentication property="principal.username"/>">
-<input id="title" name="title" type="text" maxlength="2000" placeholder="제목을 입력해주세요" style="width:500px; height: 35px;"><br>
-<textarea id="content" name="content" rows="10" maxlength="2000" style="margin-top:20px; width:620px; height:580px;" ></textarea><br>
-
-<button class="btn btn-default" onclick="location.href='/'">취소</button><button class="btn btn-primary" id="regBtn">등록</button>
+<input id="title" name="title" type="text" maxlength="2000" placeholder="제목을 입력해주세요" style="width:625px; height: 35px;"><br>
+<textarea id="content" name="content" rows="10" maxlength="2000" style="margin-top:20px; width:750px; height:650px;" ></textarea><br>
+<br>
+<button  class="btn btn-default b" id="cancel">취소</button><button class="btn btn-primary b" id="regBtn">등록</button>
 </form>
 </div>
-</body>
+<%@include file="../includes/footer.jsp"%>
 <script>
+
+$('#cancel').on("click",function(e){
+	 e.preventDefault();
+	 if(confirm('글 작성을 취소하시겠습니까?')){
+		 history.back();
+	 }
+});
+
 $('#regBtn').on("click",function(e){
 	 e.preventDefault();
 	 var cate=$('#select option:selected').val();
@@ -47,10 +55,13 @@ $('#regBtn').on("click",function(e){
 	 var content=$('#content').val();
 	 if(cate==''){
 		 alert('카테고리를 입력하세요');
+		 return;
 	 }else if(title.length==0){
 		 alert('제목을 입력하세요');
+		 return;
 	 }else if(content.length==0){
 		 alert('내용을 입력하세요');
+		 return;
 	 }else{
 		 var input="<input type='hidden' name='category' value='"+cate+"'>";
 		 

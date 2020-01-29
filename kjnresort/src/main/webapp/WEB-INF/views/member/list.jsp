@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
 <sec:authentication property="principal" var="pinfo"/>
 <c:choose>
@@ -78,22 +77,35 @@
                     <c:forEach items="${list}" var="member" varStatus="status">
                         <tr>
                             <td>${member.rn}</td>
-                            <td><a class="move" href='${member.id}'>
+                            <td>
+                            <c:if test="${member.id eq 'admin'}">
+                            	<c:out value="admin"></c:out>
+                            </c:if>
+                            <c:if test="${member.id ne 'admin'}">
+                            <a class="move" href='${member.id}'>
                             		${member.id}
-                            	</a>
+                            </a>
+                            </c:if>
                             </td>
                             <td>${member.name}</td>
                            	<td>${member.phoneNumber}</td>
                            	<td>
                            	
+                           	
                            	<!-- 1일 경우 '일반회원' 0일경우 '정지회원' -->
 			           		<c:if test="${member.status eq 1}">
-			           			<c:set var="status" value="일반회원"></c:set>
+			           		<c:choose>
+			           			<c:when test="${member.id eq 'admin'}">
+			           				<input type="text" value="관리자계정" style="color: blue; font-weight: bold; border: 0; text-align: center;" readonly>
+			           			</c:when>
+			           			<c:otherwise>
+			           				<input type="text" value="일반회원" style="color: green; font-weight: bold; border: 0; text-align: center;" readonly>
+			           			</c:otherwise>
+			           			</c:choose>
 			           		</c:if>
 			           		<c:if test="${member.status eq 0}">
-			           			<c:set var="status" value="정지회원"></c:set>
+			           			<input type="text" value="정지회원" style="color: red; font-weight: bold; border: 0; text-align: center;" readonly>
 			           		</c:if>
-                           	<c:out value="${status}"></c:out>
                            	</td>
                         </tr>
                     </c:forEach>

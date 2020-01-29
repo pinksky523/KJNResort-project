@@ -16,6 +16,7 @@ import com.kjnresort.domain.ApplianceVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.MemberVO;
 import com.kjnresort.domain.PageDTO;
+import com.kjnresort.domain.RecruitVO;
 import com.kjnresort.service.ApplianceService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
@@ -29,10 +30,10 @@ public class ApplianceController {
 	private ApplianceService service;
 	
 	@GetMapping("/register")
-	public void register(MemberVO member, Long recruitNo, Model model) {
+	public void register(MemberVO member, RecruitVO recruit, Model model) {
 		log.info("지원서 등록창 진입");
 		model.addAttribute("member", service.memberGet(member));
-		model.addAttribute("recruit", service.recruitGet(recruitNo));
+		model.addAttribute("recruit", service.recruitGet(recruit));
 	}
 	
 	@PostMapping("/register")
@@ -44,10 +45,35 @@ public class ApplianceController {
 	}
 	
 	@PostMapping("/save")
-	public String applianceSave(ApplianceVO appliance, RedirectAttributes rttr) {
+	public String save(ApplianceVO appliance, RedirectAttributes rttr) {
+		service.save(appliance);
 		log.info("지원서 임시저장");
-		return null;
+		rttr.addFlashAttribute("result", appliance.getRecruitNo());		// 등록된 게시글의 recruitNo를 result값에 담아서 redirect로 넘겨준다.
+		return "redirect:/appliance/myList";
 	}
+	
+	@GetMapping("/update")
+	public void update(ApplianceVO appliance, Model model) {
+		log.info("임시저장한 지원서 정보를 불러옴");
+		model.addAttribute("appliance", service.applianceGet(appliance));
+	}
+	
+	@PostMapping("/update")
+	public String update(ApplianceVO appliance, RedirectAttributes rttr) {
+		service.modify(appliance);
+		log.info("임시저장한 지원서 임시저장");
+		rttr.addFlashAttribute("result", appliance.getRecruitNo());		// 등록된 게시글의 recruitNo를 result값에 담아서 redirect로 넘겨준다.
+		return "redirect:/appliance/myList";
+	}
+	
+	@PostMapping("/updateInsert")
+	public String updateInsert(ApplianceVO appliance, RedirectAttributes rttr) {
+		service.modifyRegister(appliance);
+		log.info("임시저장한 지원서 제출");
+		rttr.addFlashAttribute("result", appliance.getRecruitNo());		// 등록된 게시글의 recruitNo를 result값에 담아서 redirect로 넘겨준다.
+		return "redirect:/appliance/myList";
+	}
+	
 	
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/myList")												// 나의 지원내역 리스트(사용자)

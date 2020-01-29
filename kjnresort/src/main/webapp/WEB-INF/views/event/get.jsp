@@ -12,7 +12,47 @@
 		<%@ include file="../includes/header.jsp" %>
 	</c:otherwise>
 </c:choose>
-
+<style>
+.modall {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+    
+        /* Modal Content/Box */
+        .modall-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%; /* Could be more or less, depending on screen size */                          
+        }
+        /* The Close Button */
+        .closee {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .closee:hover,
+        .closee:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+		
+		#btnDiv {
+			text-align: center;
+			margin: 10px;
+		}
+</style>
         <h2>이벤트</h2>
 <div class="row">
     <div class="col-lg-12" style="padding-bottom: 20px">
@@ -103,8 +143,57 @@
 	<input type="hidden" name="pageNum" value="${cri.pageNum}">
 	<input type="hidden" name="amount" value="${cri.amount}">
 </form> 
+
+
+
+ 
+    <!-- The Modal -->
+    <div id="myModall" class="modall">
+ 
+      <!-- Modal content -->
+      <div class="modall-content" style="width: 200px; height: 180px;">
+        <span class="closee">&times;</span>                                                               
+     	  <label>정답을 입력해주세요</label>
+		<input class="form-control" id="answer">
+      	<div id="btnDiv">
+	 		<button id="modalCloseBtn" class="btn btn-default" data-dismiss="modall">Close</button>	<!-- data-dismiss 넣으면 이벤트 처리 따로 하지 않아도 됨 -->
+	        <button id="modalApplyBtn" data-oper="modalApply" class="btn btn-primary">응모</button>
+        </div>
+         </div>
+    </div>
+
+
+
+
+
 <script>
 $(function(e){
+    var modal = document.getElementById('myModall');
+    var btn = document.getElementById("eventApply");
+    var span = document.getElementsByClassName("closee")[0];                                          
+
+    //응모하기 버튼 클릭이벤트
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    //X표시 클릭이벤트
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    //모달창 닫기버튼 클릭이벤트
+    $("#modalCloseBtn").click(function() {
+        modal.style.display = "none";
+    });
+    
+    //외부영역 클릭이벤트
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+	
 	
 	var operForm = $("#operForm");
 	
@@ -119,11 +208,24 @@ $(function(e){
 			$("#deleteForm").submit();
 		}
 	});
-
 	
+	//모달창 응모하기버튼 클릭이벤트
+	$("button[data-oper='modalApply']").on("click", function(e){
+		var answer = document.getElementById("answer").value;
+		
+		if(answer!=""){
+			alert("이벤트에 응모되셨습니다! 참여해주셔서 감사합니다");
+			modal.style.display = "none";
+		} else if(answer == null || answer === ""){
+			alert("정답을 입력해주세요");
+			$("#answer").focus();
+		}
+		
+		
+	});
 	
-	
-	
+		
+		
 	//게시물 하나에 대한 첨부파일 목록 가져오기
 	$.getJSON("/event/getAttachList", {eventNo : <c:out value="${event.eventNo}"/>},
 			function(result){
@@ -219,13 +321,6 @@ $(function(e){
 			}).fail(function(xhr, status, err){
 				console.log(err);
 			});
-	
-	
-	//응모버튼 클릭이벤트
-	$("#eventApply").click(function() {
-		alert("응모되었습니다! 참여주해주셔서 감사합니다.");
-		document.getElementById("eventApply").style.visibility = "hidden";
-	});
 	
 	
 

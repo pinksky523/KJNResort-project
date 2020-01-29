@@ -26,11 +26,11 @@
 		                <input class="form-control" name="title" id="inputTitle" value="${notice.title }"></div>
 		            <div class="form-group">
 		                <label>Top 체크: </label>
-		                <input type="checkbox" name="topCheck" id="topCheck" value="${notice.topCheck }"></div>
+		                <input type="checkbox" name="topCheck" id="topCheck" value="${notice.topCheck }" ></div>
 		            <div class="form-group">
 	                    <label>내용: </label>
 	                    <textarea class="form-control" rows="8" name="content" id="inputContent">${notice.content }</textarea></div>
-	                    <input type="hidden" name="id" value="admin">
+	                    <input type="hidden" name="noticeNo" value="${notice.noticeNo }">
 	                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	                <button type="button" onclick="modify()" class="btn btn-warning pull-right">수정</button>
 	                <button type="button" onclick="list()" class="btn btn-secondary pull-right">취소</button>
@@ -42,20 +42,31 @@
 
 <script>
 $(function(){
-		// Top체크가 1인 게시글이면, 체크박스를 선택상태로 변경
-		var topChk	= document.getElementById("topCheck").value;
+	var topChk	= document.getElementById("topCheck").value;
+	
 		if(topChk == 1){
-			document.getElementById("topCheck").checked = true;		
+			document.getElementById("topCheck").checked = true;
+		} else if(topChk == 0){
+			document.getElementById("topCheck").checked = false;
 		}
-
+	
+		$("#topCheck").change(function(){
+		if($("#topCheck").is(":checked")){
+			document.getElementById("topCheck").value = 1;
+		} else {
+			document.getElementById("topCheck").value = 0;
+		}
+	});
 });
-
+	
 function modify() {
 		
 		var titleChk = document.getElementById("inputTitle").value;
 		var contentChk = document.getElementById("inputContent").value;
+		var topChk	= document.getElementById("topCheck").value;
 
 			if(titleChk!="" && contentChk!=""){
+				alert(topChk);
 				alert("수정이 완료되었습니다.");
 				document.frm.submit();
 			} else if(titleChk == null || titleChk === ""){
@@ -74,7 +85,8 @@ function list(){
 		formObj.empty();
 		formObj.submit();
 }
+
 </script>
- 
+
 
 <%@ include file="../includes/footer.jsp" %>

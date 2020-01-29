@@ -2,11 +2,13 @@ package com.kjnresort.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.domain.Criteria;
+import com.kjnresort.domain.MemberVO;
 import com.kjnresort.domain.ReviewVO;
 import com.kjnresort.mapper.ReviewAttachMapper;
 import com.kjnresort.mapper.ReviewMapper;
@@ -84,5 +86,30 @@ public class ReviewServiceImpl implements ReviewService{
 		mapper.updateTReview(ticketNo);
 		return false;
 	}
+	
+	
+	
+	//내가 쓴 후기 전체개수
+	@Override
+	public int getMyTotalCount(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount) {
+		log.info("getMyTotalCount id 체크 : " + id);
+		log.info("getMyTotalCount pageNum 체크 : " + pageNum);
+		log.info("getMyTotalCount amount 체크 : " + amount);
+		
+		log.info("getTotalCount------------");
+		return mapper.getMyTotalCount(id, pageNum, amount);
+	}
+
+	//내가 쓴 후기 목록
+	@Override
+	public List<ReviewVO> getMyList(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount) {
+		log.info("getMyList id 체크 : " + id);
+		log.info("getMyList pageNum 체크 : " + pageNum);
+		log.info("getMyList amount 체크 : " + amount);
+		log.info("getListWithPaging------------");
+		return mapper.getMyListWithPaging(id, pageNum, amount);
+	}
+	
+	
 
 }
