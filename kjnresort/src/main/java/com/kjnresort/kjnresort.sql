@@ -394,5 +394,25 @@ alter table t_recruit add constraint pk_recruitNo primary key(recruitno);
 
 -- 태현 부분 끝
 
+-- 남구 부분 시작
 
+drop sequence seq_t_review_reply
+create sequence seq_t_review_reply
+INCREMENT BY 1
+START WITH 1
 
+drop sequence seq_t_review
+create sequence seq_t_review
+INCREMENT BY 1
+START WITH 1
+
+drop sequence seq_t_ticket_buy
+create sequence seq_t_ticket_buy
+INCREMENT BY 1
+START WITH 1
+
+ALTER TABLE t_review DROP PRIMARY KEY;
+alter table t_review add constraint pk_reviewNo primary key(reviewNo);
+
+ALTER TABLE t_ticket_buy DROP PRIMARY KEY;
+alter table t_ticket_buy add constraint pk_ticketNo primary key(ticketNo);
