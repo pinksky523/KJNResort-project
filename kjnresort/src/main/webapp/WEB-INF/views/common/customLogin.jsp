@@ -25,7 +25,7 @@
 						<a href="memberJoin" class="btn btn-lg btn-primary btn-block">회원가입</a>
 					</div>
 					<div class="col-xs-6 col-sm-6 col-md-6">
-                        <input type="button" onclick="confirm()" class="btn btn-lg btn-success btn-block" value="로그인">
+                        <input type="button" id="loginBtn" class="btn btn-lg btn-success btn-block" value="로그인">
 					</div>
 				</div>
 			</fieldset>
@@ -35,7 +35,7 @@
 </div>
 </div>
 <script>
-
+$(function() {
 
 	var msg = '<c:out value="${msg}"/>';	
 	
@@ -61,7 +61,7 @@
 	
 	
 	//확인 후 submit
-	function confirm() {
+	$("#loginBtn").click(function() {
 		
 		var idChk = document.getElementById("inputId").value;
 		var pwChk = document.getElementById("inputPassword").value;
@@ -76,9 +76,9 @@
 			alert('비밀번호를 확인해주세요');
 			document.frm.password.focus();
 		} 
-	}
+	});
 	
-
+});
 	
 </script>
 <%@ include file="../includes/footer.jsp" %>

@@ -13,7 +13,11 @@
 		<%@ include file="../includes/header.jsp" %>
 	</c:otherwise>
 </c:choose>
-
+<style>
+	.thumbImg { margin-left: 100px; width: 330px; height: 300px;}
+	#imgDiv { float: left; top: 50%; left: 50%; margin-left: 100px; margin-right: 100px;}
+	.titleTerm {margin-left: 100px; margin-bottom: 100px; font-size: large;}
+</style>
 
 
 
@@ -30,37 +34,55 @@
                 
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   
-                    <thead class="thead-light">
-                        <tr>
-                            <th>NO.</th>
-                            <th>이미지</th>
-                            <th>제목</th>
-                            <th>기간</th>
-                            <th>조회수</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+            
+            	<div id="test" style="text-align: center;">
                     <c:forEach items="${list}" var="event" varStatus="status">
-                        <tr>
-                            <td>${status.count}</td>
-                            <td>
                             
-                            <div id="thumbResult"><ul style="list-style: none;"></ul></div></td>
-                            <td><a class="move" href='${event.eventNo}'>
-                            		${event.title}
-                            	</a>
-                            </td>
-                           	<td>${event.eventStart} ~ ${event.eventEnd}</td>
-                           	<td>${event.viewCnt}</td>
-                        </tr>
+                            
+                          	   <!-- 이미지 -->
+                          		 <div class="imageList" id="${event.eventNo}">
+                            
+		                           	<!-- 제목 -->
+		                            <div class="title" id="${event.title}"></div>	
+	                            
+		                            <!-- 기간  -->
+		                            <div class="eventStart" id="${event.eventStart}"></div>
+		                            <div class="eventEnd" id="${event.eventEnd}"></div>
+									
+								</div>
+                            
+							
                     </c:forEach>
-                    </tbody>
-                </table><!-- END 게시물 출력 테이블 -->
+                    
+                </div>
                 
                 
-                
-   					 <!-- 페이지 번호 출력 -->
+   					 
+   							
+   
+   
+   <!-- 페이지 번호 누를 때마다 해당 pageNum(페이지 번호)의 목록 amount(출력 데이터 갯수)개 출력하기 위해 컨트롤러(list)로 파라미터(눌린 숫자에 해당하는 데이터) 전달 -->
+    <form id="actionForm" action="/event/list" method="get">
+    	<input type="hidden" id="pageNum" name="pageNum" value="${pageMaker.cri.pageNum}">
+    	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+    </form>
+   
+   
+   
+   
+   
+   
+   
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-6 -->
+    <div id="imgDiv"></div>
+</div>
+<!-- /.row -->
+<!-- 페이지 번호 출력 -->
                             <div class="pull-center" style="text-align: center;">
                             	 <ul class="pagination">
                             	 	<c:if test="${pageMaker.prev}">
@@ -89,81 +111,54 @@
 					         		</button> 
 					         		</div>
 					             </sec:authorize>
-                            </div>
-   							
-   
-   
-   <!-- 페이지 번호 누를 때마다 해당 pageNum(페이지 번호)의 목록 amount(출력 데이터 갯수)개 출력하기 위해 컨트롤러(list)로 파라미터(눌린 숫자에 해당하는 데이터) 전달 -->
-    <form id="actionForm" action="/event/list" method="get">
-    	<input type="hidden" id="pageNum" name="pageNum" value="${pageMaker.cri.pageNum}">
-    	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-    </form>
-   
-   
-   
-   
-   
-   
-   
-            </div>
-            <!-- /.panel-body -->
-        </div>
-        <!-- /.panel -->
-    </div>
-    <!-- /.col-lg-6 -->
-</div>
-<!-- /.row -->
+                            </div>		
+
 
 <script>
 $(function(){	
-	var hiddenEventNo = $("#hiddenEventNo").val();
 	
+	
+	
+	
+	$(".imageList").each(function() {
+		var eventNo = $(this).attr("id");
+		var title = $(this).find(".title").attr("id");
+		var eventStart = $(this).find(".eventStart").attr("id");
+		var eventEnd = $(this).find(".eventEnd").attr("id");
+		
+		
+		
+		
 	//게시물 하나에 대한 첨부파일 목록 가져오기
-	$.getJSON("/event/getAttachList", {eventNo : <c:out value='hiddenEventNo'/>},
+	$.getJSON("/event/getAttachList", {eventNo : eventNo},
 			function(result){
 				console.log("attach list.........");
 				console.log(result);	//console.log("attach list........." + result); 이런 식으로 쓰면 콘솔에 object라고 뜸
+				
+				
+				
 				
 				//업로드된 결과를 화면에 섬네일 등을 만들어서 처리
 					if(!result || result.length == 0){return;}
 					
 					var li = "";
+						
 					
 					$(result.slice(0,1)).each(function(index, aFileDTO){	//첨부파일 array중 인덱스0번째(썸네일용)만 골라내기
-//						$('.uploadResult ul').append('<li>' + aFileDTO.fileName + '</li>');
-						//이미지가 아니면 attach.png 표시
-						//클릭하면 다운로드
 						aFileDTO.fileName = aFileDTO.fileName.substring(aFileDTO.fileName.indexOf(".")+1, aFileDTO.fileName.length);
-						if(aFileDTO.fileType == false){
-							var filePath = encodeURIComponent(aFileDTO.uploadPath + "/" + aFileDTO.uuid + "_" + aFileDTO.fileName);
-							var fileLink = filePath.replace(new RegExp(/\\/g), "/");
-							
-							li += "<li data-path='" + aFileDTO.uploadPath + "'"
-								+ "data-uuid='" + aFileDTO.uuid + "' data-filename='" + aFileDTO.fileName 
-								+ "' data-type='" + aFileDTO.fileType + "'><div>"
-								+ "<img src='/resources/img/attach.png'>"
-								+ "</div></li>";
-							
-						}else{	
 							var filePath = encodeURIComponent(aFileDTO.uploadPath + "/s_" + aFileDTO.uuid + "_" + aFileDTO.fileName);
 
-							li += "<li data-path='" + aFileDTO.uploadPath + "'"
+							li += "<li style='float: left; list-style: none;' data-path='" + aFileDTO.uploadPath + "'"
 								+ "data-uuid='" + aFileDTO.uuid + "' data-filename='" + aFileDTO.fileName 
-								+ "' data-type='" + aFileDTO.fileType + "'><div>"
-								+ "<img src='/display?fileName=" + filePath + "'>"
-								+ "</div></li>";
-							
-							//섬네일 클릭 시 showImage() 호출
-//							var originPath = aFileDTO.uploadPath + "\\" + aFileDTO.uuid + "_" + aFileDTO.fileName;
-//							originPath = originPath.replace(new RegExp(/\\/g), "/");	//역슬래시를 슬래시로 바꾸는 처리
-						}
+								+ "'><div>"
+								+ "<img class='thumbImg' src='/display?fileName=" + filePath + "'>"
+								+ "</div><div class='titleTerm'><a class='move' href='/event/get/" + eventNo + "'>" + title + "</a><br>이벤트기간 : " + eventStart + " ~ " + eventEnd + "</div></li>";
 					});
-					$("#thumbResult ul").append(li);
-				
+					$("#imgDiv").append(li);
 			}).fail(function(xhr, status, err){
 				console.log(err);
 			});
-	
+	});
 	
 	
 	
@@ -216,22 +211,8 @@ $(".paginate_button a").click(function(e){
 	
 	//폼을 이용해 컨트롤러로 전달
 	$("#actionForm").submit();
-});
+});	
 
-//게시글 목록에서 제목을 클릭했을 때 컨트롤러(get)로 pageNum과 amount를 같이 보내도록 함
-$(".move").click(function(e){
-	e.preventDefault();
-	
-	//폼의 hidden 속성에 있는 id 파라미터의 값에 게시물 번호의 값 넣고
-	$("#actionForm").append("<input type='hidden' name='eventNo' value='" + $(this).attr("href") + "'>");
-	
-	//list로 되어있는 폼의 action을 get으로 변경
-	$("#actionForm").attr("action", "/event/get");
-	//폼을 이용해 컨트롤러로 전달
-	$("#actionForm").submit();
-	
-	
-});
 
 
 });

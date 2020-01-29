@@ -45,10 +45,35 @@ public class ApplianceController {
 	}
 	
 	@PostMapping("/save")
-	public String applianceSave(ApplianceVO appliance, RedirectAttributes rttr) {
+	public String save(ApplianceVO appliance, RedirectAttributes rttr) {
+		service.save(appliance);
 		log.info("지원서 임시저장");
-		return null;
+		rttr.addFlashAttribute("result", appliance.getRecruitNo());		// 등록된 게시글의 recruitNo를 result값에 담아서 redirect로 넘겨준다.
+		return "redirect:/appliance/myList";
 	}
+	
+	@GetMapping("/update")
+	public void update(ApplianceVO appliance, Model model) {
+		log.info("임시저장한 지원서 정보를 불러옴");
+		model.addAttribute("appliance", service.applianceGet(appliance));
+	}
+	
+	@PostMapping("/update")
+	public String update(ApplianceVO appliance, RedirectAttributes rttr) {
+		service.modify(appliance);
+		log.info("임시저장한 지원서 임시저장");
+		rttr.addFlashAttribute("result", appliance.getRecruitNo());		// 등록된 게시글의 recruitNo를 result값에 담아서 redirect로 넘겨준다.
+		return "redirect:/appliance/myList";
+	}
+	
+	@PostMapping("/updateInsert")
+	public String updateInsert(ApplianceVO appliance, RedirectAttributes rttr) {
+		service.modifyRegister(appliance);
+		log.info("임시저장한 지원서 제출");
+		rttr.addFlashAttribute("result", appliance.getRecruitNo());		// 등록된 게시글의 recruitNo를 result값에 담아서 redirect로 넘겨준다.
+		return "redirect:/appliance/myList";
+	}
+	
 	
 	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/myList")												// 나의 지원내역 리스트(사용자)

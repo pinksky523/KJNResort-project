@@ -12,6 +12,10 @@
 	<select id="recruitRead" resultType="com.kjnresort.domain.RecruitVO">
 		SELECT * FROM t_recruit	WHERE recruitNo = #{recruitNo}
 	</select>
+	<!-- 지원 내역 정보 조회 -->
+	<select id="applianceRead" resultType="com.kjnresort.domain.ApplianceVO">
+		SELECT * FROM t_appliance WHERE id = #{id}
+	</select>
 
 	<!-- 쿼리 보관 -->
 	<sql id="criteria">
@@ -45,8 +49,8 @@
 		<!-- 보관해 둔 쿼리 사용 -->
 		<include refid="criteria"></include>
 	   <![CDATA[ 		  
-	    		  rownum <= #{pageNum} * #{amount} )
-	    		  WHERE   rn > (#{pageNum} -1) * #{amount}
+	    		  rownum <= #{pageNum} * #{amount})
+	    WHERE   rn > (#{pageNum} -1) * #{amount} AND regDate is not null
 	   ]]> 		  
 	</select>
 	  
@@ -74,13 +78,27 @@
 		VALUES(seq_t_appliance.NEXTVAL, #{id}, #{name}, #{phoneNumber}, #{address}, #{recruitNo}, #{career}, #{introduction}, '제출완료', sysdate)
 	</insert>
 	
+	<insert id="save">
+		INSERT INTO t_appliance(applianceNo, id, name, phoneNumber, address, recruitNo, career, introduction, status)
+		VALUES(seq_t_appliance.NEXTVAL, #{id}, #{name}, #{phoneNumber}, #{address}, #{recruitNo}, #{career}, #{introduction}, '임시저장')
+	</insert>
+	
+	
 	<select id="read" resultType="com.kjnresort.domain.ApplianceVO">
 		SELECT * FROM t_appliance WHERE applianceNo = #{applianceNo}
 	</select>
 	
+	<!-- 지원서 1회 작성 후 임시저장 버튼 클릭 -->
 	<update id="update">
 		UPDATE t_appliance
-		SET career = #{career}, introduction = #{introduction}, status = #{status}
+		SET career = #{career}, introduction = #{introduction}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 지원서 1회 작성 후 지원하기 버튼 클릭 -->
+	<update id="updateInsert">
+		UPDATE t_appliance
+		SET career = #{career}, introduction = #{introduction}, status = '제출완료', regDate = sysdate
 		WHERE id = #{id}
 	</update>
 

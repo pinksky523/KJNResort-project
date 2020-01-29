@@ -145,7 +145,10 @@ footer{height: 300px;}
 		
 
 <%@include file="../includes/footer.jsp"%>
+
 <script>
+
+
 
 
 var actionForm=$("#actionForm");

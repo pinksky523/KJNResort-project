@@ -22,23 +22,23 @@
 					<div class="form-group">
 		                <label>이름 : </label>
 		                <input class="form-control" name="name"
-		                value="${member.name }" readonly></div>
+		                value="${appliance.name }" readonly></div>
 		            <div class="form-group">
 		                <label>핸드폰 번호 : </label>
 		                <input class="form-control" name="phoneNumber"
-		                value="${member.phoneNumber }" readonly></div>
+		                value="${appliance.phoneNumber }" readonly></div>
 		            <div class="form-group">
 		                <label>주소 : </label>
 		                <input class="form-control" name="address"
-		                value="${member.address }" readonly></div>
+		                value="${appliance.address }" readonly></div>
 		            <div class="form-group">
 		                <label>이력 : </label>
-		               <textarea class="form-control" rows="3" name="career" id="inputCareer"></textarea></div>
+		               <textarea class="form-control" rows="3" name="career" id="inputCareer">${appliance.career }</textarea></div>
 		            <div class="form-group">
 	                    <label>자기소개 : </label>
-	                    <textarea class="form-control" rows="10" name="introduction" id="inputIntro"></textarea></div>
-	                	<input type="hidden" name="id" value="${member.id }">
-	                	<input type="hidden" name="recruitNo" value="${recruit.recruitNo }">    
+	                    <textarea class="form-control" rows="10" name="introduction" id="inputIntro">${appliance.introduction }</textarea></div>
+	                	<input type="hidden" name="id" value="${appliance.id }">
+	                	<input type="hidden" name="recruitNo" value="${appliance.recruitNo }">    
 	                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	                <button type="button" onclick="register()" class="btn btn-primary pull-right">지원하기</button>
 	                <button type="button" onclick="save()" class="btn btn-success pull-right">임시저장</button>
@@ -57,7 +57,7 @@ function register() {
 
  				if(careerChk!="" && introChk!=""){
  					alert("지원서가 제출되었습니다.");
- 					$("form").attr("action", "/appliance/register");
+ 					$("form").attr("action", "/appliance/updateInsert");
  					document.frm.submit();
  				} else if(careerChk == null || careerChk === ""){
 					alert('이력을 입력해주세요');
@@ -70,7 +70,7 @@ function register() {
 
 function save(){
 					alert("임시저장 되었습니다.");
-					$("form").attr("action", "/appliance/save");
+					$("form").attr("action", "/appliance/update");
 					document.frm.submit();
 }
 
