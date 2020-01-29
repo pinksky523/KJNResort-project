@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
-
+<!-- 합쳐지고 최소화된 최신 CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <!-- jQuery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<!-- 합쳐지고 최소화된 최신 CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
 <style>
 .reserveDiv{background: #EAEAEA; width:900px; height:200px; align-self: center; margin:0 auto; }
@@ -93,10 +92,10 @@ footer{margin-top:200px; position: relative; top:30%;}
 function test(){
 	location.replace('payChargeResult');
 }
-var IMP = window.IMP; 
-IMP.init('imp39785834');
+
 
 function successPay(payAmount){
+	
 	var paidDate=new Date();
 	var login_ID=null;
 	
@@ -128,6 +127,8 @@ function successPay(payAmount){
 			id:login_ID,
 	};
 	
+
+	
 	$.ajax({
 		type:'post',
 		url:'/condoreserve/register',
@@ -150,10 +151,14 @@ function successPay(payAmount){
 
 }
 
+
+
 $('#payCharge').on("click",function(){
+	var IMP = window.IMP; 
+	IMP.init('imp72610175');
 
 	IMP.request_pay({
-	    pg : 'kakaopay',
+	    pg : 'kakao',
 	    pay_method : 'card',
 	    merchant_uid : 'merchant_' + new Date().getTime(),
 	    name : 'KJN 리조트 콘도',

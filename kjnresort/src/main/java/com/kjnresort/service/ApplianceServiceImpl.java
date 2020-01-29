@@ -49,8 +49,20 @@ public class ApplianceServiceImpl implements ApplianceService {
 	}
 
 	@Override
-	public boolean modify(ApplianceVO appliance) {
+	public void save(ApplianceVO appliance) {
 		log.info("지원서 임시저장 : " + appliance);
+		mapper.save(appliance);
+	}
+	
+	@Override
+	public boolean modifyRegister(ApplianceVO appliance) {
+		log.info("임시저장한 지원서를 제출 : " + appliance);
+		return mapper.updateInsert(appliance) == 1;
+	}
+	
+	@Override
+	public boolean modify(ApplianceVO appliance) {
+		log.info("임시저장한 지원서를 임시저장 : " + appliance);
 		return mapper.update(appliance) == 1;
 	}
 
@@ -63,6 +75,13 @@ public class ApplianceServiceImpl implements ApplianceService {
 	public RecruitVO recruitGet(RecruitVO recruit) {
 		return mapper.recruitRead(recruit);
 	}
+
+	@Override
+	public ApplianceVO applianceGet(ApplianceVO appliance) {
+		log.info("DB에 저장되어 있는 지원정보 불러옴");
+		return mapper.applianceRead(appliance);
+	}
+
 
 
 }
