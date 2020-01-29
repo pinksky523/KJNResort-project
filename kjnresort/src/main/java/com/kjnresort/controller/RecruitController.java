@@ -26,7 +26,8 @@ import lombok.extern.log4j.Log4j;
 @AllArgsConstructor
 public class RecruitController {
 	private RecruitService service;
-
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/register")
 	public void register() {
 		
