@@ -143,10 +143,13 @@ footer{height: 300px;}
   </div>
 </nav>
 		
-		
 
 <%@include file="../includes/footer.jsp"%>
+
 <script>
+
+
+
 
 var actionForm=$("#actionForm");
 $(".move").on("click",function(e){
