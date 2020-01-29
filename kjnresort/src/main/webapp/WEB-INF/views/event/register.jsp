@@ -141,7 +141,7 @@ $(function(e){
 		formObj.append(str1+str2).submit();
 	});
 	
-	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|xlsx|pptx|txt|html)$");
+	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|xlsx|pptx|txt|html|pdf)$");
 	var maxSize = 5242880;
 	
 	//첨부 파일 확장자 및 크기 확인 함수

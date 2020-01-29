@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -82,11 +83,15 @@ public class EventController {
 	
 	
 	//이벤트 게시글 상세조회
-	@GetMapping("get")
-	public void get(Long eventNo, Model model, @ModelAttribute("cri") Criteria cri) {
+	@GetMapping("get/{eventNo}")
+	public String get(@PathVariable("eventNo") Long eventNo, Model model, @ModelAttribute("cri") Criteria cri) {
+		log.info("1");
 		service.updateViewCnt(eventNo);
 		
 		model.addAttribute("event", service.get(eventNo));
+		
+		
+		return "/event/get";
 	}
 	
 	//이벤트 게시글 수정 창

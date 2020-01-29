@@ -119,7 +119,7 @@ public class MemberTests {
 	            if(i<49) {	//일반회원
 	               pstmt.setString(1, "user"+i);
 	               pstmt.setString(2, pwencoder.encode("1111"));
-	               pstmt.setString(3, "정지회원"+i);
+	               pstmt.setString(3, "회원이름"+i);
 	               pstmt.setString(4, "0" + i + "-0000-0000");
 	               pstmt.setString(5, "2011-11-11");
 	               pstmt.setString(6, "test주소 " + i);
@@ -127,7 +127,7 @@ public class MemberTests {
 	            } else {	//정지회원
 	               pstmt.setString(1, "user"+i);
 	               pstmt.setString(2, pwencoder.encode("1111"));
-	               pstmt.setString(3, "일반회원"+i);
+	               pstmt.setString(3, "회원이름"+i);
 	               pstmt.setString(4, "0" + i + "-0000-0000");
 	               pstmt.setString(5, "2011-11-11");
 	               pstmt.setString(6, "test주소" + i);

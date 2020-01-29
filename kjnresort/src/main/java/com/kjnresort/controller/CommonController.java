@@ -113,9 +113,9 @@ public class CommonController {
 	
 	
 	@GetMapping("/accessError")
-	public String accessDenied(Authentication auth, Model model) {
+	public String accessDenied(Authentication auth, Model model, RedirectAttributes rttr) {
 		log.info("conmmonController accessDenied() : " + auth);
-		model.addAttribute("msg", "로그인 후 이용해주세요");
+		rttr.addFlashAttribute("msg", "로그인 후 이용해주세요");
 		return "redirect:/common/customLogin";
 	}
 
