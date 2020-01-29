@@ -25,7 +25,7 @@
     <div class="col-lg-12">
         <h1 class="page-header">
         	<!-- Tables -->
-        	Board Register	
+        	후기 등록1
         </h1>
     </div>
     <!-- /.col-lg-12 -->
@@ -37,23 +37,38 @@
             <div class="panel-heading">
                 <!-- DataTables Advanced Tables -->
                 <!-- Board List Page -->
-                Board Register
+                	후기 등록2
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-			<form method="post" action="/board/register" role="form">
+			<form method="post" action="/review/register" role="form">
 			<input type="hidden" name="${_csrf.parameterName }"
  					             value="${_csrf.token }">
 	            <div class="form-group">
-	                <label>Title</label>
+	                <label>제목</label>
 	                <input class="form-control" name="title"></div>
+	            <div class="form-group">
+	                <label>카테고리</label>
+	                 <select name="category" class="form-control" id="category"  style="width: 70%">
+        				<option value="스키">스키 </option>
+        				<option value="콘도">콘도 </option>
+			        	<option value="기타">기타 </option> </select></div>
+	            <div class="form-group">
+	                <label>평점</label>
+	                 <select name="grade" class="form-control" id="grade"  style="width: 70%">
+        				<option value="1">1 </option>
+        				<option value="2">2 </option>
+        				<option value="3">3 </option>
+        				<option value="4">4 </option>
+			        	<option value="5">5 </option> </select></div>			        	    
 	            <div class="form-group">
                     <label>Text area</label>
                     <textarea class="form-control" rows="3" name="content"></textarea></div>
-	            <div class="form-group">
-	                <label>Writer</label>
-	                <input class="form-control" name="writer" readonly 
-	                	   value="<sec:authentication property="principal.username"/>"></div>
+                <input type="hidden" name="useNo" value="${useNo}">
+                <input type="hidden" name="ticketNo" value="${useNo}">
+                <sec:authorize access="isAuthenticated()">
+        			<input type="hidden" name="id" value="<sec:authentication property="principal.username"/>">
+    			</sec:authorize>
 	            <button type="submit" class="btn btn-default">
 	            	Submit Button</button>
                 <button type="reset" class="btn btn-default">
@@ -100,8 +115,6 @@ $(function(e){
 					"       value='" + o.data('uuid') + "'>";
 			tags += "<input type='hidden' name='attachList[" + i + "].uploadPath' " +
 					"       value='" + o.data('path') + "'>";
-			tags += "<input type='hidden' name='attachList[" + i + "].fileType' " +
-					"       value='" + o.data('type') + "'>";
 		});//END each()
 		console.log(tags);
 		$("form[role='form']").append(tags).submit();

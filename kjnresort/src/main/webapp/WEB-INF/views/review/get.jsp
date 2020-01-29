@@ -1,15 +1,155 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
-<%@ include file="../includes/header.jsp" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+	<title>KJN RESORT</title>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<meta charset="UTF-8">
+	<meta name="description" content="loans HTML Template">
+	<meta name="keywords" content="loans, html">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<!-- Bootstrap Core CSS -->
+    <link href="/resources/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="/resources/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="/resources/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="/resources/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="/resources/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/resources/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	
+	
+	<!-- Favicon -->
+	<link href="img/favicon.ico" rel="shortcut icon"/>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
+ 	
+	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<!-- 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->	 
+	<!-- Main Stylesheets -->
+	<link rel="stylesheet" href="/resources/css/style.css"/>
+
+
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+</head>
+<body class="contents" style="height: 100%;">
+	<!-- Page Preloder -->
+	<div id="preloder">
+		<div class="loader"></div>
+	</div>
+
+	<!-- Header Section -->
+	<header class="header-section">
+		<a href="/" class="site-logo">
+			<img src="/resources/img/logo.png" alt="">
+		</a>
+		<nav class="header-nav">
+			<ul class="main-menu">
+				<li><a href="/common/resortInfo">리조트안내</a></li>
+				<li><a href="/notice/list">공지사항</a></li>
+				<li><a href="#">콘도</a>
+					<ul class="sub-menu">
+						<li><a href="about-us.html">콘도 예약</a></li>
+						<li><a href="loans.html">콘도 예약내역</a></li>
+					</ul>
+				</li>
+				<li><a href="#">이용권</a>
+					<ul class="sub-menu">
+						<li><a href="/ticket/buyTicket">이용권 구매</a></li>
+						<form id="buyTicketListUser" action="/ticket/buyTicketListUser" method="post">
+								<input type="submit" id="ticketBtn" value="   이용권 구매내역">
+								<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					 		</form>
+					</ul>
+				</li>
+				<li><a href="/event/list">이벤트</a></li>
+				<li><a href="/review/list">후기</a></li>
+				<li><a href="#">1:1문의</a>
+					<ul class="sub-menu">
+						<li><a href="/qna/register">문의하기</a></li>
+						<li><a href="/qna/list">문의내역</a></li>
+					</ul>
+				</li>
+				<li><a href="#">인재채용</a>
+					<ul class="sub-menu">
+						<li><a href="/recruit/list">모집공고</a></li>
+						<li><a href="/appliance/myList">지원내역조회</a></li>
+					</ul>
+				</li>
+				<li>
+				<!-- 로그인한 경우 -->
+				<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal" var="pinfo"/>'>
+				
+				  <c:if test="${pinfo.username ne 'admin'}">		<!-- 관리자로 로그인할 경우 아무버튼 없음 -->
+				  	<form id="mypageForm" action="/member/mypage" method="get">
+						<button type="submit" class="btn btn-secondary" id="mypage">마이페이지</button>
+					 </form>
+ 				 </c:if>
+				</sec:authorize>
+				
+				<!-- 로그인 안 한 경우 -->
+				<sec:authorize access="isAnonymous()">
+					<button type="button" onclick="location.href='/common/customLogin'" class="btn btn-secondary" id="customLogin">로그인</button>
+				</sec:authorize>
+				</li>
+				
+				<li>
+				<!-- 로그인한 경우 -->
+				<sec:authorize access="isAuthenticated()">
+				<button type="button" onclick="location.href='/common/customLogout'" class="btn btn-danger" id="customLogout">로그아웃</button>
+				</sec:authorize>
+				
+				<!-- 로그인 안 한 경우 -->
+				<sec:authorize access="isAnonymous()">
+					<button type="button" onclick="location.href='/common/memberJoin'" class="btn btn-danger" id="register">회원가입</button>
+				</sec:authorize>
+				</li>
+			
+			</ul>
+		</nav>
+	</header>
+	
+	<!-- Header Section end -->
+	
+	<!-- JQuery -->
+	<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
+	 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
+	
 <style>
-.uploadResult { width:100%; 				background: #efe; }
+#ticketBtn  { background-color: transparent !important;
+    		  background-image: none !important;
+    		  border-color: transparent;
+    		  border: none;
+    		  color: black;
+    		  font-weight: bold; }
+    		  
+.uploadResult { width:100%; 				background: white; }
 .uploadResult ul { 	display:flex; 			flex-flow:row;
 					justify-content: center;align-items: center;}
-.uploadResult ul li {	list-style: none;	padding:10px; }
-.uploadResult ul li img { width:100px; }
+.uploadResult ul li {	list-style: none;	padding:10px; width:80%;}
+.uploadResult ul li img { width:100px; height: 200px; }
 .uploadResult ul li span { color:gray;  }
 .bigPcitureWrapper { position: absolute;		display:none;
 					 justify-content: center;	align-items: center;
@@ -18,8 +158,10 @@
 					 background: gray; }
 .bigPicture { 	position: relative;		display: flex;
 				justify-content: center;align-items: center; }
-.bigPicture img { width: 600px; }
+.bigPicture img { width: 600px; } 
 button { margin-right: 5px;}
+p {color: black;}
+#star { height: 20px; width: 100px; }
 </style>
 <div class="row">
     <div class="col-lg-12">
@@ -59,16 +201,32 @@ button { margin-right: 5px;}
 	                	      readonly><fmt:formatDate value="${review.regdate}"
                             					pattern="yyyy-MM-dd"/></textarea></div>
 	            <div class="form-group">
-                    <label>평점</label>
-                    <input class="form-control" name="grade" value="${review.grade }"
-	                	      readonly></div>
+                    <label>평점</label>  <%-- <input class="form-control" name="grade" value="${review.grade }"readonly></div> --%>
+                    <c:choose>
+                    	<c:when test="${review.grade eq 1}">
+							<img id="star" src='../../resources/images/one.PNG'>
+						</c:when>
+						<c:when test="${review.grade eq 2}">
+							<img id="star" src='../../resources/images/two.PNG'>
+						</c:when>
+						<c:when test="${review.grade eq 3}">
+							<img id="star" src='../../resources/images/three.PNG'>
+						</c:when>
+						<c:when test="${review.grade eq 4}">
+							<img id="star" src='../../resources/images/four.PNG'>
+						</c:when>
+						<c:otherwise>
+							<img id="star" src='../../resources/images/five.PNG'>
+						</c:otherwise>
+                    </c:choose>
 	            <div class="form-group">
                     <label>내용</label>
                     <textarea class="form-control" rows="3" name="content"
 	                	      readonly>${review.content }</textarea></div>     	          	      
 
-	            
-               	<button data-oper='reply' name="reply" class="btn btn-primary pull-right">댓글등록</button>
+	            <sec:authorize access="isAuthenticated()">
+					<button type="button" id="addReplyBtn" class="btn btn-primary pull-right">댓글등록</button>
+	            </sec:authorize>
             	<!-- 로그인한 사용자가 작성한 글에만 수정 버튼 표시 -->
 	            <sec:authentication property="principal" var="pinfo"/>
 	            <sec:authorize access="isAuthenticated()">
@@ -95,7 +253,7 @@ button { margin-right: 5px;}
     </div>			<!-- /.col-lg-6 -->
 </div>				<!-- /.row -->
 
-<%--  
+  
 <!-- 첨부파일  -->
 <div class="row">
     <div class="col-lg-12">
@@ -122,20 +280,13 @@ button { margin-right: 5px;}
     </div>			<!-- /.col-lg-6 -->
 </div>				<!-- /.row -->
 <!-- END 첨부파일  -->	 
---%>	  
+	  
 <!-- 댓글 목록 -->
 <div class='row'>
   <div class='col-lg-12'>
  	<div class="panel panel-default">
         <div class="panel-heading">
             <i class="fa fa-comments fa-fw"></i> Reply
-            
-             <!-- 로그인한 사용자만 댓글 작성 버튼 표시 -->
-	         <sec:authorize access="isAuthenticated()">
-            	<button type="button" class="btn btn-primary pull-right btn-xs"
-            		id="addReplyBtn">
-            	New Reply</button>
-	         </sec:authorize>
         </div>
         <div class="panel-body">
            <ul class="chat">
@@ -167,7 +318,7 @@ button { margin-right: 5px;}
 
 <!-- 댓글 모달 창 -->
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" 
+	<div class="modal fade" id="myModal" tabindex="-1"   
 		 role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
@@ -179,13 +330,13 @@ button { margin-right: 5px;}
 	            </div>
 	            <div class="modal-body">
 	                <div class="form-group">
-	                	<label>Reply</label>
-			            <input class="form-control" id="reply"
+	                	<label>댓글</label>
+			            <input class="form-control" id="reply" 
 			            	   name="reply" value="New Reply!!"></div>
 	                <div class="form-group">
 	                	<label>Id</label>
 	                	<input class="form-control" id="id" readonly
-			            	   name="id" value="id"></div>
+			            	   name="id" value="replyer"></div>
 	                <div class="form-group">
 	                	<label>Reply Date</label>
 	                	<input class="form-control" id="replyDate"
@@ -205,6 +356,7 @@ button { margin-right: 5px;}
  
 
 <script>
+
 $(function(){
 	var frm = $('#operForm');
 	
@@ -233,31 +385,14 @@ $(function(){
 <script src="/resources/js/reply.js"></script>
 <script>
 //즉시 실행함수 
-/* (function(){
-	
+ (function(){
 	//첨부파일 목록 가져오기
-	$.getJSON("/board/getAttachList", 
-			  { bno : ${board.bno} }, 
-			  function(result){
+	$.getJSON("/review/getAttachList", { reviewNo : ${review.reviewNo} }, function(result){
 		console.log('attach list----------------');
 		console.log(result);
 		var li = '';
 
-		var li = '';
-
 		$(result).each(function(index, obj){
-			if(obj.fileType == false){	//이미지가 아니면 attach.png 표시
-				var filePath = encodeURIComponent(
-									obj.uploadPath + "/" + 
-									obj.uuid + "_" +
-									obj.fileName);
-				li += "<li data-path='" + obj.uploadPath + "' " + 
-					  "    data-uuid='" + obj.uuid + "' "+
-					  "    data-filename='" + obj.fileName + "' " +
-					  "    data-type='" + obj.fileType + "'>" +
-				      "    <div><span>" + obj.fileName + "</span><br>" +
-				  	  "    <img src='/resources/img/attach.png'></div></li>";
-			} else { //이미지이면 섬네일 표시
 				var filePath = encodeURIComponent(obj.uploadPath + "/s_" +
 												  obj.uuid + "_" + 
 												  obj.fileName);
@@ -268,39 +403,14 @@ $(function(){
 
 				li += "<li data-path='" + obj.uploadPath + "' " + 
 					  "    data-uuid='" + obj.uuid + "' "+
-					  "    data-filename='" + obj.fileName + "' " +
-					  "    data-type='" + obj.fileType + "'>" +
-					  "    <img src='/display?fileName=" + filePath + "'></div></li>";   			}
+					  "    data-filename='" + obj.fileName + "' >" +
+					  "    <img src='/display?fileName=" + filePath + "'></div></li>";   			
 			});//END each()
 			$('.uploadResult ul').append(li);
 	}).fail(function(xhr, status, err){
 		console.log(err);
 	}); //END 첨부파일 목록 가져오기
 })(); //END 즉시 실행함수 
- */
-//첨부 파일 클릭 이벤트 처리
-$('.uploadResult').on('click', 'li', function(){
-	var li = $(this);
-	var filePath = encodeURIComponent(li.data('path') + "/" + 
-									  li.data('uuid') + "_" +
-									  li.data('filename'));
-	
-	if(li.data('type') == true){//이미지일 때
-		showImage(filePath.replace(new RegExp(/\\/g), "/"));
-	} else {//일반 파일일 때
-		self.location = '/download?fileName=' + filePath;
-	}
-		
-});//END 첨부 파일 클릭 이벤트 처리
-
-
-//원본 이미지 클릭 이벤트 처리
-$('.bigPcitureWrapper').on('click', function(){
-	$('.bigPicture').animate({width:'0%', height:'0%'}, 1000);
-	setTimeout(() => {
-		$(this).hide();
-	}, 1000);
-}); //END 원본 이미지 클릭 이벤트 처리
 
 
 //섬네일 이미지 원본 표시
@@ -336,17 +446,19 @@ $(function(){
 					return;
 				}
 
-				var li = '';
-				for (rvo of list) {
-					//댓글 목록을 replyUL에 <li>로 추가
-					li += "<li class='left clearfix' data-replyNo='" + rvo.replyNo + "'>" +
-						  "  <div><div class='header'>" +
-						  "         <strong class='primary-font'>" + rvo.id + "</strong>" +
-						  "         <small class='pull-right text-muted'>" + 
-						  				rvo.replyDate +  																
-						  "         </small></div>" +
-						  "		 <p>" + rvo.reply + "</p></div></li>"
-				}  
+				var li = '';	
+				for (var i = 0, len = list.length || 0; i< len; i++) {
+				    //댓글 목록을 replyUL에 <li> 로 추가
+				    li += "<li class='left clearfix' data-replyno='"+ list[i].replyNo +"'>" +  //result 에 rvo값을 li에 담아서 for문으로 돌려서 댓글숫자만큼 만듬
+			              "	<div> "+
+			              "     <div class='header'> "+
+			              "         <strong class='primary-font'>"+ list[i].reply +"</strong>"+
+			              "         <small class='pull-right text-muted'>"+
+			              	          replyService.displayTime(list[i].replyDate) +
+			              "         </small>"+
+			              "     </div>"+
+			              "     <p>"+ list[i].id +"</p></div></li>"
+				} 
 				replyUL.html(li);
 				showReplyPage(replyCnt);
 			}
@@ -424,6 +536,16 @@ $(function(){
 		xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	});
 	
+	//New Reply 버튼 이벤트 처리
+	$('#addReplyBtn').click(function(e){
+		modal.find('input').val("");
+		modal.find("input[name='id']").val(id); 
+		modalInputReplyDate.closest('div').hide();
+		modalModBtn.hide();
+		modalRegisterBtn.show();
+		modal.modal('show');
+	}); //END New Reply 버튼 이벤트 처리
+	
 	//댓글 삭제 버튼 이벤트 처리
 	modalRemoveBtn.click(function(){
 		if(id == null) { //로그인하지 않은 경우 삭제 불가
@@ -489,15 +611,12 @@ $(function(){
 	replyUL.on('click', 'li', function(e){
 		//댓글 조회
 		replyService.get(
-			$(this).data('replyNo'),
+		    $(this).data('replyno'),
 			function(result){
 				modalInputReply.val(result.reply);
 				modalInputId.val(result.id);
-				modalInputReplyDate.val(replyService.displayTime(result.replyDate))
-								   .attr('readonly', 'readonly');
-				
+				modalInputReplyDate.val(replyService.displayTime(result.replyDate)).attr('readonly', 'readonly');
 				modal.data('replyNo', result.replyNo);
-				
 				modal.find("button[id != 'modalCloseBtn']").hide();
 				modalModBtn.show();
 				modalRemoveBtn.show();
@@ -527,43 +646,11 @@ $(function(){
 	}); //END Register 버튼 이벤트 처리
 
 	
-	//New Reply 버튼 이벤트 처리
-	$('#addReplyBtn').click(function(){
-		modal.find('input').val('');
-		modal.find("input[name='id']").val(id); //id를 폼에 추가
-		modalInputReplyDate.closest('div').hide();
-		modal.find("button[id != 'modalCloseBtn']").hide();
-		modalRegisterBtn.show();
-		modal.modal('show');
-	}); //END New Reply 버튼 이벤트 처리
+	
 	
 	console.log(replyService);
 });
 </script>
 <%@ include file="../includes/footer.jsp" %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

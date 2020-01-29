@@ -5,14 +5,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zxx">
-<style>
-#ticketBtn  { background-color: transparent !important;
-    		  background-image: none !important;
-    		  border-color: transparent;
-    		  border: none;
-    		  color: black;
-    		  font-weight: bold; }
-</style>
 <head>
 	<title>KJN RESORT</title>
 	<meta charset="UTF-8">

@@ -4,17 +4,14 @@ var replyService = (function(){
 	
 	function getList(param, callback, error){			//댓글 목록
 		var url = "/replies/pages/" + param.reviewNo + "/" + param.page + ".json";
-		console.log("getList reply-------1");
+		
 		$.getJSON(url, function(result){
 			if(callback) {
-				console.log("getList reply-------2");
 			//	callback(result);
 				callback(result.replyCnt, result.list);
-				console.log("getList reply-------3");
 			}
 		}).fail(function(xhr, status, err){
 			if(error)	{
-				console.log("getList reply-------4");
 				error(err);
 			}
 		});

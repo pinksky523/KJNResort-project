@@ -9,9 +9,9 @@ public interface ReviewAttachMapper {
 	
 	public void delete(String uuid);
 	
-	public List<ReviewAttachVO> findByBno(Long bno);
+	public List<ReviewAttachVO> findByReviewNo(Long reviewNo);
 	
-	public void deleteAll(Long bno);
+	public void deleteAll(Long reviewNo);
 	
 	public List<ReviewAttachVO> getOldFiles();
 }

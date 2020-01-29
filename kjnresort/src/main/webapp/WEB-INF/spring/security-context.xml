@@ -22,8 +22,6 @@
 
 	<security:intercept-url pattern="/**" access="permitAll"/>
 	
-	
-	
 	<!-- 로그인 처리 -->
 	<!-- 로그인 성공 핸들러 지정 -->
 	 <!-- <security:form-login/> --> 

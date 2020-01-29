@@ -57,7 +57,6 @@ button { margin-right: 5px;}
 	                <input class="form-control" name="writer"
 	                	   value="${(tPrice.price * ticket.liftAmount) + (ttPrice.price * ticket.toolAmount)}" readonly></div>    	       	       	   
                              
-               	<!-- <button data-oper='review' class="btn btn-primary pull-right">후기등록</button> -->
                	<c:if test="${ticket.status == 0}">
                	<button data-oper='use' name="use" class="btn btn-success pull-right">이용 확인</button>
                	</c:if>

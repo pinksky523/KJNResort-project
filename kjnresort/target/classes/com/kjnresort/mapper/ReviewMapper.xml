@@ -40,6 +40,7 @@
    <![CDATA[ 		  
     		  rownum <= #{pageNum} * #{amount} )
     WHERE   rn > (#{pageNum} -1) * #{amount}
+    ORDER BY reviewNo DESC
    ]]> 		  
   </select>
   
@@ -92,6 +93,12 @@
     WHERE 	reviewNo = #{reviewNo}
   </update>
   
+  <update id="updateTReview">
+    UPDATE 	t_ticket_buy
+    SET		review = 1
+    WHERE 	ticketNo = #{ticketNo}
+  </update>
+  
   <delete id="delete">
     DELETE t_review WHERE reviewNo = #{reviewNo}
   </delete>
@@ -101,13 +108,25 @@
   </select>
     
   <insert id="insert">
-  	INSERT INTO t_review(reviewNo, title, content, regdate, category, grade, useNo)
-	VALUES(seq_t_review.NEXTVAL, #{title}, #{content}, sysdate, #{category}, #{grade}, #{useNo})
+  
+  <selectKey keyProperty="reviewNo" order="BEFORE" resultType="long">	<!-- insert 하기 전에 할 것이니까 BEFORE, bno의 타입이 long -->
+			SELECT seq_t_review.NEXTVAL FROM dual
+		</selectKey>
+  
+  	INSERT INTO t_review(reviewNo, id, title, content, regdate, category, grade, useNo)
+	VALUES(#{reviewNo}, #{id}, #{title}, #{content}, sysdate, #{category}, #{grade}, #{useNo})
   </insert>
 
   <select id="getList" resultType="com.kjnresort.domain.ReviewVO">
   <![CDATA[
-    SELECT * FROM tbl_board WHERE reviewNo > 0
+    SELECT * FROM t_review WHERE reviewNo > 0
   ]]>
   </select>
+  
+  <update id="updateViewCnt">
+	UPDATE t_review
+	SET viewCnt = viewCnt + 1
+	WHERE reviewNo = #{reviewNo}
+</update>
+  
 </mapper>
