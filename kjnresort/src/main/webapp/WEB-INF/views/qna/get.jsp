@@ -58,7 +58,8 @@ footer{position:relative; top:100px;}
 <sec:authentication property="principal" var="pinfo" />
 	<sec:authorize access="isAuthenticated()">
 		<c:if test="${'admin'!=pinfo.username}">
-			<button id="modifyBtn" class="btn btn-warning">수정</button> <button id="delBtn" class="btn btn-danger">삭제</button>
+		<c:if test="${qna.isAnswered=='N' }">
+			<button id="modifyBtn" class="btn btn-warning">수정</button></c:if> <button id="delBtn" class="btn btn-danger">삭제</button>
 		</c:if>
 	</sec:authorize></div>
 			

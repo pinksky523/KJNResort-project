@@ -128,6 +128,7 @@ public class CondoReserveController { //헐 이제 될거같아
 			
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/register")
 	public void register() {
 	
