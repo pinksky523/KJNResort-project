@@ -27,8 +27,8 @@
 				
 				<tr>
              <td colspan="3" align="center">
-		   	  <input type="button" class="btn btn-lg btn-secondary" onclick="location.href='/common/findPw'" value="취소">
-		      <input type="button" class="btn btn-lg btn-warning" onclick="confirm()" value="변경">
+		   	  <input style="margin: 20px;" type="button" class="btn btn-lg btn-secondary" onclick="location.href='/common/findPw'" value="취소">
+		      <input style="margin: 20px;" type="button" class="btn btn-lg btn-warning" onclick="confirm()" value="변경">
             </td>
            </tr>
            </table>
