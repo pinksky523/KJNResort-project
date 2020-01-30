@@ -123,7 +123,7 @@ public class CommonController {
 	public String accessDenied(Authentication auth, Model model, RedirectAttributes rttr) {
 		log.info("conmmonController accessDenied() : " + auth);
 		rttr.addFlashAttribute("msg", "접근금지 페이지입니다");
-		return "/common/customLogin";
+		return "redirect:/";
 	}
 
 	
