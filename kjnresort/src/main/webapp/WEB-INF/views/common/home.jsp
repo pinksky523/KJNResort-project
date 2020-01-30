@@ -59,14 +59,15 @@
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
 						<li><a href="/ticket/buyTicket">이용권 구매</a></li>
-						<li>
-							<sec:authorize access="isAuthenticated()">
+						<li><a href="/ticket/buyTicketListUser">이용권 구매내역</a></li>
+							
+							<%-- <sec:authorize access="isAuthenticated()">
 							<form id="buyTicketListUser" action="/ticket/buyTicketListUser" method="post">
 								<input type="submit" id="ticketBtn" value="   이용권 구매내역">
 								<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
 								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					 		</form>
-					 		</sec:authorize>
+					 		</sec:authorize> --%>
 						</li>
 					</ul>
 				</li>

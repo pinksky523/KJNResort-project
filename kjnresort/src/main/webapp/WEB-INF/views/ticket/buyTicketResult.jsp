@@ -25,27 +25,14 @@ button{margin-top:70px; margin-left:10px;}
 <span class="info">구매일시 : <c:out value="${ticket.buyDate}"/></span>
 </div><br>
 
-							<form id="operForm" action="/ticket/buyTicketListUser" method="post">
-								<sec:authorize access="isAuthenticated()">
-									<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
-									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-									<button  type="submit" class="btn btn-primary btn-lg">예약내역확인</button>
-								</sec:authorize>
-									<button data-oper='main' onclick="location.href='/'" class="btn btn-default btn-lg">메인으로 가기</button>
-					 		</form>
+	<button onclick="location.href='/ticket/buyTicketListUser'"  type="button" class="btn btn-primary btn-lg">예약내역확인</button>
+	<button data-oper='main' onclick="location.href='/'" class="btn btn-default btn-lg">메인으로 가기</button>
+					 		
 					 		
 </div>
 </div>
 
 <script>
-$(function(){
-	var frm = $('#operForm');
-	
-	$("button[data-oper='main']").click(function(e){
-			frm.attr("method", "get");
-			frm.attr("action", "/").submit();	
-	});
-});
 </script>
 <!--
 

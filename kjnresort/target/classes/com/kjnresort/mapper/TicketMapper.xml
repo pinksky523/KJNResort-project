@@ -26,7 +26,7 @@
 	<select id="getListWithPaging" resultType="com.kjnresort.domain.TicketBuyVO">
      <![CDATA[
       SELECT  * 
-      FROM 	  ( SELECT /*+INDEX_DESC(t_ticket_buy pk_ticket) */ 
+      FROM 	  ( SELECT /*+INDEX_DESC(t_ticket_buy pk_ticketNo) */ 
     				   rownum rn, ticketNo, id, buyDate, liftAmount, 
     			  	   toolAmount, status, review
     		    FROM   t_ticket_buy
@@ -37,7 +37,6 @@
      <![CDATA[ 		  
     		    rownum <= #{pageNum} * #{amount} )
       WHERE   rn > (#{pageNum} -1) * #{amount}
-      ORDER BY ticketNo DESC
      ]]> 		  
     </select>
     

@@ -5,80 +5,72 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
 <%@ include file="../includes/header.jsp" %>
 <style>
-.uploadResult { width:100%; 				background: #efe; }
-.uploadResult ul { 	display:flex; 			flex-flow:row;
-					justify-content: center;align-items: center;}
-.uploadResult ul li {	list-style: none;	padding:10px; }
-.uploadResult ul li img { width:100px; }
-.uploadResult ul li span { color:gray;  }
+h2{text-align: center;}
+hr{text-align: center; width:1000px;}
+footer{margin-top:400px !important;}
 button { margin-right: 5px;}
-</style>
-<div class="row">
-    <div class="col-lg-12">
-        <h2 class="page-header">
-        	<br><br><br><br>
-        	이용권 구매내역
-        </h2>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-body">
-	            <div class="form-group">
-	                <label>구매번호</label>
-	                <input class="form-control" name="ticketNo"
-	                	   value="${ticket.ticketNo }" readonly></div>
-	            <div class="form-group">
-	                <label>구매일시</label>
-	                <input class="form-control" name="buyDate"
-	                	   value="${ticket.buyDate }" readonly></div>
-	            <div class="form-group">
-                    <label>상태</label>
-                    <input class="form-control" name="content"
-	                	     value=" ${ticket.status }" readonly></div>
-	            <div class="form-group">
-	                <label>이름</label>
-	                <input class="form-control" name="writer"
-	                	   value="${member.name }" readonly></div>
-	            <div class="form-group">
-	                <label>핸드폰 번호</label>
-	                <input class="form-control" name="writer"
-	                	   value="  ${member.phoneNumber }  " readonly></div>
-	            <div class="form-group">
-	                <label>이용 정보</label>
-	                <input class="form-control" name="writer"
-	                	   value=" 리프트(4시간)/${ticket.liftAmount}매, 장비(4시간)/${ticket.toolAmount}매" readonly></div>
-	            <div class="form-group">
-	                <label>결제금액</label>
-	                <input class="form-control" name="writer"
-	                	   value="${ticket.totalPrice}" readonly></div> 
-	                	   <%-- value="${(tPrice.price * ticket.liftAmount) + (ttPrice.price * ticket.toolAmount)}" readonly></div> --%>    	       	       	   
-                <c:if test="${ticket.status == 2 && ticket.review == 0}">             
-               	<button data-oper='review' class="btn btn-primary pull-right">후기등록</button>
-               	</c:if>
-               	<c:if test="${ticket.status == 0}">
-               	<button data-oper='cancel' name="cancel" class="btn btn-danger pull-right">구매 취소</button>
-               	</c:if>
-               	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
-               	
-                <form method="post" action="/ticket/cancel" id="operForm">
-                	<input type="hidden" id="ticketNo" name="ticketNo" value="${ticket.ticketNo}">
-                	<input type="hidden" id="ticketId" name="id" value="${ticket.id}">
-                	<input type="hidden" name="pageNum" value="${cri.pageNum}">
-                	<input type="hidden" name="amount" value="${cri.amount}">
-                	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                	<!-- 키워드 파라미터 추가 -->
-                	<input type="hidden" name="type" value="${cri.type}">
-                	<input type="hidden" name="keyword" value="${cri.keyword}">
-                </form>
-            </div>	<!-- /.panel-body -->
-        </div>		<!-- /.panel -->
-    </div>			<!-- /.col-lg-6 -->
-</div>				<!-- /.row -->
+.info_div{ align-self: center;  width:1000px; margin:0 auto; margin-top:30px; background: #EAEAEA; padding:40px;}
+.buttons{text-align: right; margin-top:30px;}
+.reserveInfoUl{list-style: none; }
+.reserveInfoUl>li{margin-left:150px; font-size: 26px; margin-bottom:25px;}
+.reserveInfoUl>li>span{font-size: 28px; font-weight:bold;  margin-right: 15px;}
+.buttons{text-align: right; margin-top:30px;}
+</style>
+<br><br><br><br>
+<h2>
+	이용권 구매내역
+</h2>
+<hr>
+
+<div class="info_div">
+    
+	<ul class="reserveInfoUl">           
+       <li><span>구매번호</span>${ticket.ticketNo }</li>
+       <li><span>구매일시</span>${ticket.buyDate }</li>
+	   <li><span>상태</span>
+	   	   <c:choose>
+			<c:when test="${ticket.status == 0}">
+				구매
+			</c:when>
+			<c:when test="${ticket.status == 1}">
+				취소
+			</c:when>
+			<c:when test="${ticket.status == 2}">
+				이용
+			</c:when>
+	       </c:choose>						
+	   </li>
+          
+       <li><span>이름</span>${member.name }</li>
+       <li><span>핸드폰 번호</span>${member.phoneNumber }</li>
+       
+       <li><span>이용 정보</span>리프트(4시간)/${ticket.liftAmount}매, 장비(4시간)/${ticket.toolAmount}매</li>
+
+       <li><span>결제금액</span>${ticket.totalPrice}</li>
+       
+     </ul>
+       <div class="buttons">	    	  
+        <c:if test="${ticket.status == 2 && ticket.review == 0}">             
+       	<button data-oper='review' class="btn btn-primary pull-right">후기등록</button>
+       	</c:if>
+       	<c:if test="${ticket.status == 0}">
+       	<button data-oper='cancel' name="cancel" class="btn btn-danger pull-right">구매 취소</button>
+       	</c:if>
+       	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
+       </div>	
+        <form method="post" action="/ticket/cancel" id="operForm">
+        	<input type="hidden" id="ticketNo" name="ticketNo" value="${ticket.ticketNo}">
+        	<input type="hidden" id="ticketId" name="id" value="${ticket.id}">
+        	<input type="hidden" name="pageNum" value="${cri.pageNum}">
+        	<input type="hidden" name="amount" value="${cri.amount}">
+        	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        	<!-- 키워드 파라미터 추가 -->
+        	<input type="hidden" name="type" value="${cri.type}">
+        	<input type="hidden" name="keyword" value="${cri.keyword}">
+        </form>
+           
+ </div>
 
 <script>
 $(function(){
@@ -90,6 +82,7 @@ $(function(){
 	});
 	
 	$("button[data-oper='list']").click(function(e){
+		frm.attr("method", "get");
 		frm.attr("action", "/ticket/buyTicketListUser").submit();
 	});
 	

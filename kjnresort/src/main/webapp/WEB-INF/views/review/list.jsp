@@ -1,18 +1,36 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
-<%@ include file="../includes/header.jsp" %>
-<div class="row">
-    <div class="col-lg-12">
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %> 
+<%@ taglib  prefix="sec" uri="http://www.springframework.org/security/tags" %>   
+<sec:authentication property="principal" var="pinfo" />
+<c:if test="${'admin'!=pinfo.username}">
+	 <%@include file="../includes/header.jsp"%>
+</c:if>
+<c:if test="${'admin'==pinfo.username}">
+	 <%@include file="../includes/adminHeader.jsp"%>
+</c:if>
+
+<style>
+h2{text-align: center; position: relative; bottom: 20px;}
+hr{text-align: center; width:1000px; color: gray;}
+
+.container{margin-top:40px; height: 400px; margin-bottom:100px; font-size:2rem;}
+.table{width:150% !important;text-align:center; } 
+.pagination{justify-content: center; }
+.text-center{font-size:2rem;}
+thead{background: #E7E7E7;}
+.pagination{position: relative; }
+footer{margin-top:500px !important;}
+.reserve_list{width:1000px;}
+</style>
+
     	<br><br><br><br>
         <h2 class="page-header">후기 게시판</h2>
         <hr>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-<div class="row">
+ 
+
+<div class="container">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <!-- /.panel-heading -->
@@ -43,7 +61,7 @@
                 	</div>
                 </div>
                 <!-- END 검색 조건 및 키워드 입력 부분 -->
-                <table class="table table-striped table-bordered table-hover">	   
+                <table class="table table-hover buy_list">	   
                     <thead>
                         <tr>
                             <th>NO.</th>
@@ -91,7 +109,10 @@
                 	</ul>
                 </div>
                 <!-- END 페이지 번호 출력 -->
-                
+              </div>
+             </div>
+            </div>
+           </div>    
                 <!-- 페이지 번호 클릭 시 페이지 번호와 출력 데이터 갯수를 전달 -->
                 <form action="/review/list" id="actionForm">
                 	<input type="hidden" name="pageNum" id="pageNum" value="${pageMaker.cri.pageNum}">
@@ -108,7 +129,7 @@ $(function(){
 		var searchFrm = $('#searchForm');
 		
 		if(!searchFrm.find('option:selected').val()){	//검색 조건을 지정하지 않은 경우
-			alert('검색 종류를 선택하세요');
+			alert('검색어를 입력해주세요');
 			return false;
 		} else if(!$('#keyword').val()){		//검색어를 입력하지 않은 경우
 			alert('키워드를 입력하세요');

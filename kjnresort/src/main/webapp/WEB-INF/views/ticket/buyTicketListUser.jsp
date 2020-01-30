@@ -4,52 +4,62 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
 <%@ include file="../includes/header.jsp" %>
-<div class="row">
-    <div class="col-lg-12">
+
+<style>
+h2{text-align: center; position: relative; bottom: 20px;}
+hr{text-align: center; width:1000px; color: gray;}
+
+.container{margin-top:40px; height: 400px; margin-bottom:100px; font-size:2rem;}
+.table{width:150% !important;text-align:center; } 
+.pagination{justify-content: center; }
+.text-center{font-size:2rem;}
+thead{background: #E7E7E7;}
+.pagination{position: relative; }
+footer{margin-top:500px !important;}
+.reserve_list{width:1000px;}
+</style>
+
     	<br><br><br><br><br><br><br><br><br>
-        <h2 class="page-header">나의 이용권 구내내역</h2>
+        <h2>나의 이용권 구매내역</h2>
         <hr>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
-<div class="row">
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-
-            <div class="panel-body">     	   
-                 <!-- 검색 조건 및 키워드 입력 부분 -->
-                <div class="row">
-                	<div class="col-lg-12">
-                	</div>
-                </div>
-                <!-- END 검색 조건 및 키워드 입력 부분 -->	 
-                  
-                <table class="table table-striped table-bordered table-hover">	   
-                    <thead>
-                        <tr>
-                            <th>#구매번호<!-- Rendering engine --></th>
-                            <th>구매일시<!-- Browser --></th>
-                            <th>상태<!-- Platform(s) --></th>
-                            <th>아이디<!-- Engine version --></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    
-                    <c:forEach items="${list }" var="ticket">
-                        <tr class="odd gradeX">
-                            <td>${ticket.ticketNo }</td>
-                            <td><a class="move" href="/ticket/buyTicketGetUser/${ticket.ticketNo}/${ticket.id}">
-                            		${ticket.buyDate}
-                            	</a></td>
-                            <td>${ticket.status}</td>
-                            <td>${ticket.id}</td>
-                        </tr>
-                    </c:forEach>
-                        
-                    </tbody>
-                </table><!-- END 게시물 출력 테이블 -->
-
+	    <div class="container">               
+         <table class="table table-hover buy_list">	   
+             <thead>
+                 <tr>
+                     <th>#구매번호<!-- Rendering engine --></th>
+                     <th>구매일시<!-- Browser --></th>
+                     <th>상태<!-- Platform(s) --></th>
+                     <th>아이디<!-- Engine version --></th>
+                 </tr>
+             </thead>
+             <tbody>
+             
+             <c:forEach items="${list }" var="ticket">
+                 <tr class="odd gradeX">
+                     <td>${ticket.ticketNo }</td>
+                     <td><a class="move" href="/ticket/buyTicketGetUser/${ticket.ticketNo}/${ticket.id}">
+                     		${ticket.buyDate}
+                     	</a></td>
+                     <td>
+                     	<c:choose>
+							<c:when test="${ticket.status == 0}">
+								구매
+							</c:when>
+							<c:when test="${ticket.status == 1}">
+								취소
+							</c:when>
+							<c:when test="${ticket.status == 2}">
+								이용
+							</c:when>
+						</c:choose>
+                     </td>
+                     <td>${ticket.id}</td>
+                 </tr>
+             </c:forEach>
+                 
+             </tbody>
+         </table><!-- END 게시물 출력 테이블 -->
+		</div>
 <script>
 $(function(){
 

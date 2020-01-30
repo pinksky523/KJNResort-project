@@ -29,6 +29,7 @@ import com.kjnresort.service.ReviewService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j;
+import oracle.jdbc.proxy.annotation.GetProxy;
 
 @Controller
 @Log4j
@@ -121,10 +122,11 @@ public class ReviewController {
 	//후기 등록 폼으로 가는 버튼 클릭
 	@GetMapping("register")
 	@PreAuthorize("isAuthenticated()")
-	public void register(Long ticketNo ,Model model) {
+	public void register(Long ticketNo, Long reserveNo ,Model model) {
 		log.info("ReviewController register() - get");
 		log.info("ticketNo : " + ticketNo);
 		model.addAttribute("useNo", ticketNo);
+		model.addAttribute("useNo", reserveNo);
 	}
 	
 	//후기 등록 버튼 클릭

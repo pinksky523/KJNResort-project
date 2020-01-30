@@ -20,14 +20,15 @@ p{padding-left:30px;}
 footer{margin-top:300px; position: relative; top:30%;}
 input[type=radio]{ width: 30px; height: 30px; margin-bottom: 5px;}
 
+
 .buyTicket_body{height: 1000px important!}
 .btDiv{padding-left: 50px; text-align: left;}
 .liftSpan{padding-right: 83px;}
 .toolSpan{padding-right: 70px;}
 .total{font-weight: bold; font-size: 32px; color: red;}
-
-
-
+.buttonsDiv{text-align: right; padding-right: 50px;}
+#text1{padding-left: 20px; font-weight: bold; font-size: 26px; color: black;}
+#buy_cancle{margin-right: 20px;}
 </style>
 <%@ include file="../includes/header.jsp" %>    
 
@@ -84,12 +85,11 @@ input[type=radio]{ width: 30px; height: 30px; margin-bottom: 5px;}
         <div class="buyInfoDiv">
 			<h3>구매 정보 확인</h3>
 			<div class="btDiv">
-				<span class="total">· 총 금액 </span><span id="text1" class="form-control">원</span>
+				<span class="total">· 총 금액 </span><span id="text1">원</span>
 			</div>
 			<div class="buttonsDiv">
-			<input type="hidden" name="id" value="user00">
          	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			<button class="btn btn-default" id="reserve_cancle">취소</button><button type="submit" class="btn btn-primary" id="payCharge">결제</button>
+			<button onclick="location.href='/'" class="btn btn-default" id="buy_cancle" >취소</button><button type="submit" class="btn btn-primary" id="payCharge">결제</button>
 			</div>
 		</div> 
       

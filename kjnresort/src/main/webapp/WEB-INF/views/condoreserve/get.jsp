@@ -85,13 +85,15 @@ footer{margin-top:400px !important;}
 			<sec:authorize access="isAuthenticated()">
 				<c:if test="${'admin'!=pinfo.username}">
 					<c:if test="${reserve.review==0&&reserve.status==1}">
-						<button id="reviewBtn" class="btn btn-primary btn-lg">후기등록</button>
+						<button data-oper='review' id="reviewBtn" class="btn btn-primary btn-lg">후기등록</button>
 					</c:if>
 				</c:if>
 			</sec:authorize>
 		</div>
 	</div>
 	<form action="/condoreserve/list" id="operForm">
+		<input type="hidden" id="reserveNo" name="reserveNo" value="${reserve.reserveNo}">
+		<input type="hidden" id="reserveId" name="id" value="${reserve.id}">
 		<input type="hidden" id="pageNum" name="pageNum"
 			value="${cri.pageNum}"> <input type="hidden" id="amount"
 			name="amount" value="${cri.amount}"> <input type="hidden"
@@ -101,6 +103,17 @@ footer{margin-top:400px !important;}
 <%@include file="../includes/footer.jsp"%>
 
 <script>
+
+$(function(){
+	var frm = $('#operForm');
+	
+	$("button[data-oper='review']").click(function(e){
+		frm.attr("method", "get");
+		frm.attr("action", "/review/register").submit();
+	});
+
+}); 
+
 $('#listBtn').on("click",function(){ //목록으로 이동
 	$('#operForm').submit();
 })

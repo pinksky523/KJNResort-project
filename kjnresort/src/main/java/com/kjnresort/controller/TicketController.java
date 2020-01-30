@@ -1,5 +1,7 @@
  package com.kjnresort.controller;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
@@ -100,10 +102,14 @@ public class TicketController {
 	//이용권 상태변경 구매취소 (관리자)
 	//@PreAuthorize("principal.username == #writer")	// 작성자 확인
 	@PostMapping("cancel")
-	public String cancel(Long ticketNo, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
+	public String cancel(Long ticketNo, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri, Principal principal) {
 		log.info("TicketController cancel() " + ticketNo);
 		service.modifyStatus(ticketNo);
-		return "redirect:/ticket/buyTicketList" + cri.getListlink();
+		if(principal.getName().equals("admin")) {
+			return "redirect:/ticket/buyTicketList" + cri.getListlink();
+		}else {
+			return "redirect:/ticket/buyTicketListUser" + cri.getListlink();
+		}
 	}
 	
 	//이용권 상태변경 이용확인 (관리자)
@@ -146,11 +152,12 @@ public class TicketController {
 	}
 	
 	//이용권 구매 목록 (사용자)
-	@PostMapping("buyTicketListUser") 
-	public void buyTicketListUser(Criteria cri, String id, Model model) {
+	@GetMapping("buyTicketListUser") 
+	public void buyTicketListUser(Criteria cri, String id, Model model, Principal principal) {
 		log.info("TicketController buyTicketListUser() with cri : " + cri);
 		log.info("TicketController buyTicketListUser() list : ");
-		model.addAttribute("list", service.getListUser(id));
+		log.info(principal.getName());
+		model.addAttribute("list", service.getListUser(principal.getName()));
 		/*
 		 * model.addAttribute("pageMaker", new PageDTO(cri,
 		 * service.getTotalCount(cri)));
