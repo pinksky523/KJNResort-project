@@ -3,15 +3,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
-<sec:authentication property="principal" var="pinfo"/>
-<c:choose>
-	<c:when test="${pinfo.username eq 'admin'}">
-		<%@ include file="../includes/adminHeader.jsp" %>
-	</c:when>
-	<c:otherwise>
+
+<sec:authorize access="isAnonymous()">
 		<%@ include file="../includes/header.jsp" %>
-	</c:otherwise>
-</c:choose>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="pinfo"/>
+	<c:choose>
+	
+		<c:when test="${pinfo.username eq 'admin'}">
+			<%@ include file="../includes/adminHeader.jsp" %>
+		</c:when>
+		
+		<c:otherwise>
+			<%@ include file="../includes/header.jsp" %>
+		</c:otherwise>
+	</c:choose>
+</sec:authorize>
+
 <style>
 .modall {
             display: none; /* Hidden by default */
@@ -105,30 +115,17 @@
 
 
 
-<div style="text-align: center;">
+<div style="text-align: center; margin-bottom: 170px;">
 	<button type="button" class="btn btn-secondary" id="eventList" onclick="location.href='/event/list'">목록</button>
 	
-	 <!-- 로그인한 사용자가 작성한 글에만 수정 버튼 표시 -->
-	            <sec:authentication property="principal" var="pinfo"/>
-	            <c:if test="${pinfo.username eq 'admin'}">	<!-- 내가 작성한 글인가?  -->
+	 			   <sec:authorize access="hasRole('ROLE_ADMIN')">	
 	            	<button data-oper="modify" class="btn btn-warning" id="eventModify">수정</button>
-	            </c:if>
-	            
-	            
-	            <sec:authorize access="isAuthenticated()">	<!-- 로그인을 했나? -->
-	            <sec:authentication property="principal" var="pinfo"/>
-	            <c:if test="${pinfo.username eq 'admin'}">	<!-- 내가 작성한 글인가?  -->
-	            
 	            	<button data-oper="delete" class="btn btn-danger" id="eventDelete">삭제</button>
-	            	
-	            </c:if>
-	             </sec:authorize>
+	         	 </sec:authorize>
 	            
-	            <sec:authorize access="isAuthenticated()">	<!-- 로그인을 했나? -->
-	            <c:if test="${pinfo.username ne 'admin'}">	<!-- 내가 작성한 글인가?  -->
-	            	<button data-oper='apply' class="btn btn-success" id="eventApply">응모하기</button>
-	            </c:if>
-	            </sec:authorize>
+	           
+	            <button data-oper='apply' class="btn btn-success" name="applyBtn" id="eventApply">응모하기</button>
+	           
 	   			                   
 </div>		
 <form method="post" name="frm" id="deleteForm" action="/event/remove">
@@ -151,7 +148,7 @@
     <div id="myModall" class="modall">
  
       <!-- Modal content -->
-      <div class="modall-content" style="width: 200px; height: 180px;">
+      <div class="modall-content" style="width: 300px; height: 180px;">
         <span class="closee">&times;</span>                                                               
      	  <label>정답을 입력해주세요</label>
 		<input class="form-control" id="answer">
@@ -171,9 +168,22 @@ $(function(e){
     var modal = document.getElementById('myModall');
     var span = document.getElementsByClassName("closee")[0];                                          
 
+    //admin계정일 경우 응모하기 버튼 없애기
+    if('${pinfo.username}' == 'admin') {
+    	document.getElementById('eventApply').style.display = "none";
+    }
+    
+    
+    
     //응모하기 버튼 클릭이벤트
     $("#eventApply").click(function() {
-    	modal.style.display = "block";
+ 		if('${pinfo.username}' == "" || '${pinfo.username}' == null) {
+			alert("로그인 후 응모해주세요");
+			location.href="/common/customLogin"; 
+ 		} else {
+ 			modal.style.display = "block";
+ 		}
+    	
     });
 
     //X표시 클릭이벤트

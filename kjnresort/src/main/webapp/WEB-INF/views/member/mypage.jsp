@@ -16,7 +16,7 @@
 
 	<h2>마이페이지</h2>
 	<hr>
-	<form role="form" id="joinForm" name="frm" method="post" action="/member/mypageModify">
+	<form role="form" id="joinForm" name="frm" method="post" action="/member/mypageModify" style="margin-bottom: 170px;">
    <table width="100%" style="padding:5px 0 5px 0; table-layout: fixed;">
       
        <tr>
@@ -113,6 +113,16 @@ function checkModal(){
 		alert(msg);
 	}
 	
+}
+
+
+
+//admin계정일 경우 버튼 없애기
+if('${pinfo.username}' == 'admin') {
+	document.getElementById('leaveBtn').style.display = "none";
+	document.getElementById('myReviewBtn').style.display = "none";
+	document.getElementById('modifyBtn').style.display = "none";
+	$("#cancelBtn").attr("onclick", "location.href='/admin/adminMain'");
 }
 
 

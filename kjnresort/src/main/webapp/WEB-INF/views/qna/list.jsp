@@ -21,6 +21,7 @@ thead{background: #E7E7E7;}
 .pagination{position: relative; bottom:30px;}
 body{height:900px !important;}
 .qnatable{width:400px;}
+footer{margin-top:300px !important;}
 </style>
 <sec:authentication property="principal" var="pinfo" />
 <c:if test="${'admin'!=pinfo.username}">

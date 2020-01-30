@@ -14,6 +14,7 @@ h2{text-align: center; color:black !important;}
 hr{text-align: center; width:1000px;}
 .center_div{text-align: center; width:1000px;  margin:0 auto;}
 .b{margin:5px;}
+footer{position: relative !important; top:350px !important;}
 </style>
 <%@include file="../includes/header.jsp"%>
 <h2>1:1문의 하기</h2>

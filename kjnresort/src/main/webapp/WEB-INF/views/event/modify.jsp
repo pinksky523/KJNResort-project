@@ -103,7 +103,7 @@
           </div>
      </div>
 </div>
-<div style="text-align: center;">
+<div style="text-align: center; margin-bottom: 170px;">
 	<button type="button" class="btn btn-secondary" id="eventCancel" onclick="location.href='/event/list'">취소</button>
 	<button type="submit" data-oper="modify" class="btn btn-warning" id="eventModify">수정완료</button>
 </div>		      
