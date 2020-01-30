@@ -65,9 +65,10 @@ $('#regBtn').on("click",function(e){
 		 alert('내용을 입력하세요');
 		 return;
 	 }else{
+		 if(confirm('글을 등록하시겠습니까?')){
 		 var input="<input type='hidden' name='category' value='"+cate+"'>";
-		 
 		 $('#form').append(input).submit();
+		 }
 	 }
 })
 
