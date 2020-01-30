@@ -53,7 +53,7 @@ public class ApplianceController {
 		return "redirect:/appliance/myList";
 	}
 	
-	@PreAuthorize("principal.username==#id")
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/update")
 	public void update(ApplianceVO appliance, Model model) {
 		log.info("임시저장한 지원서 정보를 불러옴");

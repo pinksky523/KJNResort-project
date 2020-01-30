@@ -25,7 +25,7 @@
 			    	이름		${appliance.name }
 			    	</div>
 			    	<div class="form-group">
-			    	헨드폰 번호	${appliance.phoneNumber }
+			    	핸드폰 번호	${appliance.phoneNumber }
 			    	</div>
 			    	<div class="form-group">
 			    	주소		${appliance.address }
