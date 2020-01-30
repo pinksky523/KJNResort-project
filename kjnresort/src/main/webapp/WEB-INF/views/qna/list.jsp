@@ -47,7 +47,7 @@ footer{margin-top:300px !important;}
 							<option value="S"
 								<c:out value="${pageMaker.cri.type=='S'?'selected':''}"/>>스키</option>
 							<option value="E"
-								<c:out value="${pageMaker.cri.type=='S'?'selected':''}"/>>기타</option>	
+								<c:out value="${pageMaker.cri.type=='E'?'selected':''}"/>>기타</option>	
 						</select>
 						<select name="keyword" id="keyword">
 							<option value="">답변여부</option>
