@@ -4,13 +4,17 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="../includes/header.jsp" %>
 
-<div>
-    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
-        <h2>지원서 작성</h2>
-    </div>
-</div>
-<div class="row">
-    <div class="col-lg-12" style="padding-bottom: 20px">
+<style>
+h2{text-align: center;}
+body{height:900px !important;}
+footer{margin-top:300px !important;}
+button{margin-left: 5px; margin-right: 5px;}
+</style>
+
+<h2>지원서 작성</h2>
+
+	<div class="container" style="height: 400px; margin-bottom:200px; font-size:2rem; width:1000px !important;">
+	<div class="col-lg-12" style="padding-bottom: 20px">
         <div>
            <div style="text-align: center;">
                 KJN리조트와 함께 할 패기 넘치는 인재를 기다립니다.
