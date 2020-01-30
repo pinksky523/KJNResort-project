@@ -3,13 +3,40 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
 <!DOCTYPE html>
 <html lang="zxx">
+<style>
+
+h2{text-align: center;}
+hr{text-align: center; width:1000px;}
+button { margin-right: 5px;}
+p {color: black;}
+#star { height: 20px; width: 100px; }
+
+.info_div{ align-self: center;  width:1300px; margin:0 auto; margin-top:30px; background: #EAEAEA; padding:40px;}
+
+   		  
+.uploadResult { width:100%; 				background: white; }
+.uploadResult ul { 	display:flex; 			flex-flow:row;
+					justify-content: center;align-items: center;}
+.uploadResult ul li {	list-style: none;	padding:10px; width:80%;}
+.uploadResult ul li img { width:100px; height: 200px; }
+.uploadResult ul li span { color:gray;  }
+.bigPcitureWrapper { position: absolute;		display:none;
+					 justify-content: center;	align-items: center;
+					 top: 0%;					z-index: 100;
+					 width:100%;				height:100%;
+					 background: gray; }
+.bigPicture { 	position: relative;		display: flex;
+				justify-content: center;align-items: center; }
+.bigPicture img { width: 600px; } 
+
+</style>
 <head>
 	<title>KJN RESORT</title>
-	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
 	<meta charset="UTF-8">
 	<meta name="description" content="loans HTML Template">
 	<meta name="keywords" content="loans, html">
@@ -40,8 +67,8 @@
 	<!-- Google font -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&display=swap" rel="stylesheet">
  	
-	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<!-- 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->	 
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">-->	 
 	<!-- Main Stylesheets -->
 	<link rel="stylesheet" href="/resources/css/style.css"/>
 
@@ -71,11 +98,7 @@
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
 						<li><a href="/ticket/buyTicket">이용권 구매</a></li>
-						<form id="buyTicketListUser" action="/ticket/buyTicketListUser" method="post">
-								<input type="submit" id="ticketBtn" value="   이용권 구매내역">
-								<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					 		</form>
+						<li><a href="/ticket/buyTicketListUser">이용권 구매</a></li>
 					</ul>
 				</li>
 				<li><a href="/event/list">이벤트</a></li>
@@ -131,34 +154,6 @@
 	<!-- JQuery -->
 	<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script> -->
 	 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
-	
-<style>
-
-h2{text-align: center;}
-hr{text-align: center; width:1000px;}
-button { margin-right: 5px;}
-p {color: black;}
-#star { height: 20px; width: 100px; }
-
-.info_div{ align-self: center;  width:1300px; margin:0 auto; margin-top:30px; background: #EAEAEA; padding:40px;}
-
-   		  
-.uploadResult { width:100%; 				background: white; }
-.uploadResult ul { 	display:flex; 			flex-flow:row;
-					justify-content: center;align-items: center;}
-.uploadResult ul li {	list-style: none;	padding:10px; width:80%;}
-.uploadResult ul li img { width:100px; height: 200px; }
-.uploadResult ul li span { color:gray;  }
-.bigPcitureWrapper { position: absolute;		display:none;
-					 justify-content: center;	align-items: center;
-					 top: 0%;					z-index: 100;
-					 width:100%;				height:100%;
-					 background: gray; }
-.bigPicture { 	position: relative;		display: flex;
-				justify-content: center;align-items: center; }
-.bigPicture img { width: 600px; } 
-
-</style>
 
 <br><br><br><br><br>
 <h2>
@@ -310,7 +305,7 @@ p {color: black;}
 
 <!-- 댓글 모달 창 -->
 	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1"   
+	<div class="modal fade in" id="myModal" tabindex="-1"   
 		 role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
@@ -335,11 +330,11 @@ p {color: black;}
 			            	   name="replyDate" value="2019-12-02 11:22:33"></div>
 	            </div>
 	            <div class="modal-footer">
-	                <button id="modalModBtn" class="btn btn-warning">Modify</button>
-	                <button id="modalRemoveBtn" class="btn btn-danger">Remove</button>
-	                <button id="modalRegisterBtn" class="btn btn-primary">Register</button>
+	                <button id="modalModBtn" class="btn btn-warning">수정</button>
+	                <button id="modalRemoveBtn" class="btn btn-danger">삭제</button>
+	                <button id="modalRegisterBtn" class="btn btn-primary">등록</button>
 	                <button id="modalCloseBtn" class="btn btn-default" 
-	                		data-dismiss="modal">Close</button>
+	                		data-dismiss="modal">취소</button>
 	            </div>
 	        </div>	<!-- /.modal-content -->
 	    </div>		<!-- /.modal-dialog -->
@@ -440,7 +435,7 @@ $(function(){
 
 				var li = '';	
 				for (var i = 0, len = list.length || 0; i< len; i++) {
-				    //댓글 목록을 replyUL에 <li> 로 추가
+				    //댓글 목록을 replyUL에 <li> 로 추가 replyService.displayTime(list[i].replyDate)
 				    li += "<li class='left clearfix' data-replyno='"+ list[i].replyNo +"'>" +  //result 에 rvo값을 li에 담아서 for문으로 돌려서 댓글숫자만큼 만듬
 			              "	<div> "+
 			              "     <div class='header'> "+
@@ -449,7 +444,7 @@ $(function(){
 			              	          replyService.displayTime(list[i].replyDate) +
 			              "         </small>"+
 			              "     </div>"+
-			              "     <p>"+ list[i].id +"</p></div></li>"
+			              "     <p style='color: black;'>"+ list[i].id +"</p></div></li>"
 				} 
 				replyUL.html(li);
 				showReplyPage(replyCnt);
@@ -534,6 +529,7 @@ $(function(){
 		modal.find("input[name='id']").val(id); 
 		modalInputReplyDate.closest('div').hide();
 		modalModBtn.hide();
+		modalRemoveBtn.hide();
 		modalRegisterBtn.show();
 		modal.modal('show');
 	}); //END New Reply 버튼 이벤트 처리

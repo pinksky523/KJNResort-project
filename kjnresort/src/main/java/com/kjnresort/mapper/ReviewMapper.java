@@ -18,22 +18,10 @@ public interface ReviewMapper {
 	public int updateTReview(Long ticketNo);
 	public int delete(Long reviewNo);
 	public ReviewVO read(Long reviewNo);
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 	public void updateViewCnt(Long reviewNo);
-<<<<<<< HEAD
-
-=======
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 	//내가 쓴 후기 전체개수
-	public int getMyTotalCount(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount); 
-	
+	public int getMyTotalCount(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount); 	
 	//내가 쓴 후기 목록
 	public List<ReviewVO> getMyListWithPaging(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount);
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 }
