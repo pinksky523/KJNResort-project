@@ -124,14 +124,7 @@
 	<!-- Header Section end -->
 	
 	<!-- JQuery -->
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<<<<<<< HEAD
-=======
 
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project
