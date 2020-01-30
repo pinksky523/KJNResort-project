@@ -23,13 +23,19 @@
 </sec:authorize>
 
 <link rel="stylesheet" href="/resources/css/table.css"/>
-<div>
-    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
-        <h2>공지사항</h2>
-    </div>
-</div>
+<style>
+h2{text-align: center;}
+.table{width:150% !important;text-align:center; } 
+.pagination{justify-content: center; bottom:30px;}
+body{height:900px !important;}
+footer{margin-top:300px !important;}
+button{margin-left: 5px; margin-right: 5px;}
+</style>
 
-<div class="row">
+<h2>공지사항</h2>
+
+
+	<div class="container" style="height: 400px; margin-bottom:200px; font-size:2rem; width:1000px !important;">
     <div class="col-lg-12" style="padding-bottom: 20px">
         <div>
             <div style="text-align: center;">
@@ -37,7 +43,7 @@
             </div>
             <hr style="width: 70%">
             <!-- /.panel-heading -->
-            <div class="pull-right">
+            <div class="pull-right" style="margin-bottom: 20px;">
 		     	<div class="col-lg-12">
 		     		<form id='searchForm' action="/notice/list" method="get">
 		     			<select name="type">
@@ -91,12 +97,11 @@
                     </tbody>
                 </table><!-- END 게시물 출력 테이블 -->
             	<sec:authorize access="hasRole('ROLE_ADMIN')">
-	                <button id="regBtn" type="button" class="btn btn-primary pull-right">
+	                <button id="regBtn" type="button" class="btn btn-primary pull-right" style="margin-top: 15px;">
 	          			글쓰기	
 	          		</button> 
                 </sec:authorize>
-   			
-   			
+                
    			<!-- 페이지 번호 출력 -->
 				 <div style="text-align: center;">
 				 	<ul class="pagination">
@@ -131,6 +136,8 @@
     </div>				<!-- /.col-lg-6 -->
 </div>					<!-- /.row -->
 
+ 
+			
 <script>
 $(function(){
 	

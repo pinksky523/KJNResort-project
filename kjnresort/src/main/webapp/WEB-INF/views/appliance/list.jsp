@@ -5,13 +5,20 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
 <%@ include file="../includes/adminHeader.jsp" %>
 <link rel="stylesheet" href="/resources/css/table.css"/>
-<div>
-    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
-        <h2>지원자 관리</h2>
-    </div>
-</div>
 
-<div class="row">
+<style>
+h2{text-align: center;}
+.table{width:150% !important;text-align:center; } 
+.pagination{justify-content: center; bottom:30px;}
+body{height:900px !important;}
+footer{margin-top:300px !important;}
+button{margin-left: 5px; margin-right: 5px;}
+</style>
+
+<h2>지원자 관리</h2>
+
+
+	<div class="container" style="height: 400px; margin-bottom:200px; font-size:2rem; width:1000px !important;">
     <div class="col-lg-12" style="padding-bottom: 20px">
         <div>
             <div style="text-align: center;">
@@ -19,7 +26,7 @@
             </div>
             <hr style="width: 70%">
             <!-- /.panel-heading -->
-            <div class="pull-right">
+             <div class="pull-right" style="margin-bottom: 20px;">
 		     	<div class="col-lg-12">
 		     		<form id='searchForm' action="/appliance/list" method="get">
 		     			<select name="type">

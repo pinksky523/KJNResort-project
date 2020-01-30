@@ -22,13 +22,18 @@
 	</c:choose>
 </sec:authorize>
 
-<div>
-    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
-        <h2>공지사항</h2>
-    </div>
-</div>
+<style>
+h2{text-align: center;}
+.pagination{justify-content: center; bottom:30px;}
+body{height:900px !important;}
+footer{margin-top:300px !important;}
+button{margin-left: 5px; margin-right: 5px;}
+</style>
 
-<div class="row">
+<h2>공지사항</h2>
+
+
+	<div class="container" style="height: 400px; margin-bottom:200px; font-size:2rem; width:1000px !important;">
     <div class="col-lg-12" style="padding-bottom: 20px">
         <div>
             <div style="text-align: center;">
@@ -67,6 +72,7 @@
 		             	</form>          		
 					</sec:authorize>
 							<button id="regBtn" class="btn btn-secondary pull-right">목록</button>
+
             </div>	<!-- /.panel-body -->
         </div>		<!-- /.panel -->
     </div>			<!-- /.col-lg-6 -->
