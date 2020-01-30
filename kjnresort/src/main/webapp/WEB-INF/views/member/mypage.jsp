@@ -23,29 +23,35 @@
          <th>아이디</th>
          <td><input type="text" name="id" class="form-control" id="inputId" value="${member.id}" readonly></td>
        </tr>
+       <tr><td>&nbsp</td></tr>
        <tr>
          <th> 이름</th>
          <td><input type="text" class="form-control" id="inputName" value="${member.name}" readonly></td>
       </tr>
+       <tr><td>&nbsp</td></tr>
        <tr>
          <th>비밀번호</th>
          <td><input type="password" class="form-control" name="pw1" id="inputPassword" onkeyup="passwordCheck1()"></td>
       	 <td class="chkMessage"><span id="pwChk1"></span></td>
        </tr>
+        <tr><td>&nbsp</td></tr>
        <tr>
          <th>비밀번호 확인</th>
          <td><input type="password" class="form-control" name="pw" id="inputPasswordChk" onkeyup="passwordCheck2()"></td>
 		 <td class="chkMessage"><span id="pwChk2"></span></td>
        </tr>
+        <tr><td>&nbsp</td></tr>
         <tr>
          <th>핸드폰번호</th>
          <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" value="${member.phoneNumber}" onkeyup="phoneCheck()"></td>
        	 <td class="chkMessage"><span id="phoneChk"></span></td>
        </tr>
+        <tr><td>&nbsp</td></tr>
         <tr>
          <th>생년월일</th>
          <td><input type="date" class="form-control" id="inputBirth" value="${member.birth}" readonly></td>
-       </tr>															
+       </tr>	
+        <tr><td>&nbsp</td></tr>														
        <tr>
          <th>성별</th>
            <td class="s">
@@ -60,12 +66,13 @@
            		<input type="text" class="form-control" value="${gender}" readonly>
             </td>
          </tr>
-         
+          <tr><td>&nbsp</td></tr>
          <tr>
          <tr>
          <th>주소</th>
          <td><input type="text" class="form-control" name="address" id="inputAddress" value="${member.address}" style="width: 150%"></td>
        </tr>
+        <tr><td>&nbsp</td></tr>
        <tr>
          <th>가입일자</th>
          <td><input type="date" class="form-control" id="inputRegDate" value='<fmt:formatDate value="${member.regDate}" pattern="yyyy-MM-dd"/>' readonly>
@@ -73,10 +80,10 @@
        </tr><tr><td>&nbsp</td></tr>
            <tr>
              <td colspan="3" align="center">
-		   	  <button type="button" class="btn btn-secondary" id="cancelBtn" onclick="location.href='/common/home'">메인화면으로</button>
-		      <button type="button" data-oper="review" class="btn btn-success" id="myReviewBtn">내가 쓴 후기</button>
-		      <button type="button" data-oper="remove" class="btn btn-danger" id="leaveBtn">회원탈퇴</button>
-		      <button type="button" data-oper="modify" class="btn btn-warning" id="modifyBtn">수정완료</button>
+		   	  <button style="margin: 10px;" type="button" class="btn btn-secondary" id="cancelBtn" onclick="location.href='/common/home'">메인화면으로</button>
+		      <button style="margin: 10px;" type="button" data-oper="review" class="btn btn-success" id="myReviewBtn">내가 쓴 후기</button>
+		      <button style="margin: 10px;" type="button" data-oper="remove" class="btn btn-danger" id="leaveBtn">회원탈퇴</button>
+		      <button style="margin: 10px;" type="button" data-oper="modify" class="btn btn-warning" id="modifyBtn">수정완료</button>
             </td>
            </tr>
            
