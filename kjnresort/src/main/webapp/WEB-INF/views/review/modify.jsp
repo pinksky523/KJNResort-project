@@ -125,14 +125,34 @@
 
 
 <script>
-//즉시 실행함수 
 
-
+var csrfHeaderName = "${_csrf.headerName}";
+var csrfTokenValue="${_csrf.token}";
 //X 표시 버튼 클릭 이벤트 처리
 $('.uploadResult').on('click', 'button', function(e){
 	if(confirm("파일을 삭제하시겠습니까?")){
 		var targetLi = $(this).closest('li');
+		
+		var targetFile = $(this).data('file');
+		
 		targetLi.remove();
+		
+		$.ajax({
+			url: '/deleteFile',
+			data: {fileName: targetFile},
+			type: 'POST',
+			dataType: 'text',
+			beforeSend: function(xhr){//전송 전 추가 헤더 설정
+				xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+			},
+			success: function(result){
+				alert('임시업로드 파일 삭제 성공');
+				targetLi.remove();
+			},
+			error: function(error){
+				alert('임시업로드 파일 삭제 실패');
+			}
+		});	//END $.ajax
 	}
 }); //END X 표시 클릭 이벤트 처리
 
