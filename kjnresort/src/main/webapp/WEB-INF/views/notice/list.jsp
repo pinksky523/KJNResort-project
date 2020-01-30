@@ -29,6 +29,7 @@ h2{text-align: center;}
 .pagination{justify-content: center; bottom:30px;}
 body{height:900px !important;}
 footer{margin-top:300px !important;}
+button{margin-left: 5px; margin-right: 5px;}
 </style>
 
 <h2>공지사항</h2>
