@@ -21,7 +21,7 @@
             <div class="panel-body">
             	<sec:authentication property="principal" var="pinfo"/>
             	<sec:authorize access="isAuthenticated()">
-	                <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   
+	                <table class="table table-bordered table-hover" style="width: 70%; margin-left: 100px; margin-bottom: 170px;">	   
 	                    <thead class="thead-light">
 	                        <tr>
 	                            <th>이름</th>

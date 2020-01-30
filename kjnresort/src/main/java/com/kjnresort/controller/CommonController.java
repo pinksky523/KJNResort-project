@@ -61,6 +61,9 @@ public class CommonController {
 		if (id == null) {
 			rttr.addFlashAttribute("msg", "일치하는 회원정보가 없습니다.");
 			return "redirect:/common/findId";
+		} else if (id.equals("admin")) {
+			rttr.addFlashAttribute("msg", "관리자 계정은 접근할 수 없습니다.");
+			return "redirect:/common/customLogin";
 		} else {
 			rttr.addFlashAttribute("msg", "회원님의 ID는 " + id + " 입니다.");
 			return "redirect:/common/customLogin";
@@ -80,13 +83,19 @@ public class CommonController {
 		//값이 존재하는지만 확인위해 regDate 반환
 		String regDate = service.findPw(id, name, phoneNumber);
 		
-		if (regDate == null) {
-			rttr.addFlashAttribute("msg", "일치하는 회원정보가 없습니다.");
+		
+		if(id.equals("admin")) {
+			rttr.addFlashAttribute("msg", "관리자 계정은 접근할 수 없습니다.");
 			return "redirect:/common/findPw";
 		} else {
-			rttr.addFlashAttribute("msg", "비밀번호 변경페이지로 이동합니다.");
-			rttr.addFlashAttribute("id", id);
-			return "redirect:/common/pwModify";
+			if (regDate == null) {
+				rttr.addFlashAttribute("msg", "일치하는 회원정보가 없습니다.");
+				return "redirect:/common/findPw";
+			} else {
+				rttr.addFlashAttribute("msg", "비밀번호 변경페이지로 이동합니다.");
+				rttr.addFlashAttribute("id", id);
+				return "redirect:/common/pwModify";
+			}
 		}
 	}
 	
@@ -113,10 +122,11 @@ public class CommonController {
 	@GetMapping("/accessError")
 	public String accessDenied(Authentication auth, Model model, RedirectAttributes rttr) {
 		log.info("conmmonController accessDenied() : " + auth);
-		rttr.addFlashAttribute("msg", "로그인 후 이용해주세요");
-		return "redirect:/common/customLogin";
+		rttr.addFlashAttribute("msg", "접근금지 페이지입니다");
+		return "redirect:/";
 	}
 
+	
 	@GetMapping("/customLogin")
 	public void loginInput(String error, String logout, Model model) {
 		

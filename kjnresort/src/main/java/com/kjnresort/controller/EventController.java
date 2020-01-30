@@ -43,7 +43,7 @@ public class EventController {
 	
 	//이벤트 게시글 등록화면
 	@GetMapping("register")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void register() {
 		log.info("이벤트 게시글 등록화면 진입");
 	}
@@ -51,6 +51,7 @@ public class EventController {
 	
 	//이벤트 게시글 등록기능
 	@PostMapping("register")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String register(EventVO event, RedirectAttributes rttr, Principal principal) {
 		event.setId(principal.getName());		//현재 로그인한 id(admin)을 이벤트 게시글 작성자로 셋팅
 		
@@ -94,6 +95,7 @@ public class EventController {
 	
 	//이벤트 게시글 수정 창
 	@GetMapping("modify")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public void modify(Long eventNo, Model model, @ModelAttribute("cri") Criteria cri) {
 		
 		model.addAttribute("event", service.get(eventNo));
@@ -112,6 +114,7 @@ public class EventController {
 		
 	//이벤트 게시글 수정	
 	@PostMapping("modify")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String modify(EventVO event, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
 		event.getAttachList().get(0).setFileName("thumb." + event.getAttachList().get(0).getFileName());	//썸네일용은 앞에 thumb.
 		if(service.modify(event)) {
@@ -123,6 +126,7 @@ public class EventController {
 	
 	//이벤트 게시글 삭제
 	@PostMapping("remove")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public String remove(@RequestParam("eventNo") Long eventNo, String id, RedirectAttributes rttr, @ModelAttribute("cri") Criteria cri) {
 		
 		List<EventAttachVO> attachList = service.getAttachList(eventNo);
@@ -141,6 +145,7 @@ public class EventController {
 	
 	
 	//첨부파일 삭제
+	@PreAuthorize("isAuthenticated()")
 	private void deleteFiles(List<EventAttachVO> attachList) {
 		attachList.forEach(avo -> {
 			

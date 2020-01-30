@@ -168,7 +168,26 @@
 	
 		
 <script>
+var msg = '<c:out value="${msg}"/>';	
 
+//result 값이 있는지 확인하는 함수 호출
+checkModal(msg);
+history.replaceState({}, null, null);
+
+
+//메세지가 존재하면 alert창 띄우기
+function checkModal(){
+	//값이 없으면 리턴시킴
+	if(msg === '' || history.state){
+		return;
+	}
+	
+	//값이 있으면 메시지 띄우기
+	if(msg !== ''){
+		alert(msg);
+	}
+	
+}
 </script>
     
 	</body>
