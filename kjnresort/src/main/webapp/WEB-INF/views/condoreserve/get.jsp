@@ -41,7 +41,7 @@ footer{margin-top:400px !important;}
 
 			<c:choose>
 				<c:when test="${0==reserve.status}">
-					<li><span>상태<span style="color:#41FF3A; margin-left:8px;">예약</span></li>
+					<li><span>상태</span><span style="color:#41FF3A; margin-left:8px;">예약</span></li>
 				</c:when>
 				<c:when test="${1==reserve.status}">
 					<li><span>상태</span><span style="color:#2478FF; margin-left:8px;">이용</span></li>
