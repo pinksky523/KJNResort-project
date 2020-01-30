@@ -19,18 +19,19 @@
 .bigPicture { 	position: relative;		display: flex;
 				justify-content: center;align-items: center; }
 .bigPicture img { width: 600px; }
+.info_div{ align-self: center;  width:1300px; margin:0 auto; margin-top:30px; background: #EAEAEA; padding:40px;}
+
+h2{text-align: center;}
+hr{text-align: center; width:1000px;}
 </style>
-<div class="row">
-    <div class="col-lg-12">
+
         <h2 class="page-header">
         	후기 수정
         </h2>
         <hr>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
+
 <!-- /.row -->
-<div class="row">
+<div class="info_div">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <!-- /.panel-heading -->
@@ -45,12 +46,12 @@
                	<input type="hidden" name="keyword" value="${cri.keyword}">
                	<input type="hidden" name="reviewNo" value="${review.reviewNo}">
 	            <div class="form-group">
-	                <label>Title</label>
+	                <label>제목</label>
 	                <input class="form-control" name="title"
 	                	   value="${review.title }" ></div>
 	            <div class="form-group">
 	                <label>카테고리</label>
-	                 <select name="category" class="form-control" id="category"  style="width: 70%">
+	                 <select name="category" class="form-control" id="category"  style="width: 50%">
         				<option value="스키">스키 </option>
         				<option value="콘도">콘도 </option>
 			        	<option value="기타">기타 </option> </select></div>
@@ -68,7 +69,7 @@
                             					pattern="yyyy-MM-dd"/></textarea></div>
 	            <div class="form-group">
 	                <label>평점</label>
-	                 <select name="grade" class="form-control" id="grade"  style="width: 70%">
+	                 <select name="grade" class="form-control" id="grade"  style="width: 50%">
         				<option value="1">1 </option>
         				<option value="2">2 </option>
         				<option value="3">3 </option>
@@ -92,7 +93,7 @@
             </div>	<!-- /.panel-body -->
         </div>		<!-- /.panel -->
     </div>			<!-- /.col-lg-6 -->
-</div>				<!-- /.row -->
+				<!-- /.row -->
 
  
 <!-- START 첨부파일  -->
@@ -122,7 +123,7 @@
     </div>			
 </div>				
 <!-- END 첨부파일 --> 	 
-
+</div>
 
 <script>
 

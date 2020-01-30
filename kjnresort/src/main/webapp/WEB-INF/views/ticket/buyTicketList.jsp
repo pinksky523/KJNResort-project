@@ -4,13 +4,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
 <%@ include file="../includes/adminHeader.jsp" %>
+
+<style>
+h2{text-align: center; position: relative; bottom: 20px;}
+hr{text-align: center; width:1000px; color: gray;}
+
+.container{margin-top:40px; height: 400px; margin-bottom:100px; font-size:2rem;}
+.table{width:150% !important;text-align:center; } 
+.pagination{justify-content: center; }
+.text-center{font-size:2rem;}
+thead{background: #E7E7E7;}
+.pagination{position: relative; }
+footer{margin-top:500px !important;}
+.reserve_list{width:1000px;}
+</style>
     	
 <br><br><br><br><br><br><br><br><br>
-<h2>이용권 구내내역</h2>
+<h2>이용권 구매내역</h2>
 <hr>
 
 <!-- /.row -->
-<div class="row">
+<div class="container">
     <div class="col-lg-12">
         <div class="panel panel-default">
 
@@ -42,7 +56,7 @@
                 </div>
                 <!-- END 검색 조건 및 키워드 입력 부분 -->	 
                   
-                <table class="table table-hover reserve_list">	   
+                <table class="table table-hover buy_list">	   
                     <thead>
                         <tr>
                             <th>#구매번호</th>
@@ -59,7 +73,19 @@
                             <td><a class="move" href="/ticket/buyTicketGet/${ticket.ticketNo}/${ticket.id}">
                             		${ticket.buyDate}
                             	</a></td>
-                            <td>${ticket.status}</td>
+                            <td>
+                            	<c:choose>
+									<c:when test="${ticket.status == 0}">
+										구매
+									</c:when>
+									<c:when test="${ticket.status == 1}">
+										취소
+									</c:when>
+									<c:when test="${ticket.status == 2}">
+										이용
+									</c:when>
+								</c:choose>
+                            </td>
                             <td>${ticket.id}</td>
                         </tr>
                     </c:forEach>
@@ -68,7 +94,7 @@
                 </table><!-- END 게시물 출력 테이블 -->
                 
                 <!-- 페이지 번호 출력 -->
-                <div class="pull-right">
+                <div style="text-align: center;">
                 	<ul class="pagination">
                 		<c:if test="${pageMaker.prev}">
                 		<li class="paginate_button previous">

@@ -28,9 +28,24 @@
 	<link rel="stylesheet" href="/resources/css/flaticon.css"/>
 	<link rel="stylesheet" href="/resources/css/slicknav.min.css"/>
 	<link rel="stylesheet" href="/resources/css/common.css"/>
+<<<<<<< HEAD
+
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 
 	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
      <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
+<<<<<<< HEAD
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
+
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+
+	<!-- Main Stylesheets -->
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 	<link rel="stylesheet" href="/resources/css/style.css"/>
 
 
@@ -64,13 +79,7 @@
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
 						<li><a href="/ticket/buyTicket">이용권 구매</a></li>
-						<sec:authorize access="isAuthenticated()">
-							<form id="buyTicketListUser" action="/ticket/buyTicketListUser" method="post">
-								<input type="submit" id="ticketBtn" value="   이용권 구매내역">
-								<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
-								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-					 		</form>
-					 		</sec:authorize>
+						<li><a href="/ticket/buyTicketListUser">이용권 구매내역</a></li>
 					</ul>
 				</li>
 				<li><a href="/event/list">이벤트</a></li>
@@ -124,7 +133,44 @@
 	<!-- Header Section end -->
 	
 	<!-- JQuery -->
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+
+<<<<<<< HEAD
+	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+	
+
+
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<<<<<<< HEAD
+=======
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git

@@ -45,14 +45,8 @@
 	<!-- Main Stylesheets -->
 	<link rel="stylesheet" href="/resources/css/style.css"/>
 
-
-	<!--[if lt IE 9]>
-		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-
 </head>
-<br><br><br><br><br><br><br><br>
+<br><br><br>
 <body class="contents" style="height: 100%;">
 	<!-- Page Preloder -->
 	<div id="preloder">
@@ -139,13 +133,16 @@
 	 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> 
 	
 <style>
-#ticketBtn  { background-color: transparent !important;
-    		  background-image: none !important;
-    		  border-color: transparent;
-    		  border: none;
-    		  color: black;
-    		  font-weight: bold; }
-    		  
+
+h2{text-align: center;}
+hr{text-align: center; width:1000px;}
+button { margin-right: 5px;}
+p {color: black;}
+#star { height: 20px; width: 100px; }
+
+.info_div{ align-self: center;  width:1300px; margin:0 auto; margin-top:30px; background: #EAEAEA; padding:40px;}
+
+   		  
 .uploadResult { width:100%; 				background: white; }
 .uploadResult ul { 	display:flex; 			flex-flow:row;
 					justify-content: center;align-items: center;}
@@ -160,28 +157,22 @@
 .bigPicture { 	position: relative;		display: flex;
 				justify-content: center;align-items: center; }
 .bigPicture img { width: 600px; } 
-button { margin-right: 5px;}
-p {color: black;}
-#star { height: 20px; width: 100px; }
-</style>
-<div class="row">
-    <div class="col-lg-12">
-        <h2 class="page-header">
-        	후기 게시판1
-        </h2>
-        <hr>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
-<!-- /.row -->
 
-<div class="row">
+</style>
+
+<br><br><br><br><br>
+<h2>
+     후기 게시판
+</h2>
+<hr>
+
+<div class="info_div">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <!-- /.panel-heading -->
             <div class="panel-body">
 	            <div class="form-group">
-	                <label>Title</label>
+	                <label>제목</label>
 	                <input class="form-control" name="title"
 	                	   value="${review.title }" readonly></div>
 	            <div class="form-group">
@@ -256,10 +247,10 @@ p {color: black;}
 
   
 <!-- 첨부파일  -->
-<div class="row">
+<div class="row" style="width: 450px;">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">File Attch</div>
+            <div class="panel-heading">사진</div>
             <div class="panel-body">
 <!-- 	            <div class="form-group uploadDiv"> -->
 <!-- 					<input type="file" name="uploadFile" multiple="multiple"> -->
@@ -287,7 +278,7 @@ p {color: black;}
   <div class='col-lg-12'>
  	<div class="panel panel-default">
         <div class="panel-heading">
-            <i class="fa fa-comments fa-fw"></i> Reply
+            <i class="fa fa-comments fa-fw"></i> 댓글
         </div>
         <div class="panel-body">
            <ul class="chat">
@@ -354,7 +345,7 @@ p {color: black;}
 	    </div>		<!-- /.modal-dialog -->
 	</div>			<!-- /.modal -->
 <!-- END 댓글 모달 창 -->
- 
+</div> 
 
 <script>
 
