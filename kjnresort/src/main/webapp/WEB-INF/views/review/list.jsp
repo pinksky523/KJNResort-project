@@ -5,7 +5,7 @@
 <%@ include file="../includes/header.jsp" %>
 <div class="row">
     <div class="col-lg-12">
-    	<br><br><br><br>s
+    	<br><br><br><br>
         <h2 class="page-header">후기 게시판</h2>
         <hr>
     </div>
@@ -72,7 +72,7 @@
                 </table><!-- END 게시물 출력 테이블 -->
                           
                 <!-- 페이지 번호 출력 -->
-                <div class="pull-right">
+                <div style="text-align: center;">
                 	<ul class="pagination">
                 		<c:if test="${pageMaker.prev}">
                 		<li class="paginate_button previous">
@@ -100,36 +100,7 @@
                 	<input type="hidden" name="type" value="${pageMaker.cri.type}">
                 	<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
                 </form>
-<!--                 
-                Modal
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
-               		 aria-labelledby="myModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                            </div>
-                            <div class="modal-body">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                                                                처리가 완료되었습니다.
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>/.modal-content
-                    </div>    /.modal-dialog
-                </div>        /.modal
-            </div>
-            /.panel-body
-        </div>
-        /.panel
-    </div>
-    /.col-lg-6
-</div>
-/.row
- -->
+
 <script>
 $(function(){
 	//검색 버튼 이벤트 처리

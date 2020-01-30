@@ -29,7 +29,7 @@
   <select id="getListWithPaging" resultType="com.kjnresort.domain.ReviewVO">
    <![CDATA[
     SELECT  * 
-    FROM 	( SELECT /*+INDEX_DESC(t_review reviewNo) */ 
+    FROM 	( SELECT /*+INDEX_DESC(t_review SYS_C007976) */ 
     				 rownum rn, reviewNo, id, title, content, 
     				 regdate, viewCnt, category, grade, useNo
     		  FROM   t_review
@@ -40,7 +40,7 @@
    <![CDATA[ 		  
     		  rownum <= #{pageNum} * #{amount} )
     WHERE   rn > (#{pageNum} -1) * #{amount}
-    ORDER BY reviewNo DESC
+    
    ]]> 		  
   </select>
   

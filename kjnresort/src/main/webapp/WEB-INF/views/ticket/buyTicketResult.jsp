@@ -2,33 +2,53 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>이용권 구매 결과</title>
-</head>
-<body>
-	<h3> 구매가 완료되었습니다.</h3>
-	<div class="form-group">
-		<label>상품명 : KJN리조트</label>
-	</div>
-	
-	<div class="form-group">
-		<label>구매일자</label>
-		<input class="form-control" name="buyDate" readonly="readonly" value="${ticket.buyDate}">
-	</div>
-	
-	<div class="form-group">
-		<label>결제금액</label>
-		<input class="form-control" name="totalPrice" readonly="readonly" value="${ticket.totalPrice}">
-	</div>
-	<button onclick="location.href=''">예약내역확인</button><button onclick="location.href='/'">메인으로 가기</button>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<%@include file="../includes/header.jsp"%>
+
+<style>
+footer{position: relative; top:150px;}
+.center_div{align-self: center; margin:0 auto; background:#EAEAEA; width:1000px; height: 600px; padding:50px;}
+.center_contents_div{text-align:center; margin:0 auto; margin-top:50px; padding:10px;}
+.comple{font-size: 45px; color:#3699DB; }
+.info{margin-top:20px; font-size:20px; font-weight: bold; }
+button{margin-top:70px; margin-left:10px;}
+.info_div{display: block; padding:20px;}
+.info_div>span{display:block; margin-top:20px;}
+</style>
+
+<div class="center_div">
+<div class="center_contents_div">
+<span class="comple">구매가 완료되었습니다.</span>
+<div class="info_div">
+<span class="info">상품명 : KJN 리조트 스키</span>
+<span class="info">결제금액 : <c:out value="${ticket.totalPrice}"/> <br>
+<span class="info">구매일시 : <c:out value="${ticket.buyDate}"/></span>
+</div><br>
+
+							<form id="operForm" action="/ticket/buyTicketListUser" method="post">
+								<sec:authorize access="isAuthenticated()">
+									<input type="hidden" name="id" value='<sec:authentication property="principal.username"/>'>
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+									<button  type="submit" class="btn btn-primary btn-lg">예약내역확인</button>
+								</sec:authorize>
+									<button data-oper='main' onclick="location.href='/'" class="btn btn-default btn-lg">메인으로 가기</button>
+					 		</form>
+					 		
+</div>
+</div>
 
 <script>
-
-</script>
+$(function(){
+	var frm = $('#operForm');
 	
-</body>
-</html>
+	$("button[data-oper='main']").click(function(e){
+			frm.attr("method", "get");
+			frm.attr("action", "/").submit();	
+	});
+});
+</script>
+<!--
+
+//-->
+</script>
+<%@include file="../includes/footer.jsp"%>

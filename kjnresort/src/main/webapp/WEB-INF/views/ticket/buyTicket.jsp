@@ -2,66 +2,102 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ include file="../includes/header.jsp" %>    
-<br><br><br>
-	<div class="col-lg-12" style="padding-top: 120px; text-align: center;">
-        <h2>이용권 구매</h2>
-    </div>
-	<hr>
-	<!-- <form id="buyForm" method="get" action="buyTicketKakao"> -->
-   <table width="100%" style="padding:5px 0 5px 0; ">
-   	
-      <tr>
-         <th>리프트권 선택</th>
-         <td>리프트 미선택                      <input type="radio" name="lift" class="form-control" id="liftNoUse" value="0" style="width: 35%"></td>
-         <td>4시간 이용권(<c:out value="${tPrice.price}"/>원/1매)<input type="radio" name="lift" class="form-control" id="liftUse"   value="1" style="width: 35%" checked="checked"></td>
-      </tr>
-      
-      <tr>
-         <th><span id="liftAmount">수량 선택
-         
-        <select name="liftAmount" class="form-control" id="Amount"  style="width: 70%">
-        	<option value="0">0 </option>
-        	<option value="1">1 </option>
-        	<option value="2">2 </option>
-        	<option value="3">3 </option>
-        	<option value="4">4 </option>
-        	<option value="5">5 </option> 
-        </select> </span>	</th>
-       </tr>
-       <tr>
-         <th>장비렌탈 선택</th>
-         <td>장비렌탈 미선택<input type="radio" name="tool" class="form-control" id="toolNoUse" value="0" style="width: 35%" ></td>
-         <td>4시간 이용권(<c:out value="${ttPrice.price}"/>원/1매)<input type="radio" name="tool" class="form-control" id="toolUse" value="1" style="width: 35%" checked="checked"></td>
-       </tr>
-       
-       <tr>
-         <th> <span id="toolAmount">수량 선택
-         
-        <select name="toolAmount" class="form-control" id="Amount"  style="width: 70%">
-        	<option value="0">0</option>
-        	<option value="1">1</option>
-        	<option value="2">2</option>
-        	<option value="3">3</option>
-        	<option value="4">4</option>
-        	<option value="5">5</option>
-        </select>	</span> </th>
-       </tr>
-       <tr>
-       		<th>총금액</th>
-       		<td><span name="totalPrice" id="text1" class="form-control">원</span></td>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<style>
+.buyTicketDiv{background: #EAEAEA; width:900px; height:700px; align-self: center; margin:0 auto; }
+.dateDiv{ align-self: center; margin:0 auto; text-align: center;}
+hr{text-align: center; width:1000px;}
+h2{text-align: center !important;}
+h3{padding-left: 30px; padding-top: 30px;  text-align: left !important; margin-bottom:10px !important;}
 
-       </tr>
-       <tr>
-         <td colspan="2" align="right">
-         	<input type="hidden" name="id" value="user00">
+p{padding-left:30px;}
+     table
+    {
+        border:1px solid black;
+        text-align:center;
+        width:30%;
+    }
+footer{margin-top:300px; position: relative; top:30%;}
+input[type=radio]{ width: 30px; height: 30px; margin-bottom: 5px;}
+
+.buyTicket_body{height: 1000px important!}
+.btDiv{padding-left: 50px; text-align: left;}
+.liftSpan{padding-right: 83px;}
+.toolSpan{padding-right: 70px;}
+.total{font-weight: bold; font-size: 32px; color: red;}
+
+
+
+</style>
+<%@ include file="../includes/header.jsp" %>    
+
+<section class="buyTicket_body">
+	<h2>이용권 구매</h2>
+	<hr>
+	<div class="buyTicketDiv">
+		<h3>리프트권 선택</h3>
+		
+		<div class="btDiv">
+			<span class="liftSpan">· 리프트 미선택 </span> <input type="radio" name="lift" id="liftNoUse" value="0" >
+		</div>
+		
+		<div class="btDiv">
+			<span>· 4시간 이용권(<c:out value="${tPrice.price}"/>원/1매)</span> <input type="radio" name="lift" id="liftUse"   value="1" checked="checked">
+		</div>
+         <br>
+        <div class="btDiv">
+			<span id="liftAmount">수량 선택
+         	<select name="liftAmount" class="form-control" id="Amount"  style="width: 50%">
+        		<option value="0">0 </option>
+        		<option value="1">1 </option>
+        		<option value="2">2 </option>
+        		<option value="3">3 </option>
+        		<option value="4">4 </option>
+        		<option value="5">5 </option> 
+        	</select> 
+        	</span>
+		</div> 	                     
+         
+     	<h3>장비렌탈 선택</h3>
+		
+		<div class="btDiv">
+			<span class="ToolSpan">· 장비렌탈 미선택</span> <input type="radio" name="tool" id="toolNoUse" value="0"  >
+		</div>
+		
+		<div class="btDiv">
+			<span>· 4시간 이용권(<c:out value="${ttPrice.price}"/>원/1매)</span> <input type="radio" name="tool" id="toolUse" value="1" checked="checked">
+		</div>
+         <br>
+        <div class="btDiv">
+			<span id="toolAmount">수량 선택
+         	<select name="toolAmount" class="form-control" id="Amount"  style="width: 50%">
+        		<option value="0">0</option>
+        		<option value="1">1</option>
+        		<option value="2">2</option>
+        		<option value="3">3</option>
+        		<option value="4">4</option>
+        		<option value="5">5</option>
+        	</select>
+        	</span>
+		</div>
+      
+        <div class="buyInfoDiv">
+			<h3>구매 정보 확인</h3>
+			<div class="btDiv">
+				<span class="total">· 총 금액 </span><span id="text1" class="form-control">원</span>
+			</div>
+			<div class="buttonsDiv">
+			<input type="hidden" name="id" value="user00">
          	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-		    <button type="submit" class="btn btn-primary" id="payCharge">결제</button>
-         </td>
-       </tr>
-    </table>
-<!-- </form> -->
-<br><br><br><br>
+			<button class="btn btn-default" id="reserve_cancle">취소</button><button type="submit" class="btn btn-primary" id="payCharge">결제</button>
+			</div>
+		</div> 
+      
+	</div>
+
+      
+
+</section>
 
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
