@@ -10,7 +10,7 @@
 h2{text-align: center;}
 .table{width:150% !important;text-align:center; } 
 body{height:900px !important;}
-footer{margin-top:300px !important;}
+footer{margin-top:150px !important;}
 button{margin-left: 5px; margin-right: 5px;}
 </style>
 

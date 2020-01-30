@@ -5,12 +5,17 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
 <%@ include file="../includes/adminHeader.jsp" %>
 <link rel="stylesheet" href="/resources/css/table.css"/>
-<div class="container">
-    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
-        <h2>지원자 관리</h2>
-    </div>
-    
-<div class="row">
+
+<style>
+h2{text-align: center;}
+body{height:900px !important;}
+footer{margin-top:300px !important;}
+button{margin-left: 5px; margin-right: 5px;}
+</style>
+
+<h2>지원자 관리</h2>
+
+	<div class="container" style="height: 400px; margin-bottom:200px; font-size:2rem; width:1000px !important;">
     <div class="col-lg-12" style="padding-bottom: 20px">
         <div>
             <div style="text-align: center;">
@@ -37,13 +42,11 @@
 			    	자기소개	${appliance.introduction }
 			    	</div>
    			 	</div>	<!-- /.panel-body -->
-        </div>			
+        </div>	
+        		<button data-oper='list' class="btn btn-secondary pull-right">목록</button>		
     </div>				<!-- /.col-lg-6 -->
 </div>					<!-- /.row -->
-    
-	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
-	
-</div>
+ 
 
 
 <script>

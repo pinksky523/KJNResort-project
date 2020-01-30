@@ -13,8 +13,8 @@ button{margin-left: 5px; margin-right: 5px;}
 
 <h2>지원서 작성</h2>
 
-	<div class="container" style="height: 400px; margin-bottom:200px; font-size:2rem; width:1000px !important;">
-    <div class="col-lg-12" style="padding-bottom: 20px">
+	<div class="container" style="height: 400px; margin-bottom:450px; font-size:2rem; width:1000px !important;">
+    <div class="col-lg-12" >
         <div>
            <div style="text-align: center;">
                 KJN리조트와 함께 할 패기 넘치는 인재를 기다립니다.
