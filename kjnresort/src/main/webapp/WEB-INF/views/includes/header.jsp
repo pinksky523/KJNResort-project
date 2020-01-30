@@ -82,7 +82,7 @@
 				<li>
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-				<sec:authentication property="principal" var="pinfo"/>'>
+				<sec:authentication property="principal" var="pinfo"/>
 				
 				  <c:if test="${pinfo.username ne 'admin'}">		<!-- 관리자로 로그인할 경우 아무버튼 없음 -->
 				  	<form id="mypageForm" action="/member/mypage" method="get">
