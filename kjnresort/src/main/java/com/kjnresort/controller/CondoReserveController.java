@@ -59,7 +59,8 @@ public class CondoReserveController { //헐 이제 될거같아
 	}
 	
 	@ResponseBody
-	@PreAuthorize("principal.username==#id||principal.username=='admin'")
+	@PreAuthorize("hasAnyRole('ROLE_MEMBER','ROLE_ADMIN')")
+	//@PreAuthorize("principal.username==#id||principal.username=='admin'")
 	@PostMapping(value="/cancel",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> reserveCancel(Long reserveNo,String id) {
 		log.info("condoreserve/cancel Controller........ reserveNo:"+reserveNo);
@@ -68,7 +69,8 @@ public class CondoReserveController { //헐 이제 될거같아
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			
 	}
-	@PreAuthorize("isAuthenticated()")
+	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@PostMapping(value="/register",consumes="application/json",produces= {MediaType.TEXT_PLAIN_VALUE})
 	@Transactional
 	public ResponseEntity<String> register(@RequestBody CondoReserveVO crVO) {
@@ -118,7 +120,7 @@ public class CondoReserveController { //헐 이제 될거같아
 	
 	
 	@ResponseBody
-	@PreAuthorize("principal.username==#id")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping(value="/confirm",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> reserveConfirm(Long reserveNo,String id) {
 		log.info("condoreserve/confirm Controller........ reserveNo:"+reserveNo);
@@ -128,13 +130,13 @@ public class CondoReserveController { //헐 이제 될거같아
 			
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/register")
 	public void register() {
 	
 	}
 	
-	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/payChargeResult/{rno}")
 	public String chargeResult(@PathVariable long rno,Model model) {
 		model.addAttribute("reserve",service.get(rno));

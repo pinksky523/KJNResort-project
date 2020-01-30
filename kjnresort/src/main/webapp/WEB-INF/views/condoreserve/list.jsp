@@ -19,7 +19,7 @@ hr{text-align: center; width:1000px; color: gray;}
 .text-center{font-size:2rem;}
 thead{background: #E7E7E7;}
 .pagination{position: relative; }
-footer{height: 300px;}
+footer{margin-top:500px !important;}
 .reserve_list{width:1000px;}
 </style>
 <sec:authentication property="principal" var="pinfo" />

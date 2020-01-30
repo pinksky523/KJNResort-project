@@ -53,6 +53,7 @@ public class QnaController {//큐엔에이컨트롤러
 		}
 	}
 	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@PostMapping("/register")
 	public String register(QnaVO qvo,RedirectAttributes rttr) {
 		log.info("qnacontroller.... /register[post]");
@@ -65,7 +66,7 @@ public class QnaController {//큐엔에이컨트롤러
 		return "redirect:/qna/list";
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@GetMapping("/register")
 	public void register() {
 		log.info("qnacontroller.... /register[get]");

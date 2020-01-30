@@ -16,25 +16,29 @@
 	<h2>회원정보</h2>
 	<hr>
 	<form role="form" id="joinForm" name="frm" method="post" action="/member/mypageModify">
-   <table width="100%" style="padding:5px 0 5px 0; table-layout: fixed;">
+   <table width="100%" style="padding:5px 0 5px 0; table-layout: fixed; margin-bottom: 170px;">
       
        <tr>
          <th>아이디</th>
          <td><input type="text" name="id" class="form-control" id="inputId" value="${member.id}" readonly></td>
        </tr>
+       <tr><td>&nbsp</td></tr>
        <tr>
          <th> 이름</th>
          <td><input type="text" class="form-control" id="inputName" value="${member.name}" readonly></td>
       </tr>
+      <tr><td>&nbsp</td></tr>
         <tr>
          <th>핸드폰번호</th>
          <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" value="${member.phoneNumber}" readonly></td>
        	 <td class="chkMessage"><span id="phoneChk"></span></td>
        </tr>
+       <tr><td>&nbsp</td></tr>
         <tr>
          <th>생년월일</th>
          <td><input type="date" class="form-control" id="inputBirth" value="${member.birth}" readonly></td>
-       </tr>															
+       </tr>	
+       <tr><td>&nbsp</td></tr>														
        <tr>
          <th>성별</th>
            <td class="s">
@@ -49,17 +53,19 @@
            		<input type="text" class="form-control" value="${gender}" readonly>
             </td>
          </tr>
-         
+         <tr><td>&nbsp</td></tr>
          <tr>
          <tr>
          <th>주소</th>
          <td><input type="text" class="form-control" name="address" id="inputAddress" value="${member.address}" style="width: 150%" readonly></td>
        </tr>
+       <tr><td>&nbsp</td></tr>
        <tr>
          <th>가입일자</th>
          <td><input type="date" class="form-control" id="inputRegDate" value='<fmt:formatDate value="${member.regDate}" pattern="yyyy-MM-dd"/>' readonly>
        	 <span id="phoneChk"></span></td>
        </tr>
+       <tr><td>&nbsp</td></tr>
        <tr>
        <th>상태</th>
        <td class="s">
@@ -80,13 +86,13 @@
             <tr><td>&nbsp</td></tr>
            <tr>
              <td colspan="3" align="center">
-		   	  <button type="button" class="btn btn-secondary" id="cancelBtn" data-oper="list">목록</button>
+		   	  <button style="margin: 20px;" type="button" class="btn btn-secondary" id="cancelBtn" data-oper="list">목록</button>
 		      <!-- 1일 경우 정지 버튼 생성 /  0일경우 정지해제 버튼 생성 -->
 	       		<c:if test="${member.status eq 1}">
 	       			<button type="button" data-oper="stop" class="btn btn-danger" id="stopBtn">정지</button>
 	       		</c:if>
 	       		<c:if test="${member.status eq 0}">
-	       			<button type="button" data-oper="go" class="btn btn-warning" id="goBtn">정지해제</button>
+	       			<button style="margin: 20px;" type="button" data-oper="go" class="btn btn-warning" id="goBtn">정지해제</button>
 	       		</c:if>
             </td>
            </tr>

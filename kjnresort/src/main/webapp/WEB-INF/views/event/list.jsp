@@ -4,19 +4,30 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>   
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<sec:authentication property="principal" var="pinfo"/>
-<c:choose>
-	<c:when test="${pinfo.username eq 'admin'}">
-		<%@ include file="../includes/adminHeader.jsp" %>
-	</c:when>
-	<c:otherwise>
+
+<sec:authorize access="isAnonymous()">
 		<%@ include file="../includes/header.jsp" %>
-	</c:otherwise>
-</c:choose>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="pinfo"/>
+	<c:choose>
+	
+		<c:when test="${pinfo.username eq 'admin'}">
+			<%@ include file="../includes/adminHeader.jsp" %>
+		</c:when>
+		
+		<c:otherwise>
+			<%@ include file="../includes/header.jsp" %>
+		</c:otherwise>
+	</c:choose>
+</sec:authorize>
+
+
 <style>
-	.thumbImg { margin-left: 100px; width: 330px; height: 300px;}
-	#imgDiv { float: left; top: 50%; left: 50%; margin-left: 100px; margin-right: 100px;}
-	.titleTerm {margin-left: 100px; margin-bottom: 100px; font-size: large;}
+	.thumbImg { margin-left: 70px; width: 170px; height: 140px;}
+	#imgDiv { float: left; top: 50%; left: 50%; margin-left: 280px; margin-right: 100px;}
+	.titleTerm {margin-left: 70px; margin-bottom: 80px; font-size: small;}
 </style>
 
 
@@ -83,7 +94,7 @@
 </div>
 <!-- /.row -->
 <!-- 페이지 번호 출력 -->
-                            <div class="pull-center" style="text-align: center;">
+                            <div class="pull-center" style="text-align: center; margin-bottom: 170px;">
                             	 <ul class="pagination">
                             	 	<c:if test="${pageMaker.prev}">
 									    <li class="paginate_button previous">
@@ -116,7 +127,6 @@
 
 <script>
 $(function(){	
-	
 	
 	
 	

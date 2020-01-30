@@ -19,7 +19,7 @@ hr{text-align: center; width:1000px;}
 .qna_content>p{color:black;  margin-top:10px; border-top: 1px solid; border-top-color:gray; border-bottom: 1px solid; border-bottom-color:gray;}
 .user_buttons{text-align: right; margin-top:5px;}
 .qna_info{margin-top:10px;}
-footer{position:relative; top:100px;}
+footer{position: relative !important; top:700px !important;}
 .ansArea{width:1000px; margin-top:7px;}
 .showAnaswer{margin-top:10px; border-top: 1px solid; border-top-color:gray; border-bottom: 1px solid; border-bottom-color:gray; }
 .showAnaswer>p{color:black;}

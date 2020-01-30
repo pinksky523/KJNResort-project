@@ -5,15 +5,12 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kjnresort.domain.CondoVO;
 
@@ -33,6 +30,7 @@ import lombok.extern.log4j.Log4j;
 public class CondoController {//콘도 매니지컨트롤러
 	private CondoService service;
 	
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@ResponseBody
 	@GetMapping(value="/{roomType}",
 			produces= {MediaType.APPLICATION_XML_VALUE,
@@ -43,14 +41,14 @@ public class CondoController {//콘도 매니지컨트롤러
 		return new ResponseEntity<>(service.get(roomType),HttpStatus.OK);
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/list")
 	public void list(Model model) {
 		log.info("condo controller.........list()");
 		model.addAttribute("list", service.getCondoList());
 	}
 	
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("hasRole('ROLE_MEMBER')")
 	@ResponseBody
 	@PostMapping(value="/modify",produces= {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> modify(String roomType,int price) {

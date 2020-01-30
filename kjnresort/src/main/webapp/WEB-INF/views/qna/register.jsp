@@ -9,14 +9,16 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.css">
 <style>
-h2,p{text-align: center; color:black !important;} 
+h2{text-align: center; color:black !important;} 
+.stitle{text-align: center; color:black !important;}
 hr{text-align: center; width:1000px;}
 .center_div{text-align: center; width:1000px;  margin:0 auto;}
 .b{margin:5px;}
+footer{position: relative !important; top:350px !important;}
 </style>
 <%@include file="../includes/header.jsp"%>
 <h2>1:1문의 하기</h2>
-<p>고객님의 말씀을 귀기울여 듣는 KJN리조트에 문의하세요
+<p class="stitle">고객님의 말씀을 귀기울여 듣는 KJN리조트에 문의하세요
 <hr>
 <div class="center_div">
 <form action="/qna/register" method="post" id="form">

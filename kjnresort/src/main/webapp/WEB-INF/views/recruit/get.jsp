@@ -3,7 +3,24 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<%@ include file="../includes/header.jsp" %>
+
+<sec:authorize access="isAnonymous()">
+		<%@ include file="../includes/header.jsp" %>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="pinfo"/>
+	<c:choose>
+	
+		<c:when test="${pinfo.username eq 'admin'}">
+			<%@ include file="../includes/adminHeader.jsp" %>
+		</c:when>
+		
+		<c:otherwise>
+			<%@ include file="../includes/header.jsp" %>
+		</c:otherwise>
+	</c:choose>
+</sec:authorize>
 
 <div>
     <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
@@ -40,9 +57,9 @@
 	                    <label>내용: </label>
 	                    <textarea class="form-control" rows="8" name="content"
 	                     readonly>${recruit.content}</textarea></div>
-					<sec:authorize access="hasRole('ROLE_MEMBER')">
-	                	<button data-oper='register' class="btn btn-primary pull-right">지원하기</button>
-	                </sec:authorize>
+					<c:if test="${pinfo.username ne 'admin'}">
+						<button data-oper='register' class="btn btn-primary pull-right">지원하기</button>
+					</c:if>
 					<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<button data-oper='modify' class="btn btn-warning pull-right">수정</button>
 	                	<button data-oper='remove' class="btn btn-danger pull-right">삭제</button>

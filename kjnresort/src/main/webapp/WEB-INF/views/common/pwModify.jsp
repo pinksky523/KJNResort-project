@@ -16,16 +16,14 @@
                     <input type="password" name="pw1" id="inputPassword" class="form-control input-lg" placeholder="비밀번호" onkeyup="passwordCheck1()" required autofocus></td>
 					<td class="chkMessage"><span id="pwChk1"></span></td>
 				</tr>
+				<tr><td>&nbsp</td></tr>
 				<tr>
 				<th>새 비밀번호 확인</th>
 				<td>
                     <input type="password" name="pw" id="inputPasswordChk" class="form-control input-lg" placeholder="비밀번호 확인" onkeyup="passwordCheck2()" required></td>
 					<td class="chkMessage"><span id="pwChk2"></span></td>
 				</tr>
-				<tr><th>
-				<td>&nbsp</td>
-				<td>&nbsp</td>
-				</th></tr>
+				<tr><td>&nbsp</td></tr>
 				
 				<tr>
              <td colspan="3" align="center">

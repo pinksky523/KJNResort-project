@@ -26,16 +26,17 @@
 	   <![CDATA[
 	    SELECT  * 
 	    FROM 	( SELECT /*+INDEX_DESC(t_notice pk_noticeNo) */ 
-	    				 rownum rn, noticeNo, title, regDate, viewCnt, topCheck
-	    		  FROM   t_notice
-	    		  WHERE  
+	    		rownum rn, noticeNo, title, regDate, viewCnt, topCheck
+    	FROM   (SELECT * 
+    			FROM t_notice
+    			ORDER BY DECODE (topCheck,1,1,0,2), noticeNo DESC)
+	    WHERE  
 	   ]]>
 		<!-- 보관해 둔 쿼리 사용 -->
 		<include refid="criteria"></include>
 	   <![CDATA[ 		  
 	    		  rownum <= #{pageNum} * #{amount} )
 	    WHERE   rn > (#{pageNum} -1) * #{amount}
-	  	ORDER BY topCheck DESC, noticeNo DESC
 	   ]]>  		  
 	</select>
 	

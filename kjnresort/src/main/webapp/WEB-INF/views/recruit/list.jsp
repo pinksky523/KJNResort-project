@@ -2,8 +2,26 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
-<%@ include file="../includes/header.jsp" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
+  
+<sec:authorize access="isAnonymous()">
+		<%@ include file="../includes/header.jsp" %>
+</sec:authorize>
+
+<sec:authorize access="isAuthenticated()">
+	<sec:authentication property="principal" var="pinfo"/>
+	<c:choose>
+	
+		<c:when test="${pinfo.username eq 'admin'}">
+			<%@ include file="../includes/adminHeader.jsp" %>
+		</c:when>
+		
+		<c:otherwise>
+			<%@ include file="../includes/header.jsp" %>
+		</c:otherwise>
+	</c:choose>
+</sec:authorize>
+
 <link rel="stylesheet" href="/resources/css/table.css"/>
 <div>
     <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
