@@ -23,5 +23,4 @@ public interface ReviewMapper {
 	public int getMyTotalCount(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount); 	
 	//내가 쓴 후기 목록
 	public List<ReviewVO> getMyListWithPaging(@Param("id") String id, @Param("pageNum") int pageNum, @Param("amount") int amount);
-
 }
