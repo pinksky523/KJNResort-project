@@ -3,15 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>  
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>  
-<%@ include file="../includes/header.jsp" %>
-<div class="row">
-    <div class="col-lg-12">
-    	<br><br><br><br><br><br><br><br><br>
-        <h2 class="page-header">이용권 구내내역</h2>
-        <hr>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
+<%@ include file="../includes/adminHeader.jsp" %>
+    	
+<br><br><br><br><br><br><br><br><br>
+<h2>이용권 구내내역</h2>
+<hr>
+
 <!-- /.row -->
 <div class="row">
     <div class="col-lg-12">
@@ -45,13 +42,13 @@
                 </div>
                 <!-- END 검색 조건 및 키워드 입력 부분 -->	 
                   
-                <table class="table table-striped table-bordered table-hover">	   
+                <table class="table table-hover reserve_list">	   
                     <thead>
                         <tr>
-                            <th>#구매번호<!-- Rendering engine --></th>
-                            <th>구매일시<!-- Browser --></th>
-                            <th>상태<!-- Platform(s) --></th>
-                            <th>아이디<!-- Engine version --></th>
+                            <th>#구매번호</th>
+                            <th>구매일시</th>
+                            <th>상태</th>
+                            <th>아이디</th>
                         </tr>
                     </thead>
                     <tbody>

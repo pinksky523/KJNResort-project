@@ -26,7 +26,7 @@
             
             <!-- 검색 조건 및 키워드 입력 부분 -->
                             <div class="pull-center" style="text-align: center;">
-                            	<div class="col-lg-12">
+                            	<div class="col-lg-12" style="margin-bottom: 10px;>
                             		<form id='searchForm' action="/member/list" method="get">
                             		<select name= 'type'>
                             				<!-- <c:out value="${pageMaker.cri.type == null? 'selected':''}"/> 선택된 값이 유지되게 하기 (페이지 이동 시에도) -->
@@ -52,7 +52,7 @@
     									<input type="hidden" name='type2' value='<c:out value="${pageMaker.cri.type2}"/>'>
                             			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
                             			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-                            			<button class="btn btn-default">Search</button>
+                            			<button class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
                             		</form>
                             	</div>
                             </div>

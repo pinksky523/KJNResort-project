@@ -25,9 +25,9 @@
 
 
 <style>
-	.thumbImg { margin-left: 150px; width: 200px; height: 170px;}
-	#imgDiv { float: left; top: 50%; left: 50%; margin-left: 100px; margin-right: 100px;}
-	.titleTerm {margin-left: 150px; margin-bottom: 80px; font-size: larger;}
+	.thumbImg { margin-left: 70px; width: 170px; height: 140px;}
+	#imgDiv { float: left; top: 50%; left: 50%; margin-left: 280px; margin-right: 100px;}
+	.titleTerm {margin-left: 70px; margin-bottom: 80px; font-size: small;}
 </style>
 
 
@@ -94,7 +94,7 @@
 </div>
 <!-- /.row -->
 <!-- 페이지 번호 출력 -->
-                            <div class="pull-center" style="text-align: center;">
+                            <div class="pull-center" style="text-align: center; margin-bottom: 170px;">
                             	 <ul class="pagination">
                             	 	<c:if test="${pageMaker.prev}">
 									    <li class="paginate_button previous">

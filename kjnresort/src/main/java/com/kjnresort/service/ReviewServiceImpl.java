@@ -44,7 +44,18 @@ public class ReviewServiceImpl implements ReviewService{
 
 	@Override
 	public boolean modify(ReviewVO review) {
+		attachMapper.deleteAll(review.getReviewNo());
 		boolean result = mapper.update(review) == 1;	//업데이트 처리
+		
+		if(result && review.getAttachList() != null && review.getAttachList().size() > 0) {
+			review.getAttachList().forEach(attach -> {
+				attach.setReviewNo(review.getReviewNo());
+				attachMapper.insert(attach);
+			});
+		}
+		
+		
+		
 		return result;
 	}
 
