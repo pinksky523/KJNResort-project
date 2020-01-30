@@ -70,7 +70,6 @@ function modify() {
 		var topChk	= document.getElementById("topCheck").value;
 
 			if(titleChk!="" && contentChk!=""){
-				alert(topChk);
 				alert("수정이 완료되었습니다.");
 				document.frm.submit();
 			} else if(titleChk == null || titleChk === ""){
