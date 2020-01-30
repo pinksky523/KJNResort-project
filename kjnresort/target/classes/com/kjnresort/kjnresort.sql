@@ -417,4 +417,10 @@ alter table t_review add constraint pk_reviewNo primary key(reviewNo);
 ALTER TABLE t_ticket_buy DROP PRIMARY KEY;
 alter table t_ticket_buy add constraint pk_ticketNo primary key(ticketNo);
 
+insert into t_ticket 
+values ('lift', 50000)
+
+insert into t_ticket 
+values ('tool', 60000)
+
 -- 남구 부분 끝
