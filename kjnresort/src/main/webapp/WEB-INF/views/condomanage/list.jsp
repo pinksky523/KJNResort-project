@@ -46,7 +46,7 @@ footer{margin-top:300px !important;}
 					</c:when>
 				</c:choose>
 				<ul class="roomInfoUl">	
-					<li><input type="text" name="price" id="${condo.roomType}" value="<fmt:formatNumber value="${condo.price}" groupingUsed="true"></fmt:formatNumber>">원<button data-room="${condo.roomType}" class="modifyBtn">수정</button></li>
+					<li><input type="text" name="price" id="${condo.roomType}" value="<fmt:formatNumber value="${condo.price}" groupingUsed="true"></fmt:formatNumber>">원<button data-room="${condo.roomType}" class="btn btn-warning" id="modifyBtn">수정</button></li>
 					<li>${condo.location }</li>
 					<li>${condo.building}</li>
 					<li>${condo.accept}명</li>
@@ -61,7 +61,7 @@ footer{margin-top:300px !important;}
 
 <script>
 
-$('.modifyBtn').click(function(){
+$('#modifyBtn').click(function(){
 	var roomType=$(this).data('room');
 	
 	var price=$(this).siblings('input').val();

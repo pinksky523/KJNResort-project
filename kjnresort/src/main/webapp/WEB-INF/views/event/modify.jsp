@@ -13,7 +13,7 @@
 	</c:otherwise>
 </c:choose>
 
-        <h2>이벤트 등록</h2>
+        <h2>이벤트 수정</h2>
 <form role="form" id="joinForm" name="frm" method="post" action="/event/modify">
 <div class="row">
     <div class="col-lg-12" style="padding-bottom: 20px">
