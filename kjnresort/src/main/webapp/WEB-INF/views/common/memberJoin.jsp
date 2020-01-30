@@ -5,37 +5,43 @@
 	<h2>회원가입</h2>
 	<hr>
 	<form id="joinForm" name="frm" method="post" action="/common/register">
-   <table width="100%" style="padding:5px 0 5px 0; table-layout: fixed;">
+   <table width="100%" style="padding:5px 0 5px 0; table-layout: fixed; margin-bottom: 170px;">
       
        <tr>
          <th>아이디</th>
          <td><input type="text" class="form-control" name="id" id="inputId" onkeyup="idCheck()"></td>
        <td class="chkMessage"><span id="idChk"></span></td>
        </tr>
+      	 <tr><td>&nbsp</td></tr>
        <tr>
          <th>이름</th>
          <td><input type="text" class="form-control" name="name" id="inputName" onkeyup="nameCheck()"></td>
       	 <td class="chkMessage"><span id="nameChk"></span></td>
       </tr>
+       <tr><td>&nbsp</td></tr>
        <tr>
          <th>비밀번호</th>
          <td><input type="password" class="form-control" name="pw1" id="inputPassword" onkeyup="passwordCheck1()"></td>
       	 <td class="chkMessage"><span id="pwChk1"></span></td>
        </tr>
+        <tr><td>&nbsp</td></tr>
        <tr>
          <th>비밀번호 확인</th>
          <td><input type="password" class="form-control" name="pw" id="inputPasswordChk" onkeyup="passwordCheck2()"></td>
 		 <td class="chkMessage"><span id="pwChk2"></span></td>
        </tr>
+        <tr><td>&nbsp</td></tr>
         <tr>
          <th>핸드폰번호</th>
          <td><input type="text" class="form-control" name="phoneNumber" id="inputPhoneNumber" onkeyup="phoneCheck()"></td>
        	 <td class="chkMessage"><span id="phoneChk"></span></td>
        </tr>
+        <tr><td>&nbsp</td></tr>
         <tr>
          <th>생년월일</th>
          <td><input type="date" class="form-control" name="birth" id="inputBirth" ></td>
        </tr>
+        <tr><td>&nbsp</td></tr>
        <tr>
          <th>성별</th>
            <td class="s">
@@ -43,7 +49,7 @@
                <input type="radio" name="gender" value="F">여
             </td>
          </tr>
-         
+          <tr><td>&nbsp</td></tr>
          <tr>
          <th>주소</th>
          <td><input type="text" class="form-control" name="address" id="inputAddress" style="width: 150%"></td>
