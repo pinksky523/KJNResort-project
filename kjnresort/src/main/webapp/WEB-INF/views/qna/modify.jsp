@@ -45,6 +45,7 @@ footer{position: relative !important; top:350px !important;}
 <script>
 $('#modiBtn').on("click",function(e){
 	 e.preventDefault();
+	 if(confirm('글을 수정하시겠습니까?')){
 	 var cate=$('#select option:selected').val();
 	 var title=$('#title').val();
 	 var content=$('#content').val();
@@ -58,6 +59,7 @@ $('#modiBtn').on("click",function(e){
 		 var input="<input type='text' name='category' value='"+cate+"'>";
 		 
 		 $('#form').append(input).submit();
+	 }
 	 }
 });
 
