@@ -65,7 +65,7 @@ footer{margin-top:400px !important;}
 				</c:when>
 			</c:choose>
 			<li><span>객실번호</span>${reserve.roomNo}호</li>
-			<li><span>숙박일 수</span>${reserve.nights}일</li>
+			<li><span>숙박일 수</span>${reserve.nights}박</li>
 			<li><span>아이디</span>${reserve.id}</li>
 			<li><span>예약자명</span>${reserve.name}</li>
 			<li><span>연락처</span>${reserve.phoneNumber}</li>
