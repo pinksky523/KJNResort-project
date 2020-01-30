@@ -26,7 +26,7 @@
             
             <!-- 검색 조건 및 키워드 입력 부분 -->
                             <div class="pull-center" style="text-align: center;">
-                            	<div class="col-lg-12">
+                            	<div class="col-lg-12" style="margin-bottom: 10px;">
                             		<form id='searchForm' action="/member/list" method="get">
                             		<select name= 'type'>
                             				<!-- <c:out value="${pageMaker.cri.type == null? 'selected':''}"/> 선택된 값이 유지되게 하기 (페이지 이동 시에도) -->

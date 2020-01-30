@@ -35,14 +35,14 @@ public class ReviewTests {
 	         for(int i=0; i<99; i++) {
 	            if(i<49) {
 	               
-	               pstmt.setString(2, "제목----"+i);
-	               pstmt.setString(3, "내용----"+i);
+	               pstmt.setString(2, "제목--"+i);
+	               pstmt.setString(3, "내용--"+i);
 	               pstmt.setString(4, "스키");
 	               pstmt.setInt(5, 5);
 	               pstmt.setInt(6, 0);
 	            } else {
-		            pstmt.setString(2, "제목----"+i);
-		            pstmt.setString(3, "내용----"+i);
+		            pstmt.setString(2, "제목--"+i);
+		            pstmt.setString(3, "내용--"+i);
 		            pstmt.setString(4, "콘도");
 		            pstmt.setInt(5, 8);
 		            pstmt.setInt(6, 1);
