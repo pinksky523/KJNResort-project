@@ -409,6 +409,15 @@ START WITH 1;
 
 -- 남구 부분 시작
 
+ALTER TABLE t_ticket_buy DROP PRIMARY KEY;
+alter table t_ticket_buy add constraint pk_ticketNo primary key(ticketno);
+
+ALTER TABLE t_review DROP PRIMARY KEY;
+alter table t_review add constraint pk_reiewNo primary key(reviewno);
+
+ALTER TABLE t_review_reply DROP PRIMARY KEY;
+alter table t_review_reply add constraint pk_replyNo primary key(replyno);
+
 drop sequence seq_t_review_reply;
 create sequence seq_t_review_reply
 INCREMENT BY 1
@@ -429,5 +438,8 @@ values ('lift', 50000);
 
 insert into t_ticket 
 values ('tool', 60000);
+
+insert into t_ticket
+values ('both', 110000);
 
 -- 남구 부분 끝
