@@ -1,4 +1,3 @@
-
 /* Drop Tables */
 
 DROP TABLE t_appliance CASCADE CONSTRAINTS;
@@ -184,7 +183,7 @@ CREATE TABLE t_review_reply
 	reviewNo number NOT NULL,
 	reply varchar2(400) NOT NULL,
 	replyDate date DEFAULT sysdate,
-	PRIMARY KEY (replyNo)
+    CONSTRAINT pk_replyNo PRIMARY KEY(replyNo)
 );
 
 
@@ -405,6 +404,8 @@ CREATE SEQUENCE seq_t_recruit
 INCREMENT BY 1
 START WITH 1;
 
+
+--아래부터는 mapper test junit 실행 후 실행할것
 -- 공지사항 리스트 테스트 정보
 Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
 values(seq_t_notice.nextval,'admin','공지사항 Top Check 제목 1','공지사항 내용',sysdate,0,1);
@@ -439,15 +440,6 @@ values(SEQ_T_RECRUIT.nextval,'admin','19/20 강사채용','20년 2월 28일까�
 
 -- 남구 부분 시작
 
-ALTER TABLE t_ticket_buy DROP PRIMARY KEY;
-alter table t_ticket_buy add constraint pk_ticketNo primary key(ticketno);
-
-ALTER TABLE t_review DROP PRIMARY KEY;
-alter table t_review add constraint pk_reiewNo primary key(reviewno);
-
-ALTER TABLE t_review_reply DROP PRIMARY KEY;
-alter table t_review_reply add constraint pk_replyNo primary key(replyno);
-
 drop sequence seq_t_review_reply;
 create sequence seq_t_review_reply
 INCREMENT BY 1
@@ -473,3 +465,146 @@ insert into t_ticket
 values ('both', 110000);
 
 -- 남구 부분 끝
+
+ delete from t_condo_reserve;
+BEGIN
+    FOR I IN 1..30
+    LOOP
+      insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user50','P','20/01/10',0,101,'2020/01/11','2020/01/12',1,100000,0);
+    END LOOP;
+END;
+/
+
+ BEGIN
+    FOR I IN 1..100
+    LOOP
+      insert into t_qna values(seq_t_qna.nextval,'C','user5','문의 합니다. 정말 궁금해요 ','문의합니다. 궁금하네요 . 답변꼭 주세요 내일 모레 출발입니다.',sysdate,'','','N');  
+    END LOOP;
+END;
+/
+insert into t_qna values(seq_t_qna.nextval,'C','user5','콘도 문의 합니다. 정말 궁금해요 ','문의합니다. 궁금하네요 . 답변꼭 주세요 내일 모레 출발입니다.',sysdate,'','','N');
+insert into t_qna values(seq_t_qna.nextval,'S','user2','스키장 문의..코스가 몇개인가요 ','문의합니다. 궁금하네요 . 답변꼭 주세요 내일 모레 출발입니다.',sysdate,'','','N');
+insert into t_qna values(seq_t_qna.nextval,'E','user10','픽업서비스는 없나요? ','문의합니다. 궁금하네요 . 답변꼭 주세요 내일 모레 출발입니다.',sysdate,'','','N');
+insert into t_qna values(seq_t_qna.nextval,'C','user32','콘도에 안마의자 있나요','문의합니다. 궁금하네요 . 답변꼭 주세요 내일 모레 출발입니다.',sysdate,'','','N');
+insert into t_qna values(seq_t_qna.nextval,'S','user1','안전모만 따로 빌리 수 있나요 ','문의합니다. 궁금하네요 . 답변꼭 주세요 내일 모레 출발입니다.',sysdate,'','','N');
+insert into t_qna values(seq_t_qna.nextval,'S','user00','보드를 배울수 있는 클래스는 따로 없나요 ','문의합니다. 궁금하네요 . 답변꼭 주세요 내일 모레 출발입니다.',sysdate,'','','N');
+insert into t_qna values(seq_t_qna.nextval,'E','user00','리조트에 베스킨라빈스 있나요? ','문의합니다. 궁금하네요 . 답변꼭 주세요 내일 모레 출발입니다.',sysdate,'안녕하세요 고객님 저희 리조트에는 베스킨라빈스가 없습니다. 대신 나뚜루매장이 있습니다. 감사합니다.',sysdate,'Y');
+insert into t_qna values(seq_t_qna.nextval,'C','user00','콘도 욕실에 세면 도구 있나요? ','문의합니다. 궁금하네요 . 디럭실 타입이에요.',sysdate,'안녕하세요 고객님 저희 콘도 디럭스 욕실에는 1회용 세면도구 2개가 기본으로 배치되어있습니다. 감사합니다.',sysdate,'Y');  
+
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user11','P','20/01/15',0,101,'2020/02/03','2020/02/05',2,200000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user7','P','20/01/14',0,102,'2020/02/03','2020/02/05',2,200000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user12','P','20/01/16',0,103,'2020/02/03','2020/02/05',2,200000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user13','P','20/01/09',0,104,'2020/02/03','2020/02/05',2,200000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user16','P','20/01/08',0,105,'2020/02/03','2020/02/05',2,200000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user17','P','20/01/07',0,106,'2020/02/03','2020/02/05',2,200000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user18','P','20/01/12',0,107,'2020/02/03','2020/02/05',2,200000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user19','P','20/01/13',0,108,'2020/02/03','2020/02/05',2,200000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user20','P','20/01/22',0,109,'2020/02/03','2020/02/05',2,200000,0);
+
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user21','D','20/01/15',0,201,'2020/02/06','2020/02/07',1,150000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user31','D','20/01/16',0,202,'2020/02/06','2020/02/07',1,150000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user41','D','20/01/17',0,203,'2020/02/06','2020/02/07',1,150000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user11','D','20/01/18',0,204,'2020/02/06','2020/02/07',1,150000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user9','D','20/01/21',0,205,'2020/02/06','2020/02/07',1,150000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user00','D','20/01/30',0,206,'2020/02/06','2020/02/07',1,150000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user33','D','20/01/14',0,207,'2020/02/06','2020/02/07',1,150000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user42','D','20/01/06',0,208,'2020/02/06','2020/02/07',1,150000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user39','D','20/01/17',0,209,'2020/02/06','2020/02/07',1,150000,0);
+
+
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user39','N','20/01/16',0,301,'2020/02/05','2020/02/07',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user32','N','20/01/11',0,302,'2020/02/05','2020/02/07',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user16','N','20/01/21',0,303,'2020/02/05','2020/02/07',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user3','N','20/01/05',0,304,'2020/02/05','2020/02/07',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user6','N','20/02/01',0,305,'2020/02/05','2020/02/07',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user9','N','20/02/02',0,306,'2020/02/05','2020/02/07',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user12','N','20/01/17',0,307,'2020/02/05','2020/02/07',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user46','N','20/01/31',0,308,'2020/02/05','2020/02/07',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user48','N','20/01/29',0,309,'2020/02/05','2020/02/07',2,400000,0);
+
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user3','R','20/01/02',0,401,'2020/02/07','2020/02/10',3,750000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user4','R','20/01/02',0,402,'2020/02/07','2020/02/10',3,750000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user5','R','20/01/03',0,403,'2020/02/07','2020/02/10',3,750000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user6','R','20/02/01',0,404,'2020/02/07','2020/02/10',3,750000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user7','R','20/01/31',0,405,'2020/02/07','2020/02/10',3,750000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user8','R','20/01/14',0,406,'2020/02/07','2020/02/10',3,750000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user9','R','20/01/15',0,407,'2020/02/07','2020/02/10',3,750000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user10','R','20/01/23',0,408,'2020/02/07','2020/02/10',3,750000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user11','R','20/01/14',0,409,'2020/02/07','2020/02/10',3,750000,0);
+
+--
+
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user11','P','20/01/19',0,101,'2020/02/14','2020/02/17',3,300000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user12','P','20/01/17',0,102,'2020/02/14','2020/02/17',3,300000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user13','P','20/01/16',0,103,'2020/02/14','2020/02/17',3,300000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user9','D','20/01/18',0,201,'2020/02/14','2020/02/17',3,450000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user23','D','20/01/19',0,202,'2020/02/14','2020/02/17',3,450000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user32','N','20/01/20',0,301,'2020/02/14','2020/02/17',3,600000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user11','N','20/01/16',0,402,'2020/02/14','2020/02/17',3,600000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user11','R','20/01/19',0,401,'2020/02/14','2020/02/17',3,750000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user11','R','20/01/01',0,402,'2020/02/14','2020/02/17',3,750000,0);
+
+--
+
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user11','P','20/01/15',0,101,'2020/02/17','2020/02/20',3,300000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user7','P','20/01/14',0,102,'2020/02/17','2020/02/20',3,300000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user12','P','20/01/16',0,103,'2020/02/17','2020/02/20',3,300000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user13','P','20/01/09',0,104,'2020/02/17','2020/02/20',3,300000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user16','P','20/01/08',0,105,'2020/02/17','2020/02/20',3,300000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user17','P','20/01/07',0,106,'2020/02/17','2020/02/20',3,300000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user18','P','20/01/12',0,107,'2020/02/17','2020/02/20',3,300000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user19','P','20/01/13',0,108,'2020/02/17','2020/02/20',3,300000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user20','P','20/01/22',0,109,'2020/02/17','2020/02/20',3,300000,0);
+
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user24','D','20/01/09',0,201,'2020/02/17','2020/02/20',3,450000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user21','D','20/01/08',0,202,'2020/02/17','2020/02/20',3,450000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user19','D','20/01/28',0,203,'2020/02/17','2020/02/20',3,450000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user20','D','20/01/29',0,204,'2020/02/17','2020/02/20',3,450000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user23','D','20/01/30',0,205,'2020/02/17','2020/02/20',3,450000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user24','D','20/01/31',0,206,'2020/02/17','2020/02/20',3,450000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user25','D','20/01/27',0,207,'2020/02/17','2020/02/20',3,450000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user20','D','20/01/27',0,208,'2020/02/17','2020/02/20',3,450000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user32','D','20/01/22',0,209,'2020/02/17','2020/02/20',3,450000,0);
+
+
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user16','N','20/01/16',0,301,'2020/02/19','2020/02/21',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user32','N','20/01/11',0,302,'2020/02/19','2020/02/21',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user16','N','20/01/21',0,303,'2020/02/19','2020/02/21',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user3','N','20/01/05',0,304,'2020/02/19','2020/02/21',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user6','N','20/02/01',0,305,'2020/02/19','2020/02/21',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user9','N','20/02/02',0,306,'2020/02/19','2020/02/21',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user12','N','20/01/17',0,307,'2020/02/19','2020/02/21',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user46','N','20/01/31',0,308,'2020/02/19','2020/02/21',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user48','N','20/01/29',0,309,'2020/02/19','2020/02/21',2,400000,0);
+
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user3','R','20/01/02',0,401,'2020/02/19','2020/02/21',2,500000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user4','R','20/01/02',0,402,'2020/02/19','2020/02/21',2,500000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user5','R','20/01/03',0,403,'2020/02/19','2020/02/21',2,500000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user6','R','20/02/01',0,404,'2020/02/19','2020/02/21',2,500000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user7','R','20/01/31',0,405,'2020/02/19','2020/02/21',2,500000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user8','R','20/01/14',0,406,'2020/02/19','2020/02/21',2,500000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user9','R','20/01/15',0,407,'2020/02/19','2020/02/21',2,500000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user10','R','20/01/23',0,408,'2020/02/19','2020/02/21',2,500000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user11','R','20/01/14',0,409,'2020/02/19','2020/02/21',2,500000,0);
+
+
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user00','P','20/01/12',0,101,'2020/02/05','2020/02/06',1,100000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user16','P','20/01/07',0,102,'2020/02/02','2020/02/06',4,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user12','D','20/01/30',0,201,'2020/02/25','2020/02/26',1,150000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user00','N','20/01/30',-1,301,'2020/02/01','2020/02/03',2,400000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user00','R','20/01/25',1,402,'2020/01/28','2020/01/30',2,500000,0);
+insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user00','R','20/01/18',0,402,'2020/01/15','2020/01/16',1,250000,0);
+
+insert into t_ticket_buy values (50, 'user0', 'both', sysdate, 1, 1, 0, 0,  110000)
+insert into t_ticket_buy values (51, 'user1', 'both', sysdate, 2, 2, 0, 0,  220000)      
+insert into t_ticket_buy values (52, 'user2', 'both', sysdate, 1, 0, 0, 0,  50000)        
+insert into t_ticket_buy values (53, 'user3', 'both', sysdate, 0, 1, 0, 0,  60000)
+insert into t_ticket_buy values (54, 'user4', 'both', sysdate, 1, 1, 0, 0,  110000)        
+insert into t_ticket_buy values (55, 'user5', 'both', sysdate, 1, 1, 0, 0,  110000)    
+insert into t_ticket_buy values (56, 'user6', 'both', sysdate, 1, 1, 0, 0,  110000)       
+insert into t_ticket_buy values (57, 'user7', 'both', sysdate, 1, 1, 0, 0,  110000)    
+insert into t_ticket_buy values (58, 'user8', 'both', sysdate, 1, 1, 0, 0,  110000)        
+insert into t_ticket_buy values (59, 'user0', 'both', sysdate, 1, 1, 0, 0,  110000)        
+insert into t_ticket_buy values (60, 'user0', 'both', sysdate, 1, 1, 0, 0,  110000)    
+
+commit;
