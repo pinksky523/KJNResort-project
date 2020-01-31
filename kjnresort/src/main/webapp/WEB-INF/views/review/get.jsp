@@ -98,7 +98,7 @@ p {color: black;}
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
 						<li><a href="/ticket/buyTicket">이용권 구매</a></li>
-						<li><a href="/ticket/buyTicketListUser">이용권 구매</a></li>
+						<li><a href="/ticket/buyTicketListUser">이용권 구매내역</a></li>
 					</ul>
 				</li>
 				<li><a href="/event/list">이벤트</a></li>
@@ -219,9 +219,10 @@ p {color: black;}
 	            <sec:authorize access="isAuthenticated()">
 	            	<c:if test="${pinfo.username == review.id }">
 			            <button data-oper='modify' name="modify" class="btn btn-warning pull-right">수정</button>
+			            <button data-oper='remove' name="remove" class="btn btn-danger pull-right">삭제</button>
 	            	</c:if>
 	            </sec:authorize> 
-               	<button data-oper='remove' name="remove" class="btn btn-danger pull-right">삭제</button>
+               	
                	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
 
 	            
@@ -578,19 +579,20 @@ $(function(){
 			modal.modal('hide');
 			return;
 		}
- 
+		console.log('reply update .........');
 		replyService.update(					//댓글 수정
 			{ replyNo:modal.data('replyNo'), 
 			  reply:modalInputReply.val(),
 			  Id:modalInputId.val() }, //댓글 작성자 전송 추가
 			function(result){
+				  console.log('reply update success.........');
 				alert(result);
 				modal.modal('hide');
 // 				showList(1);
 				showList(pageNum);
 			},
 			function(err){
-				console.log('reply update error');
+				console.log('reply update error.........');
 			}
 		);//END replyService.update()
 	});//END 댓글 수정 버튼 이벤트 처리
