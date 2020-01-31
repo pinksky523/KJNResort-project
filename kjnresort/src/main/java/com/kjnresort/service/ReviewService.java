@@ -15,6 +15,7 @@ public interface ReviewService {
 	public List<ReviewVO> getList(Criteria cri);
 	public boolean modify(ReviewVO review);
 	public boolean modifyTReview(Long ticketNo);
+	public boolean modifyCReview(Long reserveNo);
 	public boolean remove(Long reviewNo);
 	public ReviewVO get(Long reviewNo);
 	public void register(ReviewVO review);

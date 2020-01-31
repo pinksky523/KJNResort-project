@@ -34,7 +34,8 @@ CREATE TABLE t_appliance
 	introduction varchar2(2000) ,
 	status varchar2(20) NOT NULL,
 	regDate date,
-	PRIMARY KEY (applianceNo)
+	CONSTRAINT pk_applianceNo PRIMARY KEY(applianceNo)
+	
 );
 
 
@@ -119,7 +120,7 @@ CREATE TABLE t_notice
 	regDate date DEFAULT sysdate,
 	viewCnt number DEFAULT 0,
 	topCheck number(1) DEFAULT 0,
-	PRIMARY KEY (noticeNo)
+	CONSTRAINT pk_noticeNo PRIMARY KEY(noticeNo)
 );
 
 
@@ -147,7 +148,7 @@ CREATE TABLE t_recruit
 	regDate date DEFAULT sysdate,
 	status varchar2(20) NOT NULL,
 	deadLine date NOT NULL,
-	PRIMARY KEY (recruitno)
+	CONSTRAINT pk_recruitNo PRIMARY KEY(recruitno)
 );
 
 
@@ -163,7 +164,7 @@ CREATE TABLE t_review
 	grade number(10) NOT NULL,
 	-- 예약 | 이용권
 	useNo number NOT NULL,
-	PRIMARY KEY (reviewNo)
+	CONSTRAINT pk_reviewNo PRIMARY KEY(reviewNo)
 );
 
 
@@ -206,7 +207,7 @@ CREATE TABLE t_ticket_buy
 	status number(1) DEFAULT 0,
 	review number(1) DEFAULT 0,
 	totalPrice number NOT NULL,
-	PRIMARY KEY (ticketNo)
+	CONSTRAINT pk_ticketNo PRIMARY KEY(ticketNo)
 );
 
 
@@ -216,6 +217,7 @@ CREATE TABLE t_ticket_buy
 ALTER TABLE t_condo_reserve
 	ADD FOREIGN KEY (roomType)
 	REFERENCES t_condo (roomType)
+	ON DELETE CASCADE
 ;
 
 
@@ -229,18 +231,21 @@ ALTER TABLE t_event_attach
 ALTER TABLE t_appliance
 	ADD FOREIGN KEY (id)
 	REFERENCES t_member (id)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_condo_reserve
 	ADD FOREIGN KEY (id)
 	REFERENCES t_member (id)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_event
 	ADD FOREIGN KEY (id)
 	REFERENCES t_member (id)
+	ON DELETE CASCADE
 ;
 
 
@@ -254,60 +259,70 @@ ALTER TABLE t_member_auth
 ALTER TABLE t_notice
 	ADD FOREIGN KEY (id)
 	REFERENCES t_member (id)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_qna
 	ADD FOREIGN KEY (id)
 	REFERENCES t_member (id)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_recruit
 	ADD FOREIGN KEY (id)
 	REFERENCES t_member (id)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_review
 	ADD FOREIGN KEY (id)
 	REFERENCES t_member (id)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_review_reply
 	ADD FOREIGN KEY (id)
 	REFERENCES t_member (id)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_ticket_buy
 	ADD FOREIGN KEY (id)
 	REFERENCES t_member (id)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_appliance
 	ADD FOREIGN KEY (recruitNo)
 	REFERENCES t_recruit (recruitno)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_review_attach
 	ADD FOREIGN KEY (reviewNo)
 	REFERENCES t_review (reviewNo)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_review_reply
 	ADD FOREIGN KEY (reviewNo)
 	REFERENCES t_review (reviewNo)
+	ON DELETE CASCADE
 ;
 
 
 ALTER TABLE t_ticket_buy
 	ADD FOREIGN KEY (type)
 	REFERENCES t_ticket (type)
+	ON DELETE CASCADE
 ;
 
 /* Comments */
@@ -325,6 +340,9 @@ insert into t_condo values('D','E/W 빌리지','SG 빌딩 2층','더블1 싱글3
 insert into t_condo values('N','E/W 빌리지','SG 빌딩 3층','더블2 싱글3',7,200000);
 insert into t_condo values('R','E/W 빌리지','SG 빌딩 4층','더블3 싱글3',9,250000);
 
+--admin 계정으로 create view 권한 부여해줘야됨
+-- conn /as sysdba
+-- GRANT CREATE VIEW TO team1;
 drop view view_condo_reserve;
 create or replace view view_condo_reserve as
 select roomtype,roomno,checkin,checkout
@@ -350,6 +368,8 @@ alter table t_qna add constraint pk_qna primary key(qnano);
 
 
 -- 재웅 시작
+-- 계정생성은 프로젝트파일 패키지 com.kjnresort.security.MemberTests JUnit으로 생성
+-- 내가쓴 리뷰 com.kjnresort.security.ReviewTests JUnit으로 생성
 
 --이벤트 시퀀스
 DROP SEQUENCE seq_t_event;
@@ -385,42 +405,63 @@ CREATE SEQUENCE seq_t_recruit
 INCREMENT BY 1
 START WITH 1;
 
-ALTER TABLE t_appliance DROP PRIMARY KEY;
-alter table t_appliance add constraint pk_applianceNo primary key(applianceno);
-ALTER TABLE t_notice DROP PRIMARY KEY;
-alter table t_notice add constraint pk_noticeNo primary key(noticeno);
-ALTER TABLE t_recruit DROP PRIMARY KEY;
-alter table t_recruit add constraint pk_recruitNo primary key(recruitno);
+-- 공지사항 리스트 테스트 정보
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 Top Check 제목 1','공지사항 내용',sysdate,0,1);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 Top Check 제목 2','공지사항 내용',sysdate,0,1);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 Top Check 제목 3','공지사항 내용',sysdate,0,1);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 Top Check 제목 4','공지사항 내용',sysdate,0,1);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 Top Check 제목 5','공지사항 내용',sysdate,0,1);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 제목 1','공지사항 내용',sysdate,0,0);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 제목 2','공지사항 내용',sysdate,0,0);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 제목 3','공지사항 내용',sysdate,0,0);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 제목 4','공지사항 내용',sysdate,0,0);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 제목 5','공지사항 내용',sysdate,0,0);
 
 -- 태현 부분 끝
 
 -- 남구 부분 시작
 
-drop sequence seq_t_review_reply
-create sequence seq_t_review_reply
-INCREMENT BY 1
-START WITH 1
-
-drop sequence seq_t_review
-create sequence seq_t_review
-INCREMENT BY 1
-START WITH 1
-
-drop sequence seq_t_ticket_buy
-create sequence seq_t_ticket_buy
-INCREMENT BY 1
-START WITH 1
+ALTER TABLE t_ticket_buy DROP PRIMARY KEY;
+alter table t_ticket_buy add constraint pk_ticketNo primary key(ticketno);
 
 ALTER TABLE t_review DROP PRIMARY KEY;
-alter table t_review add constraint pk_reviewNo primary key(reviewNo);
+alter table t_review add constraint pk_reiewNo primary key(reviewno);
 
-ALTER TABLE t_ticket_buy DROP PRIMARY KEY;
-alter table t_ticket_buy add constraint pk_ticketNo primary key(ticketNo);
+ALTER TABLE t_review_reply DROP PRIMARY KEY;
+alter table t_review_reply add constraint pk_replyNo primary key(replyno);
+
+drop sequence seq_t_review_reply;
+create sequence seq_t_review_reply
+INCREMENT BY 1
+START WITH 1;
+
+drop sequence seq_t_review;
+create sequence seq_t_review
+INCREMENT BY 1
+START WITH 1;
+
+drop sequence seq_t_ticket_buy;
+create sequence seq_t_ticket_buy
+INCREMENT BY 1
+START WITH 1;
 
 insert into t_ticket 
-values ('lift', 50000)
+values ('lift', 50000);
 
 insert into t_ticket 
-values ('tool', 60000)
+values ('tool', 60000);
+
+insert into t_ticket
+values ('both', 110000);
 
 -- 남구 부분 끝

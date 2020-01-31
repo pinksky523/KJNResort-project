@@ -25,7 +25,7 @@ var replyService = (function(){
 			data	: JSON.stringify(reply),
 			contentType	: 'application/json; charset=utf-8',
 			success	: function(result, status, xhr){
-				callback(result);
+				callback("댓글 등록 성공!");
 			},
 			error	: function(xhr, status, err){
 				if(error){
@@ -56,15 +56,17 @@ var replyService = (function(){
 	function update(reply, callback, error){			//댓글 수정
 		console.log("reply update....");
 		$.ajax({
-			type 	: 'put', 
+			type 	: 'post', 
 			url 	: '/replies/' + reply.replyNo,
 			data	: JSON.stringify(reply),
 			contentType	: 'application/json; charset=utf-8',
 			success	: function(result, status, xhr){
+				console.log("reply update....success");
 				callback(result);
 			},
 			error	: function(xhr, status, err){
 				if(error){
+					console.log("reply update....error");
 					error(err);
 				}
 			}

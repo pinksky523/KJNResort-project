@@ -29,7 +29,7 @@
   <select id="getListWithPaging" resultType="com.kjnresort.domain.ReviewVO">
    <![CDATA[
     SELECT  * 
-    FROM 	( SELECT /*+INDEX_DESC(t_review SYS_C007976) */ 
+    FROM 	( SELECT /*+INDEX_DESC(t_review pk_reviewNo) */ 
     				 rownum rn, reviewNo, id, title, content, 
     				 regdate, viewCnt, category, grade, useNo
     		  FROM   t_review
@@ -54,7 +54,7 @@
     		  FROM   t_review
     		  WHERE  
    ]]>
-		(id 	LIKE '%'||#{id}||'%') AND
+		(id = #{id}) AND
    <![CDATA[ 		  
     		  rownum <= #{pageNum} * #{amount} )
     WHERE   rn > (#{pageNum} -1) * #{amount}
@@ -97,6 +97,12 @@
     UPDATE 	t_ticket_buy
     SET		review = 1
     WHERE 	ticketNo = #{ticketNo}
+  </update>
+  
+  <update id="updateCReview">
+    UPDATE 	t_condo_reserve
+    SET		review = 1
+    WHERE 	reserveNo = #{reserveNo}
   </update>
   
   <delete id="delete">

@@ -25,6 +25,7 @@ import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.domain.ReviewVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.PageDTO;
+import com.kjnresort.service.ReplyService;
 import com.kjnresort.service.ReviewService;
 
 import lombok.AllArgsConstructor;
@@ -37,9 +38,10 @@ import oracle.jdbc.proxy.annotation.GetProxy;
 @AllArgsConstructor
 public class ReviewController {
 	private ReviewService service;
+	private ReplyService replyService;
 	
  	//후기 삭제
-	@PreAuthorize("principal.username == #id")						// 작성자 확인
+	//@PreAuthorize("principal.username == #id || principal.username == 'admin'")						// 작성자 확인
 	@PostMapping("remove")
 	public String remove(@RequestParam("reviewNo") Long reviewNo, RedirectAttributes rttr, 
 			 @ModelAttribute("cri") Criteria cri, String writer) {
@@ -95,9 +97,11 @@ public class ReviewController {
 				    @ModelAttribute("cri") Criteria cri) {
 		log.info("ReviewController get() or modify()");
 		model.addAttribute("review", service.get(reviewNo));
+		
 	}
 	
 	//후기 리스트
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("list")
 	public void list(Criteria cri, Model model) {
 		log.info("ReviewController list() with cri : " + cri);
@@ -116,23 +120,29 @@ public class ReviewController {
 		model.addAttribute("pageMaker", 
 							new PageDTO(cri, service.getMyTotalCount(id, pageNum, amount)));
 		
-		return "redirect:/review/list";
+		return "/member/myreview";
 	}
 	
 	//후기 등록 폼으로 가는 버튼 클릭
 	@GetMapping("register")
 	@PreAuthorize("isAuthenticated()")
-	public void register(Long ticketNo, Long reserveNo ,Model model) {
+	public void register(@Param("ticketNo") Long ticketNo,@Param("reserveNo") Long reserveNo ,Model model) {
 		log.info("ReviewController register() - get");
 		log.info("ticketNo : " + ticketNo);
-		model.addAttribute("useNo", ticketNo);
-		model.addAttribute("useNo", reserveNo);
+		log.info("ticketNo : " + reserveNo);
+		if(ticketNo != null) {
+			model.addAttribute("useNo", ticketNo);
+		} else {
+			model.addAttribute("useNo", reserveNo);
+		}
+		
+		
 	}
 	
 	//후기 등록 버튼 클릭
 	@PostMapping("register")
 	@PreAuthorize("isAuthenticated()")
-	public String register(ReviewVO review, Long ticketNo, RedirectAttributes rttr, Model model) {
+	public String register(ReviewVO review, Long ticketNo, Long reserveNo, RedirectAttributes rttr, Model model) {
 		log.info("ReviewController register()");
 		log.info("register:" + review);
 		if(review.getAttachList() != null) {
@@ -140,8 +150,16 @@ public class ReviewController {
 		}
 		log.info("===============================");
 		log.info("modifyTReview ticketNo : " + ticketNo);
+		log.info("modifyCReview reservNo : " + reserveNo);
 		service.register(review);
-		service.modifyTReview(ticketNo);
+		if(ticketNo != null) {
+			service.modifyTReview(ticketNo);
+		} else {
+			service.modifyCReview(reserveNo);
+		}
+		
+		
+		
 		rttr.addFlashAttribute("result", review.getReviewNo());
 		return "redirect:/review/list";
 	}

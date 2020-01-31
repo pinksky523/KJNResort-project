@@ -38,19 +38,6 @@ import lombok.extern.log4j.Log4j;
 public class TicketController {
 	private TicketService service;
 	
-	//이용권 외부 결제 폼으로 이동 (사용자) 현재필요없음
-//	@GetMapping("buyTicketKakao")
-//	p@PreAuthorize("isAuthenticated()")
-//	public void buyTicketKakao(Model model, HttpServletRequest request) {
-//		 int liftAmount = Integer.parseInt(request.getParameter("liftAmount")); 
-//		 int toolAmount = Integer.parseInt(request.getParameter("toolAmount"));
-//		 request.setAttribute("liftAmount", liftAmount);
-//		 request.setAttribute("toolAmount", toolAmount); 
-//		 model.addAttribute("tPrice", service.getPrice());
-//		 model.addAttribute("ttPrice", service.getPriceT());
-//		log.info("TicketController buyTicketKakao() - get!!");
-//	}
-	
 	//이용권 외부 결제에서 결제완료 버튼 눌렀을때 (사용자)
 	@PostMapping(value="buyTicket",consumes="application/json",produces= {MediaType.TEXT_PLAIN_VALUE})
 	@PreAuthorize("isAuthenticated()")
@@ -73,6 +60,7 @@ public class TicketController {
 	}
 	 
 	//이용권 구매 폼으로 이동 (사용자)
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("buyTicket")
 	//@PreAuthorize("isAuthenticated()")
 	public void buyTicket(Model model, Criteria cri) {
@@ -152,6 +140,7 @@ public class TicketController {
 	}
 	
 	//이용권 구매 목록 (사용자)
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("buyTicketListUser") 
 	public void buyTicketListUser(Criteria cri, String id, Model model, Principal principal) {
 		log.info("TicketController buyTicketListUser() with cri : " + cri);

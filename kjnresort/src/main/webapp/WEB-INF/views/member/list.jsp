@@ -47,12 +47,12 @@
                             					<option value="P" <c:out value="${type2 eq 'P'? 'selected':''}"/>>핸드폰번호</option>
                             			</select>
                             			<!-- value="${pageMaker.cri.keyword}" 검색 키워드가 유지되게 하기 (페이지 이동 시에도) -->
-                            			<input type="text" name="keyword" value="${pageMaker.cri.keyword}"/>
+                            			<input type="text" id="keyword" name="keyword" value="${pageMaker.cri.keyword}"/>
                             			<input type="hidden" name='type' value='<c:out value="${pageMaker.cri.type}"/>'>
     									<input type="hidden" name='type2' value='<c:out value="${pageMaker.cri.type2}"/>'>
                             			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
                             			<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-                            			<button class="btn btn-default"> <span class="glyphicon glyphicon-search"></span></button>
+                            			<button class="btn btn-default" id="searchBtn"><span class="glyphicon glyphicon-search"></span></button>
                             		</form>
                             	</div>
                             </div>
@@ -190,6 +190,7 @@ function checkModal(){
 $(".paginate_button a").click(function(e){
 	//a태그의 href가 적혀있는 곳으로 무조건 넘어가지 않게 하기 위해
 	//이걸 쓰지 않으면 2페이지 클릭 시 localhost:8090/board/2로 넘어감
+	
 	e.preventDefault();
 	
 //	alert("clicked!");
@@ -203,6 +204,7 @@ $(".paginate_button a").click(function(e){
 
 //게시글 목록에서 제목을 클릭했을 때 컨트롤러(get)로 pageNum과 amount를 같이 보내도록 함
 $(".move").click(function(e){
+	
 	e.preventDefault();
 	
 	//폼의 hidden 속성에 있는 id 파라미터의 값에 게시물 번호의 값 넣고
@@ -220,14 +222,18 @@ $(".move").click(function(e){
 var searchForm = $("#searchForm");
 
 $("#searchForm button").on("click", function(e){		
-		//검색 결과 페이지 번호가 1페이지가 되도록 처리
-		searchForm.find("input[name='pageNum']").val("1");
-
-		//검색 버튼을 클릭하면 폼 전송 막기
-		e.preventDefault();
-		
-		searchForm.submit();
-
+		if($("#keyword").val() == null || $("#keyword").val() == "") {
+			alert("검색어를 입력해주세요");
+			$("#keyword").focus();
+		} else {
+			//검색 결과 페이지 번호가 1페이지가 되도록 처리
+			searchForm.find("input[name='pageNum']").val("1");
+	
+			//검색 버튼을 클릭하면 폼 전송 막기
+			e.preventDefault();
+			
+			searchForm.submit();
+		}
 });
 
 
