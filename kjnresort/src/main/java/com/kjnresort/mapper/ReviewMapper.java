@@ -16,6 +16,7 @@ public interface ReviewMapper {
 	public void insert(ReviewVO review);
 	public int update(ReviewVO review);
 	public int updateTReview(Long ticketNo);
+	public int updateCReview(Long reserveNo);
 	public int delete(Long reviewNo);
 	public ReviewVO read(Long reviewNo);
 	public void updateViewCnt(Long reviewNo);

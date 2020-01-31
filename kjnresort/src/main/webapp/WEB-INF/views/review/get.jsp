@@ -91,8 +91,8 @@ p {color: black;}
 				<li><a href="/notice/list">공지사항</a></li>
 				<li><a href="#">콘도</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">콘도 예약</a></li>
-						<li><a href="loans.html">콘도 예약내역</a></li>
+						<li><a href="/condoreserve/register">콘도 예약</a></li>
+						<li><a href="/condoreserve/list">콘도 예약내역</a></li>
 					</ul>
 				</li>
 				<li><a href="#">이용권</a>
@@ -441,12 +441,12 @@ $(function(){
 				    li += "<li class='left clearfix' data-replyno='"+ list[i].replyNo +"'>" +  //result 에 rvo값을 li에 담아서 for문으로 돌려서 댓글숫자만큼 만듬
 			              "	<div> "+
 			              "     <div class='header'> "+
-			              "         <strong class='primary-font'>"+ list[i].reply +"</strong>"+
+			              "         <strong class='primary-font'>"+ list[i].id +"</strong>"+
 			              "         <small class='pull-right text-muted'>"+
 			              	          replyService.displayTime(list[i].replyDate) +
 			              "         </small>"+
 			              "     </div>"+
-			              "     <p style='color: black;'>"+ list[i].id +"</p></div></li>"
+			              "     <p style='color: black;'>"+ list[i].reply +"</p></div></li>"
 				} 
 				replyUL.html(li);
 				showReplyPage(replyCnt);

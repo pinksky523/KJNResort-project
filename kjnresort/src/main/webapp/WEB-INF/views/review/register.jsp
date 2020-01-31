@@ -60,6 +60,7 @@ hr{text-align: center; width:1000px;}
                     <textarea class="form-control" rows="3" name="content"></textarea></div>
                 <input type="hidden" name="useNo" value="${useNo}">
                 <input type="hidden" name="ticketNo" value="${useNo}">
+                <input type="hidden" name="reserveNo" value="${useNo}">
                 <sec:authorize access="isAuthenticated()">
         			<input type="hidden" name="id" value="<sec:authentication property="principal.username"/>">
     			</sec:authorize>

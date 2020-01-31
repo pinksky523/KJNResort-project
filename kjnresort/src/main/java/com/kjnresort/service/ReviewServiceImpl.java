@@ -98,7 +98,13 @@ public class ReviewServiceImpl implements ReviewService{
 		return false;
 	}
 	
-	
+
+	@Override
+	public boolean modifyCReview(Long reserveNo) {
+		log.info("modifyTReview-----------");
+		mapper.updateTReview(reserveNo);
+		return false;
+	}
 	
 	//내가 쓴 후기 전체개수
 	@Override
@@ -120,6 +126,7 @@ public class ReviewServiceImpl implements ReviewService{
 		log.info("getListWithPaging------------");
 		return mapper.getMyListWithPaging(id, pageNum, amount);
 	}
+
 	
 	
 

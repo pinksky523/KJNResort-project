@@ -129,6 +129,7 @@ public class ReviewController {
 	public void register(@Param("ticketNo") Long ticketNo,@Param("reserveNo") Long reserveNo ,Model model) {
 		log.info("ReviewController register() - get");
 		log.info("ticketNo : " + ticketNo);
+		log.info("ticketNo : " + reserveNo);
 		if(ticketNo != null) {
 			model.addAttribute("useNo", ticketNo);
 		} else {
@@ -141,7 +142,7 @@ public class ReviewController {
 	//후기 등록 버튼 클릭
 	@PostMapping("register")
 	@PreAuthorize("isAuthenticated()")
-	public String register(ReviewVO review, Long ticketNo, RedirectAttributes rttr, Model model) {
+	public String register(ReviewVO review, Long ticketNo, Long reserveNo, RedirectAttributes rttr, Model model) {
 		log.info("ReviewController register()");
 		log.info("register:" + review);
 		if(review.getAttachList() != null) {
@@ -149,8 +150,16 @@ public class ReviewController {
 		}
 		log.info("===============================");
 		log.info("modifyTReview ticketNo : " + ticketNo);
+		log.info("modifyCReview reservNo : " + reserveNo);
 		service.register(review);
-		service.modifyTReview(ticketNo);
+		if(ticketNo != null) {
+			service.modifyTReview(ticketNo);
+		} else {
+			service.modifyCReview(reserveNo);
+		}
+		
+		
+		
 		rttr.addFlashAttribute("result", review.getReviewNo());
 		return "redirect:/review/list";
 	}
