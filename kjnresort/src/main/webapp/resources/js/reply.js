@@ -25,7 +25,7 @@ var replyService = (function(){
 			data	: JSON.stringify(reply),
 			contentType	: 'application/json; charset=utf-8',
 			success	: function(result, status, xhr){
-				callback(result);
+				callback("댓글 등록 성공!");
 			},
 			error	: function(xhr, status, err){
 				if(error){
