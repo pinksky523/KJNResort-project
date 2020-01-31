@@ -332,16 +332,9 @@ p {color: black;}
 			            	   name="replyDate" value="2019-12-02 11:22:33"></div>
 	            </div>
 	            <div class="modal-footer">
-<<<<<<< HEAD
-	            <sec:authentication property="principal" var="pinfo"/>
-			            <button id="modalModBtn" class="btn btn-warning">수정</button>
-	                	<button id="modalRemoveBtn" class="btn btn-danger">삭제</button>
-	                
-=======
 	            	
 		            <button id="modalModBtn" class="btn btn-warning">수정</button>
                		<button id="modalRemoveBtn" class="btn btn-danger">삭제</button>
->>>>>>> branch 'master' of https://github.com/jsnow0819/Project
 	                <button id="modalRegisterBtn" class="btn btn-primary">등록</button>
 	                <button id="modalCloseBtn" class="btn btn-default" data-dismiss="modal">취소</button>
 	            </div>
@@ -387,7 +380,7 @@ $(function(){
 //즉시 실행함수 
  (function(){
 	//첨부파일 목록 가져오기
-	$.getJSON("/review/getAttachList", { reviewNo : ${review.reviewNo} }, function(result){
+	$.getJSON("/review/getAttachList", { reviewNo : '${review.reviewNo}' }, function(result){
 		console.log('attach list----------------');
 		console.log(result);
 		var li = '';

@@ -245,7 +245,7 @@ $(function(){
 	//즉시 실행함수 
 	 (function(){
 		//첨부파일 목록 가져오기
-		$.getJSON("/review/getAttachList", { reviewNo : ${review.reviewNo} }, function(result){
+		$.getJSON("/review/getAttachList", { reviewNo : '${review.reviewNo}' }, function(result){
 			console.log('attach list----------------');
 			console.log(result);
 			var li = '';
