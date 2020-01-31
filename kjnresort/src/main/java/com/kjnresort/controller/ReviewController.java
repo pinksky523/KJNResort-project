@@ -98,6 +98,7 @@ public class ReviewController {
 	}
 	
 	//후기 리스트
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("list")
 	public void list(Criteria cri, Model model) {
 		log.info("ReviewController list() with cri : " + cri);
@@ -122,11 +123,16 @@ public class ReviewController {
 	//후기 등록 폼으로 가는 버튼 클릭
 	@GetMapping("register")
 	@PreAuthorize("isAuthenticated()")
-	public void register(Long ticketNo, Long reserveNo ,Model model) {
+	public void register(@Param("ticketNo") Long ticketNo,@Param("reserveNo") Long reserveNo ,Model model) {
 		log.info("ReviewController register() - get");
 		log.info("ticketNo : " + ticketNo);
-		model.addAttribute("useNo", ticketNo);
-		model.addAttribute("useNo", reserveNo);
+		if(ticketNo != null) {
+			model.addAttribute("useNo", ticketNo);
+		} else {
+			model.addAttribute("useNo", reserveNo);
+		}
+		
+		
 	}
 	
 	//후기 등록 버튼 클릭

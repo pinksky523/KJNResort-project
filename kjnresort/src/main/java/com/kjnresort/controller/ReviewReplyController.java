@@ -55,11 +55,12 @@ public class ReviewReplyController {
 	}	
 	
 	@PreAuthorize("principal.username == #rvo.id")
-	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH},
+	@RequestMapping(method = { RequestMethod.POST, RequestMethod.PATCH},
 				   	value = "{replyNo}",
 				   	produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> modify(@PathVariable("replyNo") Long replyNo,
 										 @RequestBody ReviewReplyVO rvo) {
+		log.info("rvo : " + rvo);
 		log.info("ReplyController modify() replyNo : " + replyNo);
 		log.info("ReplyController modify() rvo : " + rvo);
 		return service.modify(rvo) == 1 
