@@ -365,6 +365,8 @@ alter table t_qna add constraint pk_qna primary key(qnano);
 
 
 -- 재웅 시작
+-- 계정생성은 프로젝트파일 패키지 com.kjnresort.security.MemberTests JUnit으로 생성
+-- 내가쓴 리뷰 com.kjnresort.security.ReviewTests JUnit으로 생성
 
 --이벤트 시퀀스
 DROP SEQUENCE seq_t_event;
