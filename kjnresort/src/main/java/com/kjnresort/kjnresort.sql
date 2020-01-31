@@ -406,25 +406,25 @@ START WITH 1;
 
 -- 남구 부분 시작
 
-drop sequence seq_t_review_reply
+drop sequence seq_t_review_reply;
 create sequence seq_t_review_reply
 INCREMENT BY 1
-START WITH 1
+START WITH 1;
 
-drop sequence seq_t_review
+drop sequence seq_t_review;
 create sequence seq_t_review
 INCREMENT BY 1
-START WITH 1
+START WITH 1;
 
-drop sequence seq_t_ticket_buy
+drop sequence seq_t_ticket_buy;
 create sequence seq_t_ticket_buy
 INCREMENT BY 1
-START WITH 1
+START WITH 1;
 
 insert into t_ticket 
-values ('lift', 50000)
+values ('lift', 50000);
 
 insert into t_ticket 
-values ('tool', 60000)
+values ('tool', 60000);
 
 -- 남구 부분 끝
