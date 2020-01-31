@@ -340,6 +340,9 @@ insert into t_condo values('D','E/W 빌리지','SG 빌딩 2층','더블1 싱글3
 insert into t_condo values('N','E/W 빌리지','SG 빌딩 3층','더블2 싱글3',7,200000);
 insert into t_condo values('R','E/W 빌리지','SG 빌딩 4층','더블3 싱글3',9,250000);
 
+--admin 계정으로 create view 권한 부여해줘야됨
+-- conn /as sysdba
+-- GRANT CREATE VIEW TO team1;
 drop view view_condo_reserve;
 create or replace view view_condo_reserve as
 select roomtype,roomno,checkin,checkout
