@@ -117,10 +117,10 @@ $(".move").click(function(e){
 	e.preventDefault();
 	
 	//폼의 hidden 속성에 있는 bno 파라미터의 값에 게시물 번호의 값 넣고
-	$("#actionForm").append("<input type='hidden' name='bno' value='" + $(this).attr("href") + "'>");
+	$("#actionForm").append("<input type='hidden' name='reviewNo' value='" + $(this).attr("href") + "'>");
 	
 	//list로 되어있는 폼의 action을 get으로 변경
-	$("#actionForm").attr("action", "/board/get");
+	$("#actionForm").attr("action", "/review/get");
 	//폼을 이용해 컨트롤러로 전달
 	$("#actionForm").submit();
 });

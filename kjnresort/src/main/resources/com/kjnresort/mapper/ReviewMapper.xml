@@ -54,7 +54,7 @@
     		  FROM   t_review
     		  WHERE  
    ]]>
-		(id 	LIKE '%'||#{id}||'%') AND
+		(id = #{id}) AND
    <![CDATA[ 		  
     		  rownum <= #{pageNum} * #{amount} )
     WHERE   rn > (#{pageNum} -1) * #{amount}

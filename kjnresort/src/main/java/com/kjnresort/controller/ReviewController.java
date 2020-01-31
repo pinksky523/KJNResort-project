@@ -41,7 +41,7 @@ public class ReviewController {
 	private ReplyService replyService;
 	
  	//후기 삭제
-	@PreAuthorize("principal.username == #id")						// 작성자 확인
+	//@PreAuthorize("principal.username == #id")						// 작성자 확인
 	@PostMapping("remove")
 	public String remove(@RequestParam("reviewNo") Long reviewNo, RedirectAttributes rttr, 
 			 @ModelAttribute("cri") Criteria cri, String writer) {
@@ -120,7 +120,7 @@ public class ReviewController {
 		model.addAttribute("pageMaker", 
 							new PageDTO(cri, service.getMyTotalCount(id, pageNum, amount)));
 		
-		return "redirect:/review/list";
+		return "/member/myreview";
 	}
 	
 	//후기 등록 폼으로 가는 버튼 클릭

@@ -329,6 +329,7 @@ p {color: black;}
 			            	   name="replyDate" value="2019-12-02 11:22:33"></div>
 	            </div>
 	            <div class="modal-footer">
+	            <sec:authentication property="principal" var="pinfo"/>
 			            <button id="modalModBtn" class="btn btn-warning">수정</button>
 	                	<button id="modalRemoveBtn" class="btn btn-danger">삭제</button>
 	                
@@ -345,6 +346,10 @@ p {color: black;}
 <script>
 
 $(function(){
+	
+	
+	
+	
 	var frm = $('#operForm');
 	
 	$("button[data-oper='remove']").click(function(e){
