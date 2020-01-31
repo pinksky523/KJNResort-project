@@ -91,8 +91,8 @@ p {color: black;}
 				<li><a href="/notice/list">공지사항</a></li>
 				<li><a href="#">콘도</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">콘도 예약</a></li>
-						<li><a href="loans.html">콘도 예약내역</a></li>
+						<li><a href="/condoreserve/register">콘도 예약</a></li>
+						<li><a href="/condoreserve/list">콘도 예약내역</a></li>
 					</ul>
 				</li>
 				<li><a href="#">이용권</a>
@@ -220,6 +220,9 @@ p {color: black;}
 			            <button data-oper='modify' name="modify" class="btn btn-warning pull-right">수정</button>
 			            <button data-oper='remove' name="remove" class="btn btn-danger pull-right">삭제</button>
 	            	</c:if>
+	            	<c:if test="${pinfo.username == 'admin' }">
+	            	<button data-oper='remove' name="remove" class="btn btn-danger pull-right">삭제</button>
+	            	</c:if>
             	</sec:authorize>
                	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
 
@@ -329,13 +332,18 @@ p {color: black;}
 			            	   name="replyDate" value="2019-12-02 11:22:33"></div>
 	            </div>
 	            <div class="modal-footer">
+<<<<<<< HEAD
 	            <sec:authentication property="principal" var="pinfo"/>
 			            <button id="modalModBtn" class="btn btn-warning">수정</button>
 	                	<button id="modalRemoveBtn" class="btn btn-danger">삭제</button>
 	                
+=======
+	            	
+		            <button id="modalModBtn" class="btn btn-warning">수정</button>
+               		<button id="modalRemoveBtn" class="btn btn-danger">삭제</button>
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project
 	                <button id="modalRegisterBtn" class="btn btn-primary">등록</button>
-	                <button id="modalCloseBtn" class="btn btn-default" 
-	                		data-dismiss="modal">취소</button>
+	                <button id="modalCloseBtn" class="btn btn-default" data-dismiss="modal">취소</button>
 	            </div>
 	        </div>	<!-- /.modal-content -->
 	    </div>		<!-- /.modal-dialog -->
@@ -444,12 +452,12 @@ $(function(){
 				    li += "<li class='left clearfix' data-replyno='"+ list[i].replyNo +"'>" +  //result 에 rvo값을 li에 담아서 for문으로 돌려서 댓글숫자만큼 만듬
 			              "	<div> "+
 			              "     <div class='header'> "+
-			              "         <strong class='primary-font'>"+ list[i].reply +"</strong>"+
+			              "         <strong class='primary-font'>"+ list[i].id +"</strong>"+
 			              "         <small class='pull-right text-muted'>"+
 			              	          replyService.displayTime(list[i].replyDate) +
 			              "         </small>"+
 			              "     </div>"+
-			              "     <p style='color: black;'>"+ list[i].id +"</p></div></li>"
+			              "     <p style='color: black;'>"+ list[i].reply +"</p></div></li>"
 				} 
 				replyUL.html(li);
 				showReplyPage(replyCnt);
