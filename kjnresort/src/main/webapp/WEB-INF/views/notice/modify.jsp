@@ -5,13 +5,17 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ include file="../includes/adminHeader.jsp" %>
 
-<div>
-    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
-        <h2>공지사항 게시글 수정</h2>
-    </div>
-</div>
+<style>
+h2{text-align: center;}
+body{height:900px !important;}
+footer{margin-top:300px !important;}
+button{margin-left: 5px; margin-right: 5px;}
+</style>
+
+<h2>공지사항 게시글 수정</h2>
+
  
-<div class="row">
+	<div class="container" style="height: 400px; margin-bottom:200px; font-size:2rem; width:1000px !important;">
     <div class="col-lg-12" style="padding-bottom: 20px">
         <div>
             <div style="text-align: center;">
@@ -66,7 +70,6 @@ function modify() {
 		var topChk	= document.getElementById("topCheck").value;
 
 			if(titleChk!="" && contentChk!=""){
-				alert(topChk);
 				alert("수정이 완료되었습니다.");
 				document.frm.submit();
 			} else if(titleChk == null || titleChk === ""){

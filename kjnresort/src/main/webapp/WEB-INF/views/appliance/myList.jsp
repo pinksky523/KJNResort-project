@@ -5,12 +5,18 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>    
 <%@ include file="../includes/header.jsp" %>
 <link rel="stylesheet" href="/resources/css/table.css"/>
-<div>
-    <div class="col-lg-12" style="padding-top: 120px; text-align: center;">
-        <h2>지원내역 조회</h2>
-    </div>
-</div>
-<div class="row">
+
+<style>
+h2{text-align: center;}
+.table{width:150% !important;text-align:center; } 
+body{height:900px !important;}
+footer{margin-top:150px !important;}
+button{margin-left: 5px; margin-right: 5px;}
+</style>
+
+<h2>지원내역 조회</h2>
+
+	<div class="container" style="height: 400px; margin-bottom:200px; font-size:2rem; width:1000px !important;">
     <div class="col-lg-12" style="padding-bottom: 20px">
         <div>
             <div style="text-align: center;">
@@ -21,7 +27,7 @@
             <div class="panel-body">
             	<sec:authentication property="principal" var="pinfo"/>
             	<sec:authorize access="isAuthenticated()">
-	                <table class="table table-bordered table-hover" style="width: 70%; margin-left: 100px; margin-bottom: 170px;">	   
+	                <table class="table table-bordered table-hover" style="width: 70%; margin: auto;">	   
 	                    <thead class="thead-light">
 	                        <tr>
 	                            <th>이름</th>
@@ -58,7 +64,7 @@
              			<!-- 지원상태가 제출완료가 아닌 경우만 버튼이 보인다. -->
 		           		<c:forEach items="${list}" var="appliance">
 			           		<c:if test="${'제출완료' ne appliance.status}">
-			           			<button id="regBtn" type="button" class="btn btn-primary pull-right">지원서 작성</button>
+			           			<button id="regBtn" type="button" class="btn btn-primary pull-right" style="margin-top: 15px;">지원서 작성</button>
 			           		</c:if>
 		           		</c:forEach>
    				</sec:authorize>

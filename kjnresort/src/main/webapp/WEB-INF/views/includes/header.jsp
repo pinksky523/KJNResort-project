@@ -28,18 +28,24 @@
 	<link rel="stylesheet" href="/resources/css/flaticon.css"/>
 	<link rel="stylesheet" href="/resources/css/slicknav.min.css"/>
 	<link rel="stylesheet" href="/resources/css/common.css"/>
+<<<<<<< HEAD
 
 
 
 	 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
      <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> 
+<<<<<<< HEAD
 
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
 	<!-- Main Stylesheets -->
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 	<link rel="stylesheet" href="/resources/css/style.css"/>
 	<!--[if lt IE 9]>
 		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -91,7 +97,7 @@
 				<li>
 				<!-- 로그인한 경우 -->
 				<sec:authorize access="isAuthenticated()">
-				<sec:authentication property="principal" var="pinfo"/>'>
+				<sec:authentication property="principal" var="pinfo"/>
 				
 				  <c:if test="${pinfo.username ne 'admin'}">		<!-- 관리자로 로그인할 경우 아무버튼 없음 -->
 				  	<form id="mypageForm" action="/member/mypage" method="get">
@@ -125,10 +131,16 @@
 	<!-- Header Section end -->
 	
 	<!-- JQuery -->
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<<<<<<< HEAD
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+=======
+>>>>>>> branch 'master' of https://github.com/jsnow0819/Project.git
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
