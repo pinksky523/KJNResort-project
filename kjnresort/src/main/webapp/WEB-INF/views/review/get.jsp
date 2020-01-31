@@ -220,6 +220,9 @@ p {color: black;}
 			            <button data-oper='modify' name="modify" class="btn btn-warning pull-right">수정</button>
 			            <button data-oper='remove' name="remove" class="btn btn-danger pull-right">삭제</button>
 	            	</c:if>
+	            	<c:if test="${pinfo.username == 'admin' }">
+	            	<button data-oper='remove' name="remove" class="btn btn-danger pull-right">삭제</button>
+	            	</c:if>
             	</sec:authorize>
                	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
 
@@ -329,12 +332,11 @@ p {color: black;}
 			            	   name="replyDate" value="2019-12-02 11:22:33"></div>
 	            </div>
 	            <div class="modal-footer">
-			            <button id="modalModBtn" class="btn btn-warning">수정</button>
-	                	<button id="modalRemoveBtn" class="btn btn-danger">삭제</button>
-	                
+	            	
+		            <button id="modalModBtn" class="btn btn-warning">수정</button>
+               		<button id="modalRemoveBtn" class="btn btn-danger">삭제</button>
 	                <button id="modalRegisterBtn" class="btn btn-primary">등록</button>
-	                <button id="modalCloseBtn" class="btn btn-default" 
-	                		data-dismiss="modal">취소</button>
+	                <button id="modalCloseBtn" class="btn btn-default" data-dismiss="modal">취소</button>
 	            </div>
 	        </div>	<!-- /.modal-content -->
 	    </div>		<!-- /.modal-dialog -->
