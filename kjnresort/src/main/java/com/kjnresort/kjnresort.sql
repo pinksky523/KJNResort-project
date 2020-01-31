@@ -427,6 +427,14 @@ values(seq_t_notice.nextval,'admin','공지사항 제목 4','공지사항 내용
 Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
 values(seq_t_notice.nextval,'admin','공지사항 제목 5','공지사항 내용',sysdate,0,0);
 
+-- 지원공고 리스트 테스트 정보
+Insert into t_recruit(recruitno, id, title, content, status, deadline)
+values(SEQ_T_RECRUIT.nextval,'admin','17/18 강사채용','18년 2월 28일까지 근무하실 강사를 채용합니다. 많이 지원해 주세요.', '마감', '18/01/31');
+Insert into t_recruit(recruitno, id, title, content, status, deadline)
+values(SEQ_T_RECRUIT.nextval,'admin','18/19 강사채용','19년 2월 28일까지 근무하실 강사를 채용합니다. 많이 지원해 주세요.', '마감', '19/01/31');
+Insert into t_recruit(recruitno, id, title, content, status, deadline)
+values(SEQ_T_RECRUIT.nextval,'admin','19/20 강사채용','20년 2월 28일까지 근무하실 강사를 채용합니다. 많이 지원해 주세요.', '진행중', '20/01/31');
+
 -- 태현 부분 끝
 
 -- 남구 부분 시작
