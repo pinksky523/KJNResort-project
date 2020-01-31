@@ -215,14 +215,12 @@ p {color: black;}
 					<button type="button" id="addReplyBtn" class="btn btn-primary pull-right">댓글등록</button>
 	            </sec:authorize>
             	<!-- 로그인한 사용자가 작성한 글에만 수정 버튼 표시 -->
-	            <sec:authentication property="principal" var="pinfo"/>
-	            <sec:authorize access="isAuthenticated()">
+				<sec:authorize access="isAuthenticated()">
 	            	<c:if test="${pinfo.username == review.id }">
 			            <button data-oper='modify' name="modify" class="btn btn-warning pull-right">수정</button>
 			            <button data-oper='remove' name="remove" class="btn btn-danger pull-right">삭제</button>
 	            	</c:if>
-	            </sec:authorize> 
-               	
+            	</sec:authorize>
                	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
 
 	            
@@ -331,8 +329,9 @@ p {color: black;}
 			            	   name="replyDate" value="2019-12-02 11:22:33"></div>
 	            </div>
 	            <div class="modal-footer">
-	                <button id="modalModBtn" class="btn btn-warning">수정</button>
-	                <button id="modalRemoveBtn" class="btn btn-danger">삭제</button>
+			            <button id="modalModBtn" class="btn btn-warning">수정</button>
+	                	<button id="modalRemoveBtn" class="btn btn-danger">삭제</button>
+	                
 	                <button id="modalRegisterBtn" class="btn btn-primary">등록</button>
 	                <button id="modalCloseBtn" class="btn btn-default" 
 	                		data-dismiss="modal">취소</button>

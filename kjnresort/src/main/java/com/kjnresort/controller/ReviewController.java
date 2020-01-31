@@ -25,6 +25,7 @@ import com.kjnresort.domain.ReviewAttachVO;
 import com.kjnresort.domain.ReviewVO;
 import com.kjnresort.domain.Criteria;
 import com.kjnresort.domain.PageDTO;
+import com.kjnresort.service.ReplyService;
 import com.kjnresort.service.ReviewService;
 
 import lombok.AllArgsConstructor;
@@ -37,6 +38,7 @@ import oracle.jdbc.proxy.annotation.GetProxy;
 @AllArgsConstructor
 public class ReviewController {
 	private ReviewService service;
+	private ReplyService replyService;
 	
  	//후기 삭제
 	@PreAuthorize("principal.username == #id")						// 작성자 확인
@@ -95,6 +97,7 @@ public class ReviewController {
 				    @ModelAttribute("cri") Criteria cri) {
 		log.info("ReviewController get() or modify()");
 		model.addAttribute("review", service.get(reviewNo));
+		
 	}
 	
 	//후기 리스트
