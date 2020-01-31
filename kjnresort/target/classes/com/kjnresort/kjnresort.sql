@@ -405,9 +405,48 @@ CREATE SEQUENCE seq_t_recruit
 INCREMENT BY 1
 START WITH 1;
 
+-- 공지사항 리스트 테스트 정보
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 Top Check 제목 1','공지사항 내용',sysdate,0,1);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 Top Check 제목 2','공지사항 내용',sysdate,0,1);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 Top Check 제목 3','공지사항 내용',sysdate,0,1);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 Top Check 제목 4','공지사항 내용',sysdate,0,1);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 Top Check 제목 5','공지사항 내용',sysdate,0,1);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 제목 1','공지사항 내용',sysdate,0,0);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 제목 2','공지사항 내용',sysdate,0,0);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 제목 3','공지사항 내용',sysdate,0,0);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 제목 4','공지사항 내용',sysdate,0,0);
+Insert into t_notice(noticeno, id, title, content, regdate, viewcnt, topcheck) 
+values(seq_t_notice.nextval,'admin','공지사항 제목 5','공지사항 내용',sysdate,0,0);
+
+-- 지원공고 리스트 테스트 정보
+Insert into t_recruit(recruitno, id, title, content, status, deadline)
+values(SEQ_T_RECRUIT.nextval,'admin','17/18 강사채용','18년 2월 28일까지 근무하실 강사를 채용합니다. 많이 지원해 주세요.', '마감', '18/01/31');
+Insert into t_recruit(recruitno, id, title, content, status, deadline)
+values(SEQ_T_RECRUIT.nextval,'admin','18/19 강사채용','19년 2월 28일까지 근무하실 강사를 채용합니다. 많이 지원해 주세요.', '마감', '19/01/31');
+Insert into t_recruit(recruitno, id, title, content, status, deadline)
+values(SEQ_T_RECRUIT.nextval,'admin','19/20 강사채용','20년 2월 28일까지 근무하실 강사를 채용합니다. 많이 지원해 주세요.', '진행중', '20/01/31');
+
 -- 태현 부분 끝
 
 -- 남구 부분 시작
+
+ALTER TABLE t_ticket_buy DROP PRIMARY KEY;
+alter table t_ticket_buy add constraint pk_ticketNo primary key(ticketno);
+
+ALTER TABLE t_review DROP PRIMARY KEY;
+alter table t_review add constraint pk_reiewNo primary key(reviewno);
+
+ALTER TABLE t_review_reply DROP PRIMARY KEY;
+alter table t_review_reply add constraint pk_replyNo primary key(replyno);
 
 drop sequence seq_t_review_reply;
 create sequence seq_t_review_reply
@@ -429,5 +468,8 @@ values ('lift', 50000);
 
 insert into t_ticket 
 values ('tool', 60000);
+
+insert into t_ticket
+values ('both', 110000);
 
 -- 남구 부분 끝
