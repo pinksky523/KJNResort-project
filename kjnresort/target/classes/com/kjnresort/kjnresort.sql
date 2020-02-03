@@ -595,4 +595,16 @@ insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user00','N','20/
 insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user00','R','20/01/25',1,402,'2020/01/28','2020/01/30',2,500000,0);
 insert into t_condo_reserve values(seq_t_condo_reserve.nextval,'user00','R','20/01/18',0,402,'2020/01/15','2020/01/16',1,250000,0);
 
+insert into t_ticket_buy values (50, 'user0', 'both', sysdate, 1, 1, 0, 0,  110000)
+insert into t_ticket_buy values (51, 'user1', 'both', sysdate, 2, 2, 0, 0,  220000)      
+insert into t_ticket_buy values (52, 'user2', 'both', sysdate, 1, 0, 0, 0,  50000)        
+insert into t_ticket_buy values (53, 'user3', 'both', sysdate, 0, 1, 0, 0,  60000)
+insert into t_ticket_buy values (54, 'user4', 'both', sysdate, 1, 1, 0, 0,  110000)        
+insert into t_ticket_buy values (55, 'user5', 'both', sysdate, 1, 1, 0, 0,  110000)    
+insert into t_ticket_buy values (56, 'user6', 'both', sysdate, 1, 1, 0, 0,  110000)       
+insert into t_ticket_buy values (57, 'user7', 'both', sysdate, 1, 1, 0, 0,  110000)    
+insert into t_ticket_buy values (58, 'user8', 'both', sysdate, 1, 1, 0, 0,  110000)        
+insert into t_ticket_buy values (59, 'user0', 'both', sysdate, 1, 1, 0, 0,  110000)        
+insert into t_ticket_buy values (60, 'user0', 'both', sysdate, 1, 1, 0, 0,  110000)    
+
 commit;
