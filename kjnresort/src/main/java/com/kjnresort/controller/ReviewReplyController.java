@@ -54,12 +54,14 @@ public class ReviewReplyController {
 		return new ResponseEntity<>(service.get(replyNo), HttpStatus.OK);
 	}	
 	
-	@PreAuthorize("principal.username == #rvo.id")
-	@RequestMapping(method = { RequestMethod.PUT, RequestMethod.PATCH},
+	//@PreAuthorize("principal.username == #rvo.id")
+	@RequestMapping(method = { RequestMethod.POST, RequestMethod.PATCH},
 				   	value = "{replyNo}",
 				   	produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> modify(@PathVariable("replyNo") Long replyNo,
 										 @RequestBody ReviewReplyVO rvo) {
+		log.info("댓글 수정 컨트롤러 진입");
+		log.info("rvo : " + rvo);
 		log.info("ReplyController modify() replyNo : " + replyNo);
 		log.info("ReplyController modify() rvo : " + rvo);
 		return service.modify(rvo) == 1 

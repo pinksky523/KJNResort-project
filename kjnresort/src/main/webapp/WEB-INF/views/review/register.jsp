@@ -6,6 +6,10 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>     
 <%@ include file="../includes/header.jsp" %>
 <style>
+h2{text-align: center;}
+hr{text-align: center; width:1000px;}
+#resetBtn{margin-right: 15px;}
+.info_div{ align-self: center;  width:1000px; margin:0 auto; margin-top:30px; background: #EAEAEA; padding:40px;}
 .uploadResult { width:100%; 				background: #efe; }
 .uploadResult ul { 	display:flex; 			flex-flow:row;
 					justify-content: center;align-items: center;}
@@ -21,24 +25,14 @@
 				justify-content: center;align-items: center; }
 .bigPicture img { width: 600px; }
 </style>
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">
-        	<!-- Tables -->
-        	후기 등록1
-        </h1>
-    </div>
-    <!-- /.col-lg-12 -->
-</div>
+
+        <h2>후기 등록</h2>
+                	<hr>
+
 <!-- /.row -->
-<div class="row">
+<div class="info_div">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading">
-                <!-- DataTables Advanced Tables -->
-                <!-- Board List Page -->
-                	후기 등록2
-            </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
 			<form method="post" action="/review/register" role="form">
@@ -66,18 +60,19 @@
                     <textarea class="form-control" rows="3" name="content"></textarea></div>
                 <input type="hidden" name="useNo" value="${useNo}">
                 <input type="hidden" name="ticketNo" value="${useNo}">
+                <input type="hidden" name="reserveNo" value="${useNo}">
                 <sec:authorize access="isAuthenticated()">
         			<input type="hidden" name="id" value="<sec:authentication property="principal.username"/>">
     			</sec:authorize>
-	            <button type="submit" class="btn btn-default">
-	            	Submit Button</button>
-                <button type="reset" class="btn btn-default">
-                	Reset Button</button>
+	            <button type="submit"  class="btn btn-primary pull-right">
+	            	작성완료</button>
+                <button type="button" onclick="location.href='/review/list'" id="resetBtn" class="btn btn-secondary pull-right">
+                	취소</button>
 			</form>
             </div>	<!-- /.panel-body -->
         </div>		<!-- /.panel -->
     </div>			<!-- /.col-lg-6 -->
-</div>				<!-- /.row -->
+				<!-- /.row -->
 
 <!-- 첨부파일  -->
 <div class="row">
@@ -98,7 +93,7 @@
     </div>			<!-- /.col-lg-6 -->
 </div>				<!-- /.row -->
 <!-- END 첨부파일  -->
-
+</div>
 <script>
 $(function(e){
 

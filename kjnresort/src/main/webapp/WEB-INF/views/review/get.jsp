@@ -91,14 +91,14 @@ p {color: black;}
 				<li><a href="/notice/list">공지사항</a></li>
 				<li><a href="#">콘도</a>
 					<ul class="sub-menu">
-						<li><a href="about-us.html">콘도 예약</a></li>
-						<li><a href="loans.html">콘도 예약내역</a></li>
+						<li><a href="/condoreserve/register">콘도 예약</a></li>
+						<li><a href="/condoreserve/list">콘도 예약내역</a></li>
 					</ul>
 				</li>
 				<li><a href="#">이용권</a>
 					<ul class="sub-menu">
 						<li><a href="/ticket/buyTicket">이용권 구매</a></li>
-						<li><a href="/ticket/buyTicketListUser">이용권 구매</a></li>
+						<li><a href="/ticket/buyTicketListUser">이용권 구매내역</a></li>
 					</ul>
 				</li>
 				<li><a href="/event/list">이벤트</a></li>
@@ -215,13 +215,15 @@ p {color: black;}
 					<button type="button" id="addReplyBtn" class="btn btn-primary pull-right">댓글등록</button>
 	            </sec:authorize>
             	<!-- 로그인한 사용자가 작성한 글에만 수정 버튼 표시 -->
-	            <sec:authentication property="principal" var="pinfo"/>
-	            <sec:authorize access="isAuthenticated()">
+				<sec:authorize access="isAuthenticated()">
 	            	<c:if test="${pinfo.username == review.id }">
 			            <button data-oper='modify' name="modify" class="btn btn-warning pull-right">수정</button>
+			            <button data-oper='remove' name="remove" class="btn btn-danger pull-right">삭제</button>
 	            	</c:if>
-	            </sec:authorize> 
-               	<button data-oper='remove' name="remove" class="btn btn-danger pull-right">삭제</button>
+	            	<c:if test="${pinfo.username == 'admin' }">
+	            	<button data-oper='remove' name="remove" class="btn btn-danger pull-right">삭제</button>
+	            	</c:if>
+            	</sec:authorize>
                	<button data-oper='list' class="btn btn-secondary pull-right">목록</button>
 
 	            
@@ -330,11 +332,11 @@ p {color: black;}
 			            	   name="replyDate" value="2019-12-02 11:22:33"></div>
 	            </div>
 	            <div class="modal-footer">
-	                <button id="modalModBtn" class="btn btn-warning">수정</button>
-	                <button id="modalRemoveBtn" class="btn btn-danger">삭제</button>
+	            	
+		            <button id="modalModBtn" class="btn btn-warning">수정</button>
+               		<button id="modalRemoveBtn" class="btn btn-danger">삭제</button>
 	                <button id="modalRegisterBtn" class="btn btn-primary">등록</button>
-	                <button id="modalCloseBtn" class="btn btn-default" 
-	                		data-dismiss="modal">취소</button>
+	                <button id="modalCloseBtn" class="btn btn-default" data-dismiss="modal">취소</button>
 	            </div>
 	        </div>	<!-- /.modal-content -->
 	    </div>		<!-- /.modal-dialog -->
@@ -345,6 +347,10 @@ p {color: black;}
 <script>
 
 $(function(){
+	
+	
+	
+	
 	var frm = $('#operForm');
 	
 	$("button[data-oper='remove']").click(function(e){
@@ -374,7 +380,7 @@ $(function(){
 //즉시 실행함수 
  (function(){
 	//첨부파일 목록 가져오기
-	$.getJSON("/review/getAttachList", { reviewNo : ${review.reviewNo} }, function(result){
+	$.getJSON("/review/getAttachList", { reviewNo : '${review.reviewNo}' }, function(result){
 		console.log('attach list----------------');
 		console.log(result);
 		var li = '';
@@ -439,12 +445,12 @@ $(function(){
 				    li += "<li class='left clearfix' data-replyno='"+ list[i].replyNo +"'>" +  //result 에 rvo값을 li에 담아서 for문으로 돌려서 댓글숫자만큼 만듬
 			              "	<div> "+
 			              "     <div class='header'> "+
-			              "         <strong class='primary-font'>"+ list[i].reply +"</strong>"+
+			              "         <strong class='primary-font'>"+ list[i].id +"</strong>"+
 			              "         <small class='pull-right text-muted'>"+
 			              	          replyService.displayTime(list[i].replyDate) +
 			              "         </small>"+
 			              "     </div>"+
-			              "     <p style='color: black;'>"+ list[i].id +"</p></div></li>"
+			              "     <p style='color: black;'>"+ list[i].reply +"</p></div></li>"
 				} 
 				replyUL.html(li);
 				showReplyPage(replyCnt);
@@ -578,19 +584,20 @@ $(function(){
 			modal.modal('hide');
 			return;
 		}
- 
+		console.log('reply update .........');
 		replyService.update(					//댓글 수정
 			{ replyNo:modal.data('replyNo'), 
 			  reply:modalInputReply.val(),
 			  Id:modalInputId.val() }, //댓글 작성자 전송 추가
 			function(result){
+				  console.log('reply update success.........');
 				alert(result);
 				modal.modal('hide');
 // 				showList(1);
 				showList(pageNum);
 			},
 			function(err){
-				console.log('reply update error');
+				console.log('reply update error.........');
 			}
 		);//END replyService.update()
 	});//END 댓글 수정 버튼 이벤트 처리

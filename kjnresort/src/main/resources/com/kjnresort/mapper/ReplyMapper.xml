@@ -11,15 +11,17 @@
 <select id="getListWithPaging" resultType="com.kjnresort.domain.ReviewReplyVO">
   <![CDATA[
     SELECT *
-    FROM   ( SELECT  /*+INDEX(t_review_reply replyNo) */ 
+    FROM   ( SELECT  /*+INDEX(t_review_reply pk_replyNo) */ 
     				 rownum rn, reviewNo, replyNo, reply, id, 
     				 replydate
     		  FROM   t_review_reply
     		  WHERE  reviewNo = #{reviewNo}
+    		  
     		  AND	 rownum <= #{cri.pageNum} * #{cri.amount} )
     WHERE   rn > (#{cri.pageNum} -1) * #{cri.amount}
+    ORDER BY replyNo DESC
    ]]> 		  
-  <!-- SELECT * FROM t_review_reply WHERE reviewNo = #{reviewNo} ORDER BY replyNo -->
+  
   </select>
   
 <!-- <select id="getListWithPaging" resultType="com.kjnresort.domain.ReviewReplyVO">

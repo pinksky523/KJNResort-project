@@ -38,6 +38,7 @@ encoding//src/main/java/com/kjnresort/service/MemberServiceImpl.java=UTF-8
 encoding//src/main/java/com/kjnresort/service/NoticeService.java=UTF-8
 encoding//src/main/java/com/kjnresort/service/NoticeServiceImpl.java=UTF-8
 encoding//src/main/java/com/kjnresort/service/ReplyService.java=UTF-8
+encoding//src/main/java/com/kjnresort/service/ReviewService.java=UTF-8
 encoding//src/main/java/com/kjnresort/service/ReviewServiceImpl.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/common/customLogin.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/common/home.jsp=UTF-8

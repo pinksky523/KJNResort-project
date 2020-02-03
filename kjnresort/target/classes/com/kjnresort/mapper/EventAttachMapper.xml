@@ -5,10 +5,12 @@
 <mapper namespace="com.kjnresort.mapper.EventAttachMapper">
 	
 
+	<select resultType="com.kjnresort.domain.EventAttachVO" id="getOldFiles">
+		SELECT * FROM t_event_attach WHERE uploadpath = TO_CHAR(SYSDATE - 1, 'yyyy\mm\dd') 
+	</select>
 	
-
 	<delete id="delete">
-		DELETE FROM tbl_attach WHERE uuid = #{uuid}
+		DELETE FROM t_event_attach WHERE uuid = #{uuid}
 	</delete>
 
 	<select id="findByEventNo" resultType="com.kjnresort.domain.EventAttachVO">
@@ -17,8 +19,7 @@
 	
 	
 	
-	
-	
+	<!-- 게시글 삭제할경우 첨부파일도 삭제 -->
 	<delete id="deleteAll">
 		DELETE FROM t_event_attach WHERE eventNo = #{eventNo}
 	</delete>

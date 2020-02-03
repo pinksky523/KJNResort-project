@@ -23,8 +23,8 @@
   </delete>
   
   <insert id="insert">
-	INSERT INTO t_review_attach 
-	VALUES(#{reviewNo}, #{uuid}, #{uploadPath}, #{fileName}  )
+	INSERT INTO t_review_attach(uuid, uploadPath, fileName, reviewNo)
+	VALUES(#{uuid}, #{uploadPath}, #{fileName}, #{reviewNo})
   </insert>
 </mapper>	
 

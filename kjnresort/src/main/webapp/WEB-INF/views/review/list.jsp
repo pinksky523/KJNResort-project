@@ -25,7 +25,7 @@ footer{margin-top:500px !important;}
 .reserve_list{width:1000px;}
 </style>
 
-    	<br><br><br><br>
+    	
         <h2 class="page-header">후기 게시판</h2>
         <hr>
  
